@@ -1,0 +1,115 @@
+/*CSS for Components*/
+.woo_grid, .woo_grid > .wpb_element_wrapper{
+	background-image: url(../img/icon-woo-grid.png) !important;
+}
+.woo_list, .woo_list > .wpb_element_wrapper{
+	background-image: url(../img/icon-woo-list.png) !important;
+}
+.woo_carousel, .woo_carousel > .wpb_element_wrapper{
+	background-image: url(../img/icon-woo-carousel.png) !important;
+}
+.woo_product, .woo_product > .wpb_element_wrapper{
+	background-image: url(../img/icon-woo-product.png) !important;
+}
+select#display_type,
+input#per_page,
+input#columns,
+select#orderby,
+select#order,
+select#cat {
+	width: 180px;
+	float:right;
+}
+#s2id_products {
+	width: 180px;
+}
+#s2id_cat {
+	width: 180px;
+	float: right;
+	display: inline-block !important;
+	z-index: 999;
+}
+select#cat.multiple {
+	max-height: 48px;
+	padding-bottom: 3px;
+	padding-top: 3px;
+}
+.edit_form_line .display_type, 
+.edit_form_line .per_page, 
+.edit_form_line .columns, 
+.edit_form_line .orderby, 
+.edit_form_line .order, 
+.edit_form_line .cat {
+	width: 48%;
+	float: left;
+	margin: 1%;
+	min-height: 40px;
+}
+/*Front End*/
+#vc-properties-panel.ui-draggable .display_type,
+#vc-properties-panel.ui-draggable .per_page,
+#vc-properties-panel.ui-draggable .columns,
+#vc-properties-panel.ui-draggable .orderby, 
+#vc-properties-panel.ui-draggable .order, 
+#vc-properties-panel.ui-draggable .cat {
+    width: 100%;
+	clear: both;
+	margin: 5px 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+/*Label Height*/
+div.display_type > label, 
+div.per_page > label, 
+div.columns > label, 
+div.orderby > label, 
+div.order > label, 
+div.cat > label{
+	height: 40px;
+	line-height: 40px;
+	margin: 0;
+}
+/*Query Builder Design*/
+[data-title="Edit List View [Beta]"] .wpb_el_type_woocomposer,
+[data-title="Edit Grid View [Beta]"] .wpb_el_type_woocomposer,
+[data-title="Edit Product Carousel [Beta]"] .wpb_el_type_woocomposer {
+	background: #FAFAFA;
+	padding: 15px;
+    margin: 15px 0 30px !important;
+	box-sizing: border-box;
+	border: 1px solid #ECECEC;
+	border-radius: 5px; 
+}
+/*Query Builder Front Design*/
+.vc-editor [data-title="Edit List View [Beta]"] .wpb_el_type_woocomposer,
+.vc-editor [data-title="Edit Grid View [Beta]"] .wpb_el_type_woocomposer,
+.vc-editor [data-title="Edit Product Carousel [Beta]"] .wpb_el_type_woocomposer {
+	width: 94%;
+	margin-left: 3% !important;
+	margin-right: 3% !important;   
+}
+/*Select Box Designs*/
+/*
+[data-title="Edit List View [Beta]"] .wpb_el_type_dropdown  select,
+[data-title="Edit List View [Beta]"] .wpb_el_type_number input {
+	width: auto !important;
+	min-width: 150px;
+	max-width: 100%;
+}
+*/
+@media (max-width: 767px) {
+	select#display_type, input#per_page, input#columns, select#orderby, select#order, select#cat {
+		width:60%;
+		float:right;
+		margin:0px;
+		margin-bottom:10px;
+	}
+	.edit_form_line label{
+		width: 30%;
+		float: left;
+		height: 39px;
+		line-height: 45px;
+		margin-bottom:10px;
+	}
+}

@@ -1,0 +1,47 @@
+.vc-tabs {
+    margin-top: -10px;
+    > ul {
+        margin-left: 5px;
+        display: table;
+        width: 100%;
+        background-color: #e6e6e6;
+        li {
+            display: list-item;
+            list-style: none;
+            float: left;
+            position: relative;
+            top: 0;
+            margin: 7px 2px 0 0;
+            border: 1px solid transparent;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            border-bottom-width: 0;
+            padding: 0;
+            white-space: nowrap;
+            font-weight: normal;
+            color: #949494;
+            a {
+                color: #949494;
+                float: left;
+                padding: 11px 15px;
+                text-decoration: none;
+                outline: none;
+                font-size: 12px;
+            }
+            &.ui-state-active {
+                background: #ffffff;
+                font-weight: normal;
+                color: #595959;
+                a {
+                    color: #595959;
+                }
+            }
+        }
+        > :first-child {
+            margin-left: 6px;
+        }
+    }
+    > div {
+        display: none;
+    }
+}

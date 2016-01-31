@@ -1,0 +1,17 @@
+#wpadminbar .vc-inline-link > a.ab-item:before {
+  top: 8px;
+  content: '';
+  display: inline-block;
+  background-color: transparent !important;
+  background-position: center top;
+  background-repeat: no-repeat !important;
+  background-image: url(../vc/edit_ico.png) !important;
+  width: 16px;
+  height: 9px;
+  vertical-align: middle;
+  -webkit-transition: none;
+  transition: none;
+}
+#wpadminbar .vc-inline-link > a.ab-item:hover:before {
+  background-position: center bottom;
+}

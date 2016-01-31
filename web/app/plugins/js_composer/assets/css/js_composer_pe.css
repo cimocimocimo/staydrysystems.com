@@ -1,0 +1,970 @@
+.vc-controls {
+  display: none;
+}
+.vc-controls,
+.vc-controls * {
+  font-size: 0 !important;
+}
+html.js_active {
+  margin-top: 0 !important;
+}
+body.compose-mode .controls-row,
+body.compose-mode .controls-column,
+body.compose-mode .controls-container,
+body.compose-mode .controls-element {
+  height: 0;
+  z-index: 1001;
+}
+body.compose-mode .controls-row > div,
+body.compose-mode .controls-column > div,
+body.compose-mode .controls-container > div,
+body.compose-mode .controls-element > div {
+  position: absolute;
+  white-space: nowrap;
+  font-size: 0 !important;
+}
+body.compose-mode .controls-row > div > .parent,
+body.compose-mode .controls-column > div > .parent,
+body.compose-mode .controls-container > div > .parent,
+body.compose-mode .controls-element > div > .parent {
+  display: inline-block;
+}
+body.compose-mode .controls-row > div > .element,
+body.compose-mode .controls-column > div > .element,
+body.compose-mode .controls-container > div > .element,
+body.compose-mode .controls-element > div > .element {
+  margin-left: 1px;
+  display: inline-block;
+}
+body.compose-mode .controls-tl {
+  top: 0;
+  left: 0;
+}
+body.compose-mode .controls-tc {
+  top: 0;
+  left: 50%;
+  -moz-transform: translate(-50%, 0);
+  -o-transform: translate(-50%, 0);
+  -webkit-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+}
+body.compose-mode .controls-tr {
+  top: 0;
+  right: 0;
+  direction: rtl;
+}
+body.compose-mode .controls-bl {
+  bottom: 0;
+  left: 0;
+  height: auto;
+}
+body.compose-mode .controls-bc {
+  bottom: 0;
+  left: 50%;
+  -moz-transform: translate(-50%, 0);
+  -o-transform: translate(-50%, 0);
+  -webkit-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+}
+body.compose-mode .controls-br {
+  bottom: 0;
+  right: 0;
+  direction: rtl;
+}
+body.compose-mode .controls-cc {
+  z-index: 1004;
+  top: 50%;
+  left: 50%;
+  background-color: #84c137;
+  border: 0px solid transparent;
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+body.compose-mode .controls-cc > :first-child .vc-btn-content {
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+}
+body.compose-mode .controls-cc > :last-child .vc-btn-content {
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+}
+body.compose-mode .controls-out-l {
+  left: 0px;
+  top: 1px;
+  direction: rtl;
+}
+body.compose-mode .controls-out-tl {
+  z-index: 1002;
+  left: -1px;
+  top: -30px;
+}
+body.compose-mode .controls-out-tl > .element > :first-child .vc-btn-content {
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+}
+body.compose-mode .controls-out-tr {
+  z-index: 1003;
+  right: -1px;
+  top: -30px;
+}
+body.compose-mode .controls-out-r {
+  right: -1px;
+  top: 1px;
+}
+body.compose-mode .controls-out-l,
+body.compose-mode .controls-out-r {
+  width: 0;
+  height: 0;
+}
+body.compose-mode .control-btn {
+  display: inline-block;
+  vertical-align: middle !important;
+}
+body.compose-mode .control-btn .icon {
+  display: inline-block !important;
+  background-image: url('../vc/fe/controls.png');
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 16px;
+}
+body.compose-mode .control-btn .vc-btn-content {
+  -moz-transition: background-color 0.5s;
+  -ms-transition: background-color 0.5s;
+  -o-transition: background-color 0.5s;
+  -webkit-transition: background-color 0.5s;
+  transition: background-color 0.5s;
+  background-color: transparent;
+  display: inline-block !important;
+  padding: 7px;
+  cursor: pointer !important;
+  line-height: 1px !important;
+  font-size: 1px !important;
+  vertical-align: middle !important;
+}
+body.compose-mode .control-btn .vc-btn-content:hover {
+  background-color: #669c22;
+}
+body.compose-mode .control-btn.vc-element-name .vc-btn-content {
+  background-image: url(../vc/fe/move.png) !important;
+  background-position: 10px center !important;
+  background-repeat: no-repeat;
+  text-decoration: none !important;
+  width: auto !important;
+  font-size: 9px !important;
+  color: #FFFFFF !important;
+  cursor: move !important;
+  line-height: 16px !important;
+  padding: 7px 7px 7px 29px !important;
+}
+body.compose-mode .control-btn.vc-element-name .vc-btn-content:hover {
+  text-decoration: none !important;
+}
+body.compose-mode .control-btn-prepend .icon,
+body.compose-mode .control-btn-append .icon {
+  background-position: 0 -16px;
+}
+body.compose-mode .control-btn-append {
+  position: relative;
+  top: 19px;
+}
+body.compose-mode .control-btn-append:before {
+  position: relative;
+  left: 7px;
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid #f9b418;
+  -moz-transition: border-color 0.5s;
+  -ms-transition: border-color 0.5s;
+  -o-transition: border-color 0.5s;
+  -webkit-transition: border-color 0.5s;
+  transition: border-color 0.5s;
+}
+body.compose-mode .control-btn-append:hover:before {
+  border-bottom-color: #e78800;
+}
+body.compose-mode .control-btn-append .vc-btn-content {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding: 3px;
+}
+body.compose-mode .control-btn-edit .icon {
+  background-position: 0 -32px;
+}
+body.compose-mode .control-btn-clone .icon {
+  background-position: 0 -48px;
+}
+body.compose-mode .control-btn-delete .icon {
+  background-position: 0 -64px;
+}
+body.compose-mode .control-btn-switcher {
+  overflow-x: hidden;
+  width: 24px;
+  -moz-transition: width 0.5s;
+  -ms-transition: width 0.5s;
+  -o-transition: width 0.5s;
+  -webkit-transition: width 0.5s;
+  transition: width 0.5s;
+  display: block;
+}
+body.compose-mode .control-btn-switcher .icon {
+  width: 10px;
+  background-image: url(../vc/fe/expand.gif);
+  background-position: center center;
+}
+body.compose-mode .control-btn-move {
+  background-position: 0 0;
+}
+body.compose-mode .control-btn-layout {
+  position: relative;
+}
+body.compose-mode .controls-row > div .control-btn .vc-btn-content,
+body.compose-mode .controls-column > div .control-btn .vc-btn-content,
+body.compose-mode .controls-container > div .control-btn .vc-btn-content {
+  background-color: #F9B418;
+  border-color: #F9B418;
+}
+body.compose-mode .controls-row > div .control-btn .vc-btn-content:hover,
+body.compose-mode .controls-column > div .control-btn .vc-btn-content:hover,
+body.compose-mode .controls-container > div .control-btn .vc-btn-content:hover {
+  background-color: #e78800;
+  border-color: #e78800;
+}
+body.compose-mode .controls-row > div .control-btn.vc-element-name,
+body.compose-mode .controls-column > div .control-btn.vc-element-name,
+body.compose-mode .controls-container > div .control-btn.vc-element-name,
+body.compose-mode .controls-row > div .control-btn.control-btn-switcher,
+body.compose-mode .controls-column > div .control-btn.control-btn-switcher,
+body.compose-mode .controls-container > div .control-btn.control-btn-switcher {
+  display: inline-block;
+}
+body.compose-mode .controls-row > div .advanced,
+body.compose-mode .controls-column > div .advanced,
+body.compose-mode .controls-container > div .advanced {
+  overflow: hidden;
+  height: 30px;
+  width: 0;
+  display: inline-block;
+  vertical-align: middle;
+  -moz-transition: width 0.5s;
+  -ms-transition: width 0.5s;
+  -o-transition: width 0.5s;
+  -webkit-transition: width 0.5s;
+  transition: width 0.5s;
+}
+body.compose-mode .controls-row > div > .element :last-child .vc-btn-content,
+body.compose-mode .controls-column > div > .element :last-child .vc-btn-content,
+body.compose-mode .controls-container > div > .element :last-child .vc-btn-content {
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+}
+body.compose-mode .controls-row > div > .element .control-btn-switcher .vc-btn-content,
+body.compose-mode .controls-column > div > .element .control-btn-switcher .vc-btn-content,
+body.compose-mode .controls-container > div > .element .control-btn-switcher .vc-btn-content {
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+}
+body.compose-mode .controls-row > div > .parent .control-btn .vc-btn-content,
+body.compose-mode .controls-column > div > .parent .control-btn .vc-btn-content,
+body.compose-mode .controls-container > div > .parent .control-btn .vc-btn-content {
+  background-color: #285A85;
+  border-color: #285A85;
+}
+body.compose-mode .controls-row > div > .parent .control-btn .vc-btn-content:hover,
+body.compose-mode .controls-column > div > .parent .control-btn .vc-btn-content:hover,
+body.compose-mode .controls-container > div > .parent .control-btn .vc-btn-content:hover {
+  background-color: #032644;
+  border-color: #032644;
+}
+body.compose-mode .controls-row > div > .parent > :first-child .vc-btn-content,
+body.compose-mode .controls-column > div > .parent > :first-child .vc-btn-content,
+body.compose-mode .controls-container > div > .parent > :first-child .vc-btn-content {
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+}
+body.compose-mode .controls-row > div > .active .control-btn,
+body.compose-mode .controls-column > div > .active .control-btn,
+body.compose-mode .controls-container > div > .active .control-btn {
+  display: inline-block;
+}
+body.compose-mode .controls-row > div > .active .control-btn-switcher,
+body.compose-mode .controls-column > div > .active .control-btn-switcher,
+body.compose-mode .controls-container > div > .active .control-btn-switcher {
+  width: 0;
+}
+body.compose-mode .controls-row > div > .active.parent-vc_row .advanced,
+body.compose-mode .controls-column > div > .active.parent-vc_row .advanced,
+body.compose-mode .controls-container > div > .active.parent-vc_row .advanced,
+body.compose-mode .controls-row > div > .active.parent-vc_row_inner .advanced,
+body.compose-mode .controls-column > div > .active.parent-vc_row_inner .advanced,
+body.compose-mode .controls-container > div > .active.parent-vc_row_inner .advanced {
+  width: 120px;
+}
+body.compose-mode .controls-row > div > .active.parent .advanced,
+body.compose-mode .controls-column > div > .active.parent .advanced,
+body.compose-mode .controls-container > div > .active.parent .advanced,
+body.compose-mode .controls-row > div > .active.element .advanced,
+body.compose-mode .controls-column > div > .active.element .advanced,
+body.compose-mode .controls-container > div > .active.element .advanced {
+  width: 120px;
+}
+body.compose-mode .controls-row > div > .active.element-vc_column .advanced,
+body.compose-mode .controls-column > div > .active.element-vc_column .advanced,
+body.compose-mode .controls-container > div > .active.element-vc_column .advanced,
+body.compose-mode .controls-row > div > .active.element-vc_column_inner .advanced,
+body.compose-mode .controls-column > div > .active.element-vc_column_inner .advanced,
+body.compose-mode .controls-container > div > .active.element-vc_column_inner .advanced {
+  width: 60px;
+}
+body.compose-mode .controls-row > div > .active.element-vc_tab.vc-element-name .vc-btn-content,
+body.compose-mode .controls-column > div > .active.element-vc_tab.vc-element-name .vc-btn-content,
+body.compose-mode .controls-container > div > .active.element-vc_tab.vc-element-name .vc-btn-content {
+  background-image: none;
+  padding-right: 6px;
+}
+body.compose-mode .vc-element-container > div.vc-container:first-of-type {
+  margin-top: 31px;
+}
+body.compose-mode .vc-layout-switcher {
+  background: #94B9C6;
+  display: block;
+  height: auto;
+  width: 100px;
+  padding: 2px;
+  position: absolute;
+  top: 30px;
+  white-space: normal;
+  direction: ltr;
+}
+body.compose-mode .vc-layout-switcher .vc-layout-btn {
+  display: inline-block;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 23px;
+  background-color: white;
+  margin: 1px;
+}
+body.compose-mode .vc-layout-switcher .vc-custom-layout-btn {
+  background-color: transparent;
+  display: block;
+  width: auto;
+  height: auto;
+  margin: 4px 0 3px;
+  font-size: 11px;
+  text-align: center;
+}
+body.compose-mode .vc-layout-switcher .l_1 {
+  background-image: url(../vc/fe/row_layouts/1.gif);
+}
+body.compose-mode .vc-layout-switcher .l_12_12 {
+  background-image: url(../vc/fe/row_layouts/12_12.gif);
+}
+body.compose-mode .vc-layout-switcher .l_23_13 {
+  background-image: url(../vc/fe/row_layouts/23_13.gif);
+}
+body.compose-mode .vc-layout-switcher .l_13_13_13 {
+  background-image: url(../vc/fe/row_layouts/13_13_13.gif);
+}
+body.compose-mode .vc-layout-switcher .l_13_23 {
+  background-image: url(../vc/fe/row_layouts/13_23.gif);
+}
+body.compose-mode .vc-layout-switcher .l_14_14_14_14 {
+  background-image: url(../vc/fe/row_layouts/14_14_14_14.gif);
+}
+body.compose-mode .vc-layout-switcher .l_14_34 {
+  background-image: url(../vc/fe/row_layouts/14_34.gif);
+}
+body.compose-mode .vc-layout-switcher .l_14_12_14 {
+  background-image: url(../vc/fe/row_layouts/14_12_14.gif);
+}
+body.compose-mode .vc-layout-switcher .l_56_16 {
+  background-image: url(../vc/fe/row_layouts/56_16.gif);
+}
+body.compose-mode .vc-layout-switcher .l_16_46_16 {
+  background-image: url(../vc/fe/row_layouts/14_46_16.gif);
+}
+body.compose-mode .vc-layout-switcher .l_16_16_16_12 {
+  background-image: url(../vc/fe/row_layouts/16_16_16_12.gif);
+}
+body.compose-mode .vc-layout-switcher .l_16_16_16_16_16_16 {
+  background-image: url(../vc/fe/row_layouts/16_16_16_16_16_16.gif);
+}
+body.compose-mode .vc-element .vc-controls {
+  display: block;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  visibility: hidden;
+  -moz-transition: opacity 0.5s ease-out;
+  -ms-transition: opacity 0.5s ease-out;
+  -o-transition: opacity 0.5s ease-out;
+  -webkit-transition: opacity 0.5s ease-out;
+  transition: opacity 0.5s ease-out;
+  /*
+            > :first-child {
+                .transition(top 0.2s ease-out);
+            }
+            */
+}
+body.compose-mode .control-btn-layout .vc-layout-switcher {
+  opacity: 0;
+  filter: alpha(opacity=0);
+  visibility: hidden;
+  -moz-transition: opacity 0.5s ease-out;
+  -ms-transition: opacity 0.5s ease-out;
+  -o-transition: opacity 0.5s ease-out;
+  -webkit-transition: opacity 0.5s ease-out;
+  transition: opacity 0.5s ease-out;
+}
+body.compose-mode .control-btn-layout:hover .vc-layout-switcher {
+  opacity: 0.01;
+  filter: alpha(opacity=1);
+  opacity: 1;
+  filter: alpha(opacity=100);
+  visibility: visible;
+}
+body.compose-mode .vc-element {
+  display: block;
+  position: relative;
+}
+body.compose-mode .vc-element.vc-empty .vc-empty-element {
+  min-height: 100px;
+  cursor: pointer;
+  position: relative;
+}
+body.compose-mode .vc-element.vc-empty .vc-empty-element:after {
+  content: '';
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 0;
+  margin-top: -19px;
+  width: 100%;
+  height: 38px;
+  background: transparent url(../vc/fe/empty_row_sprite.png) no-repeat top center;
+}
+body.compose-mode .vc-element.vc-empty .vc-empty-element:hover:after {
+  background-position: bottom center;
+}
+body.compose-mode .vc-element.vc-empty .vc-empty-element > .vc-element-container {
+  min-height: 100px;
+}
+body.compose-mode .vc-element.vc-empty > .vc-controls .control-btn-append {
+  display: none;
+}
+body.compose-mode .vc-element.vc-sorting-over {
+  background-image: none;
+}
+body.compose-mode .vc-element.bring-to-front {
+  z-index: 100000;
+}
+body.compose-mode .vc-element.vc-active > .vc-controls,
+body.compose-mode .vc-element.vc-hold-active > .vc-controls {
+  visibility: visible;
+  opacity: 0.7;
+}
+body.compose-mode .vc-element:hover > .vc-controls,
+body.compose-mode .vc-element.vc-hover > .vc-controls,
+body.compose-mode .vc-element.vc-hold-hover > .vc-controls {
+  visibility: visible;
+  opacity: 1;
+}
+body.compose-mode .vc-element:hover > .wpb_row > .vc-element:before,
+body.compose-mode .vc-element.vc-hover > .wpb_row > .vc-element:before,
+body.compose-mode .vc-element.vc-hold-hover > .wpb_row > .vc-element:before {
+  content: '';
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  outline: 1px dashed #EBEBEB;
+  outline: 1px dashed rgba(125, 125, 125, 0.4);
+}
+body.compose-mode .vc-element:hover > .wpb_row > .vc-element:after,
+body.compose-mode .vc-element.vc-hover > .wpb_row > .vc-element:after,
+body.compose-mode .vc-element.vc-hold-hover > .wpb_row > .vc-element:after {
+  clear: both;
+}
+body.compose-mode .vc-element-container {
+  min-height: 40px;
+}
+body.compose-mode .vc-resize-bar {
+  cursor: e-resize;
+  width: 7px;
+  right: -5px;
+  top: 0;
+  height: 100%;
+  position: absolute;
+  font-size: 0.1px;
+  display: block;
+  z-index: 1000;
+}
+body.compose-mode .vc-vc_tabs,
+body.compose-mode .vc-vc_accordion,
+body.compose-mode .vc-vc_tour,
+body.compose-mode .vc-vc_row_inner {
+  margin-top: 0 !important;
+}
+body.compose-mode .vc_span1 .controls-out-tr,
+body.compose-mode .vc_span2 .controls-out-tr,
+body.compose-mode .vc_span3 .controls-out-tr,
+body.compose-mode .vc_span4 .controls-out-tr {
+  z-index: 1003;
+  left: -1px;
+  top: -30px;
+}
+body.compose-mode .vc_span1 .vc-vc_tabs,
+body.compose-mode .vc_span2 .vc-vc_tabs,
+body.compose-mode .vc_span3 .vc-vc_tabs,
+body.compose-mode .vc_span4 .vc-vc_tabs {
+  padding-top: 30px;
+}
+body.compose-mode .vc_span1 .vc-vc_tabs .controls-out-tr,
+body.compose-mode .vc_span2 .vc-vc_tabs .controls-out-tr,
+body.compose-mode .vc_span3 .vc-vc_tabs .controls-out-tr,
+body.compose-mode .vc_span4 .vc-vc_tabs .controls-out-tr {
+  top: -64px;
+}
+body.compose-mode .vc_span1 .vc-vc_tour,
+body.compose-mode .vc_span2 .vc-vc_tour,
+body.compose-mode .vc_span3 .vc-vc_tour,
+body.compose-mode .vc_span4 .vc-vc_tour,
+body.compose-mode .vc_span1 .vc-vc_accordion,
+body.compose-mode .vc_span2 .vc-vc_accordion,
+body.compose-mode .vc_span3 .vc-vc_accordion,
+body.compose-mode .vc_span4 .vc-vc_accordion {
+  padding-top: 30px;
+}
+body.compose-mode .vc-empty-shortcode-element {
+  min-height: 32px;
+}
+body.compose-mode .vc-vc_row_inner {
+  padding-top: 32px;
+}
+body.compose-mode .vc-vc_raw_js .wpb_wrapper {
+  height: 50px;
+  background: transparent url(../vc/fe/js_icon.png) center center no-repeat;
+}
+body.compose-mode .vc-vc_column > .controls-column > div > .parent .control-btn-prepend .icon,
+body.compose-mode .vc-vc_column_inner > .controls-column > div > .parent .control-btn-prepend .icon {
+  background-position: 0 -80px;
+}
+body.compose-mode .vc-vc_tab > .vc-controls div .control-btn.vc-move-vc_tab .vc-btn-content {
+  background-image: none;
+  padding-left: 7px;
+  cursor: default;
+}
+body.compose-mode .vc-vc_tab > .vc-controls .control-btn-append {
+  display: none;
+}
+body.compose-mode .vc-vc_video {
+  padding-top: 32px;
+}
+body.compose-mode .vc-vc_video .controls-element .controls-cc {
+  top: 16px;
+}
+body.compose-mode .vc-social-placeholder {
+  display: block;
+}
+body.compose-mode .vc-vc_facebook .fb_type_box_count {
+  height: auto;
+}
+body.compose-mode .vc-vc_facebook .vc-social-placeholder {
+  height: 32px;
+  background: transparent url(../vc/fe/social/fb/standart.png) left center no-repeat;
+}
+body.compose-mode .vc-vc_facebook .vc-social-placeholder.vc-socialtype-button_count {
+  background-image: url(../vc/fe/social/fb/button_count.png);
+}
+body.compose-mode .vc-vc_facebook .vc-social-placeholder.vc-socialtype-box_count {
+  background-image: url(../vc/fe/social/fb/box_count.png);
+  height: 71px;
+}
+body.compose-mode .vc-vc_tweetmeme .vc-social-placeholder {
+  height: 32px;
+  background: transparent url(../vc/fe/social/tw/horizontal.png) left center no-repeat;
+}
+body.compose-mode .vc-vc_tweetmeme .vc-social-placeholder.vc-socialtype-vertical {
+  background-image: url(../vc/fe/social/tw/vertical.png);
+  height: 69px;
+}
+body.compose-mode .vc-vc_tweetmeme .vc-social-placeholder.vc-socialtype-none {
+  background-image: url(../vc/fe/social/tw/none.png);
+}
+body.compose-mode .vc-vc_pinterest .vc-social-placeholder {
+  height: 32px;
+  background: transparent url(../vc/fe/social/pinterest/horizontal.png) left center no-repeat;
+}
+body.compose-mode .vc-vc_pinterest .vc-social-placeholder.vc-socialtype-vertical {
+  background-image: url(../vc/fe/social/pinterest/vertical.png);
+  height: 71px;
+}
+body.compose-mode .vc-vc_pinterest .vc-social-placeholder.vc-socialtype-none {
+  background-image: url(../vc/fe/social/pinterest/none.png);
+}
+body.compose-mode .vc-vc_googleplus .vc-social-placeholder {
+  height: 32px;
+  background: transparent url(../vc/fe/social/gp/standard_desc.png) left center no-repeat;
+}
+body.compose-mode .vc-vc_googleplus .vc-social-placeholder.vc-annotation-none {
+  background-image: url(../vc/fe/social/gp/standard.png);
+}
+body.compose-mode .vc-vc_googleplus .vc-social-placeholder.vc-annotation-bubble {
+  background-image: url(../vc/fe/social/gp/standard_bubble.png);
+}
+body.compose-mode .vc-vc_googleplus .vc-social-placeholder.vc-socialtype-small {
+  background-image: url(../vc/fe/social/gp/small_desc.png);
+}
+body.compose-mode .vc-vc_googleplus .vc-social-placeholder.vc-socialtype-small.vc-annotation-none {
+  background-image: url(../vc/fe/social/gp/small.png);
+}
+body.compose-mode .vc-vc_googleplus .vc-social-placeholder.vc-socialtype-small.vc-annotation-bubble {
+  background-image: url(../vc/fe/social/gp/small_bubble.png);
+}
+body.compose-mode .vc-vc_googleplus .vc-social-placeholder.vc-socialtype-medium {
+  background-image: url(../vc/fe/social/gp/medium_desc.png);
+}
+body.compose-mode .vc-vc_googleplus .vc-social-placeholder.vc-socialtype-medium.vc-annotation-none {
+  background-image: url(../vc/fe/social/gp/medium.png);
+}
+body.compose-mode .vc-vc_googleplus .vc-social-placeholder.vc-socialtype-medium.vc-annotation-bubble {
+  background-image: url(../vc/fe/social/gp/medium_bubble.png);
+}
+body.compose-mode .vc-vc_googleplus .vc-social-placeholder.vc-socialtype-tall {
+  background-image: url(../vc/fe/social/gp/tall_desc.png);
+}
+body.compose-mode .vc-vc_googleplus .vc-social-placeholder.vc-socialtype-tall.vc-annotation-none {
+  background-image: url(../vc/fe/social/gp/tall.png);
+}
+body.compose-mode .vc-vc_googleplus .vc-social-placeholder.vc-socialtype-tall.vc-annotation-bubble {
+  background-image: url(../vc/fe/social/gp/tall_bubble.png);
+  height: 60px;
+}
+body.compose-mode .vc-vc_accordion_tab .wpb_content_element .wpb_accordion_wrapper .wpb_accordion_content {
+  padding: 1em 1em 1.5em;
+}
+body.compose-mode .vc-vc_accordion_tab > .vc-controls .control-btn-append {
+  display: none;
+}
+body.compose-mode .wpb_column > .wpb_wrapper > div.vc-vc_toggle + div:not(.vc-vc_toggle) {
+  margin-top: 35px;
+}
+body.compose-mode .vc-vc_widget_sidebar,
+body.compose-mode .vc-templatera {
+  min-height: 32px;
+}
+body.compose-mode .vc-add-element-button {
+  margin-right: 15px;
+  background-image: url(../vc/fe/add_element.png);
+  background-position: 14px center;
+  background-repeat: no-repeat;
+  padding-left: 52px;
+}
+body.compose-mode .vc-add-text-block-button {
+  margin-left: 15px;
+  background-image: url(../vc/fe/add_text_block.gif);
+  background-position: 20px center;
+  background-repeat: no-repeat;
+  padding-left: 52px;
+}
+body.compose-mode .vc-add-element-not-empty-button {
+  width: 39px;
+  height: 38px;
+  background-image: url(../vc/fe/empty_row_sprite.png);
+  background-position: top center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  /*
+        padding: 15px 18px;
+        background-image: url(../vc/add_element.png);
+        background-position: center center;
+        background-repeat: no-repeat;
+        display: none;
+        */
+}
+body.compose-mode .vc-add-element-not-empty-button:hover {
+  background-position: bottom center;
+}
+body.compose-mode .vc-no-content-helper {
+  display: block;
+  text-align: center;
+}
+body.compose-mode .vc-no-content-helper .icon {
+  display: inline-block;
+  background: transparent url(../vc/fe/visual_composer_32.png) center center no-repeat;
+  width: 32px;
+  height: 32px;
+}
+body.compose-mode .vc-no-content-helper h5 {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 33px;
+}
+body.compose-mode .vc-no-content-helper h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  line-height: 26px;
+}
+body.compose-mode .vc-no-content-helper .vc-buttons {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px dashed #EBEBEB;
+  border: 1px dashed rgba(125, 125, 125, 0.4);
+}
+body.compose-mode .vc-no-content-helper.vc-not-empty h5,
+body.compose-mode .vc-no-content-helper.vc-not-empty h3,
+body.compose-mode .vc-no-content-helper.vc-not-empty .icon {
+  display: none;
+}
+body.compose-mode .vc-no-content-helper.vc-not-empty .vc-buttons {
+  padding: 12px 10px 5px 10px;
+  border: 1px dashed #EBEBEB;
+  border: 1px dashed rgba(125, 125, 125, 0.4);
+}
+body.compose-mode .vc-no-content-helper.vc-not-empty .vc-buttons .vc-add-text-block-button,
+body.compose-mode .vc-no-content-helper.vc-not-empty .vc-buttons .vc-add-element-button {
+  display: none;
+}
+body.compose-mode .vc-no-content-helper.vc-not-empty .vc-buttons .vc-add-element-not-empty-button {
+  display: inline-block;
+}
+@media screen and (max-width: 768px) {
+  body.compose-mode .vc-add-element-button {
+    display: block;
+    margin-right: 0;
+    margin-bottom: 16px;
+  }
+  body.compose-mode .vc-add-text-block-button {
+    display: block;
+    margin-left: 0;
+  }
+}
+body.compose-mode.vc-column-dragging * {
+  cursor: e-resize !important;
+}
+body.compose-mode.vc-column-dragging .vc-controls {
+  display: none;
+}
+.vc-helper {
+  width: auto !important;
+  height: 32px !important;
+  z-index: 1006;
+  position: absolute;
+  padding: 4px 15px 4px 30px;
+  border: 1px solid #AFD23E;
+  background-color: #AFD23E;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  vertical-align: middle;
+  color: #FFFFFF;
+  font-size: 9px;
+}
+.vc-helper .vc-element-icon {
+  display: inline-block;
+  margin: 0 8px 0 0;
+  width: 32px;
+  height: 32px;
+  background-image: url(../vc/elements_icons/sprite.png);
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+}
+.vc-helper .icon-wpb-application-icon-large {
+  background-position: 0 -32px;
+}
+.vc-helper .icon-wpb-application-plus {
+  background-position: 0 -64px;
+}
+.vc-helper .icon-wpb-balloon-facebook-left {
+  background-position: 0 -96px;
+}
+.vc-helper .icon-wpb-balloon-twitter-left {
+  background-position: 0 -128px;
+}
+.vc-helper .icon-wpb-film-youtube {
+  background-position: 0 -160px;
+}
+.vc-helper .icon-wpb-images-stack {
+  background-position: 0 -192px;
+}
+.vc-helper .icon-wpb-information-white {
+  background-position: 0 -224px;
+}
+.vc-helper .icon-wpb-layer-shape-text {
+  background-position: 0 -256px;
+}
+.vc-helper .icon-wpb-layout_sidebar {
+  background-position: 0 -288px;
+}
+.vc-helper .icon-wpb-map-pin {
+  background-position: 0 -320px;
+}
+.vc-helper .icon-wpb-slideshow {
+  background-position: 0 -352px;
+}
+.vc-helper .icon-wpb-toggle-small-expand {
+  background-position: 0 -384px;
+}
+.vc-helper .icon-wpb-ui-accordion {
+  background-position: 0 -416px;
+}
+.vc-helper .icon-wpb-ui-button {
+  background-position: 0 -448px;
+}
+.vc-helper .icon-wpb-ui-separator-label {
+  background-position: 0 -480px;
+}
+.vc-helper .icon-wpb-ui-separator {
+  background-position: 0 -512px;
+}
+.vc-helper .icon-wpb-ui-tab-content {
+  background-position: 0 -544px;
+}
+.vc-helper .icon-wpb-ui-tab-content-vertical {
+  background-position: 0 -576px;
+}
+.vc-helper .icon-wpb-pinterest {
+  background-position: 0 -608px;
+}
+.vc-helper .icon-wpb-tweetme {
+  background-position: 0 -640px;
+}
+.vc-helper .icon-wpb-single-image {
+  background-position: 0 -672px;
+}
+.vc-helper .icon-wpb-call-to-action {
+  background-position: 0 -704px;
+}
+.vc-helper .icon-wpb-raw-html {
+  background-position: 0 -736px;
+}
+.vc-helper .icon-wpb-raw-javascript {
+  background-position: 0 -768px;
+}
+.vc-helper .icon-wpb-flickr {
+  background-position: 0 -800px;
+}
+.vc-helper .icon-wpb-contactform7 {
+  background-position: 0 -832px;
+}
+.vc-helper .icon-wpb-vc_gravityform {
+  background-position: 0 -864px;
+}
+.vc-helper .icon-wpb-layerslider {
+  background-position: 0 -892px;
+}
+.vc-helper .icon-wpb-revslider {
+  background-position: 0 -928px;
+}
+.vc-helper .icon-wpb-graph {
+  background-position: 0 -960px;
+}
+.vc-helper .icon-wpb-wp {
+  background-position: 0 -992px;
+}
+.vc-helper .icon-wpb-vc_pie {
+  background-position: 0 -1024px;
+}
+.vc-helper .icon-wpb-images-carousel {
+  background-position: 0 -1056px;
+}
+.vc-helper .icon-wpb-vc_carousel {
+  background-position: 0 -1088px;
+}
+.vc-helper .icon-wpb-row {
+  background-position: 0 -1120px;
+}
+.vc-helper .icon-wpb-atm {
+  background-image: url(../vc/elements_icons/atm.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.vc-helper.vc-helper-vc_row {
+  border: 1px solid #285A85;
+  background-color: #285A85;
+}
+.vc-helper.vc-helper-vc_column {
+  border: 1px solid #F9B418;
+  background-color: #F9B418;
+}
+.vc-placeholder {
+  background: transparent url(../vc/pattern.gif);
+}
+.vc-placeholder-row {
+  padding: 0;
+  margin: 0 0 35px 0;
+  background: transparent url(../vc/pattern.gif);
+  height: 50px;
+}
+.vc-placeholder-column {
+  background: transparent url(../vc/pattern.gif);
+  float: left;
+}
+.vc-sorting .wpb_row > .vc-element:before {
+  content: '';
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  outline: 1px dashed #EBEBEB;
+  outline: 1px dashed rgba(125, 125, 125, 0.4);
+}
+.vc-sorting .wpb_row > .vc-element:after {
+  clear: both;
+}
+.vc-sorting .vc-controls {
+  visibility: hidden !important;
+  opacity: 0;
+}
+.vc-no-content-helper {
+  display: none;
+}
+.vc-catcher {
+  background-color: #e8ecb8;
+}
+.hidden-placeholder {
+  display: none !important;
+}
+.vc-element .vc-vc_tab {
+  *zoom: 1;
+}
+.vc-element .vc-vc_tab:before,
+.vc-element .vc-vc_tab:after {
+  display: table;
+  content: "";
+}
+.vc-element .vc-vc_tab:after {
+  clear: both;
+}
+.wpb_content_element .wpb_tabs_nav {
+  z-index: 1001;
+  position: relative;
+}

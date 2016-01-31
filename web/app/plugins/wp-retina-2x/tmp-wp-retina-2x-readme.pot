@@ -1,0 +1,826 @@
+msgid ""
+msgstr "MIME-Version: 1.0\n"
+
+#. Name.
+msgid "WP Retina 2x"
+msgstr ""
+
+#. Short description.
+msgid "Make your website look beautiful and crisp on Retina / High DPI displays."
+msgstr ""
+
+#. Screenshot description.
+msgid "Retina Dashboard"
+msgstr ""
+
+#. Screenshot description.
+msgid "Basic Settings"
+msgstr ""
+
+#. Screenshot description.
+msgid "Advanced Settings"
+msgstr ""
+
+#. Found in description header.
+msgid "Quickstart"
+msgstr ""
+
+#. Found in description list item.
+msgid "Set your option (for instance, you probably don't need retina images for every sizes set-up in your WP)."
+msgstr ""
+
+#. Found in description list item.
+msgid "Generate the retina images (required only the first time, then images are generated automatically)."
+msgstr ""
+
+#. Found in description list item.
+msgid "Check if it works! - if it doesn't, read the FAQ, the tutorial, and check the forums."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "This plugin creates the image files required by the Retina (High DPI) devices and displays them to your visitors accordingly. Your website will look beautiful and crisp on every device! The retina images will be generated for you automatically - though you can also do it manually - and served to the retina devices."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "It supports different methods to serve the images to your visitors, for instance: PictureFill (future HTML standard + its JS polyfill), Retina.js (JS only), IMG Rewrite (on-the-fly HTML rewrite) and Retina-Images (server handler). A lazy-loading option is available as well. Pick the one that works best with your hosting and WordPress environment. Multi-site are also supported."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "The plugin is very fast and optimized. It doesn't create anything in the database. In most cases, it doesn't even require any configuration. More information and tutorial available one http://apps.meow.fr/wp-retina-2x/."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "Languages: English, French."
+msgstr ""
+
+#. Found in installation list item.
+msgid "Upload the folder <code>wp-retina-2x</code> to the <code>/wp-content/plugins/</code> directory."
+msgstr ""
+
+#. Found in installation list item.
+msgid "Activate the plugin through the 'Plugins' menu in WordPress."
+msgstr ""
+
+#. Found in installation list item.
+msgid "Check the settings of WP Retina 2x in the WordPress administration screen."
+msgstr ""
+
+#. Found in installation list item.
+msgid "Check the Retina Dashboard."
+msgstr ""
+
+#. Found in installation list item.
+msgid "Read the tutorial about the plugin: <a href='http://apps.meow.fr/wp-retina-2x/tutorial/'>WP Retina 2x Tutorial</a>."
+msgstr ""
+
+#. Found in installation paragraph.
+msgid "Quick and easy installation:"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Update: PictureFill 3.0.1 (full codebase rewrite)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Update: Little modification for SmushIt (https://wordpress.org/support/topic/wp-retina-2x-support-in-wp-smush?replies=1#post-7460268)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Update: Towards using the new WP translation system."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Update: For WordPress 4.3."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Update: RetinaImages to 1.7.2."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Info: If you like the plugin, please tell me so here: https://wordpress.org/support/view/plugin-reviews/wp-retina-2x :) Thank you, and have a nice week-end everyone!"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: Search string not null but empty induces error."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: User Agent used for Pro authentification."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: Issues with class containing trailing spaces. Fixed in in SimpleHTMLDOM."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: Used to show weird numbers when using 9999 as width or height."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: Filter and default filter to avoid certain IMG SRC to be checked/parsed by the plugin while rendering."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: Full-Size Retina wasn't removed when the original file was deleted from WP."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: Images set up with a 0x0 size must be skipped."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: There was an issue if the class starts with a space (broken HTML), plugin automatically fix it on the fly."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: Full-Size image had the wrong path in the Details screen."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: Option Auto Generate was wrongly show unchecked even though it is active by default."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Update: Moved the filters to allow developers to use files hosted on another server."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Update: Translation strings. If you want to translate the plugin in your language, please contact me :)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: There was an issue with local path for a few installs."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: Introduced $wr2x_extra_debug for extra developer debug (might be handy)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: Issues with retina images outside the uploads directory."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Info: Please write a review for the plugin if you are happy with it. I am trying my best to make this plugin to work with every kind of WP install and system :)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: Use WP uploads folder for temporary files to avoid issues depending on hosting services."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Update: LazySize from 1.0 to 1.1."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Update: PictureFill from 2.3.0 to 2.3.1."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: Used a PHP shortcut that only works in PHP 5.4. Shortcut removed."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: Support for BedRock and a few more customized installs."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Info: If you encounter any issue, please roll-back to 3.2.8 and come to the support forum (https://wordpress.org/support/plugin/wp-retina-2x). If you are happy with it, please write a little review (https://wordpress.org/support/view/plugin-reviews/wp-retina-2x) :) Nice week-end everyone!"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Update: Allows a little error margin for the resolution of images being uploaded for full-size retina."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: Support for custom uploads directory."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Info: Added error_log for BedRock related debugging (commented, check line 137 in main file). BedRock users should try to modify the wr2x_get_wordpress_upload_root function (in wp-retina-2x.php) to make it work for them. Let's talk about it on https://wordpress.org/support/topic/path-incorrect-as-custom-uploads-directory-location-with-bedrock."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: API filters to give the opportunity to other plugins to plug into... this plugin ;)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: Check the maximum upload value in PHP settings before actually uploading (to avoid silenced crashes)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Update: PictureFill from 2.2.0 to 2.3.0 (https://github.com/scottjehl/picturefill/releases/tag/2.3.0)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: Custom CDN Domain support (check the \"Custom CDN Domain\" option)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: Removed a console.log that was forgotten ;)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: different way of getting the temporary folder to write files (might help in a few cases)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: Drag &amp; drop images wasn't working on Firefox and Safari."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Info: Please rate the plugin if you love it and never hesitate to post features requests :) Thank you!"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: There was an issue when re-sizing PNG files."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: Lazysizes from 1.0.0 to 1.0.1 (seo improvement)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: Use minified version of retinajs."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: Lazy-loading option for PictureFill (Pro)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: For the Pro users having the IXR_client error."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: Plugin now works even behind a proxy."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: Little UI bug while uploading a new image."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: In the dashboard, added tooltips showing the sizes of the little squares on hover."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: The plugin was not compatible with Polylang, now it works."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: Link to logs from the dashboard (if logs are available), and possibility to clear it directly."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: Replace the Full-Size directly by drag &amp; drop in the box."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: Support for WPML Media."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: Picturefill script to 'v2.2.0 - 2014-02-03'."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: Enhanced logs (in debug mode), much easier to read."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: Dashboard enhanced, more clear, possibility of having many image sizes on the screen."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: Better handing of non-image media and image detection."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: Rounding issues always been present, they are now fixed with an 2px error margin."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: Warnings and issues in case of broken metadata and images."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: (PRO) New pop-up screen with detailed information."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: (PRO) Added Retina for Full-Size with upload feature. Please note that Full-Size Retina also works with the normal version but you will have to manually resize and upload them."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: (PRO) Option to avoid removing img's src when using PictureFill."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Info: The serial for the Pro version can be bought at http://apps.meow.fr/wp-retina-2x. Thanks for all your support, the plugin is going to be 3 years old this year! :)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: Support Manual Image Crop, resize the @2x as the user manually cropped them (that's cool!)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: Name will change little by little to WP Retina X and menus simplified to simply \"Retina\"."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: Simplification of the dashboard (more is coming)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: PictureFill updated to 'v2.2.0 - 2014-12-19'."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: Issue with the upload directory on some installs."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Info: Way more is coming soon to the dashboard, thanks for your patience :)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Info: Manual Image Crop received a Pull Request from me to support the Retina cropping but it is not part of their current version yet (1.07). For a version of Manual Image Crop that includes this change, you can use my forked version: https://github.com/tigroumeow/wp-manual-image-crop."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: Cropped images from the side now supported."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: Avoid loading the PHP Simple HTML DOM Parser twice."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Update: PictureFill, from 2.1.0 to 2.2.0."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: Now create retina files by default."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Info: If you are using LIGHTROOM, please check my new plugin called WP/LR Sync, you might find it very useful (apps.meow.fr/wplr-sync/). I am also preparing WP Retina 2x for a Pro version. Many improvements are on the way so if you have any request, please let me know here: https://wordpress.org/support/topic/what-about-a-pro-version."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: Links, documentation, readme."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: Option to disable Retina in the WP Admin. Actually now disabled by default to avoid an issue with NextGen."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: Option to disable the loading of the PictureFill script."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Update: PictureFill, from 2.1.0 (2014-08-20) to 2.1.0 (2014-10-07)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: Flattr button doesn't pop anymore. I know, that was annoying ;)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Info: I am thinking of adding features through a pro version. I would love to know your thoughts. Please check this: https://wordpress.org/support/topic/what-about-a-pro-version"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Works with WP 4."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: PictureFill method now handles special characters."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: Performance boost for PictureFill method."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: Use PHP Simple HTML DOM instead of DOMDocument for PictureFill."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Update: PictureFill, from 2.1.0 (2014-06-03) to 2.1.0 (2014-08-20)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: PictureFill issue with older version of PHP"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: issue with boolean values in the options"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: PictureFill method now ignore fallback img tags found in picture tags"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: logging enhanced for PictureFill"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Info: The new method PictureFill is currently beta but I believe is the best. Please help me test it and participate in the WordPress forums if you find any bug or a way to enhance it. Also, thanks a lot to those who made donations! :)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: new PictureFill method"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: texts and method names"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: debug mode was not logging"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Update for WordPress 3.9.1"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Update: for WordPress 3.9."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Update: MobileDetect, from 2.6.0 to 2.8.0."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Update: RetinaJS, from 1.1 to 1.3."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Info: if you want new features / enhancements, please add a message in the WordPress forum and consider a little donation (or a flattr) and I will do my best to include it in the upcoming 2.0 version of the plugin."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: issue with the src-set method."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: thumbnail size was reduced in the Retina dashboard."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Update: French translation."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: issues when using custom UPLOADS / WP_SITEURL constants."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Info: Please come say hello or make a donation if you love this plugin :)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Info: I am getting married this year!"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: HTML5 issues with the HTML srcset method."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: RetinaJS (client-side) was updated to 1.1.0."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: encoding issue with the HTML srcset method."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: HTML srcset method."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: use one file less."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: most methods were renamed nicely."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: german translation and italian translation."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: option to ignore mobile."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: avoid warnings if any issues during HTML Rewrite."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: generate button was not working anymore."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: more logging for debug mode."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: progress % during operations."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: new method called \"HTML Rewrite\"."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: .htaccess regex for images."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: donation button (can be removed, check the FAQ)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: new icons."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: french translation."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: little fixes."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: enhancement of the Retina Dashboard."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: better management of the 'issues'."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: handle images with technical problems."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: random little fixes again."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: upload is now HTML5, by drag and drop in the Retina Dashboard!"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: delete all retina files button."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: hide the columns to ignore in the Retina dashboard."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: generate button only generates pending items (images)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: performance boost!"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: random little fixes."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: warnings when uploading/replacing an image file."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: esthetical issue related to the icons in the Retina dashboard."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: Media Replace is not used anymore, the code has been embedded in the plugin directly."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: code cleaning."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: no more notices in case there are weird/unsupported/broken image files."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: Works with WP 3.5."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Update: to the new version of Retina.js (client-method)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: updated rewrite-rule (server-method) that works with multi-site."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: support for Network install (multi-site). Thanks to Jeremy (Retina-Images)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: Retina.js updated to its last version (should be slighlty faster)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: Retina-Images updated to its last version (now handles 404 error, yay!)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: using a Retina display, the Retina Dashboard was not looking very nice."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: the \"ignored\" media for retina are handled in a better way."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: the FAQ was improved."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: was not generating the images properly on multisite WordPress installs."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: warning message if using the server-side method without the pretty permalinks."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: warning message if using the server-side method on a multisite WordPress install."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: the client-method (retina.js) is now used by default."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: in a few cases, the retina images were not generated (for no apparent reasons)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: the retina image was not being generated if equal to the resolution of the original image."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: optimization and enhancement of the issues management."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: a little counter icon to show the number of issues."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: an 'IGNORE' button to hide issues that should not be."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: simplified version of the .htaccess directive."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: new version of the client-side method (Retina.js), works 100x faster."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: SQL optimization &amp; memory usage huge improvement."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: the recommended resolution shown wasn't the most adequate one."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: in a few cases, the .htaccess wasn't properly generated."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: files were renamed to avoid conflicts."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: paging for the Retina Dashboard."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: 'Generate for all files' handles and shows if there are errors."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Removed 'error_reporting' (triggers warnings and notices with other plugins)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: on uninstall/disable, the .htaccess will be updated properly."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: the Retina Dashboard."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: can now generate Retina files in bulk."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: the cropped images were not 'cropped'."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add: The Retina Dashboard and the Media Library's column can be disabled via the settings."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: resolved more PHP warning and notices."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: resolved PHP warnings and notices."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change: simplified the code of the server-side method."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix: the wrong resolution was displayed in the Retina column of the Media Manager."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Very first release."
+msgstr ""
+
+#. Found in changelog paragraph.
+msgid "Fix: Very minor issue (one of the debug line had a bug)."
+msgstr ""
+
+#. Found in faq header.
+msgid "Functions"
+msgstr ""
+
+#. Found in faq header.
+msgid "Actions"
+msgstr ""
+
+#. Found in faq header.
+msgid "Filters"
+msgstr ""
+
+#. Found in faq list item.
+msgid "wr2x_get_retina_from_url( $url ): return the URL of the retina image (empty string if not found)"
+msgstr ""
+
+#. Found in faq list item.
+msgid "wr2x_get_retina( $syspath ): return the system path of the retina image (null if not found)"
+msgstr ""
+
+#. Found in faq list item.
+msgid "wr2x_retina_file_added: called when a new retina file is created, 1st argument is $attachment_id (of the media) and second is the $retina_filepath"
+msgstr ""
+
+#. Found in faq list item.
+msgid "wr2x_retina_file_removed: called when a new retina file is removed, 1st argument is $attachment_id (of the media) and second is the $retina_filepath"
+msgstr ""
+
+#. Found in faq list item.
+msgid "wr2x_img_url: you can check and potentially override the $wr2x_img_url (normal/original image from the src) that will be used in the srcset for 1x"
+msgstr ""
+
+#. Found in faq list item.
+msgid "wr2x_img_retina_url: you can check and potentially override the $wr2x_img_retina_url (retina image) that will be used in the srcset for 2x"
+msgstr ""
+
+#. Found in faq list item.
+msgid "wr2x_img_src: you can check and potentially override the $wr2x_img_src that will be used in the img's src (only used in Pro version)"
+msgstr ""
+
+#. Found in faq list item.
+msgid "wr2x_validate_src: the img src is passed; return it if it is valid, return null if it should be skipped"
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Users, you will find the FAQ here: http://apps.meow.fr/wp-retina-2x/faq/."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Developers, WP Retina 2x has a little API. Here are a few filters and actions you might want to use."
+msgstr ""

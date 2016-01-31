@@ -1,0 +1,483 @@
+# Copyright (C) 2015 WP Retina 2x
+# This file is distributed under the same license as the WP Retina 2x package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Retina 2x 3.5.4\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-retina-2x\n"
+"POT-Creation-Date: 2015-10-08 02:18:24+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: wp-retina-2x.php:360
+msgid "N/A"
+msgstr ""
+
+#: wp-retina-2x.php:393
+msgid ""
+"PRO VERSION ONLY<br /><br />You can buy a serial from here: <a "
+"target='_blank' href='http://apps.meow.fr/wp-retina-2x/'>WP Retina 2x</a>."
+"<br />Then add this serial in the settings. That's all! :)<br />Thanks a lot "
+"for your support."
+msgstr ""
+
+#: wp-retina-2x.php:432
+msgid ""
+"The metadata is broken! This is not related to the retina plugin. You should "
+"probably use a plugin to re-generate the missing metadata and images."
+msgstr ""
+
+#: wp-retina-2x.php:436
+msgid ""
+"The image size '%s' could not be found. You probably changed your image "
+"sizes but this specific image was not re-build. This is not related to the "
+"retina plugin. You should probably use a plugin to re-generate the missing "
+"metadata and images."
+msgstr ""
+
+#: wp-retina-2x.php:454
+msgid ""
+"The retina version of the Full-Size image is missing.<br />Full Size Retina "
+"has been checked in the Settings and this image is therefore required.<br /"
+">Please drag & drop an image of at least <b>%dx%d</b> in the <b>Full-Size "
+"Retina Upload</b> column."
+msgstr ""
+
+#: wp-retina-2x.php:458
+msgid ""
+"The Full-Size image is too small (<b>%dx%d</b>) and this size cannot be "
+"generated.<br />Please upload an image of at least <b>%dx%d</b>."
+msgstr ""
+
+#: wp-retina-2x.php:468
+msgid "The retina image can be created. Please use the 'GENERATE' button."
+msgstr ""
+
+#: wp-retina-2x.php:473
+msgid "The standard image normally created by WordPress is missing."
+msgstr ""
+
+#: wp-retina-2x.php:478
+msgid "This size is ignored by your retina settings."
+msgstr ""
+
+#: wp-retina-2x.php:973
+msgid "Your serial does not seem right."
+msgstr ""
+
+#: wp-retina-2x.php:976
+msgid "Your subscription is not active."
+msgstr ""
+
+#: wp-retina-2x.php:979
+msgid "Too many URLs are linked to your subscription."
+msgstr ""
+
+#: wp-retina-2x.php:991
+msgid "Your subscription is enabled."
+msgstr ""
+
+#: wr2x_ajax.php:30
+msgid ""
+"<a href='?page=wp-retina-2x&view=issues&refresh=true'>Refresh</a> this page."
+msgstr ""
+
+#: wr2x_ajax.php:58 wr2x_ajax.php:105
+msgid "Wait..."
+msgstr ""
+
+#: wr2x_ajax.php:66
+msgid "Nothing to do ;)"
+msgstr ""
+
+#: wr2x_ajax.php:112 wr2x_retina-dashboard.php:250
+msgid "GENERATE"
+msgstr ""
+
+#: wr2x_ajax.php:356 wr2x_ajax.php:392 wr2x_ajax.php:425 wr2x_ajax.php:449
+msgid "The attachment ID is missing."
+msgstr ""
+
+#: wr2x_ajax.php:380
+msgid "Full retina file deleted."
+msgstr ""
+
+#: wr2x_ajax.php:414
+msgid "Retina files deleted."
+msgstr ""
+
+#: wr2x_ajax.php:437
+msgid "Details retrieved."
+msgstr ""
+
+#: wr2x_ajax.php:467
+msgid "Retina files generated."
+msgstr ""
+
+#: wr2x_ajax.php:477
+msgid "You do not have permission to upload files."
+msgstr ""
+
+#: wr2x_ajax.php:502
+msgid "The temporary directory could not be created."
+msgstr ""
+
+#: wr2x_ajax.php:519
+msgid "The file is not an image or the upload went wrong."
+msgstr ""
+
+#: wr2x_ajax.php:530
+msgid "You cannot use this file (wrong extension? wrong type?)."
+msgstr ""
+
+#: wr2x_ajax.php:574
+msgid "Uploaded successfully."
+msgstr ""
+
+#: wr2x_ajax.php:625
+msgid "Replaced successfully."
+msgstr ""
+
+#: wr2x_retina-dashboard.php:26
+msgid "Retina images"
+msgstr ""
+
+#: wr2x_retina-dashboard.php:27
+msgid "Retina %s"
+msgstr ""
+
+#: wr2x_retina-dashboard.php:137
+msgid "Refresh"
+msgstr ""
+
+#: wr2x_retina-dashboard.php:151
+msgid "Bulk Delete"
+msgstr ""
+
+#: wr2x_retina-dashboard.php:154
+msgid "Bulk Generate"
+msgstr ""
+
+#: wr2x_retina-dashboard.php:165
+msgid "The logs have been cleared."
+msgstr ""
+
+#: wr2x_retina-dashboard.php:189
+msgid ""
+"The full-size images should have a resolution of <b>%d×%d</b> at least for "
+"the plugin to be able generate the <b>%d retina images</b> required by your "
+"website."
+msgstr ""
+
+#: wr2x_retina-dashboard.php:190
+msgid ""
+"You <b>also need</b> to upload a retina image for the Full-Size image (might "
+"be <b>%d×%d</b>)."
+msgstr ""
+
+#: wr2x_retina-dashboard.php:191
+msgid "You can upload or replace the images by drag & drop."
+msgstr ""
+
+#: wr2x_retina-dashboard.php:192
+msgid "Your PHP configuration allows uploads of <b>%dMB</b> maximum."
+msgstr ""
+
+#: wr2x_retina-dashboard.php:196
+msgid ""
+"The <a target=\"_blank\" href=\"%s/wp-retina-2x.log\">log file</a> is "
+"available. You can also <a href=\"?page=wp-"
+"retina-2x&view=issues&clearlogs=true\">clear</a> it."
+msgstr ""
+
+#: wr2x_retina-dashboard.php:214
+msgid "All"
+msgstr ""
+
+#: wr2x_retina-dashboard.php:215
+msgid "Issues"
+msgstr ""
+
+#: wr2x_retina-dashboard.php:216
+msgid "Ignored"
+msgstr ""
+
+#: wr2x_retina-dashboard.php:222
+msgid "Base image"
+msgstr ""
+
+#: wr2x_retina-dashboard.php:223
+msgid "Media Sizes<br />Retina-ized"
+msgstr ""
+
+#: wr2x_retina-dashboard.php:224
+msgid "Full-Size<br/><b>Replace</b>"
+msgstr ""
+
+#: wr2x_retina-dashboard.php:225
+msgid "Full-Size Retina"
+msgstr ""
+
+#: wr2x_retina-dashboard.php:226
+msgid "Full-Size Retina<br/><b>Upload</b>"
+msgstr ""
+
+#: wr2x_retina-dashboard.php:252
+msgid "IGNORE"
+msgstr ""
+
+#: wr2x_retina-dashboard.php:253
+msgid "DETAILS"
+msgstr ""
+
+#: wr2x_settings.php:21 wr2x_settings.php:24 wr2x_settings.php:27
+msgid "Current method:"
+msgstr ""
+
+#: wr2x_settings.php:21
+msgid "Client side"
+msgstr ""
+
+#: wr2x_settings.php:24
+msgid "PictureFill"
+msgstr ""
+
+#: wr2x_settings.php:27
+msgid "Server side"
+msgstr ""
+
+#: wr2x_settings.php:32
+msgid ""
+"By the way, you are using a <b>WordPress Multi-Site installation</b>! You "
+"must edit your .htaccess manually and add '<b>RewriteRule ^files/(.+) wp-"
+"content/plugins/wp-retina-2x/wr2x_image.php?ms=true&file=$1 [L]</b>' as the "
+"first RewriteRule if you want the server-side to work."
+msgstr ""
+
+#: wr2x_settings.php:35
+msgid ""
+"By the way, you are using a <b>WordPress Multi-Site installation</b>! You "
+"must edit your .htaccess manually and add '<b>RewriteRule ^(wp-content/.+\\."
+"(png|gif|jpg|jpeg|bmp|PNG|GIF|JPG|JPEG|BMP)) wp-content/plugins/wp-retina-2x/"
+"wr2x_image.php?ms=true&file=$1 [L]</b>' as the first RewriteRule if you want "
+"the server-side to work."
+msgstr ""
+
+#: wr2x_settings.php:39
+msgid ""
+"The permalinks are not enabled. They need to be enabled in order to use the "
+"server-side method."
+msgstr ""
+
+#: wr2x_settings.php:85
+msgid "Basics"
+msgstr ""
+
+#: wr2x_settings.php:89
+msgid "Advanced"
+msgstr ""
+
+#: wr2x_settings.php:93
+msgid "Pro"
+msgstr ""
+
+#: wr2x_settings.php:111
+msgid "Disabled Sizes"
+msgstr ""
+
+#: wr2x_settings.php:112
+msgid ""
+"<br />The selected sizes will not have their retina equivalent generated."
+msgstr ""
+
+#: wr2x_settings.php:118
+msgid "Auto Generate"
+msgstr ""
+
+#: wr2x_settings.php:119
+msgid ""
+"Generate retina images automatically when images are uploaded or re-"
+"generated.<br /><small>The 'Disabled Sizes' will be skipped.</small>"
+msgstr ""
+
+#: wr2x_settings.php:125
+msgid "Full Size Retina (Pro)"
+msgstr ""
+
+#: wr2x_settings.php:126
+msgid ""
+"Retina for the full-size image will be considered required.<br /"
+"><small>Checks for Full-Size retina will be enabled and upload features made "
+"available.</small>"
+msgstr ""
+
+#: wr2x_settings.php:134
+msgid "Method"
+msgstr ""
+
+#: wr2x_settings.php:135
+msgid ""
+"<br />Check the <a href=\"http://apps.meow.fr/wp-retina-2x/retina-methods/"
+"\">Retina Methods</a> page if you want to know more about those methods."
+msgstr ""
+
+#: wr2x_settings.php:139
+msgid "Picturefill (Recommended)"
+msgstr ""
+
+#: wr2x_settings.php:140
+msgid "Retina.js"
+msgstr ""
+
+#: wr2x_settings.php:141
+msgid "IMG Rewrite"
+msgstr ""
+
+#: wr2x_settings.php:142
+msgid "Retina-Images"
+msgstr ""
+
+#: wr2x_settings.php:143
+msgid "None"
+msgstr ""
+
+#: wr2x_settings.php:148
+msgid "Quality"
+msgstr ""
+
+#: wr2x_settings.php:149
+msgid ""
+"<br />Image Compression quality (between 0 and 100).<br />That doesn't "
+"always actually work depending on your hosting service."
+msgstr ""
+
+#: wr2x_settings.php:155
+msgid "Debug Mode"
+msgstr ""
+
+#: wr2x_settings.php:162
+msgid "Custom CDN Domain (Pro)"
+msgstr ""
+
+#: wr2x_settings.php:163
+msgid ""
+"<br />If not empty, your site domain will be replaced with this CDN domain "
+"(PictureFill and HTML Rewrite only)."
+msgstr ""
+
+#: wr2x_settings.php:170
+msgid ""
+"<h2>For PictureFill</h2><small>Using \"Keep IMG SRC\" and \"Use Lazysizes\" "
+"is the perfect middle between SEO and Performance.</small>"
+msgstr ""
+
+#: wr2x_settings.php:175
+msgid "Keep IMG SRC (Pro)"
+msgstr ""
+
+#: wr2x_settings.php:176
+msgid ""
+"Excellent for SEO. But Retina devices will get both normal and retina images."
+"<br /><small>With PictureFill, <b>src</b> tags are replaced by <b>src-set</"
+"b> tags and consequently search engines might not be able to find and "
+"reference those images.</small>"
+msgstr ""
+
+#: wr2x_settings.php:182
+msgid "Use Lazysizes (Pro)"
+msgstr ""
+
+#: wr2x_settings.php:183
+msgid ""
+"Retina images will be loaded in a lazy way, when the visitor is getting "
+"close to them.<br /><small>HTML will be rewritten to support the lazysizes "
+"and the script will be also loaded. </small>"
+msgstr ""
+
+#: wr2x_settings.php:189
+msgid "No Picturefill Script"
+msgstr ""
+
+#: wr2x_settings.php:190
+msgid ""
+"The script for Picturefill will not be loaded.<br /><small>Only the browsers "
+"with src-set support (e.g. Chrome) will display images. You can also load "
+"the Picturefill script manually.</small>"
+msgstr ""
+
+#: wr2x_settings.php:197
+msgid "<h2>Admin Screens</h2>"
+msgstr ""
+
+#: wr2x_settings.php:202
+msgid "Hide 'Retina' column"
+msgstr ""
+
+#: wr2x_settings.php:203
+msgid "Will hide the 'Retina Column' from the Media Library."
+msgstr ""
+
+#: wr2x_settings.php:209
+msgid "Hide Retina Dashboard"
+msgstr ""
+
+#: wr2x_settings.php:210
+msgid "Doesn't show the Retina Dashboard menu and tools."
+msgstr ""
+
+#: wr2x_settings.php:216
+msgid "Admin in Retina"
+msgstr ""
+
+#: wr2x_settings.php:217
+msgid ""
+"WordPress Admin will also be Retina.<br /><small>Some plugins (like NextGen) "
+"do not like Retina enabled in the admin.</small>"
+msgstr ""
+
+#: wr2x_settings.php:224
+msgid "<h2>Mobiles</h2>"
+msgstr ""
+
+#: wr2x_settings.php:229
+msgid "Ignore Mobile"
+msgstr ""
+
+#: wr2x_settings.php:230
+msgid ""
+"Doesn't deliver Retina images to mobiles.<br /><small>PictureFill doesn't "
+"support it and cache will also prevent it from working.</small>"
+msgstr ""
+
+#: wr2x_settings.php:244
+msgid "Serial"
+msgstr ""
+
+#: wr2x_settings.php:245
+msgid ""
+"<br />Enter your serial or subscription ID here. If you don't have one yet, "
+"get one <a target=\"_blank\" href=\"http://apps.meow.fr/wp-retina-2x/"
+"\">right here</a>."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "WP Retina 2x"
+msgstr ""
+
+#. #-#-#-#-#  tmp-wp-retina-2x.pot (WP Retina 2x 3.5.4)  #-#-#-#-#
+#. Plugin URI of the plugin/theme
+#. #-#-#-#-#  tmp-wp-retina-2x.pot (WP Retina 2x 3.5.4)  #-#-#-#-#
+#. Author URI of the plugin/theme
+msgid "http://www.meow.fr"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Make your images crisp and beautiful on Retina (High-DPI) displays."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Jordy Meow"
+msgstr ""

@@ -1,0 +1,744 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Captiva Toolkit\n"
+"POT-Creation-Date: 2014-06-29 11:56-0000\n"
+"PO-Revision-Date: 2014-06-29 11:57-0000\n"
+"Last-Translator: Ed Bloom <ed@themesforge.com>\n"
+"Language-Team: Commerce Gurus <support@commercegurus.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.5\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: captiva-toolkit.php:170
+msgid "Settings"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:28
+msgid "Test Metabox"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:36
+#: includes/metaboxes/cmb/example-functions.php:270
+msgid "Test Text"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:37
+#: includes/metaboxes/cmb/example-functions.php:48
+#: includes/metaboxes/cmb/example-functions.php:55
+#: includes/metaboxes/cmb/example-functions.php:62
+#: includes/metaboxes/cmb/example-functions.php:70
+#: includes/metaboxes/cmb/example-functions.php:77
+#: includes/metaboxes/cmb/example-functions.php:89
+#: includes/metaboxes/cmb/example-functions.php:95
+#: includes/metaboxes/cmb/example-functions.php:102
+#: includes/metaboxes/cmb/example-functions.php:117
+#: includes/metaboxes/cmb/example-functions.php:125
+#: includes/metaboxes/cmb/example-functions.php:132
+#: includes/metaboxes/cmb/example-functions.php:138
+#: includes/metaboxes/cmb/example-functions.php:144
+#: includes/metaboxes/cmb/example-functions.php:156
+#: includes/metaboxes/cmb/example-functions.php:167
+#: includes/metaboxes/cmb/example-functions.php:178
+#: includes/metaboxes/cmb/example-functions.php:189
+#: includes/metaboxes/cmb/example-functions.php:197
+#: includes/metaboxes/cmb/example-functions.php:204
+#: includes/metaboxes/cmb/example-functions.php:212
+#: includes/metaboxes/cmb/example-functions.php:218
+#: includes/metaboxes/cmb/example-functions.php:230
+#: includes/metaboxes/cmb/example-functions.php:271
+#: includes/metaboxes/cmb/example-functions.php:337
+#: includes/metaboxes/cmb/example-functions.php:344
+#: includes/metaboxes/cmb/example-functions.php:351
+#: includes/metaboxes/cmb/example-functions.php:357
+#: includes/metaboxes/cmb/example-functions.php:363
+#: includes/metaboxes/cmb/example-functions.php:369
+#: includes/metaboxes/cmb/example-functions.php:375
+#: includes/metaboxes/cmb/example-functions.php:393
+msgid "field description (optional)"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:47
+msgid "Test Text Small"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:54
+msgid "Test Text Medium"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:61
+msgid "Website URL"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:69
+msgid "Test Text Email"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:76
+msgid "Test Time"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:82
+#: includes/metaboxes/cmb/example-functions.php:83
+msgid "Time zone"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:88
+msgid "Test Date Picker"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:94
+msgid "Test Date Picker (UNIX timestamp)"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:101
+msgid "Test Date/Time Picker Combo (UNIX timestamp)"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:116
+msgid "Test Money"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:124
+msgid "Test Color Picker"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:131
+msgid "Test Text Area"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:137
+msgid "Test Text Area Small"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:143
+msgid "Test Text Area for Code"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:149
+msgid "Test Title Weeeee"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:150
+msgid "This is a title description"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:155
+msgid "Test Select"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:160
+#: includes/metaboxes/cmb/example-functions.php:171
+#: includes/metaboxes/cmb/example-functions.php:182
+msgid "Option One"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:161
+#: includes/metaboxes/cmb/example-functions.php:172
+#: includes/metaboxes/cmb/example-functions.php:183
+msgid "Option Two"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:162
+#: includes/metaboxes/cmb/example-functions.php:173
+#: includes/metaboxes/cmb/example-functions.php:184
+msgid "Option Three"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:166
+msgid "Test Radio inline"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:177
+msgid "Test Radio"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:188
+msgid "Test Taxonomy Radio"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:196
+msgid "Test Taxonomy Select"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:203
+msgid "Test Taxonomy Multi Checkbox"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:211
+msgid "Test Checkbox"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:217
+msgid "Test Multi Checkbox"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:222
+msgid "Check One"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:223
+msgid "Check Two"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:224
+msgid "Check Three"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:229
+msgid "Test wysiwyg"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:236
+msgid "Test Image"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:237
+#: includes/metaboxes/logos.php:21 includes/metaboxes/testimonials.php:27
+msgid "Upload an image or enter a URL."
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:242
+msgid "Multiple Files"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:243
+msgid "Upload or add multiple images/attachments."
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:249
+msgid "oEmbed"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:250
+msgid ""
+"Enter a youtube, twitter, or instagram URL. Supports services listed at <a "
+"href=\"http://codex.wordpress.org/Embeds\">http://codex.wordpress.org/"
+"Embeds</a>."
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:262
+msgid "About Page Metabox"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:283
+msgid "Repeating Field Group"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:289
+msgid "Generates reusable form entries"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:291
+msgid "Entry {#}"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:292
+msgid "Add Another Entry"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:293
+msgid "Remove Entry"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:330
+msgid "User Profile Metabox"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:336
+msgid "Extra Info"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:343
+msgid "Avatar"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:350
+msgid "Facebook URL"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:356
+msgid "Twitter URL"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:362
+msgid "Google+ URL"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:368
+msgid "Linkedin URL"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:374
+msgid "User Field"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:388
+msgid "Theme Options Metabox"
+msgstr ""
+
+#: includes/metaboxes/cmb/example-functions.php:392
+msgid "Site Background Color"
+msgstr ""
+
+#: includes/metaboxes/cmb/helpers/cmb_Meta_Box_ajax.php:47
+msgid "Please Try Again"
+msgstr ""
+
+#: includes/metaboxes/cmb/helpers/cmb_Meta_Box_ajax.php:131
+msgid "Remove Embed"
+msgstr ""
+
+#: includes/metaboxes/cmb/helpers/cmb_Meta_Box_ajax.php:134
+#, php-format
+msgid "No oEmbed Results Found for %s. View more info at"
+msgstr ""
+
+#: includes/metaboxes/cmb/helpers/cmb_Meta_Box_field.php:459
+msgid "Add Group"
+msgstr ""
+
+#: includes/metaboxes/cmb/helpers/cmb_Meta_Box_field.php:460
+msgid "Remove Group"
+msgstr ""
+
+#: includes/metaboxes/cmb/helpers/cmb_Meta_Box_types.php:250
+msgid "Add Row"
+msgstr ""
+
+#: includes/metaboxes/cmb/helpers/cmb_Meta_Box_types.php:306
+#: includes/metaboxes/cmb/helpers/cmb_Meta_Box_types.php:706
+#: includes/metaboxes/cmb/helpers/cmb_Meta_Box_types.php:768
+msgid "Remove"
+msgstr ""
+
+#: includes/metaboxes/cmb/helpers/cmb_Meta_Box_types.php:601
+#: includes/metaboxes/cmb/helpers/cmb_Meta_Box_types.php:635
+msgid "No terms"
+msgstr ""
+
+#: includes/metaboxes/cmb/helpers/cmb_Meta_Box_types.php:674
+#: includes/metaboxes/cmb/helpers/cmb_Meta_Box_types.php:728
+msgid "Add or Upload File"
+msgstr ""
+
+#: includes/metaboxes/cmb/helpers/cmb_Meta_Box_types.php:695
+#: includes/metaboxes/cmb/helpers/cmb_Meta_Box_types.php:760
+msgid "Remove Image"
+msgstr ""
+
+#: includes/metaboxes/cmb/helpers/cmb_Meta_Box_types.php:706
+#: includes/metaboxes/cmb/helpers/cmb_Meta_Box_types.php:768
+msgid "File:"
+msgstr ""
+
+#: includes/metaboxes/cmb/helpers/cmb_Meta_Box_types.php:706
+#: includes/metaboxes/cmb/helpers/cmb_Meta_Box_types.php:768
+msgid "Download"
+msgstr ""
+
+#: includes/metaboxes/cmb/init.php:258
+msgid "Clear"
+msgstr ""
+
+#: includes/metaboxes/cmb/init.php:259
+msgid "Default"
+msgstr ""
+
+#: includes/metaboxes/cmb/init.php:260
+msgid "Select Color"
+msgstr ""
+
+#: includes/metaboxes/cmb/init.php:261
+msgid "Current Color"
+msgstr ""
+
+#: includes/metaboxes/cmb/init.php:288
+msgid "Select / Deselect All"
+msgstr ""
+
+#: includes/metaboxes/cmb/init.php:1177
+msgid "Save"
+msgstr ""
+
+#: includes/metaboxes/logos.php:14
+msgid "Logo link destination"
+msgstr ""
+
+#: includes/metaboxes/logos.php:15
+msgid ""
+"Where the logo should link to. Please do not forget to include the http://"
+msgstr ""
+
+#: includes/metaboxes/logos.php:20
+msgid "Logo image"
+msgstr ""
+
+#: includes/metaboxes/shopannouncements.php:14
+msgid "Announcement background color"
+msgstr ""
+
+#: includes/metaboxes/shopannouncements.php:15
+msgid "The announcement has a solid background color"
+msgstr ""
+
+#: includes/metaboxes/shopannouncements.php:21
+msgid "Announcement text color"
+msgstr ""
+
+#: includes/metaboxes/shopannouncements.php:22
+msgid "The text color for the announcement"
+msgstr ""
+
+#: includes/metaboxes/showcases.php:14
+msgid "Showcase url/link"
+msgstr ""
+
+#: includes/metaboxes/showcases.php:15
+msgid ""
+"Where the showcase should link to. Please do not forget to include the "
+"http://"
+msgstr ""
+
+#: includes/metaboxes/showcases.php:20
+msgid "Showcase url/link description"
+msgstr ""
+
+#: includes/metaboxes/showcases.php:21
+msgid ""
+"This is the text description displayed when clicking on the showcase url/"
+"link."
+msgstr ""
+
+#: includes/metaboxes/showcases.php:26
+msgid "Showcase image gallery"
+msgstr ""
+
+#: includes/metaboxes/showcases.php:27
+msgid "Upload images and they will be shown in a slideshow.."
+msgstr ""
+
+#: includes/metaboxes/showcases.php:33
+msgid "Showcase Video Source"
+msgstr ""
+
+#: includes/metaboxes/showcases.php:34
+msgid ""
+"As an alternative to a Showcase image gallery, you can embed a showcase "
+"video."
+msgstr ""
+
+#: includes/metaboxes/showcases.php:38
+msgid "Youtube"
+msgstr ""
+
+#: includes/metaboxes/showcases.php:39
+msgid "Vimeo"
+msgstr ""
+
+#: includes/metaboxes/showcases.php:43
+msgid "Showcase Video ID"
+msgstr ""
+
+#: includes/metaboxes/showcases.php:44
+msgid ""
+"Copy the ID of the video (E.g. http://www.youtube.com/watch?"
+"v=<strong>Sv6dMFF_yts</strong>) you want to show.."
+msgstr ""
+
+#: includes/metaboxes/testimonials.php:14 includes/metaboxes/topreviews.php:14
+msgid "Name of person providing the testimonial"
+msgstr ""
+
+#: includes/metaboxes/testimonials.php:15 includes/metaboxes/topreviews.php:15
+msgid "This can also be anonymous"
+msgstr ""
+
+#: includes/metaboxes/testimonials.php:20 includes/metaboxes/topreviews.php:20
+msgid "Organization name"
+msgstr ""
+
+#: includes/metaboxes/testimonials.php:21 includes/metaboxes/topreviews.php:21
+msgid "Enter the organization your clients works for."
+msgstr ""
+
+#: includes/metaboxes/testimonials.php:26
+msgid "Testimonial Face Profile Image"
+msgstr ""
+
+#: includes/post-types/logos.php:4
+msgid "Logos"
+msgstr ""
+
+#: includes/post-types/logos.php:5
+msgid "Logo"
+msgstr ""
+
+#: includes/post-types/logos.php:6 includes/post-types/shopannouncements.php:6
+#: includes/post-types/testimonials.php:6 includes/post-types/topreviews.php:6
+msgid "Add New"
+msgstr ""
+
+#: includes/post-types/logos.php:7
+msgid "Add New Logo"
+msgstr ""
+
+#: includes/post-types/logos.php:8
+msgid "Edit Logo"
+msgstr ""
+
+#: includes/post-types/logos.php:9
+msgid "New Logo"
+msgstr ""
+
+#: includes/post-types/logos.php:10
+msgid "View Logo"
+msgstr ""
+
+#: includes/post-types/logos.php:11
+msgid "Search Logos"
+msgstr ""
+
+#: includes/post-types/logos.php:12
+msgid "No Logos found"
+msgstr ""
+
+#: includes/post-types/logos.php:13
+msgid "No Logos in trash"
+msgstr ""
+
+#: includes/post-types/logos.php:38
+msgid "Logo Name"
+msgstr ""
+
+#: includes/post-types/logos.php:39
+#: includes/post-types/shopannouncements.php:39
+#: includes/post-types/showcases.php:38
+#: includes/post-types/testimonials.php:39
+#: includes/post-types/topreviews.php:39
+msgid "Date"
+msgstr ""
+
+#: includes/post-types/shopannouncements.php:4
+msgid "Announcements"
+msgstr ""
+
+#: includes/post-types/shopannouncements.php:5
+msgid "Announcement"
+msgstr ""
+
+#: includes/post-types/shopannouncements.php:7
+msgid "Add New Announcement"
+msgstr ""
+
+#: includes/post-types/shopannouncements.php:8
+msgid "Edit Announcement"
+msgstr ""
+
+#: includes/post-types/shopannouncements.php:9
+msgid "New Announcement"
+msgstr ""
+
+#: includes/post-types/shopannouncements.php:10
+msgid "View Announcement"
+msgstr ""
+
+#: includes/post-types/shopannouncements.php:11
+msgid "Search Announcements"
+msgstr ""
+
+#: includes/post-types/shopannouncements.php:12
+msgid "No Announcements found"
+msgstr ""
+
+#: includes/post-types/shopannouncements.php:13
+msgid "No Announcements in trash"
+msgstr ""
+
+#: includes/post-types/shopannouncements.php:38
+msgid "Shop announcement Title"
+msgstr ""
+
+#: includes/post-types/showcases.php:4
+msgid "Showcases"
+msgstr ""
+
+#: includes/post-types/showcases.php:5
+msgid "Showcase"
+msgstr ""
+
+#: includes/post-types/showcases.php:6
+msgid "showcase"
+msgstr ""
+
+#: includes/post-types/showcases.php:8
+msgid "Add New Showcase"
+msgstr ""
+
+#: includes/post-types/showcases.php:9
+msgid "Edit Showcase"
+msgstr ""
+
+#: includes/post-types/showcases.php:10
+msgid "New Showcase"
+msgstr ""
+
+#: includes/post-types/showcases.php:11
+msgid "View Showcase"
+msgstr ""
+
+#: includes/post-types/showcases.php:12
+msgid "Search Showcases"
+msgstr ""
+
+#: includes/post-types/showcases.php:13
+msgid "No showcases found"
+msgstr ""
+
+#: includes/post-types/showcases.php:14
+msgid "No showcases found in Trash"
+msgstr ""
+
+#: includes/post-types/showcases.php:37
+msgid "Showcase Title"
+msgstr ""
+
+#: includes/post-types/testimonials.php:4
+msgid "Testimonials"
+msgstr ""
+
+#: includes/post-types/testimonials.php:5
+msgid "Testimonial"
+msgstr ""
+
+#: includes/post-types/testimonials.php:7
+msgid "Add New Testimonial"
+msgstr ""
+
+#: includes/post-types/testimonials.php:8
+msgid "Edit Testimonial"
+msgstr ""
+
+#: includes/post-types/testimonials.php:9
+msgid "New Testimonial"
+msgstr ""
+
+#: includes/post-types/testimonials.php:10
+msgid "View Testimonial"
+msgstr ""
+
+#: includes/post-types/testimonials.php:11
+msgid "Search Testimonials"
+msgstr ""
+
+#: includes/post-types/testimonials.php:12
+msgid "No Testimonials found"
+msgstr ""
+
+#: includes/post-types/testimonials.php:13
+msgid "No Testimonials in trash"
+msgstr ""
+
+#: includes/post-types/testimonials.php:38
+msgid "Testimonial Title"
+msgstr ""
+
+#: includes/post-types/topreviews.php:4
+msgid "Top Reviews"
+msgstr ""
+
+#: includes/post-types/topreviews.php:5
+msgid "Top Review"
+msgstr ""
+
+#: includes/post-types/topreviews.php:7
+msgid "Add New Top Review"
+msgstr ""
+
+#: includes/post-types/topreviews.php:8
+msgid "Edit Top Review"
+msgstr ""
+
+#: includes/post-types/topreviews.php:9
+msgid "New Top Review"
+msgstr ""
+
+#: includes/post-types/topreviews.php:10
+msgid "View Top Review"
+msgstr ""
+
+#: includes/post-types/topreviews.php:11
+msgid "Search Top Reviews"
+msgstr ""
+
+#: includes/post-types/topreviews.php:12
+msgid "No Top Reviews found"
+msgstr ""
+
+#: includes/post-types/topreviews.php:13
+msgid "No Top Reviews in trash"
+msgstr ""
+
+#: includes/post-types/topreviews.php:38
+msgid "Top Review Title"
+msgstr ""
+
+#: includes/shortcodes/portfolio_slider.php:86
+#, php-format
+msgid "Permanent Link to %s"
+msgstr ""
+
+#: includes/taxonomies/showcasecategory.php:6
+msgid "Search Showcase Categories"
+msgstr ""
+
+#: includes/taxonomies/showcasecategory.php:7
+msgid "Popular Showcase Categories"
+msgstr ""
+
+#: includes/taxonomies/showcasecategory.php:8
+msgid "All Showcase Categories"
+msgstr ""
+
+#: includes/taxonomies/showcasecategory.php:11
+msgid "Edit Showcase Category"
+msgstr ""
+
+#: includes/taxonomies/showcasecategory.php:12
+msgid "Update Showcase Category"
+msgstr ""
+
+#: includes/taxonomies/showcasecategory.php:13
+msgid "Add New Showcase Category"
+msgstr ""
+
+#: includes/taxonomies/showcasecategory.php:14
+msgid "New Showcase Category Name"
+msgstr ""
+
+#: includes/taxonomies/showcasecategory.php:15
+msgid "Separate showcase categories with commas"
+msgstr ""
+
+#: includes/taxonomies/showcasecategory.php:16
+msgid "Add or remove showcase categories"
+msgstr ""
+
+#: includes/taxonomies/showcasecategory.php:17
+msgid "Choose from the most used showcase categories"
+msgstr ""
+
+#: includes/taxonomies/showcasecategory.php:21
+msgid "Showcase Category"
+msgstr ""
+
+#: uninstall.php:12
+#, php-format
+msgid "%s should only be called when uninstalling the plugin."
+msgstr ""
