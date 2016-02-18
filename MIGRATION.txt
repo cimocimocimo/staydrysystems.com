@@ -1,7 +1,7 @@
 # Use wp-cli to search replace
 
 # run on the server
-cd /srv/www/staydrysystems.com/
+cd /srv/www/staydrysystems.com/current/
 wp search-replace 'staydrysystems.com' [current development or staging domain]
 wp search-replace '/wp-content/' '/app/'
 
