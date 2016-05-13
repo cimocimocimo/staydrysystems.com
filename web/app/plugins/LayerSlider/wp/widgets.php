@@ -5,7 +5,7 @@ add_action( 'widgets_init', create_function( '', 'register_widget("LayerSlider_W
 
 class LayerSlider_Widget extends WP_Widget {
 
-	function LayerSlider_Widget() {
+	function __construct() {
 
 		$widget_ops = array( 'classname' => 'layerslider_widget', 'description' => __('Insert a slider with LayerSlider WP Widget', 'LayerSlider') );
 		$control_ops = array( 'id_base' => 'layerslider_widget' );
