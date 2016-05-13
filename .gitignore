@@ -13,7 +13,6 @@ web/app/uploads/*
 !web/app/plugins/advanced-sidebar-menu
 !web/app/plugins/akismet
 !web/app/plugins/captiva-toolkit
-!web/app/plugins/configure-smtp
 !web/app/plugins/contact-form-7
 !web/app/plugins/enhanced-e-commerce-for-woocommerce-store
 !web/app/plugins/envato-wordpress-toolkit
@@ -22,13 +21,11 @@ web/app/uploads/*
 !web/app/plugins/js_composer
 !web/app/plugins/mailchimp
 !web/app/plugins/maintenance
-!web/app/plugins/regenerate-thumbnails
 !web/app/plugins/woocommerce
 !web/app/plugins/woocommerce-incremental-product-quantities
 !web/app/plugins/woocommerce-shipping-per-product
 !web/app/plugins/woosidebars
 !web/app/plugins/woothemes-updater
-!web/app/plugins/wordpress-importer
 !web/app/plugins/wordpress-seo
 !web/app/plugins/wp-retina-2x
 !web/app/plugins/yith-woocommerce-ajax-navigation

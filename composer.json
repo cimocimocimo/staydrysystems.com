@@ -37,7 +37,8 @@
     "composer/installers": "~1.0.12",
     "vlucas/phpdotenv": "^2.0.1",
     "johnpbloch/wordpress": "4.4.1",
-    "wpackagist-plugin/w3-total-cache": "0.9.4.1"
+    "wpackagist-plugin/w3-total-cache": "0.9.4.1",
+    "wpackagist-plugin/wp-mail-smtp": "^0.9.5"
   },
   "extra": {
     "installer-paths": {
