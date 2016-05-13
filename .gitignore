@@ -19,7 +19,6 @@ web/app/uploads/*
 !web/app/plugins/envato-wordpress-toolkit-master
 !web/app/plugins/googleanalytics
 !web/app/plugins/js_composer
-!web/app/plugins/mailchimp
 !web/app/plugins/maintenance
 !web/app/plugins/woocommerce
 !web/app/plugins/woocommerce-incremental-product-quantities
