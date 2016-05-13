@@ -7,29 +7,8 @@ web/app/uploads/*
 !web/app/uploads/.gitkeep
 
 # Whitelisted Plugins
-!web/app/plugins/LayerSlider
-!web/app/plugins/Ultimate_VC_Addons
 !web/app/plugins/advanced-custom-fields
-!web/app/plugins/advanced-sidebar-menu
-!web/app/plugins/akismet
-!web/app/plugins/captiva-toolkit
-!web/app/plugins/contact-form-7
-!web/app/plugins/enhanced-e-commerce-for-woocommerce-store
-!web/app/plugins/envato-wordpress-toolkit
-!web/app/plugins/envato-wordpress-toolkit-master
-!web/app/plugins/googleanalytics
-!web/app/plugins/js_composer
-!web/app/plugins/maintenance
-!web/app/plugins/woocommerce
-!web/app/plugins/woocommerce-incremental-product-quantities
 !web/app/plugins/woocommerce-shipping-per-product
-!web/app/plugins/woosidebars
-!web/app/plugins/woothemes-updater
-!web/app/plugins/wordpress-seo
-!web/app/plugins/wp-retina-2x
-!web/app/plugins/yith-woocommerce-ajax-navigation
-!web/app/plugins/yith-woocommerce-ajax-search
-!web/app/plugins/yith-woocommerce-wishlist
 
 # WordPress
 web/wp
@@ -55,3 +34,4 @@ node_modules
 bin
 .vagrant
 
+web/app/themes/storefront/
