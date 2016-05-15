@@ -1,0 +1,22 @@
+{
+  "name": "staydrysystems.com",
+  "version": "1.0.0",
+  "description": "Build process for the staydrysystems.com website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "cimo-github:cimocimocimo/staydrysystems.com.git"
+  },
+  "author": "Aaron Cimolini",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-size": "^2.1.0",
+    "gulp-svg-sprite": "^1.2.19",
+    "gulp-svg2png": "^1.0.0",
+    "gulp-util": "^3.0.7"
+  }
+}
