@@ -12,7 +12,6 @@ web/app/uploads/*
 !web/app/plugins/advanced-custom-fields
 !web/app/plugins/advanced-sidebar-menu
 !web/app/plugins/captiva-toolkit
-!web/app/plugins/contact-form-7
 !web/app/plugins/enhanced-e-commerce-for-woocommerce-store
 !web/app/plugins/envato-wordpress-toolkit
 !web/app/plugins/envato-wordpress-toolkit-master
