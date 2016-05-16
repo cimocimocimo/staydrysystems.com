@@ -39,6 +39,7 @@
     "johnpbloch/wordpress": "4.4.1",
     "wpackagist-plugin/akismet": "^3.1.11",
     "wpackagist-plugin/contact-form-7": "^4.4.2",
+    "wpackagist-plugin/Maintenance": "^2.7.1",
     "wpackagist-plugin/w3-total-cache": "0.9.4.1",
     "wpackagist-plugin/wp-mail-smtp": "^0.9.5"
   },
