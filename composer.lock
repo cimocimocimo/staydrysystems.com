@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "006fd3739c88f3c309d7465e7717db53",
-    "content-hash": "75fee29699a0e6c93900e6b1b15f6734",
+    "hash": "e029c604ecddb61888e7c9f61e3b3e5b",
+    "content-hash": "02f343bef0111df0bcc8c427c185ffd9",
     "packages": [
         {
             "name": "composer/installers",
@@ -243,6 +243,66 @@
             "time": "2016-04-15 10:48:49"
         },
         {
+            "name": "wpackagist-plugin/akismet",
+            "version": "3.1.11",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/akismet/",
+                "reference": "tags/3.1.11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/akismet.3.1.11.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/akismet/"
+        },
+        {
+            "name": "wpackagist-plugin/contact-form-7",
+            "version": "4.4.2",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/contact-form-7/",
+                "reference": "tags/4.4.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/contact-form-7.4.4.2.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/contact-form-7/"
+        },
+        {
+            "name": "wpackagist-plugin/maintenance",
+            "version": "2.7.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/maintenance/",
+                "reference": "tags/2.7.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/maintenance.2.7.1.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/maintenance/"
+        },
+        {
             "name": "wpackagist-plugin/w3-total-cache",
             "version": "0.9.4.1",
             "source": {
@@ -261,6 +321,26 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/w3-total-cache/"
+        },
+        {
+            "name": "wpackagist-plugin/wp-mail-smtp",
+            "version": "0.9.6",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/wp-mail-smtp/",
+                "reference": "tags/0.9.6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/wp-mail-smtp.0.9.6.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/wp-mail-smtp/"
         }
     ],
     "packages-dev": [],
