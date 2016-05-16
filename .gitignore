@@ -11,7 +11,6 @@ web/app/uploads/*
 !web/app/plugins/Ultimate_VC_Addons
 !web/app/plugins/advanced-custom-fields
 !web/app/plugins/advanced-sidebar-menu
-!web/app/plugins/akismet
 !web/app/plugins/captiva-toolkit
 !web/app/plugins/contact-form-7
 !web/app/plugins/enhanced-e-commerce-for-woocommerce-store
