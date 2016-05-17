@@ -486,3 +486,5 @@ function add_price_per_unit_meta_to_price( $price ) {
   $price .= ' ' . get_post_meta(get_the_ID(), 'wc_price_per_unit_key', true);
   return $price;
 }
+
+include get_template_directory() . '/inc/staydry/custom-fields.php';
