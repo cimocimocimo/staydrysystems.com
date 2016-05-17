@@ -9,7 +9,7 @@ web/app/uploads/*
 # Whitelisted Plugins
 !web/app/plugins/LayerSlider
 !web/app/plugins/Ultimate_VC_Addons
-!web/app/plugins/advanced-custom-fields
+!web/app/plugins/advanced-custom-fields-pro
 !web/app/plugins/advanced-sidebar-menu
 !web/app/plugins/captiva-toolkit
 !web/app/plugins/enhanced-e-commerce-for-woocommerce-store
