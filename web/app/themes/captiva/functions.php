@@ -487,4 +487,6 @@ function add_price_per_unit_meta_to_price( $price ) {
   return $price;
 }
 
-include get_template_directory() . '/inc/staydry/custom-fields.php';
+include get_template_directory() . '/staydry/custom-fields.php';
+include get_template_directory() . '/staydry/homepage-logo-block.php';
+

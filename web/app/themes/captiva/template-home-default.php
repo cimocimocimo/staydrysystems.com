@@ -15,6 +15,8 @@ get_header();
 
 <?php endwhile; // end of the loop.  ?>
 
+<?php do_action('homepage_before_footer'); ?>
+
 <?php get_footer(); ?>
 
 
