@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c6e35886c7e0b70c69ae46ddb2421c03",
-    "content-hash": "3a2cbd06e13e30ad998c38c7f84a390d",
+    "hash": "f1269cb7f528e97b483b95b962d8328e",
+    "content-hash": "e6d32e014d6f191531e0cd9ba9b12787",
     "packages": [
         {
             "name": "composer/installers",
@@ -284,15 +284,15 @@
         },
         {
             "name": "wpackagist-plugin/maintenance",
-            "version": "2.7.1",
+            "version": "3.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/maintenance/",
-                "reference": "tags/2.7.1"
+                "reference": "tags/3.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/maintenance.2.7.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/maintenance.3.0.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -384,15 +384,15 @@
         },
         {
             "name": "wpackagist-theme/storefront",
-            "version": "2.0.2",
+            "version": "2.0.3",
             "source": {
                 "type": "svn",
                 "url": "https://themes.svn.wordpress.org/storefront/",
-                "reference": "2.0.2"
+                "reference": "2.0.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/theme/storefront.2.0.2.zip",
+                "url": "https://downloads.wordpress.org/theme/storefront.2.0.3.zip",
                 "reference": null,
                 "shasum": null
             },
