@@ -7,7 +7,7 @@ web/app/uploads/*
 !web/app/uploads/.gitkeep
 
 # Whitelisted Plugins
-!web/app/plugins/advanced-custom-fields
+!web/app/plugins/advanced-custom-fields-pro
 !web/app/plugins/woocommerce-shipping-per-product
 
 # WordPress
