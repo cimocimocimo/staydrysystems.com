@@ -1,10 +1,8 @@
 var gulp = require('gulp'),
-    $ = {
-        gutil: require('gulp-util'),
-        svgSprite: require('gulp-svg-sprite'),
-        svg2png: require('gulp-svg2png'),
-        size: require('gulp-size')
-    },
+    gutil = require('gulp-util'),
+    svgSprite = require('gulp-svg-sprite'),
+    svg2png = require('gulp-svg2png'),
+    size = require('gulp-size'),
     basePaths = {
         src: 'src/',
         dest: 'assets/'
@@ -24,14 +22,23 @@ var gulp = require('gulp'),
         }
     },
     changeEvent = function(event) {
-        $.gutil.log('File', $.gutil.colors.cyan(event.path.replace(new RegExp('/.*(?=/' + basePaths.src + ')/'), '')), 'was', $.gutil.colors.magenta(event.type));
+        gutil.log(
+            'File',
+            gutil.colors.cyan(
+                event.path.replace(
+                    new RegExp('/.*(?=/' + basePaths.src + ')/'),
+                    ''
+                )
+            ),
+            'was',
+            gutil.colors.magenta(event.type)
+        );
     };
-
 
 // create svg sprite
 gulp.task('svg-sprite', function(){
     return gulp.src(paths.sprite.src)
-        .pipe($.svgSprite({
+        .pipe(svgSprite({
             shape: {
                 spacing: {
                     padding: 5
@@ -61,8 +68,8 @@ gulp.task('svg-sprite', function(){
 // create png sprite
 gulp.task('png-sprite', ['svg-sprite'], function(){
     return gulp.src(basePaths.dest + paths.sprite.svg)
-        .pipe($.svg2png())
-        .pipe($.size({
+        .pipe(svg2png())
+        .pipe(size({
             showFiles: true
         }))
         .pipe(gulp.dest(paths.images.dest));
