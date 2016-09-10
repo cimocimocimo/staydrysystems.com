@@ -1,8 +1,28 @@
-.test {
-    color: pink;
+// Automatically injected Bower dependencies via wiredep (never manually edit this block)
+// bower:scss
+@import "../../bower_components/susy/sass/_susy.scss";
+@import "../../bower_components/modular-scale/stylesheets/_modular-scale.scss";
+// endbower
+
+// import the Storefront sass files from parent theme.
+@import "../../../storefront/assets/sass/utils/mixins";
+@import "../../../storefront/assets/sass/utils/variables";
+
+@include susy-media($desktop){
+    .top-bar {
+        .accepted-payment-logos {
+            @include span(4 at 1);
+        }
+
+        .site-message {
+            @include span(8 at 5);
+        }
+    }
 }
 
-.something {
-    color: yellow;
+.accepted-payment-logos {
+    img {
+        float: left;
+        margin-right: ms(0.5);
+    }
 }
-
