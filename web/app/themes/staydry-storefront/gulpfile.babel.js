@@ -6,6 +6,7 @@ import svgSprite from 'gulp-svg-sprite';
 import svg2png from 'gulp-svg2png';
 import size from 'gulp-size';
 import runSequence from 'run-sequence';
+import sass from 'gulp-sass';
 
 var basePaths = {
         src: 'src/',
@@ -23,6 +24,10 @@ var basePaths = {
         },
         templates: {
             src: basePaths.src + 'templates/'
+        },
+        styles: {
+            src: basePaths.src + 'styles/**/*.scss',
+            dest: basePaths.dest + 'styles/'
         }
     },
     changeEvent = (event) => {
@@ -40,7 +45,7 @@ var basePaths = {
     };
 
 // create svg sprite
-gulp.task('svg-sprite', ()=> {
+gulp.task('svg-sprite', () => {
     return gulp.src(paths.sprite.src)
         .pipe(svgSprite({
             shape: {
@@ -70,7 +75,7 @@ gulp.task('svg-sprite', ()=> {
 });
 
 // create png sprite
-gulp.task('png-sprite', ['svg-sprite'], ()=> {
+gulp.task('png-sprite', ['svg-sprite'], () => {
     return gulp.src(basePaths.dest + paths.sprite.svg)
         .pipe(svg2png())
         .pipe(size({
@@ -81,7 +86,13 @@ gulp.task('png-sprite', ['svg-sprite'], ()=> {
 
 gulp.task('sprite', ['png-sprite']);
 
-gulp.task('watch', ()=> {
+gulp.task('styles', () => {
+    return gulp.src(paths.styles.src)
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest(paths.styles.dest));
+});
+
+gulp.task('watch', () => {
     gulp.watch(paths.sprite.src, ['sprite']).on('change', function(event) {
 	changeEvent(event);
     });
