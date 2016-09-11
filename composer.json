@@ -44,7 +44,8 @@
     "wpackagist-plugin/maintenance": "^3.0",
     "wpackagist-plugin/woocommerce": "^2.5.5",
     "wpackagist-plugin/woocommerce-incremental-product-quantities": "^2.1.9",
-    "wpackagist-theme/storefront": "^2.0.1"
+    "wpackagist-theme/storefront": "^2.0.1",
+    "timber/timber": "^1.1"
   },
   "extra": {
     "installer-paths": {
