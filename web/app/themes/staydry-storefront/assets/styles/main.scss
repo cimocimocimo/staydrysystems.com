@@ -10,19 +10,28 @@
 
 @include susy-media($desktop){
     .top-bar {
+        padding: ms(0.5);
+
         .accepted-payment-logos {
-            @include span(4 at 1);
+            @include clearfix;
+            float: left;
+            margin-right: ms(2);
         }
 
         .site-message {
-            @include span(8 at 5);
+            float: left;
+        }
+    }
+
+    .accepted-payment-logos {
+        img {
+            float: left;
+            margin-right: ms(0.5);
+
+            &:last-child {
+                margin-right: 0;
+            }
         }
     }
 }
 
-.accepted-payment-logos {
-    img {
-        float: left;
-        margin-right: ms(0.5);
-    }
-}
