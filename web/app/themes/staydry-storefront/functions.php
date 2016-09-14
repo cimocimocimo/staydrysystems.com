@@ -87,4 +87,29 @@ add_action('init', function(){
 // remove the homepage content page from the homepage...
 add_action( 'after_setup_theme', function(){
     remove_action( 'homepage', 'storefront_homepage_content', 10);
+    remove_action( 'homepage', 'storefront_product_categories',    20 );
+    remove_action( 'homepage', 'storefront_recent_products',       30 );
+    remove_action( 'homepage', 'storefront_popular_products',      50 );
+    remove_action( 'homepage', 'storefront_best_selling_products', 70 );
+
 }, 0);
+
+add_filter('storefront_featured_products_args', function($args){
+    $args['title'] = 'Featured Products';
+    $args['limit']   = 6;
+    $args['columns'] = 3;
+
+    return $args;
+}, 10);
+
+add_filter('storefront_on_sale_products_args', function($args){
+    $args['title'] = 'Clearance Items';
+    $args['limit']   = 6;
+    $args['columns'] = 3;
+
+    return $args;
+}, 10);
+
+/* add_action( 'storefront_homepage_after_product_categories', function(){
+ *
+ * }, 10);*/
