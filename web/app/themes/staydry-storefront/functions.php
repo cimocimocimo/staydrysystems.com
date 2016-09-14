@@ -78,8 +78,12 @@ add_action('init', function(){
         if (!is_front_page()){
             return;
         }
-        Timber::render('homepage.twig', $context);
+        Timber::render('homepage-hero.twig', $context);
     }, 10);
+
+    add_action('homepage', function() use ($context){
+        Timber::render('homepage-customer-logos.twig', $context);
+    }, 55);
 
 }, 10);
 
