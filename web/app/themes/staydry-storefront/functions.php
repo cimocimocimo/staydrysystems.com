@@ -96,6 +96,8 @@ add_action( 'after_setup_theme', function(){
     remove_action( 'homepage', 'storefront_popular_products',      50 );
     remove_action( 'homepage', 'storefront_best_selling_products', 70 );
 
+    remove_action( 'storefront_sidebar', 'storefront_get_sidebar', 10 );
+
 }, 0);
 
 add_filter('storefront_featured_products_args', function($args){
