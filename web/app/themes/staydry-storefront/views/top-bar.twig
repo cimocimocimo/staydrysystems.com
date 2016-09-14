@@ -1,0 +1,17 @@
+<div id="top-bar" class="top-bar">
+  <div class="col-full">
+    <div class="accepted-payment-logos">
+      {% for image in top_bar.accepted_payment_logos %}
+        <img src="{{ image.src }}" alt="{{ image.title }}" />
+      {% endfor %}
+    </div>
+    <div class="site-message">
+      <span class="site-message__first-line">
+        {{ top_bar.site_message_first_line }}
+      </span>
+      <span class="site-message__second-line">
+        {{ top_bar.site_message_second_line }}
+      </span>
+    </div>
+  </div>
+</div>

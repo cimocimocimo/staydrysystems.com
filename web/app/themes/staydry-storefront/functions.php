@@ -51,16 +51,40 @@ if( function_exists('acf_add_options_page') ) {
     ));
 }
 
+// setup the Timber contexts
+$timber = new \Timber\Timber();
+add_filter( 'timber_context', function($context){
+    // add top-bar to all contexts
+    $context['top_bar'] = get_fields('top-bar');
+    foreach ($context['top_bar']['accepted_payment_logos'] as $key => $image){
+        $context['top_bar']['accepted_payment_logos'][$key] = new TimberImage($image['logo_image']['ID']);
+    }
+    return $context;
+});
 
-// Adds a topbar to the site
-if ( function_exists('get_field') ) {
+add_action('init', function(){
+    $context = Timber::get_context();
 
-    if ( get_field( 'show_top_bar', 'top-bar' ) === true ) {
-        add_action('storefront_before_header', 'show_top_bar', 50);
+    // Adds a topbar to the site
+    if ( function_exists('get_field') ) {
+        if ( get_field( 'show_top_bar', 'top-bar' ) === true ) {
+            add_action('storefront_before_header', function() use ($context){
+                Timber::render('top-bar.twig', $context);
+            }, 50);
+        }
     }
 
-}
+    add_action('storefront_before_content', function() use ($context){
+        if (!is_front_page()){
+            return;
+        }
+        Timber::render('homepage.twig', $context);
+    }, 10);
 
-function show_top_bar(){
-    get_template_part('templates/top-bar');
-}
+}, 10);
+
+
+// remove the homepage content page from the homepage...
+add_action( 'after_setup_theme', function(){
+    remove_action( 'homepage', 'storefront_homepage_content', 10);
+}, 0);
