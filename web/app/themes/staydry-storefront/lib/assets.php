@@ -1,6 +1,6 @@
 <?php
 
-namespace Roots\Sage\Assets;
+namespace StayDry\Assets;
 
 /**
  * Get paths for assets

@@ -1,8 +1,8 @@
 <?php
 
-namespace Roots\Sage\Setup;
+namespace StayDry\Setup;
 
-use Roots\Sage\Assets;
+use StayDry\Assets;
 
 /**
  * Theme assets
