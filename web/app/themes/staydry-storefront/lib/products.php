@@ -113,7 +113,7 @@ add_action( 'woocommerce_after_shop_loop', function(){
 // main loop adapted to show all products that are not in featured products, or replacement parts
 add_action( 'pre_get_posts', function( $query ) {
     // only run on the main shop page and in the main query
-    if ( is_shop_workaround($query) && $query->is_main_query() ) {
+    if ( is_shop_workaround($query) && $query->is_main_query() && !is_admin() ) {
         $query->set('meta_key', '_featured');
         $query->set('meta_value', 'no');
         $query->set('tax_query', [
