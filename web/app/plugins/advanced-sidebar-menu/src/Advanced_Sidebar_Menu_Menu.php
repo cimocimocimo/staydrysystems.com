@@ -1,6 +1,6 @@
 <?php
 /**
- * advancedSidebarMenu
+ * Advanced_Sidebar_Menu_Menu
  *
  * These Functions are Specific to the Advanced Sidebar Menu
  *
@@ -8,11 +8,11 @@
  *
  * @package Advanced Sidebar Menu
  */
-class advancedSidebarMenu extends Advanced_Sidebar_Menu_Deprecated {
+class Advanced_Sidebar_Menu_Menu {
 
 	var $instance; //The widget instance
 	var $top_id; //Either the top cat or page
-	var $exclude;
+	var $exclude = array();
 	var $ancestors; //For the category ancestors
 	var $count = 1; //Count for grandchild levels
 	var $order_by;
@@ -35,35 +35,28 @@ class advancedSidebarMenu extends Advanced_Sidebar_Menu_Deprecated {
 	 */
 	public $post_type = 'page';
 
-
 	public $levels = 100;
 
 
 	/**
-	 * Check is a post has children by id
+	 * Check is a post has children
 	 *
-	 * @since 8.29.13
-	 *
-	 * @param int $postId
+	 * @param int $post_id
 	 *
 	 * @return bool
 	 */
-	function hasChildren( $postId ){
+	function has_children( $post_id ){
 		$args = array(
-			'post_parent' => $postId,
-			'fields' => 'ids',
-			'post_type' => get_post_type( $postId ),
-			'post_status' => 'publish'
+			'post_parent' => $post_id,
+			'fields'      => 'ids',
+			'post_type'   => get_post_type( $post_id ),
+			'post_status' => 'publish',
+			'numberposts' => 1,
 		);
 
-		$children  = get_children( $args );
+		$children = get_children( $args );
 
-		if( count( $children ) != 0 ){
-			return true;
-		} else {
-			return false;
-		}
-
+		return !empty( $children );
 	}
 
 
@@ -145,52 +138,44 @@ class advancedSidebarMenu extends Advanced_Sidebar_Menu_Deprecated {
 	}
 
 
-
-
-
 	/**
 	 * Adds the class for any menu item with children
 	 *
-	 * @param array $css  the currrent css classes
-	 * @param obj   $page the page being checked
-	 *
-	 *
-	 * @since 8.29.13
+	 * @param array $classes  the current css classes
+	 * @param \WP_Post $page the page being checked
 	 *
 	 * @return array
 	 */
-	function hasChildrenClass( $css, $page ) {
-		if( $this->hasChildren( $page->ID ) ){
-			$css[ ] = 'has_children';
+	public function add_has_children_class( $classes, $page ) {
+		if( $this->has_children( $page->ID ) ){
+			$classes[] = 'has_children';
 		}
 
-		return $css;
-
+		return $classes;
 	}
 
 
 	/**
 	 * Adds the class for current page item etc to the page list when using a custom post type
 	 *
-	 * @param array $css            the currrent css classes
-	 * @param obj   $this_menu_item the page being checked
+	 * @param array    $classes        the current css classes
+	 * @param \WP_Post $this_menu_item the page being checked
 	 *
 	 * @return array
-	 * @since 10.10.12
 	 */
-	function custom_post_type_css( $css, $this_menu_item ) {
+	function custom_post_type_css( $classes, $this_menu_item ) {
 		global $post;
 		if( isset( $post->ancestors ) && in_array( $this_menu_item->ID, (array)$post->ancestors ) ){
-			$css[ ] = 'current_page_ancestor';
+			$classes[ ] = 'current_page_ancestor';
 		}
 		if( $this_menu_item->ID == $post->ID ){
-			$css[ ] = 'current_page_item';
+			$classes[ ] = 'current_page_item';
 
 		} elseif( $this_menu_item->ID == $post->post_parent ) {
-			$css[ ] = 'current_page_parent';
+			$classes[ ] = 'current_page_parent';
 		}
 
-		return $css;
+		return $classes;
 	}
 
 
@@ -198,7 +183,7 @@ class advancedSidebarMenu extends Advanced_Sidebar_Menu_Deprecated {
 	 *
 	 * IF this is a top level category
 	 *
-	 * @param obj $cat the cat object
+	 * @param \WP_Term $cat the cat object
 	 *
 	 * @since 6.13.13
 	 */
@@ -218,16 +203,14 @@ class advancedSidebarMenu extends Advanced_Sidebar_Menu_Deprecated {
 	/**
 	 * If the cat is a second level cat
 	 *
-	 * @param obj $cat the cat
+	 * @param \WP_Term $cat the cat
 	 *
 	 * @since 6.13.13
 	 */
 	function second_level_cat( $cat ) {
 
-		//if this is the currrent cat or a parent of the current cat
+		//if this is the current cat or a parent of the current cat
 		if( $cat->term_id == $this->current_term || in_array( $cat->term_id, $this->ancestors ) ){
-
-			$all_children = array();
 			$all_children = get_terms( $this->taxonomy, array( 'child_of' => $cat->term_id, 'fields' => 'ids' ) );
 			if( !empty( $all_children ) ){
 				$return = true;
@@ -252,7 +235,6 @@ class advancedSidebarMenu extends Advanced_Sidebar_Menu_Deprecated {
 	 * @return bool
 	 */
 	function display_all() {
-
 		return $this->checked( 'display_all' );
 	}
 
@@ -264,7 +246,6 @@ class advancedSidebarMenu extends Advanced_Sidebar_Menu_Deprecated {
 	 * @return bool
 	 */
 	function include_parent() {
-
 		if( !$this->checked( 'include_parent' ) ){
 			return false;
 		}
@@ -287,13 +268,22 @@ class advancedSidebarMenu extends Advanced_Sidebar_Menu_Deprecated {
 			$title = apply_filters( 'widget_title', $this->instance[ 'title' ], $this->args, $this->instance );
 			$title = apply_filters( 'advanced_sidebar_menu_widget_title', $title, $this->args, $this->instance, $this );
 
-			if( $this->checked( 'legacy_mode' ) ){
-				echo '<h4 class="widgettitle">' . $title . '</h4>';
-			} else {
-				echo $this->args[ 'before_title' ] . $title . $this->args[ 'after_title' ];
-			}
+			echo $this->args[ 'before_title' ] . $title . $this->args[ 'after_title' ];
 		}
 
+	}
+
+
+	/**
+	 * Retrieve the excluded items' ids
+	 *
+	 * @return array
+	 */
+	public function get_excluded_ids(){
+		$excluded = $this->exclude;
+		$excluded = array_filter( $excluded );
+		$excluded = array_map( 'intval', $excluded );
+		return $excluded;
 	}
 
 
@@ -301,38 +291,16 @@ class advancedSidebarMenu extends Advanced_Sidebar_Menu_Deprecated {
 	 *
 	 * Checks is this id is excluded or not
 	 *
-	 * @param int $id the id to check
+	 * @param int $id
 	 *
 	 * @return bool
 	 */
-	function exclude( $id ) {
+	public function is_excluded( $id ) {
 		if( !in_array( $id, $this->exclude ) ){
 			return true;
 		} else {
 			return false;
 		}
-	}
-
-
-	/**
-	 * Allows for Overwritting files in the child theme
-	 *
-	 * @since 4.23.13
-	 *
-	 * @param string $file the name of the file to overwrite
-	 */
-
-	static function file_hyercy( $file, $legacy = false ) {
-		if( $theme_file = locate_template( array( 'advanced-sidebar-menu/' . $file ) ) ){
-			$file = $theme_file;
-		} elseif( $legacy ) {
-			$file = ADVANCED_SIDEBAR_LEGACY_DIR . $file;
-		} else {
-			$file = ADVANCED_SIDEBAR_VIEWS_DIR . $file;
-		}
-
-		return apply_filters( 'advanced_sidebar_menu_view_file', $file, $legacy );
-
 	}
 
 } //End class

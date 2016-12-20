@@ -1,25 +1,25 @@
 === Advanced Sidebar Menu ===
 
 Contributors: Mat Lipe
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal%40lipeimagination%2einfo&lc=US&item_name=Advanced%20Sidebar%20Menu&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal%40matlipe%2ecom&lc=US&item_name=Advanced%20Sidebar%20Menu&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
 Tags: menus, sidebar menu, hierarchy, category menu, pages menu
-Requires at least: 3.8.0
-Tested up to: 4.3.1
-Stable tag: 5.0.9
-
-Creates a widget for both page and categories that will display the current page/category and all child pages or categories.
+Requires at least: 4.4.0
+Tested up to: 4.7.0
+Stable tag: 6.1.5
 
 == Description ==
 
-Creates a widget for both page and categories that will display the current page/category and an child pages or categories.
-Keeps the menu clean and usable.
+Uses the parent/child relationship of your pages or categories to generate menus based on the current section of your site. Simply assign a page or category to a parent and this will do the rest for you.
+
+Keeps the menu clean and usable. Only related items display so you don't have to worry about keeping a custom menu up to date or displaying links to items that don't belong.
+
 
 <h3>Want more options and better support?</h3>
 	
-<strong><big><a href="http://matlipe.com/product/advanced-sidebar-menu-pro/">Go Pro!</a></big></strong>
+<strong><big><a href="https://matlipe.com/product/advanced-sidebar-menu-pro/">Go Pro!</a></big></strong>
 
 
-Includes Page options:
+<h4>Included page options:</h4>
 <ol>
    <li>Add a title to the widget</li>
    <li>Include the highest level parent page</li>
@@ -31,7 +31,8 @@ Includes Page options:
    <li>Always display child Pages</li>
    <li>Number of levels of child pages to display</li>
 </ol>  
-Includes Category Options:
+
+<h4>Included category options:</h4>
 <ol>
    <li>Add a title to the widget</li>
    <li>Include Parent Category</li>
@@ -131,6 +132,21 @@ I do offer premium services for building custom add-ons for additional functiona
 
 
 == Changelog ==
+= 6.1.0 =
+* Improve page list view
+* Add advanced_sidebar_menu_list_pages_args filter
+
+= 6.0.0 =
+* Remove legacy template support
+* Restructure plugin
+* Introduce 'advanced_sidebar_menu_template_part' filter
+
+
+= 5.1.0 =
+* Convert query over to get_posts() to allow for more extendability
+* Implement object caching to improve performance for environments using external object caches
+* Begin modernizing the naming conventions of methods and improving PHPdocs
+
 = 5.0.0 =
 * Greatly improved performance
 * Improved code structure 
@@ -196,6 +212,8 @@ I do offer premium services for building custom add-ons for additional functiona
 
 
 == Upgrade Notice ==
+= 6.0.0 =
+If you are using the Pro version of this plugin be sure to update to Pro version 1.4.4 to keep all functionality intact with this version.
 
 = 5.0.0 =
 If you used a custom page_list.php template previously you may want to redo it on this version to take advantage of the new structure.
