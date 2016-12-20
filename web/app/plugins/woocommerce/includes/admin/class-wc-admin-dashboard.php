@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'WC_Admin_Dashboard' ) ) :
 
 /**
- * WC_Admin_Dashboard Class
+ * WC_Admin_Dashboard Class.
  */
 class WC_Admin_Dashboard {
 
@@ -30,7 +30,7 @@ class WC_Admin_Dashboard {
 	}
 
 	/**
-	 * Init dashboard widgets
+	 * Init dashboard widgets.
 	 */
 	public function init() {
 		if ( current_user_can( 'publish_shop_orders' ) ) {
@@ -41,29 +41,12 @@ class WC_Admin_Dashboard {
 	}
 
 	/**
-	 * Show status widget
+	 * Get top seller from DB.
+	 * @return object
 	 */
-	public function status_widget() {
+	private function get_top_seller() {
 		global $wpdb;
 
-		include_once( 'reports/class-wc-admin-report.php' );
-
-		$reports = new WC_Admin_Report();
-
-		// Sales
-		$query            = array();
-		$query['fields']  = "SELECT SUM( postmeta.meta_value ) FROM {$wpdb->posts} as posts";
-		$query['join']    = "INNER JOIN {$wpdb->postmeta} AS postmeta ON posts.ID = postmeta.post_id LEFT JOIN {$wpdb->posts} AS parent ON posts.post_parent = parent.ID";
-		$query['where']   = "WHERE posts.post_type IN ( '" . implode( "','", array_merge( wc_get_order_types( 'sales-reports' ), array( 'shop_order_refund' ) ) ) . "' ) ";
-		$query['where']  .= "AND posts.post_status IN ( 'wc-" . implode( "','wc-", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) . "' ) ";
-		$query['where']  .= "AND ( parent.post_status IN ( 'wc-" . implode( "','wc-", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) . "' ) OR parent.ID IS NULL ) ";
-		$query['where']  .= "AND postmeta.meta_key   = '_order_total' ";
-		$query['where']  .= "AND posts.post_date >= '" . date( 'Y-m-01', current_time( 'timestamp' ) ) . "' ";
-		$query['where']  .= "AND posts.post_date <= '" . date( 'Y-m-d H:i:s', current_time( 'timestamp' ) ) . "' ";
-
-		$sales = $wpdb->get_var( implode( ' ', apply_filters( 'woocommerce_dashboard_status_widget_sales_query', $query ) ) );
-
-		// Get top seller
 		$query            = array();
 		$query['fields']  = "SELECT SUM( order_item_meta.meta_value ) as qty, order_item_meta_2.meta_value as product_id
 			FROM {$wpdb->posts} as posts";
@@ -80,9 +63,71 @@ class WC_Admin_Dashboard {
 		$query['orderby'] = "ORDER BY qty DESC";
 		$query['limits']  = "LIMIT 1";
 
-		$top_seller = $wpdb->get_row( implode( ' ', apply_filters( 'woocommerce_dashboard_status_widget_top_seller_query', $query ) ) );
+		return $wpdb->get_row( implode( ' ', apply_filters( 'woocommerce_dashboard_status_widget_top_seller_query', $query ) ) );
+	}
 
-		// Counts
+	/**
+	 * Get sales report data.
+	 * @return object
+	 */
+	private function get_sales_report_data() {
+		include_once( dirname( __FILE__ ) . '/reports/class-wc-report-sales-by-date.php' );
+
+		$sales_by_date                 = new WC_Report_Sales_By_Date();
+		$sales_by_date->start_date     = strtotime( date( 'Y-m-01', current_time( 'timestamp' ) ) );
+		$sales_by_date->end_date       = current_time( 'timestamp' );
+		$sales_by_date->chart_groupby  = 'day';
+		$sales_by_date->group_by_query = 'YEAR(posts.post_date), MONTH(posts.post_date), DAY(posts.post_date)';
+
+		return $sales_by_date->get_report_data();
+	}
+
+	/**
+	 * Show status widget.
+	 */
+	public function status_widget() {
+		include_once( dirname( __FILE__ ) . '/reports/class-wc-admin-report.php' );
+
+		$reports = new WC_Admin_Report();
+
+		echo '<ul class="wc_status_list">';
+
+		if ( current_user_can( 'view_woocommerce_reports' ) && ( $report_data = $this->get_sales_report_data() ) ) {
+			?>
+			<li class="sales-this-month">
+				<a href="<?php echo admin_url( 'admin.php?page=wc-reports&tab=orders&range=month' ); ?>">
+					<?php echo $reports->sales_sparkline( '', max( 7, date( 'd', current_time( 'timestamp' ) ) ) ); ?>
+					<?php printf( __( '<strong>%s</strong> net sales this month', 'woocommerce' ), wc_price( $report_data->net_sales ) ); ?>
+				</a>
+			</li>
+			<?php
+		}
+
+		if ( current_user_can( 'view_woocommerce_reports' ) && ( $top_seller = $this->get_top_seller() ) && $top_seller->qty ) {
+			?>
+			<li class="best-seller-this-month">
+				<a href="<?php echo admin_url( 'admin.php?page=wc-reports&tab=orders&report=sales_by_product&range=month&product_ids=' . $top_seller->product_id ); ?>">
+					<?php echo $reports->sales_sparkline( $top_seller->product_id, max( 7, date( 'd', current_time( 'timestamp' ) ) ), 'count' ); ?>
+					<?php printf( __( '%s top seller this month (sold %d)', 'woocommerce' ), '<strong>' . get_the_title( $top_seller->product_id ) . '</strong>', $top_seller->qty ); ?>
+				</a>
+			</li>
+			<?php
+		}
+
+		$this->status_widget_order_rows();
+		$this->status_widget_stock_rows();
+
+		do_action( 'woocommerce_after_dashboard_status_widget', $reports );
+		echo '</ul>';
+	}
+
+	/**
+	 * Show order data is status widget.
+	 */
+	private function status_widget_order_rows() {
+		if ( ! current_user_can( 'edit_shop_orders' ) ) {
+			return;
+		}
 		$on_hold_count    = 0;
 		$processing_count = 0;
 
@@ -91,6 +136,25 @@ class WC_Admin_Dashboard {
 			$on_hold_count    += isset( $counts['wc-on-hold'] ) ? $counts['wc-on-hold'] : 0;
 			$processing_count += isset( $counts['wc-processing'] ) ? $counts['wc-processing'] : 0;
 		}
+		?>
+		<li class="processing-orders">
+			<a href="<?php echo admin_url( 'edit.php?post_status=wc-processing&post_type=shop_order' ); ?>">
+				<?php printf( _n( "<strong>%s order</strong> awaiting processing", "<strong>%s orders</strong> awaiting processing", $processing_count, 'woocommerce' ), $processing_count ); ?>
+			</a>
+		</li>
+		<li class="on-hold-orders">
+			<a href="<?php echo admin_url( 'edit.php?post_status=wc-on-hold&post_type=shop_order' ); ?>">
+				<?php printf( _n( "<strong>%s order</strong> on-hold", "<strong>%s orders</strong> on-hold", $on_hold_count, 'woocommerce' ), $on_hold_count ); ?>
+			</a>
+		</li>
+		<?php
+	}
+
+	/**
+	 * Show stock data is status widget.
+	 */
+	private function status_widget_stock_rows() {
+		global $wpdb;
 
 		// Get products using a query - this is too advanced for get_posts :(
 		$stock          = absint( max( get_option( 'woocommerce_notify_low_stock_amount' ), 1 ) );
@@ -128,49 +192,23 @@ class WC_Admin_Dashboard {
 			set_transient( $transient_name, $outofstock_count, DAY_IN_SECONDS * 30 );
 		}
 		?>
-		<ul class="wc_status_list">
-			<li class="sales-this-month">
-				<a href="<?php echo admin_url( 'admin.php?page=wc-reports&tab=orders&range=month' ); ?>">
-					<?php echo $reports->sales_sparkline( '', max( 7, date( 'd', current_time( 'timestamp' ) ) ) ); ?>
-					<?php printf( __( "<strong>%s</strong> sales this month", 'woocommerce' ), wc_price( $sales ) ); ?>
-				</a>
-			</li>
-			<?php if ( $top_seller && $top_seller->qty ) : ?>
-				<li class="best-seller-this-month">
-					<a href="<?php echo admin_url( 'admin.php?page=wc-reports&tab=orders&report=sales_by_product&range=month&product_ids=' . $top_seller->product_id ); ?>">
-						<?php echo $reports->sales_sparkline( $top_seller->product_id, max( 7, date( 'd', current_time( 'timestamp' ) ) ), 'count' ); ?>
-						<?php printf( __( "%s top seller this month (sold %d)", 'woocommerce' ), "<strong>" . get_the_title( $top_seller->product_id ) . "</strong>", $top_seller->qty ); ?>
-					</a>
-				</li>
-			<?php endif; ?>
-			<li class="processing-orders">
-				<a href="<?php echo admin_url( 'edit.php?post_status=wc-processing&post_type=shop_order' ); ?>">
-					<?php printf( _n( "<strong>%s order</strong> awaiting processing", "<strong>%s orders</strong> awaiting processing", $processing_count, 'woocommerce' ), $processing_count ); ?>
-				</a>
-			</li>
-			<li class="on-hold-orders">
-				<a href="<?php echo admin_url( 'edit.php?post_status=wc-on-hold&post_type=shop_order' ); ?>">
-					<?php printf( _n( "<strong>%s order</strong> on-hold", "<strong>%s orders</strong> on-hold", $on_hold_count, 'woocommerce' ), $on_hold_count ); ?>
-				</a>
-			</li>
-			<li class="low-in-stock">
-				<a href="<?php echo admin_url( 'admin.php?page=wc-reports&tab=stock&report=low_in_stock' ); ?>">
-					<?php printf( _n( "<strong>%s product</strong> low in stock", "<strong>%s products</strong> low in stock", $lowinstock_count, 'woocommerce' ), $lowinstock_count ); ?>
-				</a>
-			</li>
-			<li class="out-of-stock">
-				<a href="<?php echo admin_url( 'admin.php?page=wc-reports&tab=stock&report=out_of_stock' ); ?>">
-					<?php printf( _n( "<strong>%s product</strong> out of stock", "<strong>%s products</strong> out of stock", $outofstock_count, 'woocommerce' ), $outofstock_count ); ?>
-				</a>
-			</li>
-			
-			<?php do_action( 'woocommerce_after_dashboard_status_widget', $reports ); ?>
-		</ul>
+
+		<li class="low-in-stock">
+			<a href="<?php echo admin_url( 'admin.php?page=wc-reports&tab=stock&report=low_in_stock' ); ?>">
+				<?php printf( _n( "<strong>%s product</strong> low in stock", "<strong>%s products</strong> low in stock", $lowinstock_count, 'woocommerce' ), $lowinstock_count ); ?>
+			</a>
+		</li>
+		<li class="out-of-stock">
+			<a href="<?php echo admin_url( 'admin.php?page=wc-reports&tab=stock&report=out_of_stock' ); ?>">
+				<?php printf( _n( "<strong>%s product</strong> out of stock", "<strong>%s products</strong> out of stock", $outofstock_count, 'woocommerce' ), $outofstock_count ); ?>
+			</a>
+		</li>
+
 		<?php
 	}
 
 	/**
-	 * Recent reviews widget
+	 * Recent reviews widget.
 	 */
 	public function recent_reviews() {
 		global $wpdb;
@@ -195,9 +233,9 @@ class WC_Admin_Dashboard {
 				$rating = intval( get_comment_meta( $comment->comment_ID, 'rating', true ) );
 
 				echo '<div class="star-rating" title="' . esc_attr( $rating ) . '">
-					<span style="width:'. ( $rating * 20 ) . '%">' . $rating . ' ' . __( 'out of 5', 'woocommerce' ) . '</span></div>';
+					<span style="width:' . ( $rating * 20 ) . '%">' . $rating . ' ' . __( 'out of 5', 'woocommerce' ) . '</span></div>';
 
-				echo '<h4 class="meta"><a href="' . get_permalink( $comment->ID ) . '#comment-' . absint( $comment->comment_ID ) .'">' . esc_html__( apply_filters( 'woocommerce_admin_dashboard_recent_reviews', $comment->post_title, $comment ) ) . '</a> ' . __( 'reviewed by', 'woocommerce' ) . ' ' . esc_html( $comment->comment_author ) .'</h4>';
+				echo '<h4 class="meta"><a href="' . get_permalink( $comment->ID ) . '#comment-' . absint( $comment->comment_ID ) .'">' . esc_html( apply_filters( 'woocommerce_admin_dashboard_recent_reviews', $comment->post_title, $comment ) ) . '</a> ' . __( 'reviewed by', 'woocommerce' ) . ' ' . esc_html( $comment->comment_author ) .'</h4>';
 				echo '<blockquote>' . wp_kses_data( $comment->comment_excerpt ) . ' [...]</blockquote></li>';
 
 			}

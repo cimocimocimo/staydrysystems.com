@@ -15,22 +15,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'WC_Admin_Duplicate_Product' ) ) :
 
 /**
- * WC_Admin_Duplicate_Product Class
+ * WC_Admin_Duplicate_Product Class.
  */
 class WC_Admin_Duplicate_Product {
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 */
 	public function __construct() {
 		add_action( 'admin_action_duplicate_product', array( $this, 'duplicate_product_action' ) );
 		add_filter( 'post_row_actions', array( $this, 'dupe_link' ), 10, 2 );
-		add_filter( 'page_row_actions', array( $this, 'dupe_link' ), 10, 2 );
 		add_action( 'post_submitbox_start', array( $this, 'dupe_button' ) );
 	}
 
 	/**
-	 * Show the "Duplicate" link in admin products list
+	 * Show the "Duplicate" link in admin products list.
 	 * @param  array   $actions
 	 * @param  WP_Post $post Post object
 	 * @return array
@@ -51,7 +50,7 @@ class WC_Admin_Duplicate_Product {
 	}
 
 	/**
-	 * Show the dupe product link in admin
+	 * Show the dupe product link in admin.
 	 */
 	public function dupe_button() {
 		global $post;
@@ -69,9 +68,9 @@ class WC_Admin_Duplicate_Product {
 		}
 
 		if ( isset( $_GET['post'] ) ) {
-			$notifyUrl = wp_nonce_url( admin_url( "edit.php?post_type=product&action=duplicate_product&post=" . absint( $_GET['post'] ) ), 'woocommerce-duplicate-product_' . $_GET['post'] );
+			$notify_url = wp_nonce_url( admin_url( "edit.php?post_type=product&action=duplicate_product&post=" . absint( $_GET['post'] ) ), 'woocommerce-duplicate-product_' . $_GET['post'] );
 			?>
-			<div id="duplicate-action"><a class="submitduplicate duplication" href="<?php echo esc_url( $notifyUrl ); ?>"><?php _e( 'Copy to a new draft', 'woocommerce' ); ?></a></div>
+			<div id="duplicate-action"><a class="submitduplicate duplication" href="<?php echo esc_url( $notify_url ); ?>"><?php _e( 'Copy to a new draft', 'woocommerce' ); ?></a></div>
 			<?php
 		}
 	}
@@ -124,13 +123,15 @@ class WC_Admin_Duplicate_Product {
 		$new_post_date_gmt  = get_gmt_from_date( $new_post_date );
 
 		if ( $parent > 0 ) {
-			$post_parent        = $parent;
-			$post_status        = $post_status ? $post_status : 'publish';
-			$suffix             = '';
+			$post_parent = $parent;
+			$post_status = $post_status ? $post_status: 'publish';
+			$suffix      = '';
+			$post_title  = $post->post_title;
 		} else {
-			$post_parent        = $post->post_parent;
-			$post_status        = $post_status ? $post_status : 'draft';
-			$suffix             = ' ' . __( '(Copy)', 'woocommerce' );
+			$post_parent = $post->post_parent;
+			$post_status = $post_status ? $post_status: 'draft';
+			$suffix      = ' ' . __( '(Copy)', 'woocommerce' );
+			$post_title  = $post->post_title . $suffix;
 		}
 
 		// Insert the new template in the post table
@@ -142,7 +143,7 @@ class WC_Admin_Duplicate_Product {
 				'post_date_gmt'             => $new_post_date_gmt,
 				'post_content'              => $post->post_content,
 				'post_content_filtered'     => $post->post_content_filtered,
-				'post_title'                => $post->post_title . $suffix,
+				'post_title'                => $post_title,
 				'post_excerpt'              => $post->post_excerpt,
 				'post_status'               => $post_status,
 				'post_type'                 => $post->post_type,
@@ -161,6 +162,34 @@ class WC_Admin_Duplicate_Product {
 
 		$new_post_id = $wpdb->insert_id;
 
+		// Set title for variations
+		if ( 'product_variation' === $post->post_type ) {
+			$post_title = sprintf( __( 'Variation #%s of %s', 'woocommerce' ), absint( $new_post_id ), esc_html( get_the_title( $post_parent ) ) );
+			$wpdb->update(
+				$wpdb->posts,
+				array(
+					'post_title' => $post_title,
+				),
+				array(
+					'ID' => $new_post_id
+				)
+			);
+		}
+
+		// Set name and GUID
+		if ( ! in_array( $post_status, array( 'draft', 'pending', 'auto-draft' ) ) ) {
+	        $wpdb->update(
+				$wpdb->posts,
+				array(
+					'post_name' => wp_unique_post_slug( sanitize_title( $post_title, $new_post_id ), $new_post_id, $post_status, $post->post_type, $post_parent ),
+					'guid'      => get_permalink( $new_post_id ),
+				),
+				array(
+					'ID' => $new_post_id
+				)
+			);
+	    }
+
 		// Copy the taxonomies
 		$this->duplicate_post_taxonomies( $post->ID, $new_post_id, $post->post_type );
 
@@ -176,11 +205,14 @@ class WC_Admin_Duplicate_Product {
 			}
 		}
 
+		// Clear cache
+		clean_post_cache( $new_post_id );
+
 		return $new_post_id;
 	}
 
 	/**
-	 * Get a product from the database to duplicate
+	 * Get a product from the database to duplicate.
 	 *
 	 * @param mixed $id
 	 * @return WP_Post|bool
@@ -198,7 +230,7 @@ class WC_Admin_Duplicate_Product {
 
 		$post = $wpdb->get_results( "SELECT * FROM $wpdb->posts WHERE ID=$id" );
 
-		if ( isset( $post->post_type ) && $post->post_type == "revision" ) {
+		if ( isset( $post->post_type ) && 'revision' === $post->post_type ) {
 			$id   = $post->post_parent;
 			$post = $wpdb->get_results( "SELECT * FROM $wpdb->posts WHERE ID=$id" );
 		}
@@ -207,7 +239,7 @@ class WC_Admin_Duplicate_Product {
 	}
 
 	/**
-	 * Copy the taxonomies of a post to another post
+	 * Copy the taxonomies of a post to another post.
 	 *
 	 * @param mixed $id
 	 * @param mixed $new_id
@@ -228,7 +260,7 @@ class WC_Admin_Duplicate_Product {
 	}
 
 	/**
-	 * Copy the meta information of a post to another post
+	 * Copy the meta information of a post to another post.
 	 *
 	 * @param mixed $id
 	 * @param mixed $new_id
@@ -237,14 +269,14 @@ class WC_Admin_Duplicate_Product {
 		global $wpdb;
 
 		$sql     = $wpdb->prepare( "SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id = %d", absint( $id ) );
-		$exclude = array_map( 'esc_sql', array_filter( apply_filters( 'woocommerce_duplicate_product_exclude_meta', array( 'total_sales' ) ) ) );
+		$exclude = array_map( 'esc_sql', array_filter( apply_filters( 'woocommerce_duplicate_product_exclude_meta', array( 'total_sales', '_wc_average_rating', '_wc_rating_count', '_wc_review_count', '_sku' ) ) ) );
 
 		if ( sizeof( $exclude ) ) {
 			$sql .= " AND meta_key NOT IN ( '" . implode( "','", $exclude ) . "' )";
 		}
 
 		$post_meta = $wpdb->get_results( $sql );
-		
+
 		if ( sizeof( $post_meta ) ) {
 			$sql_query_sel = array();
 			$sql_query     = "INSERT INTO $wpdb->postmeta (post_id, meta_key, meta_value) ";
