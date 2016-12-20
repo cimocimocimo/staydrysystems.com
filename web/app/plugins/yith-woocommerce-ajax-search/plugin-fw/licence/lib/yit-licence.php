@@ -56,17 +56,48 @@ if ( ! class_exists( 'YIT_Licence' ) ) {
          */
         protected $_api_uri_query_args = '?wc-api=software-api&request=%request%';
 
+
+        /**
+         * @var string check for show extra info
+         * @since 1.0
+         */
+        public $show_extra_info = false;
+
+         /**
+         * @var string check for show extra info
+         * @since 1.0
+         */
+        public $show_renew_button = true;
+
         /**
          * Constructor
          *
          * @since    1.0
          * @author   Andrea Grillo <andrea.grillo@yithemes.com>
          */
-        public function __construct(){
-            
-            if( defined( 'YIT_LICENCE_DEBUG' ) && YIT_LICENCE_DEBUG ){
-                $this->_api_uri = 'http://dev.yithemes.com';                
+        public function __construct() {
+            $is_debug_enabled = defined( 'YIT_LICENCE_DEBUG' ) && YIT_LICENCE_DEBUG;
+            if ( $is_debug_enabled ) {
+                $this->_api_uri = defined( 'YIT_LICENCE_DEBUG_LOCALHOST' ) ? YIT_LICENCE_DEBUG_LOCALHOST : 'http://dev.yithemes.com';
+                add_filter( 'block_local_requests', '__return_false' );
             }
+
+            /* Style adn Script */
+            add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+            if( $is_debug_enabled ) {
+                //show extra info and renew button in debug mode
+                $this->show_extra_info = $this->show_renew_button = true;
+            }
+
+            else {
+                $this->show_extra_info   = defined( 'YIT_SHOW_EXTRA_LICENCE_INFO' )    && YIT_SHOW_EXTRA_LICENCE_INFO;
+                $this->show_renew_button = ! ( defined( 'YIT_HIDE_LICENCE_RENEW_BUTTON' )  && YIT_HIDE_LICENCE_RENEW_BUTTON );
+            }
+
+            /* Update Licence Information */
+            add_action( 'core_upgrade_preamble', array( $this, 'check_all' ) );
+            add_action( 'wp_maybe_auto_update',  array( $this, 'check_all' ) );
+
         }
 
         /**
@@ -114,7 +145,6 @@ if ( ! class_exists( 'YIT_Licence' ) ) {
             return $home_url;
         }
 
-
         /**
          * Check if the request is ajax
          *
@@ -146,21 +176,20 @@ if ( ! class_exists( 'YIT_Licence' ) ) {
 
             wp_enqueue_script( 'yit-licence', $script_path . '/licence/assets/js/' . $filename, array( 'jquery' ), '1.0.0', true );
             wp_enqueue_style( 'yit-theme-licence', $style_path . '/licence/assets/css/yit-licence.css' );
-        }
 
-        /**
-         * Localize Scripts
-         *
-         * @return void
-         *
-         * @since  1.0
-         * @author Andrea Grillo <andrea.grillo@yithemes.com>
-         */
-        public function localize_script() {
+            /* Localize Scripts */
             wp_localize_script( 'yit-licence', 'licence_message', array(
-                    'error'  => sprintf( _x( '%s field cannot be empty', '%s = field name', 'yith-plugin-fw' ), '%field%' ),  // sprintf must be used to avoid errors with '%field%' string in translation in .po file
-                    'errors' => sprintf( __( '%s and %s fields cannot be empty', 'yith-plugin-fw' ), '%field_1%', '%field_2%' ),
-                    'server' => __( 'Unable to contact the remote server, please try again later. Thanks!', 'yith-plugin-fw' )
+                    'error'         => sprintf( _x( '%s field cannot be empty', '%s = field name', 'yith-plugin-fw' ), '%field%' ),  // sprintf must be used to avoid errors with '%field%' string in translation in .po file
+                    'errors'        => sprintf( __( '%s and %s fields cannot be empty', 'yith-plugin-fw' ), '%field_1%', '%field_2%' ),
+                    'server'        => __( 'Unable to contact the remote server, please try again later. Thanks!', 'yith-plugin-fw' ),
+                    'email'         => __( 'Email', 'yith-plugin-fw' ),
+                    'license_key'   => __( 'License Key', 'yith-plugin-fw' ),
+                    'are_you_sure'  => __( 'Are you sure you want to deactivate the license for current site?', 'yith-plugin-fw' )
+                )
+            );
+
+            wp_localize_script( 'yit-licence', 'script_info', array(
+                    'is_debug' => defined( 'YIT_LICENCE_DEBUG' ) && YIT_LICENCE_DEBUG
                 )
             );
         }
@@ -177,7 +206,6 @@ if ( ! class_exists( 'YIT_Licence' ) ) {
          * @author Andrea Grillo <andrea.grillo@yithemes.com>
          */
         public function activate() {
-
             $product_init = $_REQUEST['product_init'];
             $product      = $this->get_product( $product_init );
 
@@ -190,7 +218,7 @@ if ( ! class_exists( 'YIT_Licence' ) ) {
             );
 
             $api_uri  = esc_url_raw( add_query_arg( $args, $this->get_api_uri( 'activation' ) ) );
-            $response = wp_remote_get( $api_uri );
+            $response = wp_remote_get( $api_uri, array( 'timeout' => 30 ) );
 
             if ( is_wp_error( $response ) ) {
                 $body = false;
@@ -203,13 +231,14 @@ if ( ! class_exists( 'YIT_Licence' ) ) {
             if ( $body && is_array( $body ) && isset( $body['activated'] ) && $body['activated'] ) {
 
                 $option[$product['product_id']] = array(
-                    'email'                => urldecode( $args['email'] ),
-                    'licence_key'          => $args['licence_key'],
-                    'licence_expires'      => $body['licence_expires'],
-                    'message'              => $body['message'],
-                    'activated'            => true,
-                    'activation_limit'     => $body['activation_limit'],
-                    'activation_remaining' => $body['activation_remaining'],
+                    'email'                 => urldecode( $args['email'] ),
+                    'licence_key'           => $args['licence_key'],
+                    'licence_expires'       => $body['licence_expires'],
+                    'message'               => $body['message'],
+                    'activated'             => true,
+                    'activation_limit'      => $body['activation_limit'],
+                    'activation_remaining'  => $body['activation_remaining'],
+                    'is_membership'         => isset( $body['is_membership'] ) ? $body['is_membership'] : false,
                 );
 
                 /* === Check for other plugins activation === */
@@ -222,7 +251,74 @@ if ( ! class_exists( 'YIT_Licence' ) ) {
                 YIT_Upgrade()->force_regenerate_update_transient();
 
                 /* === Licence Activation Template === */
-                $body['template'] = $this->show_activation_panel();
+                $body['template'] = $this->show_activation_panel( $this->get_response_code_message( 200 ) );
+            }
+
+            wp_send_json( $body );
+        }
+
+        /**
+         * Deactivate Plugins
+         *
+         * Send a request to API server to activate plugins
+         *
+         * @return void
+         * @use wp_send_json
+         *
+         * @since  1.0
+         * @author Andrea Grillo <andrea.grillo@yithemes.com>
+         */
+        public function deactivate() {
+            $product_init = $_REQUEST['product_init'];
+            $product      = $this->get_product( $product_init );
+
+            $args = array(
+                'email'       => urlencode( sanitize_email( $_REQUEST['email'] ) ),
+                'licence_key' => sanitize_text_field( $_REQUEST['licence_key'] ),
+                'product_id'  => sanitize_text_field( $product['product_id'] ),
+                'secret_key'  => sanitize_text_field( $product['secret_key'] ),
+                'instance'    => $this->get_home_url()
+            );
+
+            $api_uri  = esc_url_raw( add_query_arg( $args, $this->get_api_uri( 'deactivation' ) ) );
+            $response = wp_remote_get( $api_uri, array( 'timeout' => 30 ) );
+
+            if ( is_wp_error( $response ) ) {
+                $body = false;
+            }
+            else {
+                $body = json_decode( $response['body'] );
+                $body = is_object( $body ) ? get_object_vars( $body ) : false;
+            }
+
+            if ( $body && is_array( $body ) && isset( $body['activated'] ) && ! $body['activated'] && ! isset( $body['error'] ) ) {
+
+                 $option[$product['product_id']] = array(
+                     'activated'            => false,
+                     'email'                => urldecode( $args['email'] ),
+                     'licence_key'          => $args['licence_key'],
+                     'licence_expires'      => $body['licence_expires'],
+                     'message'              => $body['message'],
+                     'activation_limit'     => $body['activation_limit'],
+                     'activation_remaining' => $body['activation_remaining'],
+                     'is_membership'        => isset( $body['is_membership'] ) ? $body['is_membership'] : false,
+                );
+
+                /* === Check for other plugins activation === */
+                $options                         = $this->get_licence();
+                $options[$product['product_id']] = $option[$product['product_id']];
+
+                update_option( $this->_licence_option, $options );
+
+                /* === Update Plugin Licence Information === */
+                YIT_Upgrade()->force_regenerate_update_transient();
+
+                /* === Licence Activation Template === */
+                $body['template'] = $this->show_activation_panel( $this->get_response_code_message( 'deactivated', array( 'instance' => $body['instance'] ) ) );
+            }
+
+            else {
+                $body['error'] = $this->get_response_code_message( $body['code'] );
             }
 
             wp_send_json( $body );
@@ -240,7 +336,7 @@ if ( ! class_exists( 'YIT_Licence' ) ) {
          * @since  1.0
          * @author Andrea Grillo <andrea.grillo@yithemes.com>
          */
-        public function check( $product_init ) {
+        public function check( $product_init, $regenerate_transient = true ) {
 
             $status     = false;
             $body       = false;
@@ -261,7 +357,7 @@ if ( ! class_exists( 'YIT_Licence' ) ) {
             );
 
             $api_uri  = esc_url_raw( add_query_arg( $args, $this->get_api_uri( 'check' ) ) );
-            $response = wp_remote_get( $api_uri );
+            $response = wp_remote_get( $api_uri, array( 'timeout' => 30 ) );
 
             if ( ! is_wp_error( $response ) ) {
                 $body = json_decode( $response['body'] );
@@ -279,6 +375,7 @@ if ( ! class_exists( 'YIT_Licence' ) ) {
                     $licence[ $product_id ]['licence_expires']      = $body['licence_expires'];
                     $licence[ $product_id ]['activation_remaining'] = $body['activation_remaining'];
                     $licence[ $product_id ]['activation_limit']     = $body['activation_limit'];
+                    $licence[ $product_id ]['is_membership']        = isset( $body['is_membership'] ) ? $body['is_membership'] : false;
                     $status                                         = (bool) $body['activated'];
                 }
                 elseif ( isset( $body['code'] ) ) {
@@ -297,7 +394,8 @@ if ( ! class_exists( 'YIT_Licence' ) ) {
                          * 106 -> Licence key has expired
                          * 107 -> Licence key has be banned
                          *
-                         * Only code 101, 106 and 107 have effect on DB
+                         * Only code 101, 106 and 107 have effect on DB during activation
+                         * All error code have effect on DB during deactivation
                          *
                          */
 
@@ -308,15 +406,17 @@ if ( ! class_exists( 'YIT_Licence' ) ) {
 
                         case '106':
                             $licence[ $product_id ]['activated']        = false;
-                            $licence[ $product_id ]['message']          = $body['additional_info'];
+                            $licence[ $product_id ]['message']          = $body['error'];
                             $licence[ $product_id ]['status_code']      = $body['code'];
                             $licence[ $product_id ]['licence_expires']  = $body['licence_expires'];
+                            //$licence[ $product_id ]['is_membership']    = isset( $body['is_membership'] ) ? $body['is_membership'] : false;
                             break;
 
                         case '107':
-                            $licence[ $product_id ]['activated']   = false;
-                            $licence[ $product_id ]['message']     = $body['additional_info'];
-                            $licence[ $product_id ]['status_code'] = $body['code'];
+                            $licence[ $product_id ]['activated']        = false;
+                            $licence[ $product_id ]['message']          = $body['error'];
+                            $licence[ $product_id ]['status_code']      = $body['code'];
+                            //$licence[ $product_id ]['is_membership']    = isset( $body['is_membership'] ) ? $body['is_membership'] : false;
                             break;
                     }
                 }
@@ -325,9 +425,26 @@ if ( ! class_exists( 'YIT_Licence' ) ) {
                 update_option( $this->_licence_option, $licence );
 
                 /* === Update Plugin Licence Information === */
-                YIT_Upgrade()->force_regenerate_update_transient();
+                if( $regenerate_transient ) {
+                    YIT_Upgrade()->force_regenerate_update_transient();
+                }
             }
             return $status;
+        }
+
+        /**
+         * Check for licence update
+         *
+         * @return void
+         * @since 2.5
+         *
+         * @use YIT_Theme_Licence->check()
+         * @author Andrea Grillo <andrea.grillo@yithemes.com>
+         */
+        public function check_all(){
+            foreach ( $this->_products as $init => $info ) {
+                $this->check( $init );
+            }
         }
 
          /**
@@ -342,17 +459,18 @@ if ( ! class_exists( 'YIT_Licence' ) ) {
          * @author Andrea Grillo <andrea.grillo@yithemes.com>
          */
         public function update_licence_information() {
-            foreach ( $this->_products as $init => $info ) {
-                $this->check( $init );
-            }
+            /* Check licence information for alla products */
+            $this->check_all();
 
             /* === Regenerate Update Plugins Transient === */
             YIT_Upgrade()->force_regenerate_update_transient();
 
             do_action( 'yit_licence_after_check' );
 
-            $response['template'] = $this->show_activation_panel();
-            wp_send_json( $response );
+           if( $this->is_ajax() )  {
+                $response['template'] = $this->show_activation_panel();
+                wp_send_json( $response );
+            }
         }
 
         /**
@@ -363,7 +481,7 @@ if ( ! class_exists( 'YIT_Licence' ) ) {
          * @since  1.0
          * @author Andrea Grillo <andrea.grillo@yithemes.com>
          */
-        public function show_activation_panel() {
+        public function show_activation_panel( $notice = '' ) {
 
             $path = defined( 'YIT_CORE_PLUGIN_PATH' ) ? YIT_CORE_PLUGIN_PATH : get_template_directory() . '/core/plugin-fw/';
 
@@ -542,20 +660,49 @@ if ( ! class_exists( 'YIT_Licence' ) ) {
          * @since  1.0
          * @author Andrea Grillo <andrea.grillo@yithemes.com>
          */
-        public function get_error_code_message( $code ) {
+        public function get_response_code_message( $code, $args = array() ) {
+            extract( $args );
 
-            $error_strings = array(
-                '100' => __( 'Invalid Request', 'yith-plugin-fw' ),
-                '101' => __( 'Invalid licence key', 'yith-plugin-fw' ),
-                '102' => __( 'Software has been deactivated', 'yith-plugin-fw' ),
-                '103' => __( 'Maximum number of activations exceeded', 'yith-plugin-fw' ),
-                '104' => __( 'Invalid instance ID', 'yith-plugin-fw' ),
-                '105' => __( 'Invalid security key', 'yith-plugin-fw' ),
-                '106' => __( 'Licence key has expired', 'yith-plugin-fw' ),
-                '107' => __( 'Licence key has been banned', 'yith-plugin-fw' )
+            $messages = array(
+                '100'           => __( 'Invalid Request', 'yith-plugin-fw' ),
+                '101'           => __( 'Invalid license key', 'yith-plugin-fw' ),
+                '102'           => __( 'Software has been deactivated', 'yith-plugin-fw' ),
+                '103'           => __( 'Maximum number of activations exceeded', 'yith-plugin-fw' ),
+                '104'           => __( 'Invalid instance ID', 'yith-plugin-fw' ),
+                '105'           => __( 'Invalid security key', 'yith-plugin-fw' ),
+                '106'           => __( 'License key has expired', 'yith-plugin-fw' ),
+                '107'           => __( 'License key has been banned', 'yith-plugin-fw' ),
+                '108'           => __( 'Current product is not included in your YITH Club Subscription key', 'yith-plugin-fw' ),
+                '200'           => sprintf( '<strong>%s</strong>! %s',__( 'Great', 'yith-plugin-fw' ), __( 'License successfully activated', 'yith-plugin-fw' ) ),
+                'deactivated'   => sprintf( '%s <strong>%s</strong>', __( 'License key deactivated for website', 'woocommerce-software-add-on' ), isset( $instance ) ? $instance : '' )
             );
 
-            return isset( $error_strings[$code] ) ? $error_strings[$code] : false;
+            return isset( $messages[$code] ) ? $messages[$code] : false;
+        }
+
+        /**
+         * Get the product name to display
+         *
+         * @param $product_name
+         *
+         * @return string the product name
+         *
+         * @since    2.2
+         * @author   Andrea Grillo <andrea.grillo@yithemes.com>
+         */
+        public function display_product_name( $product_name ){
+            return str_replace( array( 'for WooCommerce', 'YITH', 'WooCommerce', 'Premium', 'Theme' ), '', $product_name );
+        }
+
+        public function get_number_of_membership_products(){
+            $activated_products = $this->get_activated_products();
+            $num_members_products_activate = 0;
+            foreach( $activated_products as $activated_product ){
+                if( isset( $activated_product['licence']['is_membership'] ) && $activated_product['licence']['is_membership'] ){
+                    $num_members_products_activate++;
+                }
+            }
+            return $num_members_products_activate;
         }
 
     }

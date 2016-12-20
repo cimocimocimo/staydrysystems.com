@@ -71,8 +71,14 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
                 if( isset( $this->settings['create_menu_page'] ) && $this->settings[ 'create_menu_page'] ){
                     $this->add_menu_page();
                 }
+
+                if ( !empty( $this->settings[ 'links' ] ) ) {
+                    $this->links = $this->settings[ 'links' ];
+                }
+
                 add_action( 'admin_init', array( $this, 'set_default_options') );
                 add_action( 'admin_menu', array( $this, 'add_setting_page' ) );
+                add_action( 'admin_menu', array( $this, 'add_premium_version_upgrade_to_menu' ), 100 );
                 add_action( 'admin_bar_menu', array( $this, 'add_admin_bar_menu' ), 100 );
                 add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
                 add_action( 'admin_init', array( $this, 'woocommerce_update_options' ) );
@@ -86,6 +92,9 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
                 /* WooCommerce 2.4 Support */
                 add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
             }
+
+            /* add YIT Plugin sidebar */
+            $this->sidebar = YIT_Plugin_Panel_Sidebar::instance( $this );
         }
 
 
@@ -234,14 +243,16 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
          * @since    1.0
          * @author   Andrea Grillo      <andrea.grillo@yithemes.com>
          * @author   Antonio La Rocca   <antonio.larocca@yithemes.com>
+         * @author   Leanza Francesco   <leanzafrancesco@gmail.com>
          */
         public function print_panel_content() {
             $yit_options       = $this->get_main_array_options();
             $current_tab       = $this->get_current_tab();
             $custom_tab_action = $this->is_custom_tab( $yit_options, $current_tab );
+            $hide_sidebar      = $this->hide_sidebar( $yit_options, $current_tab );
 
             if ( $custom_tab_action ) {
-                $this->print_custom_tab( $custom_tab_action );
+                $this->print_custom_tab( $custom_tab_action, $hide_sidebar );
                 return;
             }
             else {
@@ -280,7 +291,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
 
                 foreach($_POST as $name => $value) {
 
-                    //  Check if current POST var which name ends with a specific needle
+                    //  Check if current POST var name ends with a specific needle and make some stuff here
                     $attachment_id_needle = "-yith-attachment-id";
                     $is_hidden_input = (($temp = strlen($name) - strlen($attachment_id_needle)) >= 0 && strpos($name, $attachment_id_needle, $temp) !== FALSE);
                     if ($is_hidden_input){
@@ -291,7 +302,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
                         );
                     }
                 }
-                
+
                 woocommerce_update_options( $yit_options[ $current_tab ] );
 
                 do_action( 'yit_panel_wc_after_update' );
@@ -299,6 +310,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
             } elseif( isset( $_REQUEST['yit-action'] ) && $_REQUEST['yit-action'] == 'wc-options-reset'
                 && isset( $_POST['yith_wc_reset_options_nonce'] ) && wp_verify_nonce( $_POST['yith_wc_reset_options_nonce'], 'yith_wc_reset_options_'.$this->settings['page'] )){
 
+                do_action( 'yit_panel_wc_before_reset' );
+                
                 $yit_options = $this->get_main_array_options();
                 $current_tab = $this->get_current_tab();
 
@@ -307,6 +320,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
                         update_option( $option['id'], $option['default'] );
                     }
                 }
+
+                do_action( 'yit_panel_wc_after_reset' );
             }
         }
 
@@ -318,23 +333,56 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
          * @author   Andrea Grillo      <andrea.grillo@yithemes.com>
          * @author   Antonio La Rocca   <antonio.larocca@yithemes.com>
          */
-        public function admin_enqueue_scripts() { 
-            global $woocommerce;
+        public function admin_enqueue_scripts() {
+            global $woocommerce, $pagenow;
+            
+            $woocommerce_version = function_exists( 'WC' ) ? WC()->version : $woocommerce->version;
 
             wp_enqueue_style( 'raleway-font', '//fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,100,200,300,900' );
 
             wp_enqueue_media();
-            wp_enqueue_style( 'woocommerce_admin_styles', $woocommerce->plugin_url() . '/assets/css/admin.css', array(), $woocommerce->version );
-            wp_enqueue_style( 'yit-plugin-style', YIT_CORE_PLUGIN_URL . '/assets/css/yit-plugin-panel.css', $woocommerce->version );
-            wp_enqueue_style ( 'wp-jquery-ui-dialog' );
+            wp_enqueue_style( 'woocommerce_admin_styles', $woocommerce->plugin_url() . '/assets/css/admin.css', array(), $woocommerce_version );
+            wp_register_style( 'yit-plugin-style', YIT_CORE_PLUGIN_URL . '/assets/css/yit-plugin-panel.css', $woocommerce_version );
+            wp_register_style( 'colorbox', YIT_CORE_PLUGIN_URL . '/assets/css/colorbox.css', array(), $woocommerce_version );
+            wp_register_style( 'yit-upgrade-to-pro', YIT_CORE_PLUGIN_URL . '/assets/css/yit-upgrade-to-pro.css', array( 'colorbox' ), $woocommerce_version );
+
+            if ( 'customize.php' != $pagenow ){
+                wp_enqueue_style ( 'wp-jquery-ui-dialog' );
+            }
 
             wp_enqueue_style( 'jquery-chosen', YIT_CORE_PLUGIN_URL . '/assets/css/chosen/chosen.css' );
             wp_enqueue_script( 'jquery-chosen', YIT_CORE_PLUGIN_URL . '/assets/js/chosen/chosen.jquery.js', array( 'jquery' ), '1.1.0', true );
-            wp_enqueue_script( 'woocommerce_settings', $woocommerce->plugin_url() . '/assets/js/admin/settings.min.js', array( 'jquery', 'jquery-ui-datepicker','jquery-ui-dialog', 'jquery-ui-sortable', 'iris', 'chosen' ), $woocommerce->version, true );
-            wp_enqueue_script( 'yit-plugin-panel', YIT_CORE_PLUGIN_URL . '/assets/js/yit-plugin-panel.min.js', array( 'jquery', 'jquery-chosen' ), $this->version, true );
+
+            $woocommerce_settings_deps = array( 'jquery', 'jquery-ui-datepicker', 'jquery-ui-sortable', 'iris' );
+            
+            if( version_compare( '2.5', $woocommerce_version, '<=' ) ){
+                // WooCommerce > 2.6
+                $woocommerce_settings_deps[] = 'select2';
+            }
+            
+            else {
+                // WooCommerce < 2.6
+                $woocommerce_settings_deps[] = 'jquery-ui-dialog';
+                $woocommerce_settings_deps[] = 'chosen';
+            }
+            
+            wp_enqueue_script( 'woocommerce_settings', $woocommerce->plugin_url() . '/assets/js/admin/settings.min.js', $woocommerce_settings_deps, $woocommerce_version, true );
+            
+            wp_register_script( 'colorbox', YIT_CORE_PLUGIN_URL . '/assets/js/jquery.colorbox.js', array( 'jquery' ), '1.6.3', true );
+            wp_register_script( 'yit-plugin-panel', YIT_CORE_PLUGIN_URL . '/assets/js/yit-plugin-panel.min.js', array( 'jquery', 'jquery-chosen','wp-color-picker' ), $this->version, true );
             wp_localize_script( 'woocommerce_settings', 'woocommerce_settings_params', array(
                 'i18n_nav_warning' => __( 'The changes you have made will be lost if you leave this page.', 'yith-plugin-fw' )
             ) );
+
+            if( 'admin.php' == $pagenow && strpos( get_current_screen()->id, 'yith-plugins_page' ) !== false ){
+                wp_enqueue_style( 'yit-plugin-style' );
+                wp_enqueue_script( 'yit-plugin-panel' );
+            }
+
+            if( 'admin.php' == $pagenow && strpos( get_current_screen()->id, 'yith_upgrade_premium_version' ) !== false ){
+                wp_enqueue_style( 'yit-upgrade-to-pro' );
+                wp_enqueue_script( 'colorbox' );
+            }
         }
 
         /**

@@ -93,6 +93,24 @@ of YITH WOOCOMMERCE AJAX SEARCH to benefit from all features!', 'yith-woocommerc
             )
         ),
 
+        'enable_transient' => array(
+	        'name'    => __( 'Enable transients to cache autocomplete results', 'yith-woocommerce-ajax-search' ),
+	        'desc'    => __( 'Save the results of a query in a transient','yith-woocommerce-ajax-search' ),
+	        'id'      => 'yith_wcas_enable_transient',
+	        'default' => 'no',
+	        'type'    => 'checkbox'
+        ),
+
+
+        'transient_duration' => array(
+	        'name'    => __( 'Set the duration of transient', 'yith-woocommerce-ajax-search' ),
+	        'desc'    => __( '(hours)','yith-woocommerce-ajax-search' ),
+	        'id'      => 'yith_wcas_transient_duration',
+	        'default' => 12,
+	        'type'    => 'text'
+        ),
+
+
         'section_ajax_search_settings_end'      => array(
             'type' => 'sectionend',
             'id'   => 'yith_wcas_general_end'

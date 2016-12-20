@@ -14,12 +14,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 extract( $args );
 
+$min_max_attr = $step_attr = '';
+
+if( isset( $min ) ){
+    $min_max_attr .= " min='{$min}'";
+}
+
+if( isset( $max ) ){
+    $min_max_attr .= " max='{$max}'";
+}
+
+if( isset( $step ) ){
+    $step_attr .= "step='{$step}'";
+}
 ?>
 <div id="<?php echo $id ?>-container" <?php if ( isset($deps) ): ?>data-field="<?php echo $id ?>" data-dep="<?php echo $deps['ids'] ?>" data-value="<?php echo $deps['values'] ?>" <?php endif ?>>
         <div class="rm_number">
             <label for="<?php echo $id ?>"><?php echo $label ?></label>
             <span class="field">
-                <input class="number" type="text" id="<?php echo $id ?>" name="<?php echo $name ?>" <?php echo $min.' '.$max ?> value="<?php echo esc_attr( $value ) ?>" <?php if( isset( $std ) ) : ?>data-std="<?php echo $std ?>"<?php endif ?>" />
+                <input class="number" type="text" id="<?php echo $id ?>" name="<?php echo $name ?>" <?php echo $step_attr ?> <?php echo $min_max_attr ?> value="<?php echo esc_attr( $value ) ?>" <?php if( isset( $std ) ) : ?>data-std="<?php echo $std ?>"<?php endif ?>" />
                 <?php yit_string( '<span class="description">', $desc, '</span>' ); ?>
             </span>
         </div>            

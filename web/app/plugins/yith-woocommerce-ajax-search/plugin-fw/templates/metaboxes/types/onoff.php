@@ -17,8 +17,8 @@ extract( $args );
 if ( !isset( $desc ) ) {
     $desc='';
 }
-
 ?>
+
 <div id="<?php echo $id ?>-container" <?php if ( isset($deps) ): ?>data-field="<?php echo $id ?>" data-dep="<?php echo $deps['ids'] ?>" data-value="<?php echo $deps['values'] ?>" <?php endif ?> class="rm_onoff onoff_container">
 
     <label for="<?php echo $id ?>"><?php echo $label ?></label>
@@ -27,21 +27,4 @@ if ( !isset( $desc ) ) {
         <span class="onoff">&nbsp;</span>
         <span class="desc inline"><?php echo $desc ?></span>
     </p>    
-</div>      
-         
-<script type="text/javascript">
-jQuery( document ).ready( function( $ ) {
-    $( '#<?php echo $id ?>-option span' ).click( function() {
-    	var input = $( this ).prev( 'input' );
-        var checked = input.attr( 'checked' );
-                    
-        if( checked ) {
-        	input.attr( 'checked', false ).attr( 'value', 0 ).removeClass('onoffchecked');
-        } else {
-            input.attr( 'checked', true ).attr( 'value', 1 ).addClass('onoffchecked');
-        }
-                   
-        input.change();
-    } );
-} );
-</script>
+</div>

@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: YITH WooCommerce Ajax Search Premium\n"
-"POT-Creation-Date: 2015-09-25 12:30+0200\n"
-"PO-Revision-Date: 2015-09-25 12:42+0200\n"
+"POT-Creation-Date: 2016-10-17 12:45+0200\n"
+"PO-Revision-Date: 2016-10-17 12:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: Yithemes <plugins@yithemes.com>\n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-KeywordsList: __;_e;_x\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
@@ -38,19 +38,13 @@ msgstr "YITH WooCommerce Ajax Search"
 
 #: ../class.yith-wcas-admin.php:208
 msgid ""
-"In the YIT Plugin tab you can find the YITH WooCommerce Ajax Search "
-"options.\n"
+"In the YIT Plugin tab you can find the YITH WooCommerce Ajax Search options."
+"\r\n"
 "With this menu, you can access to all the settings of our plugins that you "
-"have activated.\n"
+"have activated.\r\n"
 "YITH WooCommerce Ajax Search is available in an outstanding PREMIUM version "
 "with many new options, <a href=\""
 msgstr ""
-"Nella scheda del plugin puoi trovare tutte le opzioni di YITH WooCommerce "
-"Ajax Search.\n"
-"Da questo menu, avrai accesso a tutte le impostazioni dei nostri plugin "
-"attivati finora.\n"
-"YITH WooCommerce Ajax Search è disponibile in una eccezionale versione "
-"PREMIUM con molte nuove optioni, <a href=\""
 
 #: ../class.yith-wcas-admin.php:221
 msgid "YITH WooCommerce Ajax Search Updated"
@@ -60,24 +54,17 @@ msgstr "YITH WooCommerce Ajax Search aggiornato"
 msgid ""
 "From now on, you can find all the options of YITH WooCommerce Ajax Search "
 "Updated under YIT Plugin -> Ajax Search instead of WooCommerce -> Settings -"
-"> Ajax Search, as in the previous version.\n"
-"When one of our plugins updates, a new voice will be added to this menu.\n"
+"> Ajax Search, as in the previous version.\r\n"
+"When one of our plugins updates, a new voice will be added to this menu.\r\n"
 "YITH WooCommerce Ajax Search renovates with new available options, discover "
 "the <a href=\""
 msgstr ""
-"Da adesso, puoi trovare tutte le opzioni del nuovo YITH WooCommerce Ajax "
-"Search in YIT Plugin > Ajax Search invece che in WooCommerce > Settings > "
-"Ajax Search, come accadeva nelle precedenti versioni.\n"
-"Quando uno dei nostri plugin verrà aggiornato, una nuova voce sarà aggiunta "
-"a questo menu.\n"
-"YITH WooCommerce Ajax Search si è rinnovato con molte nuove opzioni "
-"disponibili, scopri <a href=\""
 
-#: ../class.yith-wcas.php:175
+#: ../class.yith-wcas.php:181
 msgid "No results"
 msgstr "Nessun risultato"
 
-#: ../init.php:40
+#: ../init.php:46
 msgid ""
 "You can't activate the free version of YITH WooCommerce Ajax Search while "
 "you are using the premium one."
@@ -85,7 +72,7 @@ msgstr ""
 "Non puoi attivare la versione free di YITH WooCommerce Ajax Search se stai "
 "già utilizzando la premium."
 
-#: ../init.php:104
+#: ../init.php:108
 msgid ""
 "YITH WooCommerce Ajax Search is enabled but not effective. It requires "
 "WooCommerce in order to work."
@@ -103,12 +90,9 @@ msgstr "Scopri le funzionalità avanzate"
 
 #: ../plugin-options/settings-options.php:26
 msgid ""
-"Upgrade to the PREMIUM VERSION\n"
+"Upgrade to the PREMIUM VERSION\r\n"
 "of YITH WOOCOMMERCE AJAX SEARCH to benefit from all features!"
 msgstr ""
-"Passa alla VERSIONE PREMIUM\n"
-"di YITH WooCommerce Ajax Search per poter fruire di tutte le sue "
-"funzionalità!"
 
 #: ../plugin-options/settings-options.php:33
 msgid "Get Support and Pro Features"
@@ -165,6 +149,22 @@ msgstr "Numero massimo di risultati"
 #: ../plugin-options/settings-options.php:84
 msgid "Maximum number of results showed within the autosuggest box."
 msgstr "Numero massimo di risultati da mostrare tra i suggerimenti automatici."
+
+#: ../plugin-options/settings-options.php:97
+msgid "Enable transients to cache autocomplete results"
+msgstr ""
+
+#: ../plugin-options/settings-options.php:98
+msgid "Save the results of a query in a transient"
+msgstr ""
+
+#: ../plugin-options/settings-options.php:106
+msgid "Set the duration of transient"
+msgstr ""
+
+#: ../plugin-options/settings-options.php:107
+msgid "(hours)"
+msgstr ""
 
 #: ../templates/admin/premium.php:251 ../templates/admin/premium.php:299
 #, php-format
@@ -257,6 +257,45 @@ msgstr "YITH WooCommerce Ajax Product Search"
 #: ../widgets/class.yith-wcas-ajax-search.php:89
 msgid "Title:"
 msgstr "Titolo:"
+
+#~ msgid ""
+#~ "In the YIT Plugin tab you can find the YITH WooCommerce Ajax Search "
+#~ "options.\n"
+#~ "With this menu, you can access to all the settings of our plugins that "
+#~ "you have activated.\n"
+#~ "YITH WooCommerce Ajax Search is available in an outstanding PREMIUM "
+#~ "version with many new options, <a href=\""
+#~ msgstr ""
+#~ "Nella scheda del plugin puoi trovare tutte le opzioni di YITH WooCommerce "
+#~ "Ajax Search.\n"
+#~ "Da questo menu, avrai accesso a tutte le impostazioni dei nostri plugin "
+#~ "attivati finora.\n"
+#~ "YITH WooCommerce Ajax Search è disponibile in una eccezionale versione "
+#~ "PREMIUM con molte nuove optioni, <a href=\""
+
+#~ msgid ""
+#~ "From now on, you can find all the options of YITH WooCommerce Ajax Search "
+#~ "Updated under YIT Plugin -> Ajax Search instead of WooCommerce -> "
+#~ "Settings -> Ajax Search, as in the previous version.\n"
+#~ "When one of our plugins updates, a new voice will be added to this menu.\n"
+#~ "YITH WooCommerce Ajax Search renovates with new available options, "
+#~ "discover the <a href=\""
+#~ msgstr ""
+#~ "Da adesso, puoi trovare tutte le opzioni del nuovo YITH WooCommerce Ajax "
+#~ "Search in YIT Plugin > Ajax Search invece che in WooCommerce > Settings > "
+#~ "Ajax Search, come accadeva nelle precedenti versioni.\n"
+#~ "Quando uno dei nostri plugin verrà aggiornato, una nuova voce sarà "
+#~ "aggiunta a questo menu.\n"
+#~ "YITH WooCommerce Ajax Search si è rinnovato con molte nuove opzioni "
+#~ "disponibili, scopri <a href=\""
+
+#~ msgid ""
+#~ "Upgrade to the PREMIUM VERSION\n"
+#~ "of YITH WOOCOMMERCE AJAX SEARCH to benefit from all features!"
+#~ msgstr ""
+#~ "Passa alla VERSIONE PREMIUM\n"
+#~ "di YITH WooCommerce Ajax Search per poter fruire di tutte le sue "
+#~ "funzionalità!"
 
 #~ msgid "Output"
 #~ msgstr "Risultati di ricerca"

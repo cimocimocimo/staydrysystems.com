@@ -17,7 +17,8 @@ return array(
     'premium' => array(
         'home' => array(
             'type'   => 'custom_tab',
-            'action' => 'yith_ajax_search_premium'
+            'action' => 'yith_ajax_search_premium',
+            'hide_sidebar' => true
         )
     )
 );

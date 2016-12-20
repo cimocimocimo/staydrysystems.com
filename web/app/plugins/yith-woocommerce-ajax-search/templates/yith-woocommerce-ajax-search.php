@@ -28,9 +28,8 @@ wp_enqueue_script('yith_wcas_frontend' );
 
             <input type="submit" id="yith-searchsubmit" value="<?php echo get_option('yith_wcas_search_submit_label') ?>" />
             <input type="hidden" name="post_type" value="product" />
-            <?php if ( defined( 'ICL_LANGUAGE_CODE' ) ): ?>
-                <input type="hidden" name="lang" value="<?php echo( ICL_LANGUAGE_CODE ); ?>" />
-            <?php endif ?>
+            <?php do_action( 'wpml_add_language_form_field' ); ?>
+
         </div>
     </form>
 </div>

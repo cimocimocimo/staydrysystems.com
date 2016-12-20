@@ -3,8 +3,8 @@
 Contributors: yithemes
 Tags: woocommerce search by sku, woocommerce search results, woocommerce search shortcode, woocommerce search page, woocommerce search form, woocommerce search filter, woocommerce search products, woocommerce search content, woocommerce search autocomplete, woocommerce advanced search, woocommerce search category, woocommerce search product attributes, woocommerce search by tag, woocommerce search by brand, woocommerce predictive, woocommerce live search, woocommerce single product search, woocommerce site search, woocommerce search tex, tajax, search, woocommerce, products, themes, yit, e-commerce, shop, yith, ajax search, instant search, premium, yithemes, autocomplete, autosuggest, better search, category search, custom search, highlight terms, Live Search, Predictive Search, product search, relevant search, search highlight, search product, suggest, typeahead, WooCommerce Plugin, woocommerce product search, woocommerce search, wordpress ecommerce
 Requires at least: 3.5.1
-Tested up to: 4.2
-Stable tag: 1.3.8
+Tested up to: 4.6.1
+Stable tag: 1.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -138,172 +138,183 @@ If you have created your own language pack for YITH WooCommerce Ajax Search, or 
 2. YITH WooCommerce Ajax Search in operation displaying WooCommerce search results
 
 == Changelog ==
-= 1.3.8 =
+= 1.4.1 - Released: Oct 17, 2016 =
+* Added: Option to save the autocomplete results in a transient
+* Updated: Plugin Framework
+
+= 1.4.0 - Released: Jun 10, 2016 =
+* Added: Support to WooCommerce 2.6 RC1
+* Updated: Plugin Core Framework
+
+= 1.3.9 - Released: Dec 15, 2015 =
+* Added: Support to Wordpress 4.4
+* Updated: Plugin Core Framework
+
+= 1.3.8 - Released: Oct 30, 2015 =
 * Added: Add Plugin-Fw support for Essential Kit #1
 
-= 1.3.7 =
+= 1.3.7 - Released: Sep 18, 2015 =
 * Updated: Changed Text Domain from 'yit' to 'yith-woocommerce-ajax-search'
 * Updated: Plugin Core Framework
 
-= 1.3.6 =
+= 1.3.6 - Released: Aug 12, 2015 =
 * Added: Support to WooCommerce 2.4.2
 * Updated: Plugin Core Framework
 
-= 1.3.5 =
+= 1.3.5 - Released: Aug 07, 2015 =
 * Added: Support more search elements on a page
 
-= 1.3.4 =
+= 1.3.4 - Released: Jul 17, 2015 =
 * Fixed: Support to WPML
 
-= 1.3.3 =
+= 1.3.3 - Released: Jul 07, 2015 =
 * Fixed: Called to WP_Widget construct
 * Fixed: Support to WPML
 
-= 1.3.2 =
+= 1.3.2 - Released: Jun 15, 2015 =
 
 * Fixed: Backward compatibility with Autocomplete function
 
-= 1.3.1 =
+= 1.3.1 - Released: Jun 10, 2015 =
 
 * Updated: Renamed Autocomplete function with YithAutocomplete
 
-= 1.3.0 =
-
-* Added: Wordpress 4.2 compatibility
-* Fixed: Shorcode output
-* Fixed: WP security issue
-
-= 1.2.7 =
-
-* Updated: Plugin Core Framework
-
-= 1.2.6 =
-
-* Updated: Plugin Core Framework
-* Fixed: Loader image not hidden after search
-* Fixed: Disabled submit when search string is empty
-* Fixed: Support to WPML in query string
-
-= 1.2.5 =
-
-* Fixed: Plugin installation bug
-
-= 1.2.4 =
-
-* Fixed: Minor bugs
-
-= 1.2.3 =
-
-* Added: Support to Wordpress 4.1.1
-* Fixed: Minor bugs
-
-= 1.2.2 =
-
-* Added: Support to WooCommerce 2.3.x
-* Fixed: Minor bugs
-
-= 1.2.1 =
-
-* Updated: Plugin Core Framework
-
-= 1.2 =
-
-* Updated: Plugin Core Framework
-
-= 1.1.3 =
-
-* Fixed: Javascript code in external file
-
-= 1.1.2 =
-
-* Fixed: Prevent undefined title index if the widget is called by the the_widget func
-* Updated: Autocomplete js library
-* Updated: Plugin Core Framework
-
-= 1.1.1 =
-
-* Fixed: Settings link doesn't work on WooCommerce 2.1.1
-
-= 1.1.0 =
-
-* Added: Support to WooCommerce 2.1.x
-
-= 1.0.0 =
-
-* Initial release
-
-
-== Upgrade notice ==
-
-= 1.3.2 =
-
-* Fixed: Backward compatibility with Autocomplete function
-
-= 1.3.1 =
-
-* Updated: Renamed Autocomplete function with YithAutocomplete
-
-= 1.3.0 =
+= 1.3.0 - Released: Apr 24, 2015 =
 
 * Added: Wordpress 4.2 compatibility
 * Fixed: Shorcode output
 * Fixed: Wp security issue
 
-= 1.2.7 =
+= 1.2.7 - Released: Apr 07, 2015 =
 
 * Updated: Plugin Core Framework
 
-= 1.2.6 =
+= 1.2.6 - Released: Mar 30, 2015 =
 
 * Updated: Plugin Core Framework
 * Fixed: Loader image not hided after search
 * Fixed: Disabled submit when search string is empty
 * Fixed: Support to WPML in query string
 
-= 1.2.5 =
+= 1.2.5 - Released: Mar 12, 2015 =
 
 * Fixed: Plugin installation bug
 
-= 1.2.4 =
+= 1.2.4 - Released: Mar 04, 2015 =
 
 * Fixed: Minor bugs
 
-= 1.2.3 =
+= 1.2.3 - Released: Mar 02, 2015 =
 
 * Added: Support to Wordpress 4.1.1
 * Fixed: Minor bugs
 
-= 1.2.2 =
+= 1.2.2 - Released: Feb 12, 2015 =
 
 * Added: Support to WooCommerce 2.3.x
 * Fixed: Minor bugs
 
-= 1.2.1 =
+= 1.2.1 - Released: Feb 06, 2015 =
 
 * Updated: Plugin Core Framework
 
-= 1.2 =
+= 1.2.0 - Released: Jan 29, 2015 =
 
 * Updated: Plugin Core Framework
 
-= 1.1.3 =
+= 1.1.3 - Released: Oct 16, 2014 =
 
 * Fixed: Javascript code in external file
 
-= 1.1.2 =
+= 1.1.2 - Released: Sep 14, 2014 =
 
 * Fixed: Prevent undefined title index if the widget is called by the the_widget func
 * Updated: Autocomplete js library
 * Updated: Plugin Core Framework
 
-= 1.1.1 =
+= 1.1.1 - Released: Feb 14, 2014 =
 
 * Fixed: Settings link doesn't work on WooCommerce 2.1.1
 
-= 1.1.0 =
+= 1.1.0 - Released: Feb 12, 2013 =
 
 * Added: Support to WooCommerce 2.1.x
 
-= 1.0.0 =
+= 1.0.0 - Released: Aug 01, 2013 =
+
+* Initial release
+
+== Upgrade notice ==
+
+= 1.3.2 - Released: Jun 15, 2015 =
+
+* Fixed: Backward compatibility with Autocomplete function
+
+= 1.3.1 - Released: Jun 10, 2015 =
+
+* Updated: Renamed Autocomplete function with YithAutocomplete
+
+= 1.3.0 - Released: Apr 24, 2015 =
+
+* Added: Wordpress 4.2 compatibility
+* Fixed: Shorcode output
+* Fixed: Wp security issue
+
+= 1.2.7 - Released: Apr 07, 2015 =
+
+* Updated: Plugin Core Framework
+
+= 1.2.6 - Released: Mar 30, 2015 =
+
+* Updated: Plugin Core Framework
+* Fixed: Loader image not hided after search
+* Fixed: Disabled submit when search string is empty
+* Fixed: Support to WPML in query string
+
+= 1.2.5 - Released: Mar 12, 2015 =
+
+* Fixed: Plugin installation bug
+
+= 1.2.4 - Released: Mar 04, 2015 =
+
+* Fixed: Minor bugs
+
+= 1.2.3 - Released: Mar 02, 2015 =
+
+* Added: Support to Wordpress 4.1.1
+* Fixed: Minor bugs
+
+= 1.2.2 - Released: Feb 12, 2015 =
+
+* Added: Support to WooCommerce 2.3.x
+* Fixed: Minor bugs
+
+= 1.2.1 - Released: Feb 06, 2015 =
+
+* Updated: Plugin Core Framework
+
+= 1.2.0 - Released: Jan 29, 2015 =
+
+* Updated: Plugin Core Framework
+
+= 1.1.3 - Released: Oct 16, 2014 =
+
+* Fixed: Javascript code in external file
+
+= 1.1.2 - Released: Sep 14, 2014 =
+
+* Fixed: Prevent undefined title index if the widget is called by the the_widget func
+* Updated: Autocomplete js library
+* Updated: Plugin Core Framework
+
+= 1.1.1 - Released: Feb 14, 2014 =
+
+* Fixed: Settings link doesn't work on WooCommerce 2.1.1
+
+= 1.1.0 - Released: Feb 12, 2013 =
+
+* Added: Support to WooCommerce 2.1.x
+
+= 1.0.0 - Released: Aug 01, 2013 =
 
 * Initial release
