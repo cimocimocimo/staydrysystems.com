@@ -3,13 +3,13 @@
 * Plugin Name: YITH WooCommerce Wishlist
 * Plugin URI: http://yithemes.com/themes/plugins/yith-woocommerce-wishlist/
 * Description: YITH WooCommerce Wishlist allows you to add Wishlist functionality to your e-commerce.
-* Version: 2.0.12
-* Author: Yithemes
+* Version: 2.0.16
+* Author: YITHEMES
 * Author URI: http://yithemes.com/
 * Text Domain: yith-woocommerce-wishlist
 * Domain Path: /languages/
 * 
-* @author Your Inspiration Themes
+* @author YITHEMES
 * @package YITH WooCommerce Wishlist
 * @version 2.0.0
 */
@@ -33,13 +33,6 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 } // Exit if accessed directly
-
-/**
- * Required functions
- */
-if( ! defined( 'YITH_FUNCTIONS' ) ) {
-    require_once( 'yit-common/yit-functions.php' );
-}
 
 if ( ! function_exists( 'yith_plugin_registration_hook' ) ) {
     require_once 'plugin-fw/yit-plugin-registration-hook.php';
@@ -71,7 +64,9 @@ if ( ! defined( 'YITH_WCWL_FREE_INIT' ) ) {
 }
 
 /* Plugin Framework Version Check */
-! function_exists( 'yit_maybe_plugin_fw_loader' ) && require_once( YITH_WCWL_DIR . 'plugin-fw/init.php' );
+if( ! function_exists( 'yit_maybe_plugin_fw_loader' ) && file_exists( YITH_WCWL_DIR . 'plugin-fw/init.php' ) ) {
+    require_once( YITH_WCWL_DIR . 'plugin-fw/init.php' );
+}
 yit_maybe_plugin_fw_loader( YITH_WCWL_DIR  );
 
 if( ! function_exists( 'yith_wishlist_constructor' ) ) {

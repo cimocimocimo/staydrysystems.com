@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH WooCommerce Wishlist\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-23 16:43+0100\n"
-"PO-Revision-Date: 2015-10-23 16:43+0100\n"
+"POT-Creation-Date: 2016-06-14 17:33+0200\n"
+"PO-Revision-Date: 2016-06-14 17:33+0200\n"
 "Last-Translator: patrons_admin <arman.shahinyan@aticser.com>\n"
 "Language-Team: Your Inspiration Themes <plugins@yithemes.com>\n"
 "Language: es_ES\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.1\n"
+"X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
 "__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
 "_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
@@ -23,29 +23,33 @@ msgstr ""
 "X-Poedit-SearchPath-0: ..\n"
 "X-Poedit-SearchPathExcluded-0: ../plugin-fw\n"
 
-#: ../includes/class.yith-wcwl-admin-init.php:194
-#: ../includes/class.yith-wcwl-admin-init.php:1414
-#: ../includes/class.yith-wcwl-admin-init.php:1415
+#: ../includes/class.yith-wcwl-admin-init.php:176
+#: ../includes/class.yith-wcwl-admin-init.php:1403
+#: ../includes/class.yith-wcwl-admin-init.php:1404
 #: ../includes/class.yith-wcwl-install.php:240
 msgid "Wishlist"
 msgstr "Lista de Deseos"
 
-#: ../includes/class.yith-wcwl-admin-init.php:196
-#: ../includes/class.yith-wcwl-admin-init.php:298
+#: ../includes/class.yith-wcwl-admin-init.php:178
+#: ../includes/class.yith-wcwl-admin-init.php:285
 msgid "Settings"
 msgstr "Ajustes"
 
-#: ../includes/class.yith-wcwl-admin-init.php:197
-#: ../includes/class.yith-wcwl-admin-init.php:265
+#: ../includes/class.yith-wcwl-admin-init.php:179
+#: ../includes/class.yith-wcwl-admin-init.php:252
 msgid "Colors"
 msgstr "Colores"
 
-#: ../includes/class.yith-wcwl-admin-init.php:198
-#: ../includes/class.yith-wcwl-admin-init.php:302
+#: ../includes/class.yith-wcwl-admin-init.php:180
+#: ../includes/class.yith-wcwl-admin-init.php:289
 msgid "Premium Version"
 msgstr "Versión Premium"
 
-#: ../includes/class.yith-wcwl-admin-init.php:326
+#: ../includes/class.yith-wcwl-admin-init.php:290
+msgid "Live Demo"
+msgstr ""
+
+#: ../includes/class.yith-wcwl-admin-init.php:314
 msgid ""
 "WARNING: This plugin requires at least WooCommerce 2.2! Please, use this "
 "link to update it."
@@ -53,39 +57,39 @@ msgstr ""
 "ADVERTENCIA: Este plugin requiere al menos WooCommerce 2.2! Por favor, use "
 "este enlace para actualizarlo."
 
-#: ../includes/class.yith-wcwl-admin-init.php:329
+#: ../includes/class.yith-wcwl-admin-init.php:317
 msgid "WARNING: This plugin requires at least WooCommerce 2.2!"
 msgstr "ADVERTENCIA: Este plugin requiere al menos WooCommerce 2.2!"
 
-#: ../includes/class.yith-wcwl-admin-init.php:334
+#: ../includes/class.yith-wcwl-admin-init.php:322
 msgid "Plugin Documentation"
 msgstr "Documentación Plugin"
 
-#: ../includes/class.yith-wcwl-admin-init.php:350
+#: ../includes/class.yith-wcwl-admin-init.php:338
 msgid "Wishlist Page"
 msgstr ""
 "Página \n"
 "Lista de Deseos"
 
-#: ../includes/class.yith-wcwl-admin-init.php:351
+#: ../includes/class.yith-wcwl-admin-init.php:339
 msgid "Page contents: [yith_wcwl_wishlist]"
 msgstr ""
 "Contenido de la Página: \n"
 "[yith_wcwl_wishlist]"
 
-#: ../includes/class.yith-wcwl-admin-init.php:926
+#: ../includes/class.yith-wcwl-admin-init.php:914
 msgid "Upgrade to the PREMIUM VERSION"
 msgstr "Actualiza a la versión Premium"
 
-#: ../includes/class.yith-wcwl-admin-init.php:929
+#: ../includes/class.yith-wcwl-admin-init.php:917
 msgid "YITH WooCommerce Wishlist"
 msgstr "YITH WooCommerce Wishlist"
 
-#: ../includes/class.yith-wcwl-admin-init.php:930
+#: ../includes/class.yith-wcwl-admin-init.php:918
 msgid "Discover the Advanced Features"
 msgstr "Descubre las funciones avanzadas"
 
-#: ../includes/class.yith-wcwl-admin-init.php:931
+#: ../includes/class.yith-wcwl-admin-init.php:919
 msgid ""
 "Upgrade to the PREMIUM VERSION\n"
 "of YITH WOOCOMMERCE WISHLIST to benefit from all features!"
@@ -93,11 +97,11 @@ msgstr ""
 "Actualiza a la versión Premium\n"
 "de Yith WooCommerce WISHLIST para beneficiarse de todas las características!"
 
-#: ../includes/class.yith-wcwl-admin-init.php:938
+#: ../includes/class.yith-wcwl-admin-init.php:926
 msgid "Get Support and Pro Features"
 msgstr "Obtén ayuda y Características Pro"
 
-#: ../includes/class.yith-wcwl-admin-init.php:939
+#: ../includes/class.yith-wcwl-admin-init.php:927
 msgid ""
 "By purchasing the premium version of the plugin, you will take advantage of "
 "the advanced features of the product and you will get one year of free "
@@ -107,17 +111,17 @@ msgstr ""
 "características avanzadas del producto y obtendrá un año de actualizaciones "
 "gratuitas y apoyo a través de nuestra plataforma disponible 24h/24."
 
-#: ../includes/class.yith-wcwl-admin-init.php:949
+#: ../includes/class.yith-wcwl-admin-init.php:937
 msgid "General Settings"
 msgstr "Configuración general"
 
-#: ../includes/class.yith-wcwl-admin-init.php:956
+#: ../includes/class.yith-wcwl-admin-init.php:944
 msgid "Enable YITH Wishlist"
 msgstr ""
 "Habilitar Y\n"
 "ITH Wishlist"
 
-#: ../includes/class.yith-wcwl-admin-init.php:957
+#: ../includes/class.yith-wcwl-admin-init.php:945
 #, php-format
 msgid ""
 "Enable all plugin features. <strong>Be sure to select at least one option in "
@@ -131,23 +135,23 @@ msgstr ""
 "documentación</a>\n"
 "."
 
-#: ../includes/class.yith-wcwl-admin-init.php:964
+#: ../includes/class.yith-wcwl-admin-init.php:952
 msgid "Default wishlist title"
 msgstr "Título por defecto de la Lista de Deseos"
 
-#: ../includes/class.yith-wcwl-admin-init.php:966
-#: ../includes/class.yith-wcwl-admin-init.php:967
-#: ../includes/class.yith-wcwl-admin-init.php:1226
-#: ../includes/class.yith-wcwl-admin-init.php:1227
+#: ../includes/class.yith-wcwl-admin-init.php:954
+#: ../includes/class.yith-wcwl-admin-init.php:955
+#: ../includes/class.yith-wcwl-admin-init.php:1214
+#: ../includes/class.yith-wcwl-admin-init.php:1215
 #, php-format
 msgid "My wishlist on %s"
 msgstr "Mi lista de Deseos en %s"
 
-#: ../includes/class.yith-wcwl-admin-init.php:975
+#: ../includes/class.yith-wcwl-admin-init.php:963
 msgid "Position"
 msgstr "Posición"
 
-#: ../includes/class.yith-wcwl-admin-init.php:976
+#: ../includes/class.yith-wcwl-admin-init.php:964
 msgid ""
 "You can add the button in variable products only after the \"Add to Cart\" "
 "button or using the shortcode [yith_wcwl_add_to_wishlist]."
@@ -158,27 +162,27 @@ msgstr ""
 "yith_wcwl_add_to_wishlist\n"
 "]."
 
-#: ../includes/class.yith-wcwl-admin-init.php:982
+#: ../includes/class.yith-wcwl-admin-init.php:970
 msgid "After \"Add to cart\""
 msgstr "Después de \"Añadir al carrito\""
 
-#: ../includes/class.yith-wcwl-admin-init.php:983
+#: ../includes/class.yith-wcwl-admin-init.php:971
 msgid "After thumbnails"
 msgstr "Después de miniaturas"
 
-#: ../includes/class.yith-wcwl-admin-init.php:984
+#: ../includes/class.yith-wcwl-admin-init.php:972
 msgid "After summary"
 msgstr "Después de sumario"
 
-#: ../includes/class.yith-wcwl-admin-init.php:985
+#: ../includes/class.yith-wcwl-admin-init.php:973
 msgid "Use shortcode"
 msgstr "Usar shortcode"
 
-#: ../includes/class.yith-wcwl-admin-init.php:990
+#: ../includes/class.yith-wcwl-admin-init.php:978
 msgid "Redirect to cart"
 msgstr "Redirigir a la cesta"
 
-#: ../includes/class.yith-wcwl-admin-init.php:991
+#: ../includes/class.yith-wcwl-admin-init.php:979
 msgid ""
 "Redirect to cart page if \"Add to cart\" button is clicked in the wishlist "
 "page."
@@ -186,227 +190,229 @@ msgstr ""
 "Redirect to cart page if \"Add to cart\" button is clicked in the wishlist "
 "page."
 
-#: ../includes/class.yith-wcwl-admin-init.php:998
+#: ../includes/class.yith-wcwl-admin-init.php:986
 msgid "Remove if added to the cart"
 msgstr "Eliminar si se añade a la cesta"
 
-#: ../includes/class.yith-wcwl-admin-init.php:999
+#: ../includes/class.yith-wcwl-admin-init.php:987
 msgid "Remove the product from the wishlist if it has been added to the cart."
 msgstr "Eliminar el producto de la lista si se ha añadido a la cesta."
 
-#: ../includes/class.yith-wcwl-admin-init.php:1006
+#: ../includes/class.yith-wcwl-admin-init.php:994
 msgid "\"Add to Wishlist\" text"
 msgstr "Texto \"Añadir a la Lista de Deseos\""
 
-#: ../includes/class.yith-wcwl-admin-init.php:1008
-#: ../includes/class.yith-wcwl-admin-init.php:1009
+#: ../includes/class.yith-wcwl-admin-init.php:996
+#: ../includes/class.yith-wcwl-admin-init.php:997
 msgid "Add to Wishlist"
 msgstr "Añadir a la lista de deseos"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1014
+#: ../includes/class.yith-wcwl-admin-init.php:1002
 msgid "\"Browse wishlist\" text"
 msgstr "Texto de \"Navegar por la Lista de Deseos\""
 
-#: ../includes/class.yith-wcwl-admin-init.php:1016
-#: ../includes/class.yith-wcwl-admin-init.php:1017
+#: ../includes/class.yith-wcwl-admin-init.php:1004
+#: ../includes/class.yith-wcwl-admin-init.php:1005
 #: ../includes/class.yith-wcwl-ui.php:81 ../includes/class.yith-wcwl-ui.php:82
 msgid "Browse Wishlist"
 msgstr "Navegar por Lista de Deseos"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1022
+#: ../includes/class.yith-wcwl-admin-init.php:1010
 msgid "\"Product already in wishlist\" text"
 msgstr "Texto de \"El producto ya está en la lista de deseos\""
 
-#: ../includes/class.yith-wcwl-admin-init.php:1024
-#: ../includes/class.yith-wcwl-admin-init.php:1025
+#: ../includes/class.yith-wcwl-admin-init.php:1012
+#: ../includes/class.yith-wcwl-admin-init.php:1013
 #: ../includes/class.yith-wcwl-ui.php:82
 msgid "The product is already in the wishlist!"
 msgstr "El producto ya está en la lista de deseos!"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1030
+#: ../includes/class.yith-wcwl-admin-init.php:1018
 msgid "\"Product added\" text"
 msgstr "Texto de \"Producto añadido\""
 
-#: ../includes/class.yith-wcwl-admin-init.php:1032
-#: ../includes/class.yith-wcwl-admin-init.php:1033
+#: ../includes/class.yith-wcwl-admin-init.php:1020
+#: ../includes/class.yith-wcwl-admin-init.php:1021
 #: ../includes/class.yith-wcwl-ui.php:81
 msgid "Product added!"
 msgstr "Producto añadido!"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1038
+#: ../includes/class.yith-wcwl-admin-init.php:1026
 msgid "\"Add to Cart\" text"
 msgstr "Texto de \"Añadir a la Cesta\""
 
-#: ../includes/class.yith-wcwl-admin-init.php:1040
-#: ../includes/class.yith-wcwl-admin-init.php:1041
+#: ../includes/class.yith-wcwl-admin-init.php:1028
+#: ../includes/class.yith-wcwl-admin-init.php:1029
 msgid "Add to Cart"
 msgstr "Añadir a la cesta"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1046
+#: ../includes/class.yith-wcwl-admin-init.php:1034
 msgid "Show Unit price"
 msgstr "Mostrar Precio unitario"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1047
+#: ../includes/class.yith-wcwl-admin-init.php:1035
 msgid "Show unit price for each product in wishlist"
 msgstr "Mostrar el precio unitario de cada producto en la lista de deseos"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1055
+#: ../includes/class.yith-wcwl-admin-init.php:1043
 msgid "Show \"Add to Cart\" button"
 msgstr "Mostrar botón de \"Añadir al carrito\""
 
-#: ../includes/class.yith-wcwl-admin-init.php:1056
+#: ../includes/class.yith-wcwl-admin-init.php:1044
 msgid "Show \"Add to Cart\" button for each product in wishlist"
 msgstr ""
 "Mostrar botón \"Añadir al carrito\" para cada producto en la lista de deseos"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1064
+#: ../includes/class.yith-wcwl-admin-init.php:1052
 msgid "Show Stock status"
 msgstr "Mostrar el estado del Stock"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1065
+#: ../includes/class.yith-wcwl-admin-init.php:1053
 msgid ""
 "Show \"In stock\" or \"Out of stock\" label for each product in wishlist"
 msgstr ""
 "Mostrar etiqueta \"En existencia\" o \"Agotado\" para cada producto en la "
 "lista de deseos"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1073
+#: ../includes/class.yith-wcwl-admin-init.php:1061
 msgid "Show Date of addition"
 msgstr "Mostrar Fecha de adición"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1074
+#: ../includes/class.yith-wcwl-admin-init.php:1062
 msgid "Show the date when users have added a product to the wishlist"
 msgstr ""
 "Mostrar la fecha en que los usuarios han añadido un producto a la lista de "
 "deseos"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1082
+#: ../includes/class.yith-wcwl-admin-init.php:1070
 msgid "Add second remove button"
 msgstr "Añadir segundo botón de eliminación"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1083
+#: ../includes/class.yith-wcwl-admin-init.php:1071
 msgid "Add a second remove button in the last column, with extended label"
 msgstr ""
 "Añadir un segundo botón de eliminación en la última columna, con la etiqueta "
 "ampliada"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1106
+#: ../includes/class.yith-wcwl-admin-init.php:1094
 msgid "Styles"
 msgstr "Estilos"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1113
+#: ../includes/class.yith-wcwl-admin-init.php:1101
 msgid "Use buttons"
 msgstr "Usar botones"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1114
+#: ../includes/class.yith-wcwl-admin-init.php:1102
 msgid "Use buttons instead of simple anchors."
 msgstr "Utilizar los botones en lugar de anclajes simples."
 
-#: ../includes/class.yith-wcwl-admin-init.php:1121
+#: ../includes/class.yith-wcwl-admin-init.php:1109
 msgid "Custom CSS"
 msgstr "CSS personalizado"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1129
+#: ../includes/class.yith-wcwl-admin-init.php:1117
 msgid "Use theme style"
 msgstr "Usar estilo del tema"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1130
+#: ../includes/class.yith-wcwl-admin-init.php:1118
 msgid "Use the theme style."
 msgstr "Utilizar el estilo de tema."
 
-#: ../includes/class.yith-wcwl-admin-init.php:1137
+#: ../includes/class.yith-wcwl-admin-init.php:1125
 msgid "Rounded buttons"
 msgstr "Botones redondeados"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1138
+#: ../includes/class.yith-wcwl-admin-init.php:1126
 msgid "Make button corners rounded"
 msgstr "Hacer que las esquinas del botón sean redondeadas"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1145
+#: ../includes/class.yith-wcwl-admin-init.php:1133
 msgid "\"Add to Wishlist\" icon"
 msgstr ""
 "Icono de \n"
 "\"Añadir a la Lista de Deseos\""
 
-#: ../includes/class.yith-wcwl-admin-init.php:1146
+#: ../includes/class.yith-wcwl-admin-init.php:1134
 msgid "Add an icon to the \"Add to Wishlist\" button"
 msgstr "Añadir un icono para el botón \"Agregar a la lista de deseos\""
 
-#: ../includes/class.yith-wcwl-admin-init.php:1157
+#: ../includes/class.yith-wcwl-admin-init.php:1145
 msgid "\"Add to Cart\" icon"
 msgstr ""
 "Icono de \n"
 "\"Añadir al carrito\""
 
-#: ../includes/class.yith-wcwl-admin-init.php:1158
+#: ../includes/class.yith-wcwl-admin-init.php:1146
 msgid "Add an icon to the \"Add to Cart\" button"
 msgstr "Añadir un icono para el botón \"Añadir al carrito\""
 
-#: ../includes/class.yith-wcwl-admin-init.php:1177
+#: ../includes/class.yith-wcwl-admin-init.php:1165
 msgid "Social Networks & Share"
 msgstr "Redes Sociales y Compartir"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1184
+#: ../includes/class.yith-wcwl-admin-init.php:1172
 msgid "Share on Facebook"
 msgstr "Compartir en Facebook"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1185
+#: ../includes/class.yith-wcwl-admin-init.php:1173
 msgid "Show \"Share on Facebook\" button"
 msgstr "Mostrar el botón \"Compartir en Facebook\""
 
-#: ../includes/class.yith-wcwl-admin-init.php:1192
+#: ../includes/class.yith-wcwl-admin-init.php:1180
 msgid "Tweet on Twitter"
 msgstr "Twittear en Twitter"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1193
+#: ../includes/class.yith-wcwl-admin-init.php:1181
 msgid "Show \"Tweet on Twitter\" button"
 msgstr "Mostrar botón \"Twittear en Twitter\""
 
-#: ../includes/class.yith-wcwl-admin-init.php:1200
+#: ../includes/class.yith-wcwl-admin-init.php:1188
 msgid "Pin on Pinterest"
 msgstr "Pin en Pinterest"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1201
+#: ../includes/class.yith-wcwl-admin-init.php:1189
 msgid "Show \"Pin on Pinterest\" button"
 msgstr "Mostrar botón \"Pin on Pinterest\""
 
-#: ../includes/class.yith-wcwl-admin-init.php:1208
+#: ../includes/class.yith-wcwl-admin-init.php:1196
 msgid "Share on Google+"
 msgstr "Compartir en Google+"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1209
+#: ../includes/class.yith-wcwl-admin-init.php:1197
 msgid "Show \"Share on Google+\" button"
 msgstr "Mostrar el botón \"Compartir en Google+\""
 
-#: ../includes/class.yith-wcwl-admin-init.php:1216
+#: ../includes/class.yith-wcwl-admin-init.php:1204
 msgid "Share by Email"
 msgstr "Compartir por correo electrónico"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1217
+#: ../includes/class.yith-wcwl-admin-init.php:1205
 msgid "Show \"Share by Email\" button"
 msgstr "Mostrar el botón \"Compartir por correo electrónico\""
 
-#: ../includes/class.yith-wcwl-admin-init.php:1224
+#: ../includes/class.yith-wcwl-admin-init.php:1212
 msgid "Social title"
 msgstr "Título Social"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1232
+#: ../includes/class.yith-wcwl-admin-init.php:1220
 msgid "Social text"
 msgstr "Texto Social"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1233
+#: ../includes/class.yith-wcwl-admin-init.php:1221
 msgid ""
-"It will be used by Facebook, Twitter and Pinterest. Use <strong>%wishlist_url"
-"%</strong> where you want to show the URL of your wishlist."
+"It will be used by Twitter and Pinterest. Use <strong>%wishlist_url%</"
+"strong> where you want to show the URL of your wishlist."
 msgstr ""
-"Será usado por Facebook, Twitter y Pinterest. Usar <strong>%wishlist_url%</ "
-"strong> en la que desea mostrar la URL de tu lista de deseos."
 
-#: ../includes/class.yith-wcwl-admin-init.php:1241
+#: ../includes/class.yith-wcwl-admin-init.php:1229
 msgid "Social image URL"
 msgstr "URL de la imagen Social"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1256
+#: ../includes/class.yith-wcwl-admin-init.php:1230
+msgid "It will be used by Pinterest."
+msgstr ""
+
+#: ../includes/class.yith-wcwl-admin-init.php:1245
 #, php-format
 msgid ""
 "If you want to take advantage of this feature, you could consider to "
@@ -415,15 +421,15 @@ msgstr ""
 "Si desea tomar ventaja de esta característica, usted podría considerar "
 "comprar el %s."
 
-#: ../includes/class.yith-wcwl-admin-init.php:1261
+#: ../includes/class.yith-wcwl-admin-init.php:1250
 msgid "YITH WooCommerce Frequently Bought Together Integration"
 msgstr "Yith WooCommerce Productos adquiridos juntos frecuentemente"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1268
+#: ../includes/class.yith-wcwl-admin-init.php:1257
 msgid "Enable slider in wishlist"
 msgstr "Habilitar control deslizante en la lista de deseos"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1269
+#: ../includes/class.yith-wcwl-admin-init.php:1258
 #, php-format
 msgid ""
 "Choose to enable product slider in wishlist page with linked products (<a "
@@ -433,84 +439,84 @@ msgstr ""
 "con productos vinculados \n"
 "(<a href=\"%s\" class=\"thickbox\">Ejemplo</a>). %s"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1306
+#: ../includes/class.yith-wcwl-admin-init.php:1295
 msgid "\"Add to wishlist\" button"
 msgstr "Botón de \"Añadir a la lista de deseos\""
+
+#: ../includes/class.yith-wcwl-admin-init.php:1298
+#: ../includes/class.yith-wcwl-admin-init.php:1316
+#: ../includes/class.yith-wcwl-admin-init.php:1334
+#: ../includes/class.yith-wcwl-admin-init.php:1352
+#: ../includes/class.yith-wcwl-admin-init.php:1370
+msgid "Background"
+msgstr "Fondo"
+
+#: ../includes/class.yith-wcwl-admin-init.php:1299
+#: ../includes/class.yith-wcwl-admin-init.php:1317
+#: ../includes/class.yith-wcwl-admin-init.php:1335
+#: ../includes/class.yith-wcwl-admin-init.php:1353
+#: ../includes/class.yith-wcwl-admin-init.php:1371
+msgid "Text"
+msgstr "Texto"
+
+#: ../includes/class.yith-wcwl-admin-init.php:1300
+#: ../includes/class.yith-wcwl-admin-init.php:1318
+#: ../includes/class.yith-wcwl-admin-init.php:1336
+#: ../includes/class.yith-wcwl-admin-init.php:1354
+#: ../includes/class.yith-wcwl-admin-init.php:1372
+msgid "Border"
+msgstr "Borde"
+
+#: ../includes/class.yith-wcwl-admin-init.php:1307
+#: ../includes/class.yith-wcwl-admin-init.php:1325
+#: ../includes/class.yith-wcwl-admin-init.php:1343
+#: ../includes/class.yith-wcwl-admin-init.php:1361
+msgid "Background (hover)"
+msgstr "Fondo (hover)"
+
+#: ../includes/class.yith-wcwl-admin-init.php:1308
+#: ../includes/class.yith-wcwl-admin-init.php:1326
+#: ../includes/class.yith-wcwl-admin-init.php:1344
+#: ../includes/class.yith-wcwl-admin-init.php:1362
+msgid "Text (hover)"
+msgstr "Texto (hover)"
 
 #: ../includes/class.yith-wcwl-admin-init.php:1309
 #: ../includes/class.yith-wcwl-admin-init.php:1327
 #: ../includes/class.yith-wcwl-admin-init.php:1345
 #: ../includes/class.yith-wcwl-admin-init.php:1363
-#: ../includes/class.yith-wcwl-admin-init.php:1381
-msgid "Background"
-msgstr "Fondo"
-
-#: ../includes/class.yith-wcwl-admin-init.php:1310
-#: ../includes/class.yith-wcwl-admin-init.php:1328
-#: ../includes/class.yith-wcwl-admin-init.php:1346
-#: ../includes/class.yith-wcwl-admin-init.php:1364
-#: ../includes/class.yith-wcwl-admin-init.php:1382
-msgid "Text"
-msgstr "Texto"
-
-#: ../includes/class.yith-wcwl-admin-init.php:1311
-#: ../includes/class.yith-wcwl-admin-init.php:1329
-#: ../includes/class.yith-wcwl-admin-init.php:1347
-#: ../includes/class.yith-wcwl-admin-init.php:1365
-#: ../includes/class.yith-wcwl-admin-init.php:1383
-msgid "Border"
-msgstr "Borde"
-
-#: ../includes/class.yith-wcwl-admin-init.php:1318
-#: ../includes/class.yith-wcwl-admin-init.php:1336
-#: ../includes/class.yith-wcwl-admin-init.php:1354
-#: ../includes/class.yith-wcwl-admin-init.php:1372
-msgid "Background (hover)"
-msgstr "Fondo (hover)"
-
-#: ../includes/class.yith-wcwl-admin-init.php:1319
-#: ../includes/class.yith-wcwl-admin-init.php:1337
-#: ../includes/class.yith-wcwl-admin-init.php:1355
-#: ../includes/class.yith-wcwl-admin-init.php:1373
-msgid "Text (hover)"
-msgstr "Texto (hover)"
-
-#: ../includes/class.yith-wcwl-admin-init.php:1320
-#: ../includes/class.yith-wcwl-admin-init.php:1338
-#: ../includes/class.yith-wcwl-admin-init.php:1356
-#: ../includes/class.yith-wcwl-admin-init.php:1374
 msgid "Border (hover)"
 msgstr "Borde (hover)"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1324
+#: ../includes/class.yith-wcwl-admin-init.php:1313
 msgid "\"Add to Cart\" button"
 msgstr "Botón \"Añadir a la cesta\""
 
-#: ../includes/class.yith-wcwl-admin-init.php:1342
+#: ../includes/class.yith-wcwl-admin-init.php:1331
 msgid "\"Style 1\" button"
 msgstr "Botón \"Estilo 1\""
 
-#: ../includes/class.yith-wcwl-admin-init.php:1360
+#: ../includes/class.yith-wcwl-admin-init.php:1349
 msgid "\"Style 2\" button"
 msgstr "Botón \"Estilo 2\""
 
-#: ../includes/class.yith-wcwl-admin-init.php:1378
+#: ../includes/class.yith-wcwl-admin-init.php:1367
 msgid "Wishlist table"
 msgstr "Tabla Lista de Deseos"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1387
+#: ../includes/class.yith-wcwl-admin-init.php:1376
 msgid "Headers"
 msgstr "Cabeceras"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1390
+#: ../includes/class.yith-wcwl-admin-init.php:1379
 msgid "Background color"
 msgstr "Color de fondo"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1480
+#: ../includes/class.yith-wcwl-admin-init.php:1469
 msgid "Wishlist Activated"
 msgstr "Lista de Deseos Activado"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1481
+#: ../includes/class.yith-wcwl-admin-init.php:1470
 #, php-format
 msgid ""
 "In the YIT Plugin tab you can find the Wishlist options. With this menu, you "
@@ -526,11 +532,11 @@ msgstr ""
 "descúbrelo ahora\n"
 "</a>."
 
-#: ../includes/class.yith-wcwl-admin-init.php:1492
+#: ../includes/class.yith-wcwl-admin-init.php:1481
 msgid "Wishlist Updated"
 msgstr "Lista de Deseos Actualizado"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1493
+#: ../includes/class.yith-wcwl-admin-init.php:1482
 #, php-format
 msgid ""
 "From now on, you can find all the options of Wishlist under YIT Plugin -> "
@@ -546,7 +552,7 @@ msgstr ""
 "de Deseos se ha actualizado con nuevas opciones disponibles, <a href=\"%s"
 "\">descubra la versión PREMIUM.</a>"
 
-#: ../includes/class.yith-wcwl-init.php:361
+#: ../includes/class.yith-wcwl-init.php:380
 msgid ""
 "We are sorry, but this feature is available only if cookies are enabled on "
 "your browser."
@@ -554,7 +560,7 @@ msgstr ""
 "Lo sentimos, pero esta característica sólo está disponible si las cookies "
 "están habilitadas en su navegador."
 
-#: ../includes/class.yith-wcwl-init.php:362
+#: ../includes/class.yith-wcwl-init.php:381
 msgid "Product correctly added to cart"
 msgstr "Producto añadido correctamente a la cesta"
 
@@ -564,24 +570,24 @@ msgid "wishlist"
 msgstr "lista de deseos"
 
 #: ../includes/class.yith-wcwl-shortcode.php:242
-#: ../includes/class.yith-wcwl-ui.php:161
+#: ../includes/class.yith-wcwl-ui.php:163
 msgid "Share on:"
 msgstr "Compartir en:"
 
-#: ../includes/class.yith-wcwl-ui.php:116
-#: ../includes/class.yith-wcwl-ui.php:199
+#: ../includes/class.yith-wcwl-ui.php:117
+#: ../includes/class.yith-wcwl-ui.php:201
 msgid "Select options"
 msgstr "Seleccione opciones"
 
-#: ../includes/class.yith-wcwl-ui.php:165 ../templates/share.php:16
+#: ../includes/class.yith-wcwl-ui.php:167 ../templates/share.php:20
 msgid "Facebook"
 msgstr "Facebook"
 
-#: ../includes/class.yith-wcwl-ui.php:168 ../templates/share.php:22
+#: ../includes/class.yith-wcwl-ui.php:170 ../templates/share.php:26
 msgid "Twitter"
 msgstr "Twitter"
 
-#: ../includes/class.yith-wcwl-ui.php:177
+#: ../includes/class.yith-wcwl-ui.php:179
 msgid "email"
 msgstr "email"
 
@@ -589,39 +595,39 @@ msgstr "email"
 msgid "An error occurred while adding products to the wishlist."
 msgstr "Se produjo un error al agregar productos a la lista de deseos."
 
-#: ../includes/class.yith-wcwl.php:296
+#: ../includes/class.yith-wcwl.php:307
 msgid "An error occurred while adding products to wishlist."
 msgstr "Se produjo un error al agregar productos a la lista de deseos."
 
-#: ../includes/class.yith-wcwl.php:311
+#: ../includes/class.yith-wcwl.php:322
 msgid "The \"Remove\" option now does not require any parameter"
 msgstr "La opción \"Eliminar\" ahora no requiere ningún parámetro"
 
-#: ../includes/class.yith-wcwl.php:345
+#: ../includes/class.yith-wcwl.php:365
 msgid "An error occurred while removing products from the wishlist"
 msgstr "Se produjo un error al eliminar los productos de la lista de deseos"
 
-#: ../includes/class.yith-wcwl.php:649
+#: ../includes/class.yith-wcwl.php:765
 msgid "You need to log in before creating a new wishlist"
 msgstr "Tienes que iniciar sesión antes de crear una nueva lista de deseos"
 
-#: ../includes/class.yith-wcwl.php:1359
+#: ../includes/class.yith-wcwl.php:1479
 msgid "Product successfully removed."
 msgstr "Producto eliminado correctamente."
 
-#: ../includes/class.yith-wcwl.php:1363
+#: ../includes/class.yith-wcwl.php:1483
 msgid "Error. Unable to remove the product from the wishlist."
 msgstr "Error. No se puede eliminar el producto de la lista de deseos."
 
-#: ../includes/class.yith-wcwl.php:1367 ../templates/wishlist-view.php:261
+#: ../includes/class.yith-wcwl.php:1487 ../templates/wishlist-view.php:265
 msgid "No products were added to the wishlist"
 msgstr "No se han añadido productos a la lista de deseos"
 
-#: ../includes/class.yith-wcwl.php:1409
+#: ../includes/class.yith-wcwl.php:1529
 msgid "An error as occurred."
 msgstr "Se produjo un error."
 
-#: ../init.php:133
+#: ../init.php:128
 msgid ""
 "YITH WooCommerce Wishlist is enabled but not effective. It requires "
 "WooCommerce in order to work."
@@ -629,7 +635,7 @@ msgstr ""
 "Yith WooCommerce Lista de Deseos está habilitado pero no funcionando. "
 "Requiere WooCommerce con el fin de trabajar."
 
-#: ../init.php:143
+#: ../init.php:138
 msgid ""
 "You can't activate the free version of YITH WooCommerce Wishlist while you "
 "are using the premium one."
@@ -879,147 +885,143 @@ msgid ""
 "to keep you users informed about their operations."
 msgstr ""
 
-#: ../templates/share.php:28
+#: ../templates/share.php:32
 msgid "Pinterest"
 msgstr "Pinterest"
 
-#: ../templates/share.php:34
+#: ../templates/share.php:38
 msgid "Google+"
 msgstr "Google+"
 
-#: ../templates/share.php:40
+#: ../templates/share.php:44
+msgid "I wanted you to see this site"
+msgstr ""
+
+#: ../templates/share.php:44
 msgid "Email"
 msgstr "Email"
 
-#: ../templates/wishlist-view.php:28
+#: ../templates/wishlist-view.php:32
 msgid "Edit title"
 msgstr "Editar título"
 
-#: ../templates/wishlist-view.php:37
+#: ../templates/wishlist-view.php:41
 msgid "Save"
 msgstr "Guardar"
 
-#: ../templates/wishlist-view.php:41
+#: ../templates/wishlist-view.php:45
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: ../templates/wishlist-view.php:78
+#: ../templates/wishlist-view.php:82
 msgid "Product Name"
 msgstr "Nombre de producto"
 
-#: ../templates/wishlist-view.php:85
+#: ../templates/wishlist-view.php:89
 msgid "Unit Price"
 msgstr "Precio unitario"
 
-#: ../templates/wishlist-view.php:98
+#: ../templates/wishlist-view.php:102
 msgid "Stock Status"
 msgstr "Estado del stock"
 
-#: ../templates/wishlist-view.php:144 ../templates/wishlist-view.php:251
+#: ../templates/wishlist-view.php:148 ../templates/wishlist-view.php:255
 msgid "Remove this product"
 msgstr "Eliminar este producto"
 
-#: ../templates/wishlist-view.php:175
+#: ../templates/wishlist-view.php:179
 msgid "Free!"
 msgstr "¡Gratis!"
 
-#: ../templates/wishlist-view.php:186
+#: ../templates/wishlist-view.php:190
 msgid "Out of Stock"
 msgstr "Agotado"
 
-#: ../templates/wishlist-view.php:189
+#: ../templates/wishlist-view.php:193
 msgid "In Stock"
 msgstr "Disponible"
 
-#: ../templates/wishlist-view.php:200
+#: ../templates/wishlist-view.php:204
 #, php-format
 msgid "Added on : %s"
 msgstr "Añadido el: %s"
 
-#: ../templates/wishlist-view.php:219
+#: ../templates/wishlist-view.php:223
 msgid "Move"
 msgstr "Mover"
 
-#: ../templates/wishlist-view.php:231
+#: ../templates/wishlist-view.php:235
 msgid "Shared"
 msgstr "Compartido"
 
-#: ../templates/wishlist-view.php:234
+#: ../templates/wishlist-view.php:238
 msgid "Private"
 msgstr "Privado"
 
-#: ../templates/wishlist-view.php:237
+#: ../templates/wishlist-view.php:241
 msgid "Public"
 msgstr "Público"
 
-#: ../templates/wishlist-view.php:251
+#: ../templates/wishlist-view.php:255
 msgid "Remove"
 msgstr "Eliminar"
 
-#: ../templates/wishlist-view.php:278
+#: ../templates/wishlist-view.php:282
 msgid "Add the selected products to the cart"
 msgstr "Añadir los productos seleccionados a la cesta"
 
-#: ../templates/wishlist-view.php:286 ../templates/wishlist-view.php:328
+#: ../templates/wishlist-view.php:290 ../templates/wishlist-view.php:332
 msgid "Ask for an estimate"
 msgstr "Pida presupuesto"
 
-#: ../yit-common/yith-panel.php:401
-msgid "Select a date"
-msgstr "Seleccione una fecha"
+#~ msgid ""
+#~ "It will be used by Facebook, Twitter and Pinterest. Use <strong>"
+#~ "%wishlist_url%</strong> where you want to show the URL of your wishlist."
+#~ msgstr ""
+#~ "Será usado por Facebook, Twitter y Pinterest. Usar <strong>%wishlist_url"
+#~ "%</ strong> en la que desea mostrar la URL de tu lista de deseos."
 
-#: ../yit-common/yith-panel.php:402
-msgid "Hours"
-msgstr "Horas"
+#~ msgid "Select a date"
+#~ msgstr "Seleccione una fecha"
 
-#: ../yit-common/yith-panel.php:403 ../yit-common/yith-panel.php:404
-msgid "Minutes"
-msgstr "Minutos"
+#~ msgid "Hours"
+#~ msgstr "Horas"
 
-#: ../yit-common/yith-panel.php:412
-msgid "Upload"
-msgstr "Subir"
+#~ msgid "Minutes"
+#~ msgstr "Minutos"
 
-#: ../yit-common/yith-panel.php:439
-msgid "px"
-msgstr "px"
+#~ msgid "Upload"
+#~ msgstr "Subir"
 
-#: ../yit-common/yith-panel.php:440
-msgid "em"
-msgstr "em"
+#~ msgid "px"
+#~ msgstr "px"
 
-#: ../yit-common/yith-panel.php:441
-msgid "pt"
-msgstr "pt"
+#~ msgid "em"
+#~ msgstr "em"
 
-#: ../yit-common/yith-panel.php:442
-msgid "rem"
-msgstr "rem"
+#~ msgid "pt"
+#~ msgstr "pt"
 
-#: ../yit-common/yith-panel.php:452
-msgid "Select a font family"
-msgstr "Seleccione una fuente"
+#~ msgid "rem"
+#~ msgstr "rem"
 
-#: ../yit-common/yith-panel.php:460
-msgid "Regular"
-msgstr "Regular"
+#~ msgid "Select a font family"
+#~ msgstr "Seleccione una fuente"
 
-#: ../yit-common/yith-panel.php:461
-msgid "Bold"
-msgstr "Negrita"
+#~ msgid "Regular"
+#~ msgstr "Regular"
 
-#: ../yit-common/yith-panel.php:462
-msgid "Extra bold"
-msgstr "Negrita extra"
+#~ msgid "Bold"
+#~ msgstr "Negrita"
 
-#: ../yit-common/yith-panel.php:463
-msgid "Italic"
-msgstr "Cursiva"
+#~ msgid "Extra bold"
+#~ msgstr "Negrita extra"
 
-#: ../yit-common/yith-panel.php:464
-msgid "Italic bold"
-msgstr "Cursiva negrita"
+#~ msgid "Italic"
+#~ msgstr "Cursiva"
 
-#: ../yit-common/yith-panel.php:476
-msgid "Click to preview"
-msgstr "Haga clic para obtener una vista previa"
+#~ msgid "Italic bold"
+#~ msgstr "Cursiva negrita"
+
+#~ msgid "Click to preview"
+#~ msgstr "Haga clic para obtener una vista previa"

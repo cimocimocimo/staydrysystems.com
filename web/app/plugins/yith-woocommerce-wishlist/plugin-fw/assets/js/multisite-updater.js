@@ -54,7 +54,7 @@
                     info    = plugin[headers],
                     name    = '' + info.Name,
                     id      = name.replace(regex, '-').trim(),
-                    row     = '#' + id.toLowerCase();
+                    row     = '*[data-slug="' + id.toLowerCase() +'"]';
 
                 $(row).addClass("update");
 

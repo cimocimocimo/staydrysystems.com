@@ -4,7 +4,7 @@ jQuery( document ).ready( function( $ ){
         this_page = window.location.toString(),
         checkboxes = $( '.wishlist_table tbody input[type="checkbox"]:not(:disabled)');
 
-        $(document).on( 'yith_wcwl_init', function(){
+    $(document).on( 'yith_wcwl_init', function(){
         var t = $(this),
             checkboxes = $( '.wishlist_table tbody input[type="checkbox"]:not(:disabled)');
 
@@ -29,9 +29,9 @@ jQuery( document ).ready( function( $ ){
         } );
 
         t.on( 'adding_to_cart', 'body', function( ev, button, data ){
-            if( button.closest( '.wishlist_table' ).length != 0 ){
-                data.remove_from_wishlist_after_add_to_cart = button.closest( 'tr' ).data( 'row-id' );
-                data.wishlist_id = button.closest( 'table' ).data( 'id' );
+            if( typeof button != 'undefined' && typeof data != 'undefined' && button.closest( '.wishlist_table' ).length != 0 ){
+                data.remove_from_wishlist_after_add_to_cart = button.closest( '[data-row-id]' ).data( 'row-id' );
+                data.wishlist_id = button.closest( '.wishlist_table' ).data( 'id' );
                 wc_add_to_cart_params.cart_redirect_after_add = yith_wcwl_l10n.redirect_to_cart;
             }
         } );
@@ -256,7 +256,7 @@ jQuery( document ).ready( function( $ ){
 
                 if( yith_wcwl_l10n.multi_wishlist && yith_wcwl_l10n.is_user_logged_in ) {
                     var wishlist_select = $( 'select.wishlist-select' );
-                    if( typeof $.prettyPhoto != 'undefined' ) {
+                    if( typeof $.prettyPhoto != 'undefined' && typeof $.prettyPhoto.close != 'undefined' ) {
                         $.prettyPhoto.close();
                     }
 
@@ -325,7 +325,7 @@ jQuery( document ).ready( function( $ ){
             pagination = table.data( 'pagination' ),
             per_page = table.data( 'per-page' ),
             current_page = table.data( 'page' ),
-            row = el.parents( 'tr' ),
+            row = el.parents( '[data-row-id]' ),
             pagination_row = table.find( '.pagination-row'),
             data_row_id = row.data( 'row-id'),
             wishlist_id = table.data( 'id' ),
@@ -431,7 +431,7 @@ jQuery( document ).ready( function( $ ){
         var table = el.parents( '.cart.wishlist_table'),
             wishlist_token = table.data( 'token'),
             wishlist_id = table.data( 'id' ),
-            item = el.parents( 'tr'),
+            item = el.parents( '[data-row-id]'),
             item_id = item.data( 'row-id'),
             to_token = el.val(),
             pagination = table.data( 'pagination' ),
@@ -532,7 +532,7 @@ jQuery( document ).ready( function( $ ){
     function add_wishlist_popup() {
         if( $('.yith-wcwl-add-to-wishlist').length != 0 && $( '#yith-wcwl-popup-message' ).length == 0 ) {
             var message_div = $( '<div>' )
-                    .attr( 'id', 'yith-wcwl-message' ),
+                .attr( 'id', 'yith-wcwl-message' ),
                 popup_div = $( '<div>' )
                     .attr( 'id', 'yith-wcwl-popup-message' )
                     .html( message_div )
@@ -559,7 +559,7 @@ jQuery( document ).ready( function( $ ){
             checkboxes.filter(':checked').each( function(){
                 var t = $(this);
                 ids += ( ids.length != 0 ) ? ',' : '';
-                ids += t.parents('tr').data( 'row-id' );
+                ids += t.parents('[data-row-id]').data( 'row-id' );
             } );
 
             url = add_query_arg( url, 'wishlist_products_to_add_to_cart', ids );

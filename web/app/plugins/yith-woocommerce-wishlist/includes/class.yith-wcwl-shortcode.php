@@ -35,7 +35,7 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 
 			// retrieve options from query string
 			$action_params = get_query_var( 'wishlist-action', false );
-			$action_params = explode( '/', $action_params );
+			$action_params = explode( '/', apply_filters( 'yith_wcwl_current_wishlist_view_params', $action_params ) );
 			$action = ( isset( $action_params[0] ) ) ? $action_params[0] : 'view';
 
 			$user_id = isset( $_GET['user_id'] ) ? $_GET['user_id'] : false;
@@ -301,12 +301,13 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 		public static function add_to_wishlist( $atts, $content = null ) {
 			global $product;
 
-			if( ! isset( $product ) ){
-				$product = ( isset( $atts['product_id'] ) ) ? wc_get_product( $atts['product_id'] ) : false;
-			}
+			// product object
+			$current_product = ( isset( $atts['product_id'] ) ) ? wc_get_product( $atts['product_id'] ) : false;
+			$current_product = $current_product ? $current_product : $product;
 
 			$template_part = 'button';
 
+			// labels & icons settings
 			$label_option = get_option( 'yith_wcwl_add_to_wishlist_text' );
 			$icon_option = get_option( 'yith_wcwl_add_to_wishlist_icon' ) != 'none' ? get_option( 'yith_wcwl_add_to_wishlist_icon' ) : '';
 
@@ -319,8 +320,10 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 
 			$product_added = get_option( 'yith_wcwl_product_added_text' );
 
+			// button class
 			$classes = apply_filters( 'yith_wcwl_add_to_wishlist_button_classes', get_option( 'yith_wcwl_use_button' ) == 'yes' ? 'add_to_wishlist single_add_to_wishlist button alt' : 'add_to_wishlist' );
 
+			// default wishlist id
 			$default_wishlists = is_user_logged_in() ? YITH_WCWL()->get_wishlists( array( 'is_default' => true ) ) : false;
 
 			if( ! empty( $default_wishlists ) ){
@@ -330,15 +333,19 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 				$default_wishlist = false;
 			}
 
-			$exists = YITH_WCWL()->is_product_in_wishlist( $product->id, $default_wishlist );
+			// exists in default wishlist
+			$exists = YITH_WCWL()->is_product_in_wishlist( $current_product->id, $default_wishlist );
 
+			// get wishlist url
 			$wishlist_url = YITH_WCWL()->get_wishlist_url();
-			$product_type = $product->product_type;
+
+			// get product type
+			$product_type = $current_product->product_type;
 
 			$additional_params = array(
 				'wishlist_url' => $wishlist_url,
 				'exists' => $exists,
-				'product_id' => $product->id,
+				'product_id' => $current_product->id,
 				'product_type' => $product_type,
 				'label' => $label,
 				'browse_wishlist_text' => $browse_wishlist,

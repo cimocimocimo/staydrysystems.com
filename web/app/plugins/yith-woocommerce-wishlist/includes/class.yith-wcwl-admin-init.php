@@ -28,22 +28,6 @@ if ( ! class_exists( 'YITH_WCWL_Admin_Init' ) ) {
 		protected static $instance;
 
 		/**
-		 * Plugin version
-		 *
-		 * @var string
-		 * @since 1.0.0
-		 */
-		public $version = '2.0.12';
-
-		/**
-		 * Plugin database version
-		 *
-		 * @var string
-		 * @since 1.0.0
-		 */
-		public $db_version = '2.0.0';
-
-		/**
 		 * Wishlist panel
 		 *
 		 * @var string Panel hookname
@@ -70,6 +54,7 @@ if ( ! class_exists( 'YITH_WCWL_Admin_Init' ) ) {
 		public $banner_img = 'http://cdn.yithemes.com/plugins/yith_wishlist.php';
 		public $doc_url = 'http://yithemes.com/docs-plugins/yith-woocommerce-wishlist/';
 		public $premium_landing_url = 'http://yithemes.com/themes/plugins/yith-woocommerce-wishlist/';
+		public $live_demo_url = 'http://plugins.yithemes.com/yith-woocommerce-wishlist/';
 
 		/**
 		 * Plugin options
@@ -118,9 +103,6 @@ if ( ! class_exists( 'YITH_WCWL_Admin_Init' ) ) {
 		 * @since 2.0.0
 		 */
 		public function __construct(){
-			define( 'YITH_WCWL_VERSION', $this->version );
-			define( 'YITH_WCWL_DB_VERSION', $this->db_version );
-
 			// init premium features for admin panel
 			if( function_exists( 'YITH_WCWL_Admin_Premium' ) ){
 				YITH_WCWL_Admin_Premium();
@@ -199,8 +181,8 @@ if ( ! class_exists( 'YITH_WCWL_Admin_Init' ) ) {
 			) );
 			$this->default_tab = apply_filters( 'yith_wcwl_default_admin_tab', $this->default_tab );
 
-			wp_register_style( 'yith-wcwl-admin', YITH_WCWL_URL . 'assets/css/admin.css' );
-			wp_register_script( 'yith-wcwl-admin', YITH_WCWL_URL . 'assets/js/admin/yith-wcwl.js' );
+			wp_register_style( 'yith-wcwl-admin', YITH_WCWL_URL . 'assets/css/admin.css', array(), YITH_WCWL_Init()->version );
+			wp_register_script( 'yith-wcwl-admin', YITH_WCWL_URL . 'assets/js/admin/yith-wcwl.js', array(), YITH_WCWL_Init()->version );
 		}
 
 		/**
@@ -221,7 +203,7 @@ if ( ! class_exists( 'YITH_WCWL_Admin_Init' ) ) {
 				do_action( 'yith_wcwl_installed' );
 				do_action( 'yith_wcwl_updated' );
 			}
-			elseif ( $this->db_version != $stored_db_version || ! YITH_WCWL_Install()->is_installed() ) {
+			elseif ( YITH_WCWL_Init()->db_version != $stored_db_version || ! YITH_WCWL_Install()->is_installed() ) {
 				add_action( 'init', array( YITH_WCWL_Install(), 'init' ) );
 				YITH_WCWL_Install()->default_options( $this->options );
 
@@ -244,7 +226,12 @@ if ( ! class_exists( 'YITH_WCWL_Admin_Init' ) ) {
 			foreach ( YITH_WCWL_Init()->colors_options as $name => $option ) {
 				foreach ( $option as $id => $color ) {
 					$default_value = isset( $colors_options[$name][$id] ) ? $colors_options[$name][$id] : '';
-					$colors_options[$name][$id] = isset( $_POST['yith_wcwl_color_' . $name . '_' . $id] ) && ! empty( $_POST['yith_wcwl_color_' . $name . '_' . $id] ) ? woocommerce_format_hex( $_POST['yith_wcwl_color_' . $name . '_' . $id] ) : $default_value;
+					if( isset( $_POST['yith_wcwl_color_' . $name . '_' . $id] ) && ! empty( $_POST['yith_wcwl_color_' . $name . '_' . $id] ) ){
+						$colors_options[$name][$id] = function_exists( 'wc_format_hex' ) ? wc_format_hex( $_POST['yith_wcwl_color_' . $name . '_' . $id] ) : woocommerce_format_hex( $_POST['yith_wcwl_color_' . $name . '_' . $id] );
+					}
+					else{
+						$colors_options[$name][$id] = $default_value;
+					}
 				}
 			}
 
@@ -300,6 +287,7 @@ if ( ! class_exists( 'YITH_WCWL_Admin_Init' ) ) {
 
 			if( ! function_exists( 'YITH_WCWL_Premium' ) ){
 				$plugin_links[] = '<a target="_blank" href="' . $this->get_premium_landing_uri() . '">' . __( 'Premium Version', 'yith-woocommerce-wishlist' ) . '</a>';
+				$plugin_links[] = '<a target="_blank" href="' . $this->live_demo_url . '">' . __( 'Live Demo', 'yith-woocommerce-wishlist' ) . '</a>';
 			}
 
 			return array_merge( $links, $plugin_links );
@@ -1230,7 +1218,7 @@ of YITH WOOCOMMERCE WISHLIST to benefit from all features!', 'yith-woocommerce-w
 				),
 				'socials_text' =>  array(
 					'name'    => __( 'Social text', 'yith-woocommerce-wishlist' ),
-					'desc'    => __( 'It will be used by Facebook, Twitter and Pinterest. Use <strong>%wishlist_url%</strong> where you want to show the URL of your wishlist.', 'yith-woocommerce-wishlist' ),
+					'desc'    => __( 'It will be used by Twitter and Pinterest. Use <strong>%wishlist_url%</strong> where you want to show the URL of your wishlist.', 'yith-woocommerce-wishlist' ),
 					'id'      => 'yith_wcwl_socials_text',
 					'css'     => 'width:100%; height: 75px;',
 					'std'     => '', // for woocommerce < 2.0
@@ -1239,6 +1227,7 @@ of YITH WOOCOMMERCE WISHLIST to benefit from all features!', 'yith-woocommerce-w
 				),
 				'socials_image' => array(
 					'name'    => __( 'Social image URL', 'yith-woocommerce-wishlist' ),
+					'desc'    => __( 'It will be used by Pinterest.', 'yith-woocommerce-wishlist' ),
 					'id'      => 'yith_wcwl_socials_image_url',
 					'std'     => '', // for woocommerce < 2.0
 					'default' => '', // for woocommerce >= 2.0
@@ -1413,7 +1402,7 @@ of YITH WOOCOMMERCE WISHLIST to benefit from all features!', 'yith-woocommerce-w
 				'parent_slug'   => '',
 				'page_title'    => __( 'Wishlist', 'yith-woocommerce-wishlist' ),
 				'menu_title'    => __( 'Wishlist', 'yith-woocommerce-wishlist' ),
-				'capability'    => 'manage_options',
+				'capability'    => apply_filters( 'yith_wcwl_settings_panel_capability', 'manage_options' ),
 				'parent'        => '',
 				'parent_page'   => 'yit_plugin_panel',
 				'page'          => 'yith_wcwl_panel',

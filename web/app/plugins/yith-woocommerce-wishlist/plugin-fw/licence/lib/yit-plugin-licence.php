@@ -8,11 +8,11 @@
  * http://www.gnu.org/licenses/gpl-3.0.txt
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if ( !defined( 'ABSPATH' ) ) {
     exit;
 } // Exit if accessed directly
 
-if ( ! class_exists( 'YIT_Plugin_Licence' ) ) {
+if ( !class_exists( 'YIT_Plugin_Licence' ) ) {
     /**
      * YIT Plugin Licence Panel
      *
@@ -23,7 +23,6 @@ if ( ! class_exists( 'YIT_Plugin_Licence' ) ) {
      * @since      1.0
      * @author     Andrea Grillo      <andrea.grillo@yithemes.com>
      */
-
     class YIT_Plugin_Licence extends YIT_Licence {
 
         /**
@@ -59,27 +58,26 @@ if ( ! class_exists( 'YIT_Plugin_Licence' ) ) {
         public function __construct() {
             parent::__construct();
 
-	        if ( ! is_admin() ) {
-		        return;
-	        }
+            if ( !is_admin() ) {
+                return;
+            }
 
             $this->_settings = array(
                 'parent_page' => 'yit_plugin_panel',
-                'page_title'  => __( 'Licence Activation', 'yith-plugin-fw' ),
-                'menu_title'  => __( 'Licence Activation', 'yith-plugin-fw' ),
+                'page_title'  => __( 'License Activation', 'yith-plugin-fw' ),
+                'menu_title'  => __( 'License Activation', 'yith-plugin-fw' ),
                 'capability'  => 'manage_options',
                 'page'        => 'yith_plugins_activation',
             );
 
             add_action( 'admin_menu', array( $this, 'add_submenu_page' ), 99 );
-            add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
-            add_action( 'admin_enqueue_scripts', array( $this, 'localize_script' ), 15 );
             add_action( "wp_ajax_activate-{$this->_product_type}", array( $this, 'activate' ) );
+            add_action( "wp_ajax_deactivate-{$this->_product_type}", array( $this, 'deactivate' ) );
             add_action( "wp_ajax_update_licence_information-{$this->_product_type}", array( $this, 'update_licence_information' ) );
             add_action( 'yit_licence_after_check', array( $this, 'licence_after_check' ) );
         }
 
-        
+
         public function licence_after_check() {
             /* === Regenerate Update Plugins Transient === */
             YIT_Upgrade()->force_regenerate_update_transient();
@@ -103,7 +101,7 @@ if ( ! class_exists( 'YIT_Plugin_Licence' ) ) {
         }
 
         /**
-         * Add "Activation" submenu page under YIT Plugins
+         * Add "Activation" submenu page under YITH Plugins
          *
          * @return void
          * @since  1.0
@@ -133,16 +131,20 @@ if ( ! class_exists( 'YIT_Plugin_Licence' ) ) {
          * @author   Andrea Grillo <andrea.grillo@yithemes.com>
          */
         public function register( $plugin_init, $secret_key, $product_id ) {
-            if ( ! function_exists( 'get_plugins' ) ) {
+            if ( !function_exists( 'get_plugins' ) ) {
                 require_once ABSPATH . 'wp-admin/includes/plugin.php';
             }
 
             $plugins                             = get_plugins();
             $plugins[$plugin_init]['secret_key'] = $secret_key;
             $plugins[$plugin_init]['product_id'] = $product_id;
-            $this->_products[$plugin_init]        = $plugins[$plugin_init];
+            $this->_products[$plugin_init]       = $plugins[$plugin_init];
         }
-}
+
+        public function get_product_type() {
+            return $this->_product_type;
+        }
+    }
 }
 
 /**
@@ -152,7 +154,7 @@ if ( ! class_exists( 'YIT_Plugin_Licence' ) ) {
  * @since  1.0
  * @author Andrea Grillo <andrea.grillo@yithemes.com>
  */
-if( ! function_exists( 'YIT_Plugin_Licence' ) ){
+if ( !function_exists( 'YIT_Plugin_Licence' ) ) {
     function YIT_Plugin_Licence() {
         return YIT_Plugin_Licence::instance();
     }

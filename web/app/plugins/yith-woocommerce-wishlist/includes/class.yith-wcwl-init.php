@@ -44,6 +44,22 @@ if ( ! class_exists( 'YITH_WCWL_Init' ) ) {
 		public $colors_options;
 
 		/**
+		 * Plugin version
+		 *
+		 * @var string
+		 * @since 1.0.0
+		 */
+		public $version = '2.0.16';
+
+		/**
+		 * Plugin database version
+		 *
+		 * @var string
+		 * @since 1.0.0
+		 */
+		public $db_version = '2.0.0';
+
+		/**
 		 * Positions of the button "Add to Wishlist"
 		 *
 		 * @var array
@@ -81,6 +97,9 @@ if ( ! class_exists( 'YITH_WCWL_Init' ) ) {
 		 * @since 1.0.0
 		 */
 		public function __construct() {
+			define( 'YITH_WCWL_VERSION', $this->version );
+			define( 'YITH_WCWL_DB_VERSION', $this->db_version );
+
 			$this->_yith_wcwl_install = YITH_WCWL_Install();
 			$this->_positions         = apply_filters( 'yith_wcwl_positions', array(
 				'add-to-cart' => array( 'hook' => 'woocommerce_single_product_summary', 'priority' => 31 ),
@@ -268,11 +287,11 @@ if ( ! class_exists( 'YITH_WCWL_Init' ) ) {
 				'wishlist.css'
 			) );
 
-			wp_register_style( 'woocommerce_prettyPhoto_css', $assets_path . 'css/prettyPhoto.css' );
-			wp_register_style( 'jquery-selectBox', YITH_WCWL_URL . 'assets/css/jquery.selectBox.css' );
-			wp_register_style( 'yith-wcwl-main', YITH_WCWL_URL . 'assets/css/style.css' );
-			wp_register_style( 'yith-wcwl-user-main', str_replace( get_template_directory(), get_template_directory_uri(), $located ) );
-			wp_register_style( 'yith-wcwl-font-awesome', YITH_WCWL_URL . 'assets/css/font-awesome.min.css' );
+			wp_register_style( 'woocommerce_prettyPhoto_css', $assets_path . 'css/prettyPhoto.css', array(), '3.1.6' );
+			wp_register_style( 'jquery-selectBox', YITH_WCWL_URL . 'assets/css/jquery.selectBox.css', array(), '1.2.0' );
+			wp_register_style( 'yith-wcwl-main', YITH_WCWL_URL . 'assets/css/style.css', array(), $this->version );
+			wp_register_style( 'yith-wcwl-user-main', str_replace( get_template_directory(), get_template_directory_uri(), $located ), array(), $this->version );
+			wp_register_style( 'yith-wcwl-font-awesome', YITH_WCWL_URL . 'assets/css/font-awesome.min.css', array(), '4.3.0' );
 
 			wp_enqueue_style( 'woocommerce_prettyPhoto_css' );
 			wp_enqueue_style( 'jquery-selectBox' );
@@ -314,7 +333,7 @@ if ( ! class_exists( 'YITH_WCWL_Init' ) ) {
 				?>
 			</style>
 			<script type="text/javascript">
-				var yith_wcwl_plugin_ajax_web_url = '<?php echo admin_url('admin-ajax.php') ?>';
+				var yith_wcwl_plugin_ajax_web_url = '<?php echo admin_url('admin-ajax.php', 'relative') ?>';
 			</script>
 		<?php
 		}
@@ -345,12 +364,12 @@ if ( ! class_exists( 'YITH_WCWL_Init' ) ) {
 
 			wp_enqueue_script( 'prettyPhoto', $assets_path . 'js/prettyPhoto/jquery.prettyPhoto' . $suffix . '.js', array( 'jquery' ), '3.1.5', true );
 			wp_enqueue_script( 'prettyPhoto-init', $assets_path . 'js/prettyPhoto/jquery.prettyPhoto.init' . $suffix . '.js', array( 'jquery','prettyPhoto' ), defined( 'WC_VERSION' ) ? WC_VERSION : WOOCOMMERCE_VERSION, true );
-			wp_enqueue_script( 'jquery-selectBox', YITH_WCWL_URL . 'assets/js/jquery.selectBox.min.js', array( 'jquery' ), false, true );
-			wp_register_script( 'jquery-yith-wcwl', YITH_WCWL_URL . 'assets/js/jquery.yith-wcwl.js', array( 'jquery', 'jquery-selectBox' ), '2.0', true );
-			wp_register_script( 'jquery-yith-wcwl-user', str_replace( get_template_directory(), get_template_directory_uri(), $located ), array( 'jquery', 'jquery-selectBox' ), '2.0', true );
+			wp_enqueue_script( 'jquery-selectBox', YITH_WCWL_URL . 'assets/js/jquery.selectBox.min.js', array( 'jquery' ), '1.2.0', true );
+			wp_register_script( 'jquery-yith-wcwl', YITH_WCWL_URL . 'assets/js/jquery.yith-wcwl.js', array( 'jquery', 'jquery-selectBox' ), $this->version, true );
+			wp_register_script( 'jquery-yith-wcwl-user', str_replace( get_template_directory(), get_template_directory_uri(), $located ), array( 'jquery', 'jquery-selectBox' ), $this->version, true );
 
 			$yith_wcwl_l10n = array(
-				'ajax_url' => admin_url( 'admin-ajax.php', is_ssl() ? 'https' : 'http' ),
+				'ajax_url' => admin_url( 'admin-ajax.php', 'relative' ),
 				'redirect_to_cart' => get_option( 'yith_wcwl_redirect_cart' ),
 				'multi_wishlist' => get_option( 'yith_wcwl_multi_wishlist_enable' ) == 'yes' ? true : false,
 				'hide_add_button' => apply_filters( 'yith_wcwl_hide_add_button', true ),
@@ -359,7 +378,7 @@ if ( ! class_exists( 'YITH_WCWL_Init' ) ) {
 				'remove_from_wishlist_after_add_to_cart' => get_option( 'yith_wcwl_remove_after_add_to_cart' ),
 				'labels' => array(
 					'cookie_disabled' => __( 'We are sorry, but this feature is available only if cookies are enabled on your browser.', 'yith-woocommerce-wishlist' ),
-					'added_to_cart_message' => sprintf( '<div class="woocommerce-message">%s</div>', __( 'Product correctly added to cart', 'yith-woocommerce-wishlist' ) )
+					'added_to_cart_message' => sprintf( '<div class="woocommerce-message">%s</div>', apply_filters( 'yith_wcwl_added_to_cart_message', __( 'Product correctly added to cart', 'yith-woocommerce-wishlist' ) ) )
 				),
 				'actions' => array(
 					'add_to_wishlist_action' => 'add_to_wishlist',

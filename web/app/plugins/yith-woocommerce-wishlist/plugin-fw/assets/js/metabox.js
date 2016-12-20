@@ -143,21 +143,6 @@
         $('.metaboxes-tab .select_wrapper select[multiple]').not('.chosen').hide();
     })
 
-    //on-off
-    $('.metaboxes-tab .onoff_container span').on('click', function(){
-
-        var input = $( this ).prev( 'input' );
-        var checked = input.prop( 'checked' );
-
-        if( checked ) {
-            input.prop( 'checked', false ).attr( 'value', 'no' ).removeClass('onoffchecked');
-        } else {
-            input.prop( 'checked', true ).attr( 'value', 'yes' ).addClass('onoffchecked');
-        }
-
-        input.change();
-    });
-
     //chosen
     $('.metaboxes-tab .chosen .select_wrapper select').chosen();
 
@@ -346,6 +331,22 @@
         $image_gallery_ids.val( attachment_ids );
 
         return false;
+    });
+
+
+    //on-off
+    $('.the-metabox .rm_onoff.onoff_container span').on('click', function(ev){
+
+        var input = $( this ).prev( 'input' );
+        var checked = input.prop( 'checked' );
+
+        if( checked ) {
+            input.prop( 'checked', false ).attr( 'value', 'no' ).removeClass('onoffchecked');
+        } else {
+            input.prop( 'checked', true ).attr( 'value', 'yes' ).addClass('onoffchecked');
+        }
+
+        input.change();
     });
 
 

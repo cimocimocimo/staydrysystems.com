@@ -6,6 +6,10 @@
  * @package YITH WooCommerce Wishlist
  * @version 2.0.12
  */
+
+if ( ! defined( 'YITH_WCWL' ) ) {
+	exit;
+} // Exit if accessed directly
 ?>
 
 <?php do_action( 'yith_wcwl_before_wishlist_form', $wishlist_meta ); ?>
@@ -154,7 +158,7 @@
 
                         <td class="product-name">
                             <a href="<?php echo esc_url( get_permalink( apply_filters( 'woocommerce_in_cart_product', $item['prod_id'] ) ) ) ?>"><?php echo apply_filters( 'woocommerce_in_cartproduct_obj_title', $product->get_title(), $product ) ?></a>
-                            <?php do_action( 'yith_wccl_table_after_product_name', $item ); ?>
+                            <?php do_action( 'yith_wcwl_table_after_product_name', $item ); ?>
                         </td>
 
                         <?php if( $show_price ) : ?>
@@ -204,12 +208,12 @@
 	                        <!-- Add to cart button -->
                             <?php if( $show_add_to_cart && isset( $stock_status ) && $stock_status != 'Out' ): ?>
                                 <?php
-                                if( function_exists( 'wc_get_template' ) ) {
-                                    wc_get_template( 'loop/add-to-cart.php' );
-                                }
-                                else{
-                                    woocommerce_get_template( 'loop/add-to-cart.php' );
-                                }
+								if( function_exists( 'woocommerce_template_loop_add_to_cart' ) ) {
+									woocommerce_template_loop_add_to_cart();
+								}
+								else{
+									wc_get_template( 'loop/add-to-cart.php' );
+								}
                                 ?>
                             <?php endif ?>
 

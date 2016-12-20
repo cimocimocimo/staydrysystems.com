@@ -91,6 +91,7 @@ if( ! class_exists( 'YITH_WCWL_UI' ) ) {
         /**
          * Build the "Add to cart" HTML.
          *
+         * @deprecated
          * @param string $url
          * @param string $stock_status
          * @param string $type
@@ -142,6 +143,7 @@ if( ! class_exists( 'YITH_WCWL_UI' ) ) {
         /**
          * Build share HTML.
          *
+         * @deprecated
          * @param string $url
          * @return string $string
          * @static
