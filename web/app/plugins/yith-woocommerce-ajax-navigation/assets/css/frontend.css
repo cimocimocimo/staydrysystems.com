@@ -144,6 +144,11 @@
 
 .yith-wcan-select-wrapper ul.yith-wcan-select.yith-wcan li a, .widget .yit-wcan-select-open {
     width: auto;
+    display: block;
+}
+
+.yith-wcan-select-wrapper ul.yith-wcan-select.yith-wcan li.chosen a{
+    padding: 0;
 }
 
 .yith-wcan-select-wrapper ul.yith-wcan-select.yith-wcan li a:hover, .widget .yit-wcan-select-open:hover {
@@ -163,12 +168,28 @@
 }
 
 /* Hierarchical  Order */
-.widget.widget_layered_nav li.yit-wcan-child-terms {
+.widget.widget_layered_nav li.yit-wcan-child-terms.level-1 {
     padding-left: 30px;
 }
 
-.yith-wcan-select-wrapper ul.yith-wcan-select.yith-wcan li.yit-wcan-child-terms {
+.widget.widget_layered_nav li.yit-wcan-child-terms.level-2 {
+    padding-left: 60px;
+}
+
+.widget.widget_layered_nav li.yit-wcan-child-terms.level-3 {
+    padding-left: 90px;
+}
+
+.yith-wcan-select-wrapper ul.yith-wcan-select.yith-wcan li.yit-wcan-child-terms.level-1 {
     padding-left: 30px;
+}
+
+.yith-wcan-select-wrapper ul.yith-wcan-select.yith-wcan li.yit-wcan-child-terms.level-2 {
+    padding-left: 60px;
+}
+
+.yith-wcan-select-wrapper ul.yith-wcan-select.yith-wcan li.yit-wcan-child-terms.level-2 {
+    padding-left: 90px;
 }
 
 /* widget dropdown */
@@ -261,9 +282,85 @@ a.yith-wcan-price-link.active:before {
 .woocommerce .widget_layered_nav ul.yith-wcan-color li a.multicolor.round {
     border-radius: 50%;
 }
+
+.yith-wcan-pro.woocommerce .widget_price_filter .price_slider_amount button {
+    display: none;
+}
+
 .woocommerce .widget_price_filter .price_slider_amount #min_price.yith_wcan_no_slider,
 .woocommerce .widget_price_filter .price_slider_amount #max_price.yith_wcan_no_slider {
     margin-bottom: 10px;
 }
 
 
+/*--------------------------
+    CHECKBOX LAYOUT
+---------------------------*/
+.yith-woocommerce-ajax-product-filter.with-checkbox{
+
+}
+.yith-woocommerce-ajax-product-filter.with-checkbox ul{
+    list-style-type: none;
+    padding-left: 0;
+}
+.yith-woocommerce-ajax-product-filter.yith-wcan-sort-by.with-checkbox ul{
+    margin-left: 0;
+}
+.yith-woocommerce-ajax-product-filter.with-checkbox ul li a:before{
+    content: '';
+    display: inline-block;
+    background-image: url("../images/checkbox_sprite.png");
+    background-repeat: no-repeat;
+    background-position: top center;
+    width: 11px;
+    height: 11px;
+    margin-right: 5px;
+}
+
+.yith-woocommerce-ajax-product-filter.yith-wcan-sort-by.with-checkbox ul li a:before{
+    background-image: url("../images/radio_sprite.png");
+}
+
+.yith-woocommerce-ajax-product-filter.with-checkbox ul li a.active:before,
+.yith-woocommerce-ajax-product-filter.with-checkbox ul li a.chosen:before,
+.yith-woocommerce-ajax-product-filter.with-checkbox ul li.active a:before,
+.yith-woocommerce-ajax-product-filter.with-checkbox ul li.chosen a:before,
+.yith-woocommerce-ajax-product-filter.with-checkbox ul.orderby li a.active:before,
+.yith-woocommerce-ajax-product-filter.with-checkbox ul.orderby li a.chosen:before,
+.yith-woocommerce-ajax-product-filter.with-checkbox ul.orderby li.active a:before,
+.yith-woocommerce-ajax-product-filter.with-checkbox ul.orderby li.chosen a:before{
+    content: '';
+    background-position: bottom center;
+}
+.yith-woocommerce-ajax-product-filter.with-checkbox ul li a:after,
+.yith-woocommerce-ajax-product-filter.with-checkbox ul li a.active:after,
+.yith-woocommerce-ajax-product-filter.with-checkbox ul li a.chosen:after,
+.yith-woocommerce-ajax-product-filter.with-checkbox ul li.active a:after,
+.yith-woocommerce-ajax-product-filter.with-checkbox ul li.chosen a:after{
+    content: '';
+    display: none;
+}
+
+/*-------------------------------
+    SEE ALL CATEGORIES AND TAGS
+--------------------------------*/
+
+.widget .yith-wcan-show-all-categories,
+.widget .yith-wcan-show-all-tags {
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+.widget .yith-wcan-show-all-categories a,
+.widget .yith-wcan-show-all-tags a{
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.widget .yith-wcan-show-all-categories a:before,
+.widget .yith-wcan-show-all-tags a:before{
+    content: "<";
+    margin-right: 5px;
+    font-weight: bold;
+    font-size: 12px;
+}

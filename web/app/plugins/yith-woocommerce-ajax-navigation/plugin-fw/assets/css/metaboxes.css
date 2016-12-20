@@ -176,6 +176,40 @@
 /* on off */
 .the-metabox .rm_onoff span.onoff { float:left; margin-right:5px; margin-left:-4px; /* image fix */ }
 
+/* onoff */
+.rm_onoff input {
+    display: none;
+}
+
+.rm_onoff input + span {
+    cursor: pointer;
+    text-indent: -9999px;
+    display: block;
+    width: 85px;
+    height: 37px;
+    background: transparent url(../images/off.png);
+}
+
+.rm_onoff input:checked + span {
+    background: transparent url(../images/on.png);
+}
+
+.rm_onoff input.onoffchecked + span {
+    background: transparent url(../images/on.png);
+}
+
+.messages-panel.updated {
+    margin: 10px 0px 10px !important;
+    max-width: 1200px;
+    border-radius: 5px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.ui-widget-overlay { background-image: none !important; }
+
+
+
 /* select */
 .the-metabox .select_wrapper { width:341px; background-color:#fff; }
 .the-metabox .select_wrapper select { width:100%; }
@@ -237,6 +271,27 @@
 .chosen .select_wrapper .chosen-container .chosen-drop .chosen-search input{
     width: 100%!important;
 }
+.select_wrapper span {
+    height: 26px;
+    line-height: 26px;
+    padding-left: 6px;
+    position: absolute;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.the-metabox .select_wrapper select {
+    cursor: pointer;
+    height: 28px;
+    margin: 0;
+    opacity: 0;
+    padding: 0;
+    position: relative;
+    width: inherit;
+    z-index: 4;
+    background-color: #FAFAFA;
+}
+
 
 /* typography */
 .the-metabox.typography .select_wrapper.font-family { width:200px; }

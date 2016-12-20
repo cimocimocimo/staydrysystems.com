@@ -88,22 +88,25 @@ if ( ! class_exists( 'YIT_Plugin_SubPanel' ) ) {
          * @since    1.0
          * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
          */
-          public function add_setting_page() {
+        public function add_setting_page() {
+            global $admin_page_hooks;
+            $logo = YIT_CORE_PLUGIN_URL . '/assets/images/yithemes-icon.png';
 
-                $logo = YIT_CORE_PLUGIN_URL . '/assets/images/yithemes-icon.png';
+            $admin_logo = function_exists( 'yit_get_option' ) ? yit_get_option( 'admin-logo-menu' ) : '';
 
-                $admin_logo = function_exists( 'yit_get_option' ) ? yit_get_option( 'admin-logo-menu' ) : '';
+            if ( isset( $admin_logo ) && !empty( $admin_logo ) && $admin_logo != '' && $admin_logo ) {
+                $logo = $admin_logo;
+            }
 
-                if ( isset( $admin_logo ) && ! empty( $admin_logo ) && $admin_logo != '' && $admin_logo) {
-                    $logo = $admin_logo;
-                }
+            if( ! isset( $admin_page_hooks['yit_plugin_panel'] ) ) {
                 $position = apply_filters( 'yit_plugins_menu_item_position', '62.32' );
-                add_menu_page( 'yit_plugin_panel', __( 'YIT Plugins', 'yith-plugin-fw' ), 'nosuchcapability', 'yit_plugin_panel', NULL, $logo, $position );
+                add_menu_page( 'yit_plugin_panel', 'YITH Plugins', 'nosuchcapability', 'yit_plugin_panel', NULL, $logo, $position );
+            }
 
-                add_submenu_page( 'yit_plugin_panel', $this->settings['label'], $this->settings['label'], 'manage_options', $this->settings['page'], array( $this, 'yit_panel' ) );
-                remove_submenu_page( 'yit_plugin_panel', 'yit_plugin_panel' );
+            add_submenu_page( 'yit_plugin_panel', $this->settings['label'], $this->settings['label'], 'manage_options', $this->settings['page'], array( $this, 'yit_panel' ) );
+            remove_submenu_page( 'yit_plugin_panel', 'yit_plugin_panel' );
 
-          }
+        }
 
         /**
          * Show a tabbed panel to setting page

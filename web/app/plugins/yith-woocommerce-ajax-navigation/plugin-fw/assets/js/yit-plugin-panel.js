@@ -65,7 +65,7 @@
     $('.plugin-option .chosen .select_wrapper select').chosen();
 
     // on-off
-    $('.plugin-option .on_off_container span').on('click', function () {
+    $('.plugin-option .onoff_container span').on('click', function () {
         var input   = $(this).prev('input');
         var checked = input.prop('checked');
 
@@ -78,6 +78,17 @@
         input.change();
     });
 
+    //colorpicker
+    $('.plugin-option .panel-colorpicker').wpColorPicker({
+        onInit: function(){ },
+        change: function(event, ui){
+        },
+        clear: function(){
+            var input = $(this);
+            input.val(input.data('default-color'));
+            input.change();
+        }
+    });
 
     //slider
     $('.plugin-option .slider_container .ui-slider-horizontal').each(function () {
@@ -177,6 +188,16 @@
             //Open the uploader dialog
             custom_uploader.open();
         });
+
+        $( document).on( 'click', '.plugin-option .upload_button_reset', function(e){
+            var t   = $(this),
+                id = t.attr('id'),
+                input_id = t.attr('id').replace(/-button_reset$/, ''),
+                default_value = $('#' + id).data('default');
+
+            $("#" + input_id).val( default_value );
+            $('.plugin-option .upload_img_url').trigger('change');
+        } );
     }
 
     $('.plugin-option .add_media').on('click', function () {

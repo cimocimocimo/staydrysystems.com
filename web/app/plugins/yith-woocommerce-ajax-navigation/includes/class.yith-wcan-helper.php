@@ -26,9 +26,9 @@ if ( ! class_exists( 'YITH_WCAN_Helper' ) ) {
          * @access public
          */
         public static function attribute_taxonomies() {
-            global $woocommerce;
+            $_woocommerce = WC();
 
-            if ( ! isset( $woocommerce ) ) {
+            if ( ! isset( $_woocommerce ) ) {
                 return array();
             }
 
@@ -37,7 +37,7 @@ if ( ! class_exists( 'YITH_WCAN_Helper' ) ) {
                 $attribute_taxonomies = wc_get_attribute_taxonomies();
             }
             else {
-                $attribute_taxonomies = $woocommerce->get_attribute_taxonomies();
+                $attribute_taxonomies = WC()->get_attribute_taxonomies();
             }
 
             if ( empty( $attribute_taxonomies ) ) {
@@ -50,7 +50,7 @@ if ( ! class_exists( 'YITH_WCAN_Helper' ) ) {
                     $taxonomy = wc_attribute_taxonomy_name( $attribute->attribute_name );
                 }
                 else {
-                    $taxonomy = $woocommerce->attribute_taxonomy_name( $attribute->attribute_name );
+                    $taxonomy = WC()->attribute_taxonomy_name( $attribute->attribute_name );
                 }
 
 

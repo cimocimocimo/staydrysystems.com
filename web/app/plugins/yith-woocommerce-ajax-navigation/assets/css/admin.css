@@ -75,6 +75,10 @@ label.yith-wcan-reset-table{
     width: 270px;
 }
 
+.yit-plugins_page_yith_wcan_panel .plugin-option .yit-options .option, .plugin-option .yit_options .option.yit-upload {
+    width: 350px;
+}
+
 .yit-plugins_page_yith_wcan_panel .plugin-option .yit-options .option, .plugin-option .yit_options.on_off_container .option {
     width: 100px;
 }
@@ -88,7 +92,8 @@ label.yith-wcan-reset-table{
 }
 
 div#yit_wcan_options_yith_wcan_dropdown_style-container .select_wrapper,
-div#yit_wcan_options_yith_wcan_tag_query_option-container .select_wrapper {
+div#yit_wcan_options_yith_wcan_tag_query_option-container .select_wrapper,
+div#yit_wcan_options_yith_wcan_scroll_top_mode-container .select_wrapper {
   width: 220px;
 }
 
@@ -185,8 +190,16 @@ input#yit_wcan_options_yith_wcan_ajax_shop_pagination,
 input#yit_wcan_options_yith_wcan_ajax_shop_container,
 input#yit_wcan_options_yith_wcan_ajax_shop_result_container,
 input#yit_wcan_options_yith_wcan_ajax_widget_title_class,
+input#yit_wcan_options_yith_wcan_ajax_scroll_top_class,
+input#yit_wcan_options_yith_wcan_ajax_shop_pagination_anchor_class,
+input#yit_wcan_options_yith_wcan_enable_see_all_categories_link_text,
 input#yit_wcan_options_yith_wcan_ajax_widget_title_tag {
     width: 230px;
+}
+
+#yit_wcan_options_yith_wcan_ajax_shop_terms_order-container .select_wrapper,
+#yit_wcan_options_yith_wcan_ajax_shop_filter_style-container .select_wrapper {
+    width: 235px;
 }
 
 div#yit_wcan_options_yith_wcan_custom_style-container .option {
@@ -203,4 +216,22 @@ div#yit_wcan_options_yith_wcan_seo_value-container .option,
 div#yit_wcan_options_yith_wcan_seo_value-container .option .select_wrapper,
 #yit_wcan_options_yith_wcan_seo_option-container .select_wrapper {
     width: auto;
+}
+
+/* === OLD Theme Panel Fix */
+.yit-plugins_page_yith_wcan_panel .yit_options .description {
+    float: none;
+    display: block;
+    margin-left: 0;
+    width: 100%;
+    clear: both;
+}
+
+.yit-plugins_page_yith_wcan_panel .yit_options input:not(.button):not(.number):not(#export-file):not(#delete-cache):not(#reset-theme-options):not(#delete-custom-sidebars):not(#delete-resized-images):not(#install-sampledata) {
+    margin-bottom: 10px;
+}
+
+.yith-wcan-see-all-taxonomies-text-default,
+.yith-wcan-see-all-taxonomies-text-description {
+    display: block;
 }

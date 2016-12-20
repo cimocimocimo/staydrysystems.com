@@ -65,7 +65,6 @@ if ( ! class_exists( 'YITH_WCAN_Admin' ) ) {
             $this->version = $version;
 
             //Actions
-            add_action( 'init', array( $this, 'init' ) );
             add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles_scripts' ) );
 
             /* Plugin Option Panel */
@@ -81,19 +80,7 @@ if ( ! class_exists( 'YITH_WCAN_Admin' ) ) {
             // YITH WCAN Loaded
             do_action( 'yith_wcan_loaded' );
         }
-
-
-        /**
-         * Init method:
-         *  - default options
-         *
-         * @access public
-         * @since 1.0.0
-         */
-        public function init() {
-        }
-
-
+        
         /**
          * Enqueue admin styles and scripts
          *
@@ -154,12 +141,7 @@ if ( ! class_exists( 'YITH_WCAN_Admin' ) ) {
                 'options-path'     => YITH_WCAN_DIR . '/settings',
                 'plugin-url'       => YITH_WCAN_URL
             );
-
-            /* === Fixed: not updated theme  === */
-            if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
-                require_once( 'plugin-fw/lib/yit-plugin-panel-wc.php' );
-            }
-
+            
             $this->_panel = new YIT_Plugin_Panel( $args );
             $this->_main_panel_option = "yit_{$args['parent']}_options";
 

@@ -3,8 +3,8 @@
 Contributors: yithemes
 Tags: woocommerce ajax product filter download, woocommerce, widget, ajax, ajax filtered nav, ajax navigation, ajax filtered navigation, woocommerce layered navigation, woocommerce layered nav, product filter, product filters, ajax product filter, woocommerce ajax product filter, woocommerce filters, sidebar filter, sidebar ajax filter, ajax price filter, price filter, product sorting, woocommerce filter, taxonomy filter, attribute filter, attributes filter, woocommerce product sort, ajax sort, woocommerce ajax product filter, advanced product filters, ajax product filters, filters, woocommerce ajax product filters, woocommerce product filters, woocommerce product filters, category filter, attribute filters, woocommerce products filter, woocommerce price filter, yit, yith, yithemes
 Requires at least: 4.0
-Tested up to: 4.3.1
-Stable tag: 2.6.0
+Tested up to: 4.7
+Stable tag: 3.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -159,13 +159,166 @@ If you want to see a demonstration version of the premium plugin, you can see it
 
 == Changelog ==
 
-= 2.6.0 =
+= 3.1.0 - Released: 05 December, 2016 =
+
+* Added: Support to WordPress 4.7
+
+= 3.0.12 - Released: 23 November, 2016 =
+
+* Fixed: Url management with query type set to OR
+* Fixed: Close dropdown widget before open another dropdown
+* Fixed: Layout issue with color style
+
+= 3.0.11 - Released: 05 October, 2016=
+
+* Tweak: Removed deprecated taxonomy count WooCommerce transient
+* Fixed: Wrong reset url if filter start from product category page
+
+= 3.0.10 - Released: 29 September, 2016 =
+
+* Fixed: Warning: in_array() expects at least 2 parameters, 1 given with query type set to OR
+* Fixed: Widget dropdown doesn't works on Flatsome Theme
+
+= 3.0.9 - Released: 31 Aug, 2016 =
+
+* Added: Support to Ultimate Member plugin
+* Fixed: Error on activation "the plugin required WooCommerce in order to works"
+* Fixed: Get term issue with old WordPress version
+
+= 3.0.8 - Released: Aug 11, 2016 =
+
+* Added: Support to WordPress 4.6RC2
+* Tweak: Removed deprecated arg to get_terms function
+* Fixed: Empty filter doesn't hide after ajax call
+* Fixed: Max execution time issue and 500 internal server error issue
+
+= 3.0.7 - Released: Jul 29, 2016 =
+
+* Added: yith_wcan_get_list_html_terms hook
+* Fixed: Filter doesn't work with WooCommerce 2.6.x
+
+= 3.0.6 - Released: Jul 21, 2016 =
+
+* Fixed: Reset button doesn't show after click on a filter
+
+= 3.0.5 - Released: Jul 20, 2016 =
+
+* Fixed: style="displya:none"> text appears if the filters are empty
+* Fixed: Argument #1 is not an array in frontend class
+* Fixed: WP_Post object cannot convert to string in frontend class
+* Fixed: Problem with cirillic charachter
+* Fixed: Wrong count in filter widgets
+
+= 3.0.4 - Released: Jul 8, 2016 =
+
+* Fixed: Filters show all attributes in shop and product taxonomy pages
+
+= 3.0.3 - Released: Jul 6, 2016 =
+
+* Fixed: Wrong query object in layered nav query with WooCommerce 2.6.2
+
+= 3.0.2 - Released: Jul 4, 2016 =
+
+* Fixed: Filters disappears in sort count select on Avada theme
+* Fixed: Filter by attributes doesn't works with WooCommerce 2.5
+* Fixed: rtrim waring in untrailingslashit
+* Fixed: Wrong filter on category page with WooCommerce 2.6.2
+
+= 3.0.1 - Released: Jun 14, 2016 =
+
+* Fixed: print empty li tag after update to version 3.0.0
+
+= 3.0.0 - Released: Jun 13, 2016 =
+
+* Added: Support to WooCommece 2.6
+* Tweak: Layered navigation management
+* Tweak: English Typo
+
+= 2.9.2 - Released: May 16, 2016 =
+
+* Fixed: Wrong reset button link in product category page
+
+= 2.9.1 - Released: May 04, 2016 =
+
+* Fixed: $class variable are not defined
+* Fixed: Filter by list-attribute doesn't works in versio 2.9.0
+
+= 2.9.0 - Released: May 02, 2016 =
+
+* Fixed: Filtering issue with YITH WooCommerce Brands Add-on Premium
+* Fixed: HTML5 Validation (attribute name not allowed in ul element)
+* Fixed: z-index not set to -1 when user close dropdown filters with click in page area
+
+
+= 2.8.1 - Released: Mar 10, 2016 =
+
+* Fixed: Dropdown issue with Remy Theme
+* Fixed: $.fn.slider is not a function after click on reset filter
+* Fixed: Reset filter in product category page doesn't works
+* Fixed: Plugin panel option style issue
+
+= 2.8.0 - Released: Mar 1 - 2016 =
+
+* Tweak: Plugin Core Framework
+* Tweak: Term and Filter management
+
+= 2.7.8 - Released: Feb 25 - 2016 =
+
+* Fixed: Issue with filter in category and taxonomy pages
+
+= 2.7.7 - Released: Feb 19 - 2016 =
+
+* Added: Trigger window scroll event after ajax call
+* Fixed: The page scroll down after filter has been applied in mobile
+* Fixed: Duplicated query in Filter by categories
+* Fixed: generated 404 link with in stock/on sale filter
+* Fixed: YITH WooCommerce Product Slider Carousel doesn't work after a filter was applied
+* Fixed: Widget doesn't work with multiple hierarchical terms
+
+= 2.7.6 - Released: Feb 05 - 2016 =
+
+* Added: Suppoort to quantity input in loop
+* Added: yith-wcan-free body class
+* Fixed: Filter button doesn't appear in WooCommerce Price Filter Slider
+
+= 2.7.5 - Released: Jan 27 - 2016 =
+
+* Fixed: Error on plugin activation
+
+= 2.7.4 - Released: Jan 27 - 2016 =
+
+* Added: New event yith-wcan-wrapped was triggered after container wrap
+* Added: Support to WooCommerce 2.5
+* Fixed: Stop activation free version if premium is enabled
+
+= 2.7.3 - Released: Jan 12 - 2016 =
+
+* Updated: Plugin core framework
+
+= 2.7.2 - Released: Jan 07 - 2015 =
+
+* Added: Support to WooCommerce 2.5-RC1
+* Fixed: Reset Filter in category page
+* Fixed: Filter doesn't work correctly in sub-categories
+
+= 2.7.1 - Released: Dec 23 - 2015 =
+
+* Fixed: The plugin shows empty filters in product category page
+* Fixed: Reset filter doesn't works in product category page
+* Fixed: WooCommerce price slider doesn't set to default value after filter reset
+
+= 2.7.0 - Released: Dec 10 - 2015 =
+
+* Fixed: Click on row to filter in dropdown style
+* Removed: var_dump() in product filter widget
+
+= 2.6.0 - Released: Nov 02 - 2015 =
 
 * Added: yith_wcan_show_widget hook to manage the widgets display condition
 * Added: yith_wcan_is_search hook to disable the widgets in search page
 * Fixed: Disable widgets in search page
 
-= 2.5.0 =
+= 2.5.0 - Released: Oct 21 - 2015 =
 
 * Added: yith_wcan_untrailingslashit hook for disable untrailingslashit function in filter link
 * Tweak: Performance improved with new plugin core 2.0
@@ -174,44 +327,44 @@ If you want to see a demonstration version of the premium plugin, you can see it
 * Fixed: Filter widget don't show in product attribute page
 * Fixed: Issue with WPML and Visual Composer plugins in admin
 
-= 2.4.0 =
+= 2.4.0 - Released: Sept, 25 - 2015 =
 
 * Tweak: New wordpress translation text domain added
 * Added: Language files called yith-woocommerce-ajax-navigation
 * Removed: All language files called yith_wc_ajxnav 
 
-= 2.3.1 =
+= 2.3.1 - Released: Sept, 17 - 2015 =
 
 * Added: Support to YITH Infinite Scrolling plugin
 * Fixed: No pagination container issue after filter applied
 * Fixed: js error yit_wcan not defined
 * Fixed: issue with blank label
 
-= 2.3.0 =
+= 2.3.0 - Released: Sept, 11 - 2015 =
 
 * Added: Custom Style Section
 * Added: New frontend options for script configuration
 * Updated: Plugin Core Framework
 * Updated: Languages file
 
-= 2.2.0 =
+= 2.2.0 - Released: Aug, 25 - 2015 =
 
 * Added: Support to WordPress 4.3
 * Updated: Language files
 * Fixed: Color lost after change widget style with WordPress 4.3
 * Fixed: Warning when switch from color to label style
 
-= 2.1.2 =
+= 2.1.2 - Released: Aug, 11 - 2015 =
 
 * Added: Support to WooCommerce 2.4
 * Updated: Plugin Framework
 * Fixed: Tag list and child term support 
 
-= 2.1.1 =
+= 2.1.1 - Released: July, 30 - 2015 =
 
 * Tweak: Support to PAAMAYIM NEKUDOTAYIM in PHP Version < 5.3
 
-= 2.1.0 =
+= 2.1.0 - Released: July, 29 - 2015 =
 
 * Added: Frontend classes option panel
 * Added: yith_wcan_ajax_frontend_classes filter
@@ -226,26 +379,25 @@ If you want to see a demonstration version of the premium plugin, you can see it
 * Fixed: Prevent double instance in singleton class
 * Fixed: The widget doesn't work with WPML with Label and Color style
 
-= 2.0.4 =
+= 2.0.4 - Released: July, 13 - 2015 =
 
 * Added: Filter 'yith_wcan_product_taxonomy_type' to widget product tax type
 * Tweak: YITH WooCommerce Brands Add-on support in taxonomy page
 
-
-= 2.0.3 =
+= 2.0.3 - Released: July, 03 - 2015 =
 
 * Added: Support to Sortable attribute
 * Fixed: Color lost after change widget style
 
-= 2.0.2 =
+= 2.0.2 - Released: Jun, 25 - 2015 =
 
 * Fixed: Empty filters appear after update to 2.0.0
 
-= 2.0.1 =
+= 2.0.1 - Released: Jun, 24 - 2015 =
 
 * Fixed: Unable to active plugin
 
-= 2.0.0 =
+= 2.0.0 - Released: Jun, 24 - 2015 =
 
 * Tweak: Plugin core framework
 * Updated: Languages file
@@ -254,59 +406,59 @@ If you want to see a demonstration version of the premium plugin, you can see it
 * Fixed: Filter doesn't work if shop page is on front
 * Removed: old default.po catalog language file
 
-= 1.4.1 =
+= 1.4.1 - Released: Oct, 08 - 2014 =
 
 * Fixed: Wrong attribute show with WooCommerce 2.2
 
-= 1.4.0 =
+= 1.4.0 - Released: Set, 16 - 2014 =
 
 * Added: Support to WC 2.2
 * Updated: Plugin Core Framework
 * Fixed: Widget error on empty title
 * Fixed: Ajax load on widget type switching
 
-= 1.3.2 =
+= 1.3.2 - Released: Jun, 05 - 2014 =
 
 * Fixed: Wrong enqueue of the main css file
 * Added: Filter yith_wcan_exclude_terms
 
-= 1.3.1 =
+= 1.3.1 - Released: Mar, 03 - 2014 =
 
 * Added: Attribute order (All, Hieralchical or Only Parent style)
 * Fixed: Dropdown Style on Firefox
 * Fixed: Blank box on attribute without label (Label Style)
 * Fixed: Blank box on attribute without color (Color Stle)
 
-= 1.3.0 =
+= 1.3.0 - Released: Feb, 12 - 2014 =
 
 * Added: Support to WooCommerce 2.1.X
 * Fixed: One filter bug on sidebar
 
-= 1.2.1 =
+= 1.2.1 - Released: Jan, 29 - 2014 =
 
 * Fixed: Width of select dropdown too large
 
-= 1.2.0 =
+= 1.2.0 - Released: Jan, 10 - 2014 =
 
 * Added: Dropdown style
 * Added: Support to Wordpress 3.8
 * Fixed: Error with non-latin languages
 * Fixed: Improved WPML compatibility
 
-= 1.1.2 =
+= 1.1.2 - Released: Oct, 14 - 2013 =
 
 * Added: Title to the color filters
 * Removed: Limit of 3 characters in the label text input
 
-= 1.1.1 =
+= 1.1.1 - Released: Jul, 31 - 2014 =
 
 * Minor bugs fixes
 
-= 1.1.0 =
+= 1.1.0 - Released: Jul, 19 - 2013  =
 
 * Added new widget YITH WooCommerce Ajax Reset Navigation
 
-= 1.0.0 =
+= 1.0.0 - Released: Jun, 24 - 2013  =
 
 * Initial release
 

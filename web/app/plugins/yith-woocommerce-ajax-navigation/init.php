@@ -3,10 +3,10 @@
  * Plugin Name: YITH WooCommerce Ajax Product Filter
  * Plugin URI: http://yithemes.com/
  * Description: YITH WooCommerce Ajax Product Filter offers the perfect way to filter all the products of your shop.
- * Version: 2.6.0
- * Author: yithemes
+ * Version: 3.1.0
+ * Author: YITHEMES
  * Author URI: http://yithemes.com/
- * Text Domain: yith_wc_ajxnav
+ * Text Domain: yith-woocommerce-ajax-navigation
  * Domain Path: /languages/
  *
  * @author  Your Inspiration Themes
@@ -48,24 +48,23 @@ if( ! function_exists( 'install_premium_woocommerce_admin_notice' ) ) {
         <?php
     }
 }
-
-//Check if WooCommerce is active
-if ( ! function_exists( 'WC' ) ) {
-    add_action( 'admin_notices', 'install_premium_woocommerce_admin_notice' );
-    return;
+if( ! function_exists( 'yith_deactive_free_wcan_version' ) ) {
+    function yith_deactive_free_wcan_version() {
+        ?>
+        <div class="error">
+            <p><?php _e( 'You can\'t activate the free version of YITH WooCommerce Ajax Product Filter while you are using the premium one.', 'yith-wocc' ); ?></p>
+        </div>
+        <?php
+    }
 }
 
 load_plugin_textdomain( 'yith-woocommerce-ajax-navigation', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
-//Stop activation if the premium version of the same plugin is still active
-if ( defined( 'YITH_WCAN_VERSION' ) ) {
-    return;
-}
 
 ! defined( 'YITH_WCAN' )            && define( 'YITH_WCAN', true );
 ! defined( 'YITH_WCAN_URL' )        && define( 'YITH_WCAN_URL', plugin_dir_url( __FILE__ ) );
 ! defined( 'YITH_WCAN_DIR' )        && define( 'YITH_WCAN_DIR', plugin_dir_path( __FILE__ ) );
-! defined( 'YITH_WCAN_VERSION' )    && define( 'YITH_WCAN_VERSION', '2.6.0' );
+! defined( 'YITH_WCAN_VERSION' )    && define( 'YITH_WCAN_VERSION', '3.1.0' );
 ! defined( 'YITH_WCAN_FREE_INIT')   && define( 'YITH_WCAN_FREE_INIT', plugin_basename( __FILE__ ) );
 ! defined( 'YITH_WCAN_FILE' )       && define( 'YITH_WCAN_FILE', __FILE__ );
 
@@ -101,10 +100,26 @@ if ( ! function_exists( 'YITH_WCAN' ) ) {
     }
 }
 
-/**
- * Instance main plugin class
- */
-global $yith_wcan;
-$yith_wcan = YITH_WCAN();
+if( ! function_exists( 'yith_wcan_free_install' ) ){
+    function yith_wcan_free_install() {
+
+        if ( ! function_exists( 'WC' ) ) {
+            add_action( 'admin_notices', 'install_premium_woocommerce_admin_notice' );
+        }
+        elseif ( defined( 'YITH_WCAN_PREMIUM' ) ) {
+            add_action( 'admin_notices', 'yith_deactive_free_wcan_version' );
+            deactivate_plugins( plugin_basename( __FILE__ ) );
+        }
+        else {
+            /**
+             * Instance main plugin class
+             */
+            global $yith_wcan;
+            $yith_wcan = YITH_WCAN();
+        }
+    }
+}
+
+add_action( 'plugins_loaded', 'yith_wcan_free_install', 11 );
 
 register_activation_hook( YITH_WCAN_FILE, 'yith_plugin_registration_hook' );

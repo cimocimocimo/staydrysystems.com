@@ -26,13 +26,14 @@ jQuery(function ($) {
 
     $(document).on('change', '.yith_wcan_type, .yith_wcan_attributes', function (e) {
         var t = this,
-            container   = $(this).parents('.widget-content').find('.yith_wcan_placeholder').html(''),
-            spinner     = container.next('.spinner').show(),
-            display     = $(this).parents('.widget-content').find('#yit-wcan-display'),
-            style       = $(this).parents('.widget-content').find('#yit-wcan-style'),
-            show_count  = $(this).parents('.widget-content').find('#yit-wcan-show-count'),
-            attributes  = $(this).parents('.widget-content').find('.yith-wcan-attribute-list'),
-            tag_list    = $(this).parents('.widget-content').find('.yit-wcan-widget-tag-list');
+            container       = $(this).parents('.widget-content').find('.yith_wcan_placeholder').html(''),
+            spinner         = container.next('.spinner').show(),
+            display         = $(this).parents('.widget-content').find('#yit-wcan-display'),
+            style           = $(this).parents('.widget-content').find('#yit-wcan-style'),
+            show_count      = $(this).parents('.widget-content').find('#yit-wcan-show-count'),
+            attributes      = $(this).parents('.widget-content').find('.yith-wcan-attribute-list'),
+            tag_list        = $(this).parents('.widget-content').find('.yit-wcan-widget-tag-list'),
+            see_all_text    = $(this).parents('.widget-content').find('.yit-wcan-see-all-taxonomies-text');
 
         var data = {
             action   : 'yith_wcan_select_type',
@@ -62,7 +63,7 @@ jQuery(function ($) {
             show_count.hide();
         }
 
-        if( data.value == 'tags' || data.value == 'brands' ){
+        if( data.value == 'tags' || data.value == 'brands' || data.value == 'categories' ){
             attributes.hide();
         } else {
             attributes.show();
@@ -72,6 +73,12 @@ jQuery(function ($) {
             tag_list.show();
         } else {
             tag_list.hide();
+        }
+
+        if( data.value == 'tags' || data.value == 'categories' ){
+            see_all_text.show();
+        } else {
+            see_all_text.hide();
         }
 
        $.post(ajaxurl, data, function (response) {
@@ -108,11 +115,11 @@ jQuery(function ($) {
 
     select_all.on('click', function(e){
         e.preventDefault();
-        $(this).parents( '.yith-wcan-select-option').next('.yith_wcan_select_tag').find('.yith_wcan_tag_list_checkbox').attr( 'checked', true );
+        $(this).parents( '.yith-wcan-select-option').next('.yith_wcan_select_tag_wrapper').find('.yith_wcan_tag_list_checkbox').attr( 'checked', true );
     });
 
     unselect_all.on('click', function(e){
         e.preventDefault();
-        $(this).parents( '.yith-wcan-select-option').next('.yith_wcan_select_tag').find('.yith_wcan_tag_list_checkbox').attr( 'checked', false );
+        $(this).parents( '.yith-wcan-select-option').next('.yith_wcan_select_tag_wrapper').find('.yith_wcan_tag_list_checkbox').attr( 'checked', false );
     });
 });
