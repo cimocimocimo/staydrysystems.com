@@ -9,11 +9,19 @@ add_action( 'admin_menu', 'wr2x_admin_menu_dashboard' );
  */
 
 function wr2x_admin_menu_dashboard () {
+	global $wr2x_admin;
 	$refresh = isset ( $_GET[ 'refresh' ] ) ? $_GET[ 'refresh' ] : 0;
 	$clearlogs = isset ( $_GET[ 'clearlogs' ] ) ? $_GET[ 'clearlogs' ] : 0;
 	$ignore = isset ( $_GET[ 'ignore' ] ) ? $_GET[ 'ignore' ] : false;
-	if ( $ignore )
-		wr2x_add_ignore( $ignore );
+	if ( $ignore ) {
+		if ( !$wr2x_admin->is_pro() ) {
+			echo "<div class='error' style='margin-top: 20px;'><p>";
+			_e( "Ignore is a Pro feature.", 'wp-retina-2x' );
+			echo "</p></div>";
+		}
+		else
+			wr2x_add_ignore( $ignore );
+	}
 	if ( $refresh ) {
 		wr2x_calculate_issues();
 	}
@@ -29,6 +37,8 @@ function wr2x_admin_menu_dashboard () {
 }
 
 function wpr2x_wp_retina_2x() {
+	global $wr2x_admin;
+	$hide_ads = get_option( 'meowapps_hide_ads', false );
 	$view = isset ( $_GET[ 'view' ] ) ? $_GET[ 'view' ] : 'issues';
 	$paged = isset ( $_GET[ 'paged' ] ) ? $_GET[ 'paged' ] : 1;
 	$s = isset( $_GET[ 's' ] ) && !empty( $_GET[ 's' ] ) ? sanitize_text_field( $_GET[ 's' ] ) : null;
@@ -37,14 +47,11 @@ function wpr2x_wp_retina_2x() {
 	$issues = wr2x_get_issues();
 	$ignored = wr2x_get_ignores();
 
-	?>
-	<div class='wrap'>
-	<?php jordy_meow_donation(true); ?>
-	<h2>Retina <?php by_jordy_meow(); ?></h2>
+	echo '<div class="wrap">';
+  echo $wr2x_admin->display_title( "WP Retina 2x" );
+	echo '<p></p>';
 
-	<?php
-
-	if ( $view == 'issues' ) {
+	if ( $wr2x_admin->is_pro() && $view == 'issues' ) {
 		global $wpdb;
 		$totalcount = $wpdb->get_var( $wpdb->prepare( "
 			SELECT COUNT(*)
@@ -68,7 +75,7 @@ function wpr2x_wp_retina_2x() {
 			)
 		);
 	}
-	else if ( $view == 'ignored' ) {
+	else if ( $wr2x_admin->is_pro() && $view == 'ignored' ) {
 		global $wpdb;
 		$totalcount = $wpdb->get_var( $wpdb->prepare( "
 			SELECT COUNT(*)
@@ -167,7 +174,7 @@ function wpr2x_wp_retina_2x() {
 		}
 
 		$active_sizes = wr2x_get_active_image_sizes();
-		$full_size_needed = wr2x_getoption( "full_size", "wr2x_basics", false );
+		$full_size_needed = get_option( "wr2x_full_size" );
 
 		$max_width = 0;
 		$max_height = 0;
@@ -182,14 +189,14 @@ function wpr2x_wp_retina_2x() {
 		$max_width = $max_width * 2;
 		$max_height = $max_height * 2;
 
-		$upload_max_size = ini_get( 'upload_max_filesize' );
+		$upload_max_size = wr2x_get_max_filesize();
 	?>
 
 	<p>
 		<?php printf( __( 'The full-size images should have a resolution of <b>%d×%d</b> at least for the plugin to be able generate the <b>%d retina images</b> required by your website.', 'wp-retina-2x' ), $max_width, $max_height, count( $active_sizes ) ); ?>
 		<?php if ( $full_size_needed ) printf( __(  "You <b>also need</b> to upload a retina image for the Full-Size image (might be <b>%d×%d</b>).", 'wp-retina-2x' ), $max_width * 2, $max_height * 2 ); ?>
-		<?php _e("You can upload or replace the images by drag & drop.", 'wp-retina-2x'); ?>
-		<?php printf( __( "Your PHP configuration allows uploads of <b>%dMB</b> maximum.", 'wp-retina-2x'), $upload_max_size ); ?>
+		<?php _e("You can upload or replace the images by drag & drop.", 'wp-retina-2x' ); ?>
+		<?php printf( __( "Your PHP configuration allows uploads of <b>%dMB</b> maximum.", 'wp-retina-2x'), $upload_max_size / 1000000 ); ?>
 
 		<?php
 			if ( file_exists( plugin_dir_path( __FILE__ ) . '/wp-retina-2x.log' ) ) {
@@ -197,6 +204,17 @@ function wpr2x_wp_retina_2x() {
 			}
 		?>
 	</p>
+
+<!--
+	 It is activated through a serial key that you can buy here: <a href='http://apps.meow.fr/wp-retina-2x/'>Meow Apps</a>. -->
+
+	<?php
+	if ( !$wr2x_admin->is_pro() && !$hide_ads ) {
+		echo '<div class="updated"><p>';
+		echo __( '<b>Only Pro users have access to the features of this dashboard.</b> As a standard user, the dashboard allow you to Bulk Generate, Bulk Delete and access the Retina Logs. If you wish to stay a standard user and never see this dashboard aver again, you can hide it in the settings.<br /><br />The Pro version of the plugin allows you to <b>replace directly an image already uploaded in the Media Library</b> by a simple drag & drop, upload a <b>retina image for a full-size image</b>, use <b>lazy-loading</b> to load your images (for better performance) and, more importantly, <b>supports the developer</b> :) The serial key for the Pro has to be inserted in your Settings > Retina > Pro tab. Thank you :)<br /><br /><a class="button-primary" href="http://meowapps.com/wp-retina-2x/" target="_blank">Get the serial key for the Pro</a>', 'wp-retina-2x' );
+		echo '</p></div>';
+	}
+	?>
 
 	<div id='wr2x-pages'>
 	<?php
@@ -212,8 +230,20 @@ function wpr2x_wp_retina_2x() {
 
 	<ul class="subsubsub">
 		<li class="all"><a <?php if ( $view == 'all' ) echo "class='current'"; ?> href='?page=wp-retina-2x&s=<?php echo $s; ?>&view=all'><?php _e( "All", 'wp-retina-2x' ); ?></a><span class="count">(<?php echo $totalcount; ?>)</span></li> |
+
+		<?php if ( $wr2x_admin->is_pro() ): ?>
+
 		<li class="all"><a <?php if ( $view == 'issues' ) echo "class='current'"; ?> href='?page=wp-retina-2x&s=<?php echo $s; ?>&view=issues'><?php _e( "Issues", 'wp-retina-2x' ); ?></a><span class="count">(<?php echo $issues_count; ?>)</span></li> |
 		<li class="all"><a <?php if ( $view == 'ignored' ) echo "class='current'"; ?> href='?page=wp-retina-2x&s=<?php echo $s; ?>&view=ignored'><?php _e( "Ignored", 'wp-retina-2x' ); ?></a><span class="count">(<?php echo count( $ignored ); ?>)</span></li>
+
+		<?php else: ?>
+
+		<li class="all"><span><?php _e( "Issues", 'wp-retina-2x' ); ?></span> <span class="count">(<?php echo $issues_count; ?>)</span></li> |
+		<li class="all"><span><?php _e( "Ignored", 'wp-retina-2x' ); ?></span> <span class="count">(<?php echo count( $ignored ); ?>)</span></li>
+
+		<?php endif; ?>
+
+
 	</ul>
 	<table class='wp-list-table widefat fixed media wr2x-table'>
 		<thead><tr>
@@ -258,11 +288,10 @@ function wpr2x_wp_retina_2x() {
 				echo wpr2x_html_get_basic_retina_info( $post, $info );
 				echo "</td>";
 
-				// Full-Size Replace
-				echo "<td class='wr2x-fullsize-replace'><div class='wr2x-dragdrop'></div>";
-				echo "</td>";
-
-				if ( wr2x_is_pro() ) {
+				if ( $wr2x_admin->is_pro() ) {
+					// Full-Size Replace
+					echo "<td class='wr2x-fullsize-replace'><div class='wr2x-dragdrop'></div>";
+					echo "</td>";
 					// Full-Size Retina
 					echo '<td id="wr2x-info-full-' . $post->ID . '" class="wr2x-image wr2x-info-full">';
 					echo wpr2x_html_get_basic_retina_info_full( $post->ID, $info );
@@ -272,10 +301,8 @@ function wpr2x_wp_retina_2x() {
 					echo "<div class='wr2x-dragdrop'></div>";
 					echo "</td>";
 				}
-				else {
-					echo "<td colspan='2' style='text-align: center;'><small><br /><a target='_blank' href='http://apps.meow.fr/wp-retina-2x/'>PRO VERSION ONLY</a></small></td>";
-				}
-
+				else
+					echo "<td colspan='3' style='text-align: center; background: #F9F9F9;'><small><br />PRO VERSION ONLY</small></td>";
 				echo "</tr>";
 			}
 			?>
@@ -283,20 +310,6 @@ function wpr2x_wp_retina_2x() {
 	</table>
 	</div>
 
-	<div id="wr2x-modal-info-backdrop" style="display: none;">
-	</div>
-
-	<div id="wr2x-modal-info" style="display: none;" tabindex="1">
-		<div class="close">X</div>
-		<h2 style="margin-top: 0px;">Retina Details</h2>
-		<div class="loading">
-			<img src="<?php echo plugin_dir_url( __FILE__ ); ?>img/loading.gif" />
-		</div>
-		<div class="content">
-		</div>
-	</div>
-
 	<?php
-	jordy_meow_footer();
 }
 ?>
