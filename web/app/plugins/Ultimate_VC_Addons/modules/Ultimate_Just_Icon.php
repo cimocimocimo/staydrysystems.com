@@ -3,13 +3,13 @@
 * Add-on Name: Just Icon for Visual Composer
 * Add-on URI: http://dev.brainstormforce.com
 */
-if(!class_exists('AIO_Just_Icon')) 
+if(!class_exists('AIO_Just_Icon'))
 {
 	class AIO_Just_Icon
 	{
 		function __construct()
 		{
-			add_action('admin_init',array($this,'just_icon_init'));
+			add_action('init',array($this,'just_icon_init'));
 			add_shortcode('just_icon',array($this,'just_icon_shortcode'));
 		}
 		function just_icon_init()
@@ -18,159 +18,159 @@ if(!class_exists('AIO_Just_Icon'))
 			{
 				vc_map(
 					array(
-					   "name" => __("Just Icon"),
+					   "name" => __("Just Icon","ultimate_vc"),
 					   "base" => "just_icon",
 					   "class" => "vc_simple_icon",
 					   "icon" => "vc_just_icon",
-					   "category" => __("Ultimate VC Addons","smile"),
-					   "description" => __("Add a simple icon and give some custom style.","smile"),
-					   "params" => array(							
+					   "category" => "Ultimate VC Addons",
+					   "description" => __("Add a simple icon and give some custom style.","ultimate_vc"),
+					   "params" => array(
 							// Play with icon selector
 							array(
 								"type" => "dropdown",
 								"class" => "",
-								"heading" => __("Icon to display:", "smile"),
+								"heading" => __("Icon to display:", "ultimate_vc"),
 								"param_name" => "icon_type",
 								"value" => array(
-									"Font Icon Manager" => "selector",
-									"Custom Image Icon" => "custom",
+									__("Font Icon Manager","ultimate_vc") => "selector",
+									__("Custom Image Icon","ultimate_vc") => "custom",
 								),
-								"description" => __("Use <a href='admin.php?page=font-icon-Manager' target='_blank'>existing font icon</a> or upload a custom image.", "smile")
+								"description" => __("Use existing font icon or upload a custom image.", "ultimate_vc")
 							),
 							array(
 								"type" => "icon_manager",
 								"class" => "",
-								"heading" => __("Select Icon ","smile"),
+								"heading" => __("Select Icon ","ultimate_vc"),
 								"param_name" => "icon",
 								"value" => "",
-								"description" => __("Click and select icon of your choice. If you can't find the one that suits for your purpose, you can <a href='admin.php?page=font-icon-Manager' target='_blank'>add new here</a>.", "flip-box"),
+								"description" => __("Click and select icon of your choice. If you can't find the one that suits for your purpose","ultimate_vc").", ".__("you can","ultimate_vc")." <a href='admin.php?page=bsf-font-icon-manager' target='_blank'>".__("add new here","ultimate_vc")."</a>.",
 								"dependency" => Array("element" => "icon_type","value" => array("selector")),
 							),
 							array(
-								"type" => "attach_image",
+								"type" => "ult_img_single",
 								"class" => "",
-								"heading" => __("Upload Image Icon:", "smile"),
+								"heading" => __("Upload Image Icon:", "ultimate_vc"),
 								"param_name" => "icon_img",
 								"admin_label" => true,
 								"value" => "",
-								"description" => __("Upload the custom image icon.", "smile"),
+								"description" => __("Upload the custom image icon.", "ultimate_vc"),
 								"dependency" => Array("element" => "icon_type","value" => array("custom")),
 							),
 							array(
 								"type" => "number",
 								"class" => "",
-								"heading" => __("Image Width", "smile"),
+								"heading" => __("Image Width", "ultimate_vc"),
 								"param_name" => "img_width",
 								"value" => 48,
 								"min" => 16,
 								"max" => 512,
 								"suffix" => "px",
-								"description" => __("Provide image width", "smile"),
+								"description" => __("Provide image width", "ultimate_vc"),
 								"dependency" => Array("element" => "icon_type","value" => array("custom")),
 							),
 							array(
 								"type" => "number",
 								"class" => "",
-								"heading" => __("Size of Icon", "smile"),
+								"heading" => __("Size of Icon", "ultimate_vc"),
 								"param_name" => "icon_size",
 								"value" => 32,
 								"min" => 12,
 								"max" => 72,
 								"suffix" => "px",
-								"description" => __("How big would you like it?", "smile"),
+								"description" => __("How big would you like it?", "ultimate_vc"),
 								"dependency" => Array("element" => "icon_type","value" => array("selector")),
 							),
 							array(
 								"type" => "colorpicker",
 								"class" => "",
-								"heading" => __("Color", "smile"),
+								"heading" => __("Color", "ultimate_vc"),
 								"param_name" => "icon_color",
 								"value" => "#333333",
-								"description" => __("Give it a nice paint!", "smile"),
-								"dependency" => Array("element" => "icon_type","value" => array("selector")),						
+								"description" => __("Give it a nice paint!", "ultimate_vc"),
+								"dependency" => Array("element" => "icon_type","value" => array("selector")),
 							),
 							array(
 								"type" => "dropdown",
 								"class" => "",
-								"heading" => __("Icon or Image Style", "smile"),
+								"heading" => __("Icon or Image Style", "ultimate_vc"),
 								"param_name" => "icon_style",
 								"value" => array(
-									"Simple" => "none",
-									"Circle Background" => "circle",
-									"Square Background" => "square",
-									"Design your own" => "advanced",
+									__("Simple","ultimate_vc") => "none",
+									__("Circle Background","ultimate_vc") => "circle",
+									__("Square Background","ultimate_vc") => "square",
+									__("Design your own","ultimate_vc") => "advanced",
 								),
-								"description" => __("We have given three quick preset if you are in a hurry. Otherwise, create your own with various options.", "smile"),
+								"description" => __("We have given three quick preset if you are in a hurry. Otherwise, create your own with various options.", "ultimate_vc"),
 							),
 							array(
 								"type" => "colorpicker",
 								"class" => "",
-								"heading" => __("Background Color", "smile"),
+								"heading" => __("Background Color", "ultimate_vc"),
 								"param_name" => "icon_color_bg",
 								"value" => "#ffffff",
-								"description" => __("Select background color for icon.", "smile"),	
+								"description" => __("Select background color for icon.", "ultimate_vc"),
 								"dependency" => Array("element" => "icon_style", "value" => array("circle","square","advanced")),
 							),
 							array(
 								"type" => "dropdown",
 								"class" => "",
-								"heading" => __("Icon Border Style", "smile"),
+								"heading" => __("Icon Border Style", "ultimate_vc"),
 								"param_name" => "icon_border_style",
 								"value" => array(
-									"None"=> "",
-									"Solid"=> "solid",
-									"Dashed" => "dashed",
-									"Dotted" => "dotted",
-									"Double" => "double",
-									"Inset" => "inset",
-									"Outset" => "outset",
+									__("None","ultimate_vc")=> "",
+									__("Solid","ultimate_vc")=> "solid",
+									__("Dashed","ultimate_vc") => "dashed",
+									__("Dotted","ultimate_vc") => "dotted",
+									__("Double","ultimate_vc") => "double",
+									__("Inset","ultimate_vc") => "inset",
+									__("Outset","ultimate_vc") => "outset",
 								),
-								"description" => __("Select the border style for icon.","smile"),
+								"description" => __("Select the border style for icon.","ultimate_vc"),
 								"dependency" => Array("element" => "icon_style", "value" => array("advanced")),
 							),
 							array(
 								"type" => "colorpicker",
 								"class" => "",
-								"heading" => __("Border Color", "smile"),
+								"heading" => __("Border Color", "ultimate_vc"),
 								"param_name" => "icon_color_border",
 								"value" => "#333333",
-								"description" => __("Select border color for icon.", "smile"),	
+								"description" => __("Select border color for icon.", "ultimate_vc"),
 								"dependency" => Array("element" => "icon_border_style", "not_empty" => true),
 							),
 							array(
 								"type" => "number",
 								"class" => "",
-								"heading" => __("Border Width", "smile"),
+								"heading" => __("Border Width", "ultimate_vc"),
 								"param_name" => "icon_border_size",
 								"value" => 1,
 								"min" => 1,
 								"max" => 10,
 								"suffix" => "px",
-								"description" => __("Thickness of the border.", "smile"),
+								"description" => __("Thickness of the border.", "ultimate_vc"),
 								"dependency" => Array("element" => "icon_border_style", "not_empty" => true),
 							),
 							array(
 								"type" => "number",
 								"class" => "",
-								"heading" => __("Border Radius", "smile"),
+								"heading" => __("Border Radius", "ultimate_vc"),
 								"param_name" => "icon_border_radius",
 								"value" => 500,
 								"min" => 1,
 								"max" => 500,
 								"suffix" => "px",
-								"description" => __("0 pixel value will create a square border. As you increase the value, the shape convert in circle slowly. (e.g 500 pixels).", "smile"),
+								"description" => __("0 pixel value will create a square border. As you increase the value, the shape convert in circle slowly. (e.g 500 pixels).", "ultimate_vc"),
 								"dependency" => Array("element" => "icon_border_style", "not_empty" => true),
 							),
 							array(
 								"type" => "number",
 								"class" => "",
-								"heading" => __("Background Size", "smile"),
+								"heading" => __("Background Size", "ultimate_vc"),
 								"param_name" => "icon_border_spacing",
 								"value" => 50,
 								"min" => 30,
 								"max" => 500,
 								"suffix" => "px",
-								"description" => __("Spacing from center of the icon till the boundary of border / background", "smile"),
+								"description" => __("Spacing from center of the icon till the boundary of border / background", "ultimate_vc"),
 								"dependency" => Array("element" => "icon_border_style", "not_empty" => true),
 							),
 							array(
@@ -179,82 +179,89 @@ if(!class_exists('AIO_Just_Icon'))
 								"heading" => __("Link ","smile"),
 								"param_name" => "icon_link",
 								"value" => "",
-								"description" => __("Add a custom link or select existing page. You can remove existing link as well.","smile")
+								"description" => __("Add a custom link or select existing page. You can remove existing link as well.","ultimate_vc")
 							),
 							array(
 								"type" => "dropdown",
 								"class" => "",
-								"heading" => __("Animation","smile"),
+								"heading" => __("Animation","ultimate_vc"),
 								"param_name" => "icon_animation",
 								"value" => array(
-							 		__("No Animation","smile") => "",
-									__("Swing","smile") => "swing",
-									__("Pulse","smile") => "pulse",
-									__("Fade In","smile") => "fadeIn",
-									__("Fade In Up","smile") => "fadeInUp",
-									__("Fade In Down","smile") => "fadeInDown",
-									__("Fade In Left","smile") => "fadeInLeft",
-									__("Fade In Right","smile") => "fadeInRight",
-									__("Fade In Up Long","smile") => "fadeInUpBig",
-									__("Fade In Down Long","smile") => "fadeInDownBig",
-									__("Fade In Left Long","smile") => "fadeInLeftBig",
-									__("Fade In Right Long","smile") => "fadeInRightBig",
-									__("Slide In Down","smile") => "slideInDown",
-									__("Slide In Left","smile") => "slideInLeft",
-									__("Slide In Left","smile") => "slideInLeft",
-									__("Bounce In","smile") => "bounceIn",
-									__("Bounce In Up","smile") => "bounceInUp",
-									__("Bounce In Down","smile") => "bounceInDown",
-									__("Bounce In Left","smile") => "bounceInLeft",
-									__("Bounce In Right","smile") => "bounceInRight",
-									__("Rotate In","smile") => "rotateIn",
-									__("Light Speed In","smile") => "lightSpeedIn",
-									__("Roll In","smile") => "rollIn",
+							 		__("No Animation","ultimate_vc") => "",
+									__("Swing","ultimate_vc") => "swing",
+									__("Pulse","ultimate_vc") => "pulse",
+									__("Fade In","ultimate_vc") => "fadeIn",
+									__("Fade In Up","ultimate_vc") => "fadeInUp",
+									__("Fade In Down","ultimate_vc") => "fadeInDown",
+									__("Fade In Left","ultimate_vc") => "fadeInLeft",
+									__("Fade In Right","ultimate_vc") => "fadeInRight",
+									__("Fade In Up Long","ultimate_vc") => "fadeInUpBig",
+									__("Fade In Down Long","ultimate_vc") => "fadeInDownBig",
+									__("Fade In Left Long","ultimate_vc") => "fadeInLeftBig",
+									__("Fade In Right Long","ultimate_vc") => "fadeInRightBig",
+									__("Slide In Down","ultimate_vc") => "slideInDown",
+									__("Slide In Left","ultimate_vc") => "slideInLeft",
+									__("Slide In Left","ultimate_vc") => "slideInLeft",
+									__("Bounce In","ultimate_vc") => "bounceIn",
+									__("Bounce In Up","ultimate_vc") => "bounceInUp",
+									__("Bounce In Down","ultimate_vc") => "bounceInDown",
+									__("Bounce In Left","ultimate_vc") => "bounceInLeft",
+									__("Bounce In Right","ultimate_vc") => "bounceInRight",
+									__("Rotate In","ultimate_vc") => "rotateIn",
+									__("Light Speed In","ultimate_vc") => "lightSpeedIn",
+									__("Roll In","ultimate_vc") => "rollIn",
 									),
-								"description" => __("Like CSS3 Animations? We have several options for you!","smile")
+								"description" => __("Like CSS3 Animations? We have several options for you!","ultimate_vc")
 						  	),
 							array(
 								"type" => "dropdown",
 								"class" => "",
-								"heading" => __("Tooltip", "smile"),
+								"heading" => __("Tooltip", "ultimate_vc"),
 								"param_name" => "tooltip_disp",
 								"value" => array(
-									"None"=> "",
-									"Tooltip from Left" => "left",
-									"Tooltip from Right" => "right",
-									"Tooltip from Top" => "top",
-									"Tooltip from Bottom" => "bottom",
+									__("None","ultimate_vc")=> "",
+									__("Tooltip from Left","ultimate_vc") => "left",
+									__("Tooltip from Right","ultimate_vc") => "right",
+									__("Tooltip from Top","ultimate_vc") => "top",
+									__("Tooltip from Bottom","ultimate_vc") => "bottom",
 								),
-								"description" => __("Select the tooltip position","smile"),
-							),							
+								"description" => __("Select the tooltip position","ultimate_vc"),
+							),
 							array(
 								"type" => "textfield",
 								"class" => "",
-								"heading" => __("Tooltip Text", "smile"),
+								"heading" => __("Tooltip Text", "ultimate_vc"),
 								"param_name" => "tooltip_text",
 								"value" => "",
-								"description" => __("Enter your tooltip text here.", "smile"),
+								"description" => __("Enter your tooltip text here.", "ultimate_vc"),
 								"dependency" => Array("element" => "tooltip_disp", "not_empty" => true),
 							),
 							array(
 								"type" => "dropdown",
 								"class" => "",
-								"heading" => __("Alignment", "smile"),
+								"heading" => __("Alignment", "ultimate_vc"),
 								"param_name" => "icon_align",
 								"value" => array(
-									"Center"	=>	"center",
-									"Left"		=>	"left",
-									"Right"		=>	"right"
+									__("Center","ultimate_vc")	=>	"center",
+									__("Left","ultimate_vc")		=>	"left",
+									__("Right","ultimate_vc")		=>	"right"
 								)
 							),
 							array(
 								"type" => "textfield",
 								"class" => "",
-								"heading" => __("Custom CSS Class", "smile"),
+								"heading" => __("Custom CSS Class", "ultimate_vc"),
 								"param_name" => "el_class",
 								"value" => "",
-								"description" => __("Ran out of options? Need more styles? Write your own CSS and mention the class name here.", "smile"),
+								"description" => __("Ran out of options? Need more styles? Write your own CSS and mention the class name here.", "ultimate_vc"),
 							),
+							array(
+								'type' => 'css_editor',
+					            'heading' => __( 'Css', 'ultimate_vc' ),
+					            'param_name' => 'css_just_icon',
+					            'group' => __( 'Design ', 'ultimate_vc' ),
+					            'edit_field_class' => 'vc_col-sm-12 vc_column no-vc-background no-vc-border creative_link_css_editor',
+					        ),
 						),
 					)
 				);
@@ -263,44 +270,49 @@ if(!class_exists('AIO_Just_Icon'))
 		// Shortcode handler function for stats Icon
 		function just_icon_shortcode($atts)
 		{
-			// enqueue js
-			wp_enqueue_script('ultimate-appear');
-			if(get_option('ultimate_row') == "enable"){
-				wp_enqueue_script('ultimate-row-bg',plugins_url('../assets/js/',__FILE__).'ultimate_bg.js');
-			}
-			wp_enqueue_script('ultimate-custom');
-			// enqueue css
-			wp_enqueue_style('ultimate-animate');
-			wp_enqueue_style('ultimate-style');
-			wp_enqueue_script('aio-tooltip',plugins_url('../assets/js/',__FILE__).'tooltip.js',array('jquery'));
-			wp_enqueue_style('aio-tooltip',plugins_url('../assets/css/',__FILE__).'tooltip.css');
 			$icon_type = $icon_img = $img_width = $icon = $icon_color = $icon_color_bg = $icon_size = $icon_style = $icon_border_style = $icon_border_radius = $icon_color_border = $icon_border_size = $icon_border_spacing = $icon_link = $el_class = $icon_animation =  $tooltip_disp = $tooltip_text = $icon_align = '';
-			extract(shortcode_atts( array(				
-				'icon_type' => '',
-				'icon' => '',
+			extract(shortcode_atts( array(
+				'icon_type' => 'selector',
+				'icon' => 'none',
 				'icon_img' => '',
-				'img_width' => '',
-				'icon_size' => '',				
-				'icon_color' => '',
-				'icon_style' => '',
-				'icon_color_bg' => '',
-				'icon_color_border' => '',			
+				'img_width' => '48',
+				'icon_size' => '32',
+				'icon_color' => '#333',
+				'icon_style' => 'none',
+				'icon_color_bg' => '#ffffff',
+				'icon_color_border' => '#333333',
 				'icon_border_style' => '',
-				'icon_border_size' => '',
-				'icon_border_radius' => '',
-				'icon_border_spacing' => '',
+				'icon_border_size' => '1',
+				'icon_border_radius' => '500',
+				'icon_border_spacing' => '50',
 				'icon_link' => '',
-				'icon_animation' => '',
+				'icon_animation' => 'none',
 				'tooltip_disp' => '',
 				'tooltip_text' => '',
 				'el_class'=>'',
-				'icon_align' => ''
+				'icon_align' => 'center',
+				'css_just_icon' => '',
 			),$atts));
+			$is_preset = false;
+			if(isset($_GET['preset'])) {
+				$is_preset = true;
+			}
+			$css_just_icon = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, vc_shortcode_custom_css_class( $css_just_icon, ' ' ), "just_icon", $atts );
+			$css_just_icon = esc_attr( $css_just_icon );
+			$ultimate_js = get_option('ultimate_js');
+			if($tooltip_text != '' && $ultimate_js == 'disable')
+				wp_enqueue_script('ultimate-tooltip');
+
+			$output = $style = $link_sufix = $link_prefix = $target = $href = $icon_align_style = $css_trans = '';
+
+			if(trim($icon_animation) === '')
+				$icon_animation = 'none';
+
 			if($icon_animation !== 'none')
 			{
 				$css_trans = 'data-animation="'.$icon_animation.'" data-animation-delay="03"';
 			}
-			$output = $style = $link_sufix = $link_prefix = $target = $href = $icon_align_style = '';
+
 			$uniqid = uniqid();
 			if($icon_link !== ''){
 				$href = vc_build_link($icon_link);
@@ -309,30 +321,38 @@ if(!class_exists('AIO_Just_Icon'))
 				$link_sufix .= '</a>';
 			} else {
 				if($tooltip_disp !== ""){
-					$link_prefix .= '<span class="aio-tooltip '.$uniqid.'" href = "'.$href.'" '.$target.' data-toggle="tooltip" data-placement="'.$tooltip_disp.'" title="'.$tooltip_text.'">';
-					$link_sufix .= '</span>';
+					$link_prefix .= '<div class="aio-tooltip '.$uniqid.'" href = "'.$href.'" '.$target.' data-toggle="tooltip" data-placement="'.$tooltip_disp.'" title="'.$tooltip_text.'">';
+					$link_sufix .= '</div>';
 				}
 			}
-			
+
+			$elx_class = '';
+
 			/* position fix */
 			if($icon_align == 'right')
 				$icon_align_style .= 'text-align:right;';
 			elseif($icon_align == 'center')
 				$icon_align_style .= 'text-align:center;';
-			else
+			elseif($icon_align == 'left')
 				$icon_align_style .= 'text-align:left;';
-			
+
 			if($icon_type == 'custom'){
-				$img = wp_get_attachment_image_src( $icon_img, 'large');
+
+				$img = apply_filters('ult_get_img_single', $icon_img, 'url');
+				$alt = apply_filters('ult_get_img_single', $icon_img, 'alt');
+				//$title = apply_filters('ult_get_img_single', $icon_img, 'title');
+				//$description = apply_filters('ult_get_img_single', $icon_img, 'description');
+				//$caption = apply_filters('ult_get_img_single', $icon_img, 'caption');
+
 				if($icon_style !== 'none'){
 					if($icon_color_bg !== '')
 						$style .= 'background:'.$icon_color_bg.';';
 				}
 				if($icon_style == 'circle'){
-					$el_class.= ' uavc-circle ';
+					$elx_class.= ' uavc-circle ';
 				}
 				if($icon_style == 'square'){
-					$el_class.= ' uavc-square ';
+					$elx_class.= ' uavc-square ';
 				}
 				if($icon_style == 'advanced' && $icon_border_style !== '' ){
 					$style .= 'border-style:'.$icon_border_style.';';
@@ -341,9 +361,13 @@ if(!class_exists('AIO_Just_Icon'))
 					$style .= 'padding:'.$icon_border_spacing.'px;';
 					$style .= 'border-radius:'.$icon_border_radius.'px;';
 				}
-				if(!empty($img[0])){
-					$output .= "\n".$link_prefix.'<div class="aio-icon-img '.$el_class.'" style="font-size:'.$img_width.'px;'.$style.'" '.$css_trans.'>';
-					$output .= "\n\t".'<img class="img-icon" src="'.$img[0].'"/>';	
+
+				if(!empty($img)){
+					if($icon_link == '' || $icon_align == 'center') {
+						$style .= 'display:inline-block;';
+					}
+					$output .= "\n".$link_prefix.'<div class="aio-icon-img '.$elx_class.'" style="font-size:'.$img_width.'px;'.$style.'" '.$css_trans.'>';
+					$output .= "\n\t".'<img class="img-icon" alt="'.$alt.'" src="'.apply_filters('ultimate_images', $img).'"/>';
 					$output .= "\n".'</div>'.$link_sufix;
 				}
 				$output = $output;
@@ -365,9 +389,12 @@ if(!class_exists('AIO_Just_Icon'))
 				}
 				if($icon_size !== '')
 					$style .='font-size:'.$icon_size.'px;';
+				if($icon_align !== 'left'){
+					$style .= 'display:inline-block;';
+				}
 				if($icon !== ""){
-					$output .= "\n".$link_prefix.'<div class="aio-icon '.$icon_style.' '.$el_class.'" '.$css_trans.' style="'.$style.'">';				
-					$output .= "\n\t".'<i class="'.$icon.'"></i>';	
+					$output .= "\n".$link_prefix.'<div class="aio-icon '.$icon_style.' '.$elx_class.'" '.$css_trans.' style="'.$style.'">';
+					$output .= "\n\t".'<i class="'.$icon.'"></i>';
 					$output .= "\n".'</div>'.$link_sufix;
 				}
 				$output = $output;
@@ -380,10 +407,26 @@ if(!class_exists('AIO_Just_Icon'))
 				</script>';
 			}
 			/* alignment fix */
-			if($icon_align !== ''){
+			if($icon_align_style !== ''){
 				$output = '<div class="align-icon" style="'.$icon_align_style.'">'.$output.'</div>';
 			}
-			
+
+			$output = '<div class="ult-just-icon-wrapper '.$el_class.' '.$css_just_icon.'">'.$output.'</div>';
+
+			if($is_preset) {
+				$text = 'array ( ';
+				foreach ($atts as $key => $att) {
+					$text .= '<br/>	\''.$key.'\' => \''.$att.'\',';
+				}
+				if($content != '') {
+					$text .= '<br/>	\'content\' => \''.$content.'\',';
+				}
+				$text .= '<br/>)';
+				$output .= '<pre>';
+				$output .= $text;
+				$output .= '</pre>';
+			}
+
 			return $output;
 		}
 	}
@@ -391,4 +434,8 @@ if(!class_exists('AIO_Just_Icon'))
 if(class_exists('AIO_Just_Icon'))
 {
 	$AIO_Just_Icon = new AIO_Just_Icon;
+}
+if ( class_exists( 'WPBakeryShortCode' ) ) {
+    class WPBakeryShortCode_just_icon extends WPBakeryShortCode {
+    }
 }

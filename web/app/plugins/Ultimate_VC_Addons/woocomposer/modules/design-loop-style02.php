@@ -9,12 +9,12 @@ function WooComposer_Loop_style02($atts,$element){
 		"disp_type" => "",
 		"category" => "",
 		"shortcode" => "",
-		"product_style" => "",
+		"product_style" => "style01",
 		"display_elements" => "",
-		"quick_view_style" => "",
+		"quick_view_style" => "expandable",
 		"label_on_sale" => "Sale!",
 		"text_align" => "left",
-		"img_animate" => "",
+		"img_animate" => "rotate-clock",
 		"pagination" => "",
 		"color_heading" => "",
 		"color_categories" => "",
@@ -40,9 +40,9 @@ function WooComposer_Loop_style02($atts,$element){
 		"lazy_images" => "",
 		"advanced_opts" => "",
 		"sale_price" => "",
-		"on_sale_style" => "",
-		"on_sale_alignment" => "",
-		"product_img_disp" => "",
+		"on_sale_style" => "wcmp-sale-circle",
+		"on_sale_alignment" => "wcmp-sale-right",
+		"product_img_disp" => "single",
 	),$atts));
 	$output = $heading_style = $cat_style = $price_style = $cart_style = $cart_bg_style = $view_style = $view_bg_style = $rating_style = '';
 	$desc_style = $label_style = $on_sale = $class = $style = $border = $desc_style = $sale_price_size = '';
@@ -261,7 +261,7 @@ function WooComposer_Loop_style02($atts,$element){
 			$output .= "\n".'<div class="wcmp-product woocommerce wcmp-'.$product_style.' '.$img_animate.'" style="'.$border.' '.$desc_style.'">';
 						
 				$output .= "\n\t".'<div class="wcmp-product-image">';
-					if(!empty($attachment_ids) && count($attachment_ids) > 1 && $product_img_disp == "carousel"){
+					if(empty($attachment_ids) && count($attachment_ids) > 1 && $product_img_disp == "carousel"){
 						$uniqid = uniqid();
 						$output .= '<div class="wcmp-single-image-carousel carousel-in-loop">';
 						$product_img = wp_get_attachment_image_src( get_post_thumbnail_id($product_id),$image_size);

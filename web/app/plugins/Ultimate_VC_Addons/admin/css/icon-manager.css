@@ -1,103 +1,198 @@
 /*Admin CSS for Icon Manager*/
-.ult_buttons, .ult_buttons > .wpb_element_wrapper{
+.ultimate_icons{
+	background-image: url(../img/icon-icons.png) !important;
+	background-position:0 0 !important;
+}
+.ultimate_carousel{
+	background-image: url(../img/icon-advanced-carousel.png) !important;
+	background-position:0 0 !important;
+}
+.ultimate_icon_list{
+	background-image: url(../img/icon-list-icon-parent.png) !important;
+	background-position:0 0 !important;
+}
+.icon_list_item {
+	background-image: url(../img/icon-list-icon-child.png) !important;
+	background-position:0 0 !important;
+}
+.ult_buttons{
 	background-image: url(../img/icon-button.png) !important;
+	background-position:0 0 !important;
 }
-.wpb_ult_animation_block, .animation_block {
+.animation_block {
 	background-image: url(../img/icon-animation.png) !important;
+	background-position:0 0 !important;
 }
-.wpb_swatch_container, .vc_swatch_container {
+.vc_swatch_container {
 	background-image: url(../img/icon-swatch-parent.png) !important;
+	background-position:0 0 !important;
 }
-.wpb_swatch_item, .vc_swatch_item, .vc_swatch_item > .wpb_element_wrapper {
+.vc_swatch_item {
 	background-image: url(../img/icon-swatch-child.png) !important;
+	background-position:0 0 !important;
 }
-.list_icon, .list_icon > .wpb_element_wrapper{
+.list_icon{
 	background-image: url(../img/icon-list.png) !important;
+	background-position:0 0 !important;
 }
-.vc_icon_tabs, .vc_icon_tabs > .wpb_element_wrapper{
+.vc_icon_tabs{
 	background-image: url(../img/icon-info-tabs.png) !important;
+	background-position:0 0 !important;
 }
-.uavc_heading_nav > i.vc-element-icon, .uavc_heading > .wpb_element_wrapper{
+.uavc_heading_nav{
 	background-image: url(../img/icon-heading.png) !important;
+	background-position:0 0 !important;
 }
-.vc_ultimate_heading, .vc_ultimate_heading > .wpb_element_wrapper{
+.vc_ultimate_heading{
 	background-image: url(../img/icon-heading.png) !important;
+	background-position:0 0 !important;
 }
-.vc_google_trends, .vc_google_trends > .wpb_element_wrapper{
+.vc_google_trends{
 	background-image: url(../img/icon-google-trends.png) !important;
+	background-position:0 0 !important;
 }
-.vc_countdown_nav > .vc_countdown{
+.vc_countdown{
 	background-image: url(../img/icon-countdown.png) !important;
+	background-position:0 0 !important;
 }
-.vc_countdown > .wpb_element_wrapper{
-	background-image: url(../img/icon-countdown.png) !important;	
-}
-.vc_ultimate_info_table_nav > .vc_ultimate_info_table{
+.vc_ultimate_info_table{
 	background-image: url(../img/icon-info-table.png) !important;
+	background-position:0 0 !important;
 }
-.vc_ultimate_info_table > .wpb_element_wrapper{
-	background-image: url(../img/icon-info-table.png) !important;	
+.vc_ultimate_info_table{
+	background-image: url(../img/icon-info-table.png) !important;
+	background-position:0 0 !important;
 }
-.vc_info_circle_item , .vc_info_circle_item > .wpb_element_wrapper {
-	background-image: url(../img/icon-info-circle-block.png) !important;	
+.vc_info_circle_item{
+	background-image: url(../img/icon-info-circle-block.png) !important;
+	background-position:0 0 !important;
 }
-.vc_info_circle, .wpb_element_wrapper .vc_shortcodes_container.wpb_info_circle
-{
+.vc_info_circle {
 	background-image: url(../img/icon-info-circle.png) !important;
+	background-position:0 0 !important;
 }
-.vc_ultimate_pricing_nav > .vc_ultimate_pricing{
+.vc_ultimate_pricing{
 	background-image: url(../img/icon-price-box.png) !important;
+	background-position:0 0 !important;
 }
-.vc_ultimate_pricing > .wpb_element_wrapper{
-	background-image: url(../img/icon-price-box.png) !important;	
+.vc_ultimate_pricing{
+	background-image: url(../img/icon-price-box.png) !important;
+	background-position:0 0 !important;
 }
-.vc_ultimate_spacer_nav > .vc_ultimate_spacer{
+.vc_ultimate_spacer{
 	background-image: url(../img/icon-spacer.png) !important;
+	background-position:0 0 !important;
 }
-.vc_ultimate_spacer > .wpb_element_wrapper{
-	background-image: url(../img/icon-spacer.png) !important;	
-}
-.vc_timeline_feat_icon, .vc_timeline_feat > .wpb_element_wrapper {
+.vc_timeline_feat_icon{
 	background-image: url(../img/icon-timeline-featured.png) !important;
+	background-position:0 0 !important;
 }
-.vc_timeline_sep_icon, .vc_timeline_sep > .wpb_element_wrapper {
+.vc_timeline_sep_icon{
 	background-image: url(../img/icon-timeline-sep.png) !important;
+	background-position:0 0 !important;
 }
-.vc_timeline_item_icon, .vc_timeline_item > .wpb_element_wrapper {
+.vc_timeline_item_icon {
 	background-image: url(../img/icon-timeline.png) !important;
+	background-position:0 0 !important;
 }
-.vc_timeline_icon, .vc_timeline > .wpb_element_wrapper {
+.vc_timeline_icon{
 	background-image: url(../img/icon-timeline.png) !important;
+	background-position:0 0 !important;
 }
-.vc_icon_block, .vc_flip_box > .wpb_element_wrapper {
+.vc_icon_block{
 	background-image: url(../img/icon-flip-box.png) !important;
+	background-position:0 0 !important;
 }
-.vc_icon_list, .vc_info_list > .wpb_element_wrapper {
+.vc_icon_list{
 	background-image: url(../img/icon-info-list.png) !important;
+	background-position:0 0 !important;
+}
+.vc_icon_content_box{
+	background-image: url(../img/content-box.png) !important;
+	background-position:0 0 !important;
 }
 .vc_icon_stats, .vc_stats_counter > .wpb_element_wrapper {
 	background-image: url(../img/icon-counter.png) !important;
 }
-.vc_just_icon, .vc_simple_icon > .wpb_element_wrapper {
+.vc_just_icon{
 	background-image: url(../img/icon-just-icon.png) !important;
+	background-position:0 0 !important;
 }
-.vc_info_box, .info_box > .wpb_element_wrapper {
+.vc_info_box, .info_box{
 	background-image: url(../img/icon-info-box.png) !important;
+	background-position:0 0 !important;
 }
-.vc_modal_box, .modal_box > .wpb_element_wrapper {
+.vc_modal_box, .modal_box{
 	background-image: url(../img/icon-modal.png) !important;
+	background-position:0 0 !important;
 }
-.vc_icon_interactive, .vc_interactive_icon > .wpb_element_wrapper {
+.vc_icon_interactive{
 	background-image: url(../img/icon-interactive-banner.png) !important;
+	background-position:0 0 !important;
 }
-.vc_google_map, .vc_google_map > .wpb_element_wrapper {
+.vc_google_map{
 	background-image: url(../img/icon-map.png) !important;
+	background-position:0 0 !important;
 }
-.wpb_icon_timeline.vc_shortcodes_container {
-	background-image: url(../img/icon-timeline.png) !important;
+.vc_ultimate_fancytext{
+	background-image: url(../img/icon-fancy-text.png) !important;
+	background-position:0 0 !important;
 }
-.wpb_info_list.vc_shortcodes_container {
-	background-image: url(../img/icon-info-list-block.png) !important;
+.vc_icon_ctaction{
+	background-image: url(../img/icon-highlight-box.png) !important;
+	background-position:0 0 !important;
+}
+.vc_icon_info_banner{
+	background-image: url(../img/icon-info-banner.png) !important;
+	background-position:0 0 !important;
+}
+.ult_ihover{
+	background-image: url(../img/icon-hover.png) !important;
+	background-position:0 0 !important;
+}
+.ult_hotspot {
+	background-image: url(../img/icon-hotspot.png) !important;
+	background-position: 0 0 !important;
+}
+.vc_ultimate_video_banner {
+	background-image: url(../img/icon-video-banner.png) !important;
+	background-position: 0 0 !important;
+}
+.vc_icon_img_separator {
+	background-image: url(../img/icon-image-separator.png) !important;
+	background-position: 0 0 !important;
+}
+.vc_icon_team {
+	background-image: url(../img/icon-team.png) !important;
+	background-position: 0 0 !important;
+}
+.vc_icon_sticky_section {
+	background-image: url(../img/icon-sticky-section.png) !important;
+	background-position: 0 0 !important;
+}
+.vc_icon_range_slider {
+	background-image: url(../img/icon-range-slider.png) !important;
+	background-position: 0 0 !important;
+}
+a#ult_tab_element .vc_element-icon,
+.ult_tab_eleicon {
+	background-image: url(../img/tab-icon.png) !important;
+	background-position: 0 0 !important;
+}
+.uvc_creative_link {
+	background-image: url(../img/creative-link.png) !important;
+	background-position: 0 0 !important;
+}
+.uvc_expandable {
+	background-image: url(../img/collapsable.png) !important;
+	background-position: 0 0 !important;
+}
+.uvc_dual_button {
+	background-image: url(../img/dual_button.png) !important;
+	background-position: 0 0 !important;
+}
+.wpb_ult_tab_element.ult_tab_eleicon {
+    background: none !important;
 }
 /*icon-manager*/
 #smile_icon_search {
@@ -183,6 +278,7 @@ input.search-icon {
 	content: '' !important;
 }
 */
+
 /*On Off Checkbox Switch*/
 .onoffswitch {
 	position: relative;
@@ -195,7 +291,13 @@ input.search-icon {
 	-ms-user-select: none;
 }
 .onoffswitch-checkbox {
-	display: none !important;
+	position: absolute;
+	outline: none;
+	top: 2px;
+	left:0;
+}
+.onoffswitch-checkbox:foucs {
+	outline: none;
 }
 .onoffswitch-label {
 	display: block;
@@ -281,3 +383,46 @@ input.search-icon {
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
 	margin-left: 0;
 }
+.icon_type.none, .icon_type option.none {
+	display:block !important;
+}
+
+/* Aktina theme carousel navigation fix */
+.wpb_el_type_slick_icon .icon-list li:before {
+	display:none !important;
+}
+
+
+.wp-picker-container .iris-picker {
+z-index: 99;
+}
+
+.wpb-edit-form select.none, .wpb-select option.none {
+	display: block !important;
+}
+
+.wpb_el_type_css_editor.no-vc-border .vc_border > label:nth-of-type(1),
+.wpb_el_type_css_editor.no-vc-border .vc_border > .vc_top,
+.wpb_el_type_css_editor.no-vc-border .vc_border > .vc_right,
+.wpb_el_type_css_editor.no-vc-border .vc_border > .vc_bottom,
+.wpb_el_type_css_editor.no-vc-border .vc_border > .vc_left,
+.wpb_el_type_css_editor.no-vc-border .vc_settings label:nth-of-type(1),
+.wpb_el_type_css_editor.no-vc-border .vc_settings label:nth-of-type(3),
+.wpb_el_type_css_editor.no-vc-border .vc_settings label:nth-of-type(4),
+.wpb_el_type_css_editor.no-vc-border .vc_settings .color-group:nth-of-type(1),
+.wpb_el_type_css_editor.no-vc-border .vc_settings .vc_border-style,
+.wpb_el_type_css_editor.no-vc-border .vc_settings .vc_border-radius,
+.wpb_el_type_css_editor.no-vc-background .vc_settings label:nth-of-type(2),
+.wpb_el_type_css_editor.no-vc-background .vc_settings .color-group ~ .color-group,
+.wpb_el_type_css_editor.no-vc-background .vc_settings .vc_background-image,
+.wpb_el_type_css_editor.no-vc-background .vc_settings .vc_background-style {
+	display:none;
+}
+
+.wpb_el_type_css_editor.no-vc-border .vc_border {
+	border:0 !important;
+}
+.wpb_el_type_css_editor.no-vc-border .vc_border .vc_padding {
+	margin:0;
+}
+

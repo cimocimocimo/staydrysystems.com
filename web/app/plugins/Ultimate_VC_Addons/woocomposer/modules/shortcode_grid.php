@@ -15,7 +15,7 @@ if(!class_exists('WooComposer_GridView')){
 			if(function_exists('vc_map')){
 				vc_map(
 					array(
-						"name"		=> __("Products Grid [Beta]", "woocomposer"),
+						"name"		=> __("Products Grid", "woocomposer"),
 						"base"		=> "woocomposer_grid",
 						"icon"		=> "woo_grid",
 						"class"	   => "woo_grid",
@@ -24,6 +24,7 @@ if(!class_exists('WooComposer_GridView')){
 						"controls" => "full",
 						"wrapper_class" => "clearfix",
 						"show_settings_on_create" => true,
+						"deprecated" => "3.13.5",
 						"params" => array(
 							array(
 								"type" => "woocomposer",
@@ -40,7 +41,7 @@ if(!class_exists('WooComposer_GridView')){
 										"order"		   => __("Display Order:","woocomposer"),
 										"category" 		=> __("Category:","woocomposer"),
 								),
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Initial Settings",
 							),
 							array(
@@ -55,13 +56,13 @@ if(!class_exists('WooComposer_GridView')){
 										"Style 3" => "style03",
 										/* "Style 4" => "style04", */
 									),
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Initial Settings",
 							),
 							array(
-								"type" => "chk-switch",
+								"type" => "ult_switch",
 								"class" => "",
-								"heading" => __("", "woocomposer"),
+								"heading" => "",
 								"param_name" => "pagination",
 								"value" => "",
 								"options" => array(
@@ -71,13 +72,13 @@ if(!class_exists('WooComposer_GridView')){
 											"off" => "No",
 										),
 									),
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Initial Settings",
 							),
 							array(
-								"type" => "chk-switch",
+								"type" => "ult_switch",
 								"class" => "",
-								"heading" => __("", "woocomposer"),
+								"heading" => "",
 								"param_name" => "lazy_images",
 								"admin_label" => true,
 								"value" => "",
@@ -88,11 +89,11 @@ if(!class_exists('WooComposer_GridView')){
 											"off" => "No",
 										),
 									),
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Initial Settings",
 							),
 							array(
-								"type" => "chk-switch",
+								"type" => "ult_switch",
 								"class" => "",
 								"heading" => __("Select Product Elements to display", "woocomposer"),
 								"param_name" => "display_elements",
@@ -119,7 +120,7 @@ if(!class_exists('WooComposer_GridView')){
 													"off" => "No",
 												),
 									),
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Initial Settings",
 							),
 							array(
@@ -132,7 +133,7 @@ if(!class_exists('WooComposer_GridView')){
 										"Expanding Preview " => "expandable",
 										"Display in Lightbox" => "popup",
 									),
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Initial Settings",
 							),
 							array(
@@ -145,7 +146,7 @@ if(!class_exists('WooComposer_GridView')){
 									"Center"=> "center",
 									"Right" => "right",
 								),
-								"description" => __("","smile"),
+								//"description" => __("","smile"),
 								"group" => "Initial Settings",
 							),
 							array(
@@ -167,7 +168,7 @@ if(!class_exists('WooComposer_GridView')){
 										"Circle" => "wcmp-sale-circle",
 										"Square" => "wcmp-sale-rectangle",
 									),
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Initial Settings",
 							),
 							array(
@@ -180,7 +181,7 @@ if(!class_exists('WooComposer_GridView')){
 										"Right" => "wcmp-sale-right",
 										"Left" => "wcmp-sale-left",
 									),
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Initial Settings",
 							),
 							array(
@@ -192,7 +193,7 @@ if(!class_exists('WooComposer_GridView')){
 									"Display product featured image" => "single",
 									"Display product gallery in carousel slider" => "carousel",
 								),
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Initial Settings",
 							),
 							array(
@@ -211,7 +212,7 @@ if(!class_exists('WooComposer_GridView')){
 									"Blur" => "blur",
 									"Anti Grayscale" => "antigrayscale",
 								),
-								"description" => __("","smile"),
+								//"description" => __("","smile"),
 								"group" => "Initial Settings",
 							),
 							array(
@@ -228,7 +229,7 @@ if(!class_exists('WooComposer_GridView')){
 									"Inset" => "inset",
 									"Outset" => "outset",
 								),
-								"description" => __("","smile"),
+								//"description" => __("","smile"),
 								"group" => "Initial Settings",
 							),
 							array(
@@ -237,7 +238,7 @@ if(!class_exists('WooComposer_GridView')){
 								"heading" => __("Border Color", "woocomposer"),
 								"param_name" => "border_color",
 								"value" => "#333333",
-								"description" => __("", "woocomposer"),	
+								//"description" => __("", "woocomposer"),	
 								"dependency" => Array("element" => "border_style", "not_empty" => true),
 								"group" => "Initial Settings",
 							),
@@ -250,7 +251,7 @@ if(!class_exists('WooComposer_GridView')){
 								"min" => 1,
 								"max" => 10,
 								"suffix" => "px",
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"dependency" => Array("element" => "border_style", "not_empty" => true),
 								"group" => "Initial Settings",
 							),
@@ -263,7 +264,7 @@ if(!class_exists('WooComposer_GridView')){
 								"min" => 1,
 								"max" => 500,
 								"suffix" => "px",
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"dependency" => Array("element" => "border_style", "not_empty" => true),
 								"group" => "Initial Settings",
 							),
@@ -297,7 +298,7 @@ if(!class_exists('WooComposer_GridView')){
 									__("Light Speed In","smile") => "lightSpeedIn",
 									__("Roll In","smile") => "rollIn",
 									),
-								"description" => __("","smile"),
+								//"description" => __("","smile"),
 								"group" => "Initial Settings",
 						  	),
 							array(
@@ -306,7 +307,7 @@ if(!class_exists('WooComposer_GridView')){
 								"heading" => __("Product Title Color", "woocomposer"),
 								"param_name" => "color_heading",
 								"value" => "",
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Style Settings",
 							),
 							array(
@@ -315,7 +316,7 @@ if(!class_exists('WooComposer_GridView')){
 								"heading" => __("Categories Color", "woocomposer"),
 								"param_name" => "color_categories",
 								"value" => "",
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Style Settings",
 							),
 							array(
@@ -324,7 +325,7 @@ if(!class_exists('WooComposer_GridView')){
 								"heading" => __("Price Color", "woocomposer"),
 								"param_name" => "color_price",
 								"value" => "",
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Style Settings",
 							),
 							array(
@@ -333,7 +334,7 @@ if(!class_exists('WooComposer_GridView')){
 								"heading" => __("Star Ratings Color", "woocomposer"),
 								"param_name" => "color_rating",
 								"value" => "",
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Style Settings",
 							),
 							array(
@@ -342,7 +343,7 @@ if(!class_exists('WooComposer_GridView')){
 								"heading" => __("Star Ratings Background Color", "woocomposer"),
 								"param_name" => "color_rating_bg",
 								"value" => "",
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Style Settings",
 							),
 							array(
@@ -351,7 +352,7 @@ if(!class_exists('WooComposer_GridView')){
 								"heading" => __("Quick View Icon Color", "woocomposer"),
 								"param_name" => "color_quick",
 								"value" => "",
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Style Settings",
 							),
 							array(
@@ -360,7 +361,7 @@ if(!class_exists('WooComposer_GridView')){
 								"heading" => __("Quick View Icon Background Color", "woocomposer"),
 								"param_name" => "color_quick_bg",
 								"value" => "",
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Style Settings",
 							),
 							array(
@@ -369,7 +370,7 @@ if(!class_exists('WooComposer_GridView')){
 								"heading" => __("Cart Icon Color", "woocomposer"),
 								"param_name" => "color_cart",
 								"value" => "",
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Style Settings",
 							),
 							array(
@@ -378,7 +379,7 @@ if(!class_exists('WooComposer_GridView')){
 								"heading" => __("Cart Icon Background Color", "woocomposer"),
 								"param_name" => "color_cart_bg",
 								"value" => "",
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Style Settings",
 							),
 							array(
@@ -387,7 +388,7 @@ if(!class_exists('WooComposer_GridView')){
 								"heading" => __("Sale Notification Label Color", "woocomposer"),
 								"param_name" => "color_on_sale",
 								"value" => "",
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Style Settings",
 							),
 							array(
@@ -396,7 +397,7 @@ if(!class_exists('WooComposer_GridView')){
 								"heading" => __("Sale Notification Background Color", "woocomposer"),
 								"param_name" => "color_on_sale_bg",
 								"value" => "",
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Style Settings",
 							),
 							array(
@@ -405,7 +406,7 @@ if(!class_exists('WooComposer_GridView')){
 								"heading" => __("Product Description Text Color", "woocomposer"),
 								"param_name" => "color_product_desc",
 								"value" => "",
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Style Settings",
 							),
 							array(
@@ -414,7 +415,7 @@ if(!class_exists('WooComposer_GridView')){
 								"heading" => __("Product Description Background Color", "woocomposer"),
 								"param_name" => "color_product_desc_bg",
 								"value" => "",
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Style Settings",
 							),
 							
@@ -427,7 +428,7 @@ if(!class_exists('WooComposer_GridView')){
 								"min" => 10,
 								"max" => 72,
 								"suffix" => "px",
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Size Settings",
 							),
 							array(
@@ -439,7 +440,7 @@ if(!class_exists('WooComposer_GridView')){
 								"min" => 10,
 								"max" => 72,
 								"suffix" => "px",
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Size Settings",
 							),
 							array(
@@ -451,7 +452,7 @@ if(!class_exists('WooComposer_GridView')){
 								"min" => 10,
 								"max" => 72,
 								"suffix" => "px",
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Size Settings",
 							),
 							array(
@@ -463,7 +464,7 @@ if(!class_exists('WooComposer_GridView')){
 								"min" => 10,
 								"max" => 72,
 								"suffix" => "px",
-								"description" => __("", "woocomposer"),
+								//"description" => __("", "woocomposer"),
 								"group" => "Size Settings",
 							),
 						)/* vc_map params array */
@@ -474,12 +475,13 @@ if(!class_exists('WooComposer_GridView')){
 		function woocomposer_grid_shortcode($atts){
 			$product_style = '';
 			extract(shortcode_atts(array(
-				"product_style" => "",
+				"product_style" => "style01",
 			),$atts));
 			$output = '';
 			ob_start();
 			$output .= '<div class="woocommerce">';
-			wc_print_notices();
+			if(function_exists('wc_print_notices'))
+				wc_print_notices();
 			$output .= ob_get_clean();
 			$output .= '</div>';
 			$uid = uniqid();

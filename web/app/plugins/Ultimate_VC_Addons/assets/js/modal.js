@@ -1,7 +1,7 @@
-(function() {
-	var triggerBttn = document.getElementsByClassName( 'overlay-show' ),
-	overlay = document.querySelector( 'div.ult-overlay' ),
-	closeBttn = overlay.querySelector( 'div.ult-overlay-close' );
+(function($) {
+	var triggerBttn = $( '.overlay-show' ),
+	overlay = $( 'div.ult-overlay' ),
+	closeBttn = overlay.find( 'div.ult-overlay-close' );
 	transEndEventNames = {
 		'WebkitTransition': 'webkitTransitionEnd',
 		'MozTransition': 'transitionend',
@@ -14,12 +14,9 @@
 	function toggleOverlay(id) {
 		var ovv = 'div.ult-overlay.'+id;
 		joverlay = document.querySelector( ovv );
-		overlay = jQuery(ovv);
+		overlay = $(ovv);
 		/* firefox transition issue fix of overflow hidden */
-		var modal_height = overlay.find('.ult_modal').outerHeight(); //modal height
-		var window_height = jQuery(window).outerHeight(); //window height
-		if(window_height < modal_height) //if window height is less than modal height
-			jQuery('html').css({'overflow':'hidden'}); //add overflow hidden to html
+
 		if( overlay.hasClass('ult-open') ) {
 			overlay.removeClass('ult-open');
 			overlay.addClass('ult-close');
@@ -37,7 +34,7 @@
 				joverlay.addEventListener( transEndEventName, onEndTransitionFn );
 				overlay.removeClass('ult-close');
 				if(window_height < modal_height) //remove overflow hidden
-					jQuery('html').css({'overflow':'auto'});
+					$('html').css({'overflow':'auto'});
 			}
 			else {
 				onEndTransitionFn();
@@ -47,12 +44,16 @@
 			overlay.addClass('ult-open');
 			//classie.add( overlay, 'ult-open' );
 		}
+		var modal_height = overlay.find('.ult_modal').outerHeight(); //modal height
+		var window_height = $(window).outerHeight(); //window height
+		if(window_height < modal_height) //if window height is less than modal height
+			$('html').css({'overflow':'hidden'}); //add overflow hidden to html
 	}
-	var corner_to = jQuery('.overlay-show-cornershape').find('path').attr('d');
+	var corner_to = $('.overlay-show-cornershape').find('path').attr('d');
 	function overlay_cornershape_f(id){
 		var ovv = 'div.overlay-cornershape.'+id;
 		var joverlay_cornershape = document.querySelector( ovv );
-		var overlay_cornershape = jQuery(ovv);
+		var overlay_cornershape = $(ovv);
 		var s = Snap( joverlay_cornershape.querySelector( 'svg' ) ),
 			path = s.select( 'path' ),
 			pathConfig = {
@@ -80,7 +81,7 @@
 	function overlay_genie_f(id) {
 		var ovv = 'div.overlay-genie.'+id;
 		var joverlay_genie = document.querySelector( ovv );
-		var overlay_genie = jQuery(ovv);
+		var overlay_genie = $(ovv);
 		var gs = Snap( joverlay_genie.querySelector( 'svg' ) ),
 			geniepath = gs.select( 'path' ),
 			steps = joverlay_genie.getAttribute( 'data-steps' ).split(';'),
@@ -138,7 +139,7 @@
 	function overlay_boxes_f(id) {
 		var ovv = 'div.overlay-boxes.'+id;
 		var joverlay_boxes = document.querySelector( ovv );
-		var overlay_boxes = jQuery(ovv);
+		var overlay_boxes = $(ovv);
 		var boxes_path = [].slice.call( joverlay_boxes.querySelectorAll( 'svg > path' ) ),
 		pathsTotal = boxes_path.length;
 		var cnt = 0;
@@ -169,17 +170,17 @@
 			});
 		}
 	}
-	jQuery(window).load(function(){
+	$(window).load(function(){
 		var onload_modal_array = new Array();
-		jQuery('.ult-onload').each(function(index){
-			onload_modal_array.push(jQuery(this));
+		$('.ult-onload').each(function(index){
+			onload_modal_array.push($(this));
 			setTimeout(function() {
 				onload_modal_array[index].trigger('click');
-			}, parseInt(jQuery(this).data('onload-delay'))*1000);
+			}, parseInt($(this).data('onload-delay'))*1000);
 		});
-		jQuery('.ult-vimeo iframe').each(function(index, element) {
-			var player_id = jQuery(this).attr('id');
-			var iframe = jQuery(this)[0],
+		$('.ult-vimeo iframe').each(function(index, element) {
+			var player_id = $(this).attr('id');
+			var iframe = $(this)[0],
 				player = $f(iframe);
 			player.addEvent('ready', function() {
 				player.addEvent('pause');
@@ -187,112 +188,200 @@
 			});
         });
 	});
-	jQuery(document).ready(function(){
-		jQuery('.ult-overlay').each(function(){
-			jQuery('body').append(jQuery(this).clone());
-			jQuery(this).remove();
+	$(document).ready(function(){
+		$('.ult-overlay').each(function(){
+			$(this).appendTo(document.body);
 		});
-		jQuery('.ult-overlay').attr('style','');
-		jQuery('.overlay-show').each(function(index, element) {
-            var class_id = jQuery(this).data('class-id');
-			jQuery('.'+class_id).find('.ult-vimeo iframe').attr('id','video_'+class_id);
-			jQuery('.'+class_id).find('.ult-youtube iframe').attr('id','video_'+class_id);
+		$('.ult-overlay').show();
+		$('.overlay-show').each(function(index, element) {
+            var class_id = $(this).data('class-id');
+			$('.'+class_id).find('.ult-vimeo iframe').attr('id','video_'+class_id);
+			$('.'+class_id).find('.ult-youtube iframe').attr('id','video_'+class_id);
         });
 		var modal_count=0;
-		jQuery('.overlay-show').click(function(event){
-		event.stopPropagation();
-			var class_id = jQuery(this).data('class-id');
-			//jQuery('.'+class_id).find('.ult-vimeo iframe').attr('id','video_'+class_id);
-			jQuery('.'+class_id).find('.ult-vimeo iframe').html(jQuery('.ult-vimeo iframe').html());
-			jQuery('.'+class_id).addClass(jQuery(this).data('overlay-class'));
+		$(document).on('click', '.overlay-show', function(event){
+			event.stopPropagation();
+			event.preventDefault();
+
+			var class_id = $(this).data('class-id');
+			$('.'+class_id).find('.ult_modal-content').removeClass('ult-hide');
+			$('.'+class_id).find('.ult-vimeo iframe').html($('.ult-vimeo iframe').html());
+			$('.'+class_id).addClass($(this).data('overlay-class'));
 			setTimeout(function() {
-				jQuery('body, html').addClass('ult_modal-body-open');
+				$('body, html').addClass('ult_modal-body-open');
 				toggleOverlay(class_id);
-				if(jQuery('.'+class_id).hasClass('overlay-doorhorizontal')){
-					setTimeout(function() {
-						content_check(class_id);
-					}, 500);
-				}else{
-					content_check(class_id);
-				}
+				content_check(class_id);
 			}, 500);
-		})
-		jQuery('.overlay-show-cornershape').click(function(event){
+			//$('.'+class_id).find('.ult-vimeo iframe').attr('id','video_'+class_id);
+		});
+
+		$(document).on('click', '.overlay-show-cornershape', function(event){
 			event.stopPropagation();
-			var class_id = jQuery(this).data('class-id')
-			//jQuery('.overlay-cornershape').removeClass('overlay-cornershape');
-			jQuery('.'+class_id).addClass('overlay-cornershape');
+			event.preventDefault();
+
+			var class_id = $(this).data('class-id');
+			$('.'+class_id).find('.ult_modal-content').removeClass('ult-hide');
+			//$('.overlay-cornershape').removeClass('overlay-cornershape');
+			setTimeout(function(){
+				$('.'+class_id).addClass('overlay-cornershape');
+				overlay_cornershape_f(class_id);
+				$('body, html').addClass('ult_modal-body-open');
+				content_check(class_id);
+			},300);
+		});
+
+		$(document).on('click', 'div.overlay-cornershape div.ult-overlay-close', function(event){
+			event.stopPropagation();
+			var class_id = $(this).parents('div.overlay-cornershape').data('class');
 			overlay_cornershape_f(class_id);
-			jQuery('body, html').addClass('ult_modal-body-open');
-			content_check(class_id);
-		})
-		jQuery('div.overlay-cornershape div.ult-overlay-close').click(function(event){
+			$('body, html').removeClass('ult_modal-body-open');
+			$('html').css({'overflow':'auto'});
+			$(document).trigger('onUVCModalPopUpClosed',class_id);
+		});
+
+		$(document).on('click', '.overlay-show-boxes', function(event){
 			event.stopPropagation();
-			var class_id = jQuery(this).parents('div.overlay-cornershape').data('class');
-			overlay_cornershape_f(class_id);
-			jQuery('body, html').removeClass('ult_modal-body-open');
-		})
-		jQuery('.overlay-show-boxes').click(function(event){
+			event.preventDefault();
+
+			var class_id = $(this).data('class-id');
+			$('.'+class_id).find('.ult_modal-content').removeClass('ult-hide');
+			setTimeout(function(){
+				$('.'+class_id).addClass('overlay-boxes');
+				overlay_boxes_f(class_id);
+				$('body, html').addClass('ult_modal-body-open');
+				content_check(class_id);
+			},300);
+			//$('.overlay-boxes').removeClass('overlay-boxes');
+
+		});
+
+		$(document).on('click', 'div.overlay-boxes div.ult-overlay-close', function(event){
 			event.stopPropagation();
-			var class_id = jQuery(this).data('class-id')
-			//jQuery('.overlay-boxes').removeClass('overlay-boxes');
-			jQuery('.'+class_id).addClass('overlay-boxes');
+			var class_id = $(this).parents('div.overlay-boxes').data('class');
 			overlay_boxes_f(class_id);
-			jQuery('body, html').addClass('ult_modal-body-open');
-			content_check(class_id);
+			$('body, html').removeClass('ult_modal-body-open');
+			$('html').css({'overflow':'auto'});
+			$(document).trigger('onUVCModalPopUpClosed',class_id);
 		});
-		jQuery('div.overlay-boxes div.ult-overlay-close').click(function(event){
+
+		$(document).on('click', '.overlay-show-genie', function(event){
+			event.preventDefault();
+
+			var class_id = $(this).data('class-id');
+			$('.'+class_id).find('.ult_modal-content').removeClass('ult-hide');
+			//$('.overlay-genie').removeClass('overlay-genie');
+			setTimeout(function(){
+				$('.'+class_id).addClass('overlay-genie');
+				overlay_genie_f(class_id);
+				$('body, html').addClass('ult_modal-body-open');
+				content_check(class_id);
+				$('html').css({'overflow':'auto'});
+			},300);
+		});
+
+		$(document).on('click', 'div.overlay-genie div.ult-overlay-close', function(event){
 			event.stopPropagation();
-			var class_id = jQuery(this).parents('div.overlay-boxes').data('class');
-			overlay_boxes_f(class_id);
-			jQuery('body, html').removeClass('ult_modal-body-open');
-		});
-		jQuery('.overlay-show-genie').click(function(event){
-			var class_id = jQuery(this).data('class-id')
-			//jQuery('.overlay-genie').removeClass('overlay-genie');
-			jQuery('.'+class_id).addClass('overlay-genie');
+			var class_id = $(this).parents('div.overlay-genie').data('class');
 			overlay_genie_f(class_id);
-			jQuery('body, html').addClass('ult_modal-body-open');
-			content_check(class_id);
+			$('body, html').removeClass('ult_modal-body-open');
+			$('html').css({'overflow':'auto'});
+			$(document).trigger('onUVCModalPopUpClosed',class_id);
 		});
-		jQuery('div.overlay-genie div.ult-overlay-close').click(function(event){
+
+		$(document).on('click', '.ult-overlay .ult-overlay-close', function(event){
 			event.stopPropagation();
-			var class_id = jQuery(this).parents('div.overlay-genie').data('class');
-			overlay_genie_f(class_id);
-			jQuery('body, html').removeClass('ult_modal-body-open');
-		})
-		jQuery('.ult-overlay .ult-overlay-close').click(function(event){
-			event.stopPropagation();
-			var id = jQuery(this).parents('.ult-overlay').data('class');
+			var id = $(this).parents('.ult-overlay').data('class');
 			toggleOverlay(id);
-			jQuery('body, html').removeClass('ult_modal-body-open');
-			if(jQuery(this).parent().find(".ult-vimeo").length){
-				var player_id = jQuery(this).parent().find(".ult-vimeo iframe").attr('id');
-				var iframe = jQuery("#"+player_id)[0],
-				player = $f(iframe);
-				player.api('pause');
+			$('body, html').removeClass('ult_modal-body-open');
+			if($(this).parent().find(".ult-vimeo").length){
+				$(this).parent().find(".ult-vimeo iframe").each(function(i,iframe){
+					var player_id = $(iframe);
+					var src = $(iframe).attr("src");
+					$(iframe).attr("src",'');
+					$(iframe).attr("src",src);
+					var iframe = player_id[0],
+					player = $f(iframe);
+					player.api('pause');
+				});
 			} else {
-				var player_id = jQuery(this).parent().find(".ult-youtube iframe").attr('id');
-				var src = jQuery("#"+player_id).attr("src");
-				jQuery("#"+player_id).attr("src",src);
+				$(this).parent().find(".ult-youtube iframe").each(function(i,iframe){
+					var src = $(iframe).attr("src");
+					$(iframe).attr("src",'');
+					$(iframe).attr("src",src);
+				});
 			}
+			$('html').css({'overflow':'auto'});
+			$(document).trigger('onUVCModalPopUpClosed');
 		});
-		jQuery('.ult-overlay .ult_modal').click(function(event){
+
+		$(document).on('click', '.ult-overlay .ult_modal', function(event){
 			event.stopPropagation();
-		})
-		jQuery('.ult-overlay').click(function(event){
+		});
+
+		$(document).on('click', '.ult-overlay', function(event){
 			event.stopPropagation();
-			jQuery(this).find('.ult-overlay-close').trigger('click');
-		})
+			event.preventDefault();
+
+			$(this).find('.ult-overlay-close').trigger('click');
+			$('html').css({'overflow':'auto'});
+		});
 	})
 	function content_check(id){
-		var ch = jQuery('.'+id).find('.ult_modal-content').height();
-		var wh = jQuery(window).height();
+		var ch = $('.'+id).find('.ult_modal-content').height();
+		var wh = $(window).height();
 		if(ch>wh){
-			jQuery('.'+id).addClass('ult_modal-auto-top');
+			$('.'+id).addClass('ult_modal-auto-top');
 		}
 		else{
-			jQuery('.'+id).removeClass('ult_modal-auto-top');
+			$('.'+id).removeClass('ult_modal-auto-top');
 		}
+		if($('.'+id).find('iframe').length > 0)
+		{
+			$('.'+id).find('iframe').each(function(i,iframe){
+				$(iframe).attr('src', $(iframe).attr('src'));
+			});
+		}
+		$( document ).trigger( "onUVCModalPopupOpen", id );
 	}
-})();
+
+	function resize_modal_iframe()
+	{
+		$(".ult_modal-body iframe").each(function(index, element) {
+			var w = $(this).parent().width();
+			var small_modal = ($(this).parent().parent().parent().hasClass('ult-small')) ? true : false;
+			var medium_modal = ($(this).parent().parent().parent().hasClass('ult-medium')) ? true : false;
+			var large_modal = ($(this).parent().parent().parent().hasClass('ult-container')) ? true : false;
+			var block_modal = ($(this).parent().parent().parent().hasClass('ult-block')) ? true : false;
+
+			var c = w/10;
+			var h = (w*(9/16))+c;
+
+			var is_video = ($(this).parent().hasClass('ult-youtube') || $(this).parent().hasClass('ult-vimeo')) ? true : false;
+			if(!is_video)
+				return false;
+
+			if(large_modal)
+			{
+				var window_height = $(window).height();
+				if(window_height < h)
+					h = window_height - 100;
+			}
+
+			if(block_modal)
+			{
+				w = $(this).attr('width')
+				h = $(this).attr('height');
+				if( typeof w === 'undefined' || w == '')
+					w = 640;
+				if( typeof h === 'undefined' || h == '')
+					h = 360;
+			}
+
+			$(this).css({"width":w+"px","height":h+"px"});
+		});
+	}
+	$(document).on('onUVCModalPopupOpen',function(){
+		resize_modal_iframe();
+		$(window).trigger('resize');
+	});
+})(jQuery);

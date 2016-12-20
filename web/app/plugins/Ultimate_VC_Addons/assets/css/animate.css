@@ -1426,7 +1426,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 .animated.flip {
   -webkit-backface-visibility: visible;
-  -ms-backface-visibility: visible;
   backface-visibility: visible;
   -webkit-animation-name: flip;
   animation-name: flip;
@@ -1477,7 +1476,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 .flipInX {
   -webkit-backface-visibility: visible !important;
-  -ms-backface-visibility: visible !important;
   backface-visibility: visible !important;
   -webkit-animation-name: flipInX;
   animation-name: flipInX;
@@ -1528,7 +1526,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 .flipInY {
   -webkit-backface-visibility: visible !important;
-  -ms-backface-visibility: visible !important;
   backface-visibility: visible !important;
   -webkit-animation-name: flipInY;
   animation-name: flipInY;
@@ -1563,7 +1560,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   -webkit-animation-name: flipOutX;
   animation-name: flipOutX;
   -webkit-backface-visibility: visible !important;
-  -ms-backface-visibility: visible !important;
   backface-visibility: visible !important;
 }
 @-webkit-keyframes flipOutY {
@@ -1594,7 +1590,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 .flipOutY {
   -webkit-backface-visibility: visible !important;
-  -ms-backface-visibility: visible !important;
   backface-visibility: visible !important;
   -webkit-animation-name: flipOutY;
   animation-name: flipOutY;
@@ -2087,7 +2082,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 @-webkit-keyframes slideInDown {
   0% {
-    opacity: 0;
+    opacity: 1;
     -webkit-transform: translateY(-2000px);
     transform: translateY(-2000px);
   }
@@ -2099,7 +2094,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 @keyframes slideInDown {
   0% {
-    opacity: 0;
+    opacity: 1;
     -webkit-transform: translateY(-2000px);
     -ms-transform: translateY(-2000px);
     transform: translateY(-2000px);
@@ -2117,7 +2112,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 @-webkit-keyframes slideInLeft {
   0% {
-    opacity: 0;
+    opacity: 1;
     -webkit-transform: translateX(-2000px);
     transform: translateX(-2000px);
   }
@@ -2129,7 +2124,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 @keyframes slideInLeft {
   0% {
-    opacity: 0;
+    opacity: 1;
     -webkit-transform: translateX(-2000px);
     -ms-transform: translateX(-2000px);
     transform: translateX(-2000px);
@@ -2147,7 +2142,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 @-webkit-keyframes slideInRight {
   0% {
-    opacity: 0;
+    opacity: 1;
     -webkit-transform: translateX(2000px);
     transform: translateX(2000px);
   }
@@ -2159,7 +2154,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 @keyframes slideInRight {
   0% {
-    opacity: 0;
+    opacity: 1;
     -webkit-transform: translateX(2000px);
     -ms-transform: translateX(2000px);
     transform: translateX(2000px);
@@ -2182,7 +2177,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     transform: translateX(0);
   }
   100% {
-    opacity: 0;
+    opacity: 1;
     -webkit-transform: translateX(-2000px);
     transform: translateX(-2000px);
   }
@@ -2195,7 +2190,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     transform: translateX(0);
   }
   100% {
-    opacity: 0;
+    opacity: 1;
     -webkit-transform: translateX(-2000px);
     -ms-transform: translateX(-2000px);
     transform: translateX(-2000px);
@@ -2212,7 +2207,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     transform: translateX(0);
   }
   100% {
-    opacity: 0;
+    opacity: 1;
     -webkit-transform: translateX(2000px);
     transform: translateX(2000px);
   }
@@ -2225,7 +2220,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     transform: translateX(0);
   }
   100% {
-    opacity: 0;
+    opacity: 1;
     -webkit-transform: translateX(2000px);
     -ms-transform: translateX(2000px);
     transform: translateX(2000px);
@@ -2242,7 +2237,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     transform: translateY(0);
   }
   100% {
-    opacity: 0;
+    opacity: 1;
     -webkit-transform: translateY(-2000px);
     transform: translateY(-2000px);
   }
@@ -2255,7 +2250,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     transform: translateY(0);
   }
   100% {
-    opacity: 0;
+    opacity: 1;
     -webkit-transform: translateY(-2000px);
     -ms-transform: translateY(-2000px);
     transform: translateY(-2000px);
@@ -2267,7 +2262,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 @-webkit-keyframes slideInUp {
   0% {
-    opacity: 0;
+    opacity: 1;
     -webkit-transform: translateY(2000px);
     transform: translateY(2000px);
   }
@@ -2279,7 +2274,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 @keyframes slideInUp {
   0% {
-    opacity: 0;
+    opacity: 1;
     -webkit-transform: translateY(2000px);
     -ms-transform: translateY(2000px);
     transform: translateY(2000px);
@@ -2302,7 +2297,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     transform: translateY(0);
   }
   100% {
-    opacity: 0;
+    opacity: 1;
     -webkit-transform: translateY(2000px);
     transform: translateY(2000px);
   }
@@ -2315,7 +2310,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     transform: translateY(0);
   }
   100% {
-    opacity: 0;
+    opacity: 1;
     -webkit-transform: translateY(2000px);
     -ms-transform: translateY(2000px);
     transform: translateY(2000px);
@@ -2852,6 +2847,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 /*=======================================================================================================*/
 /*Infinite Animation*/
 .InfiniteRotate,
+.InfiniteRotateCounter,
 .InfiniteDangle,
 .InfiniteSwing,
 .InfinitePulse,
@@ -2866,10 +2862,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 .InfiniteHorizontalScaleFlip,
 .InfiniteVerticalScaleFlip {
 	-webkit-animation-iteration-count: infinite !important;
-	-moz-animation-iteration-count: infinite !important;
 	animation-iteration-count: infinite !important;
 	-webkit-backface-visibility: hidden;
-	-moz-backface-visibility: hidden;
 	backface-visibility: hidden;
 }
 /*Infinite Rotation*/
@@ -2883,15 +2877,40 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 @keyframes InfiniteRotate {
 	from {
+		-webkit-transform: rotate(0deg);
 		transform: rotate(0deg);
 	}
 	to {
+		-webkit-transform: rotate(359deg);
 		transform: rotate(359deg);
 	}
 }
 .InfiniteRotate {
 	-webkit-animation: InfiniteRotate;
 	animation: InfiniteRotate;
+}
+/*Infinite Rotation Counter*/
+@-webkit-keyframes InfiniteRotateCounter {
+	from {
+		-webkit-transform: rotate(359deg);
+	}
+	to {
+		-webkit-transform: rotate(0deg);
+	}
+}
+@keyframes InfiniteRotateCounter {
+	from {
+		-webkit-transform: rotate(359deg);
+		transform: rotate(359deg);
+	}
+	to {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+}
+.InfiniteRotateCounter {
+	-webkit-animation: InfiniteRotateCounter;
+	animation: InfiniteRotateCounter;
 }
 /*Infinite Dangle*/
 @-webkit-keyframes InfiniteDangle {
@@ -2904,9 +2923,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 @keyframes InfiniteDangle {
 	0%, 100% {
+		-webkit-transform: rotate(-4deg);
 		transform: rotate(-4deg);
 	}
 	50% {
+		-webkit-transform: rotate(4deg);
 		transform: rotate(4deg);
 	}
 }
@@ -2925,9 +2946,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 @keyframes InfinitePulse {
 	0%, 100% {
+		-webkit-transform: scale(1);
 		transform: scale(1);
 	}
 	50% {
+		-webkit-transform: scale(0.85);
 		transform: scale(0.85);
 	}
 }
@@ -2935,6 +2958,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	-webkit-animation: InfinitePulse;
 	animation: InfinitePulse;
 	-webkit-transform-origin: center;
+	-ms-transform-origin: center;
 	transform-origin: center;
 }
 /*Horizontal Shake*/
@@ -3256,7 +3280,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 .InfiniteHorizontalFlip {
 	-webkit-backface-visibility: visible;
-	-ms-backface-visibility: visible;
 	backface-visibility: visible;
 	-webkit-animation-name: InfiniteHorizontalFlip;
 	animation-name: InfiniteHorizontalFlip;
@@ -3286,7 +3309,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 .InfiniteVericalFlip {
 	-webkit-backface-visibility: visible;
-	-ms-backface-visibility: visible;
 	backface-visibility: visible;
 	-webkit-animation-name: InfiniteVericalFlip;
 	animation-name: InfiniteVericalFlip;
@@ -3363,7 +3385,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 .InfiniteHorizontalScaleFlip {
 	-webkit-backface-visibility: visible;
-	-ms-backface-visibility: visible;
 	backface-visibility: visible;
 	-webkit-animation-name: InfiniteHorizontalScaleFlip;
 	animation-name: InfiniteHorizontalScaleFlip;
@@ -3440,7 +3461,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 .InfiniteVerticalScaleFlip {
 	-webkit-backface-visibility: visible;
-	-ms-backface-visibility: visible;
 	backface-visibility: visible;
 	-webkit-animation-name: InfiniteVerticalScaleFlip;
 	animation-name: InfiniteVerticalScaleFlip;

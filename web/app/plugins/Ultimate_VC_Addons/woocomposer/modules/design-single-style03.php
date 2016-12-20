@@ -6,11 +6,11 @@ function WooComposer_Single_style03($atts){
 	$border_color = $border_size = $border_radius = $sale_price = $on_sale_alignment = $on_sale_style = $product_img_disp = '';
 	extract(shortcode_atts(array(
 		"product_id" => "",
-		"product_style" => "",
+		"product_style" => "style01",
 		"display_elements" => "",
 		"label_on_sale" => "Sale!",
 		"text_align" => "left",
-		"img_animate" => "",
+		"img_animate" => "rotate-clock",
 		"color_heading" => "",
 		"color_categories" => "",
 		"color_price" => "",
@@ -32,9 +32,9 @@ function WooComposer_Single_style03($atts){
 		"border_size" => "",
 		"border_radius" => "",
 		"sale_price" => "",
-		"on_sale_style" => "",
-		"on_sale_alignment" => "",
-		"product_img_disp" => "",
+		"on_sale_style" => "wcmp-sale-circle",
+		"on_sale_alignment" => "wcmp-sale-right",
+		"product_img_disp" => "single",
 	),$atts));
 	$output = $heading_style = $cat_style = $price_style = $cart_style = $cart_bg_style = $view_style = $view_bg_style = $rating_style = '';
 	$desc_style = $label_style = $border = $desc_style = $sale_price_size = '';

@@ -1,11 +1,13 @@
-jQuery(document).ready(function(e) {
+jQuery(window).load(function(e) {
 	var update = jQuery(".update-plugins");
-	var count = update.find(".update-count").text();
-	count = parseInt(count)+1;
-	update.removeClass("count-0").addClass("count-"+count);
-	update.find(".update-count").html(count);
-	jQuery("#wp-admin-bar-updates").find(".ab-label").html(count);
-	jQuery(".plugin-count").html(count);
+	
+	var plugin_counter = update.find(".plugin-count").html();
+	plugin_counter = parseInt(plugin_counter)+1;
+	jQuery(".plugin-count").html(plugin_counter);
+	
+	update.removeClass("count-0").addClass("count-"+plugin_counter);
+	update.find(".update-count").html(plugin_counter);
+	jQuery("#wp-admin-bar-updates").find(".ab-label").html(plugin_counter);
 	
 	jQuery("#ultimate-addons-for-visual-composer").addClass("update");
 	var html = '<tr class="plugin-update-tr">\

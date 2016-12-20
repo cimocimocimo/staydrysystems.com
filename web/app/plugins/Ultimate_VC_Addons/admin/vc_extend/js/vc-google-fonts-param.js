@@ -79,6 +79,7 @@ function process_vc_gfont_fields($select, random_num, is_font_change)
 	var $next_fstyler = ultimate_vc_gfonts_field.next('.wpb_el_type_ultimate_google_fonts_style').find('.ultimate_fstyle');	
 	if(typeof $next_fstyler != "undefined")
 	{		
+		$next_fstyler.html('<span class="spinner" style="display:inline-block; float:left;margin:0;visibility:visible"></span>');
 		var data = {
 			action : 'get_font_variants',
 			font_name : val

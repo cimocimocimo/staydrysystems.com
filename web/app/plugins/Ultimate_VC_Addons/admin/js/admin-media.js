@@ -33,7 +33,7 @@
 		options.input_target.val(selection.id).trigger('change')
 		$("body").trigger(options.trigger, [selection, options]);
 	}
-	$(document).ready(function () 
+	$(document).ready(function ()
 	{
 		$.SmileTrigger.media_new();
 		//Fonts Zip file upload
@@ -50,7 +50,8 @@ EXTRA FUNCTIONS, NOT NECESSARY FOR THE DEFAULT UPLOAD
 		options.input_target.val("");
 		var manager = $('.smile_iconfont_manager');
 		var msg = $('#msg');
-		if(selection.subtype !== 'zip')
+		var proceed = (selection.subtype == 'zip' || selection.subtype == 'x-zip') ? true : false;
+		if(proceed == false)
 		{
 			$('.spinner').hide();
 			msg.html("<div class='error'><p>Please upload a valid ZIP file.<br/>You can create the file on icomoon.io</p></div>");
@@ -64,7 +65,7 @@ EXTRA FUNCTIONS, NOT NECESSARY FOR THE DEFAULT UPLOAD
 		$.ajax({
 				type: "POST",
 				url: ajaxurl,
-				data: 
+				data:
 				{
 					action: 'smile_ajax_add_zipped_font',
 					values: selection,
@@ -116,7 +117,7 @@ EXTRA FUNCTIONS, NOT NECESSARY FOR THE DEFAULT UPLOAD
 		$.ajax({
 			type: "POST",
 			url: ajaxurl,
-			data: 
+			data:
 			{
 				action: 'smile_ajax_remove_zipped_font',
 				del_font: del_font,
@@ -159,7 +160,7 @@ EXTRA FUNCTIONS, NOT NECESSARY FOR THE DEFAULT UPLOAD
 				//msg.fadeOut('slow');
 			},
 			complete: function(response)
-			{	
+			{
 				//alert(response);
 			}
 		});
