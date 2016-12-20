@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	die( '-1' );
+}
+
 /**
  * Manage update messages and Plugins info for VC in default Wordpress plugins list.
  */
@@ -35,6 +39,7 @@ class Vc_Updating_Manager {
 	 * @var string
 	 */
 	protected $url = 'http://bit.ly/vcomposer';
+
 	/**
 	 * Initialize a new instance of the WordPress Auto-Update class
 	 *
@@ -51,26 +56,35 @@ class Vc_Updating_Manager {
 		$this->slug = str_replace( '.php', '', $t[1] );
 
 		// define the alternative API for updating checking
-		add_filter( 'pre_set_site_transient_update_plugins', array( &$this, 'check_update' ) );
+		add_filter( 'pre_set_site_transient_update_plugins', array(
+			$this,
+			'check_update',
+		) );
 
 		// Define the alternative response for information checking
-		add_filter( 'plugins_api', array( &$this, 'check_info' ), 10, 3 );
+		add_filter( 'plugins_api', array(
+			$this,
+			'check_info',
+		), 10, 3 );
 
-		add_action( 'in_plugin_update_message-' . vc_plugin_name(), array( &$this, 'addUpgradeMessageLink' ) );
+		add_action( 'in_plugin_update_message-' . vc_plugin_name(), array(
+			$this,
+			'addUpgradeMessageLink',
+		) );
 	}
 
 	/**
 	 * Add our self-hosted autoupdate plugin to the filter transient
 	 *
 	 * @param $transient
+	 *
 	 * @return object $ transient
 	 */
 	public function check_update( $transient ) {
-
-		if ( empty( $transient->checked ) ) {
+		// Extra check for 3rd plugins
+		if ( isset( $transient->response[ $this->plugin_slug ] ) ) {
 			return $transient;
 		}
-
 		// Get the remote version
 		$remote_version = $this->getRemote_version();
 
@@ -79,10 +93,10 @@ class Vc_Updating_Manager {
 			$obj = new stdClass();
 			$obj->slug = $this->slug;
 			$obj->new_version = $remote_version;
-			$obj->url = ''; // $this->update_path;
-			$obj->package = ''; // $this->update_path;
+			$obj->url = '';
+			$obj->package = vc_license()->isActivated();
 			$obj->name = vc_updater()->title;
-			$transient->response[$this->plugin_slug] = $obj;
+			$transient->response[ $this->plugin_slug ] = $obj;
 		}
 
 		return $transient;
@@ -91,9 +105,10 @@ class Vc_Updating_Manager {
 	/**
 	 * Add our self-hosted description to the filter
 	 *
-	 * @param boolean $false
+	 * @param bool $false
 	 * @param array $action
 	 * @param object $arg
+	 *
 	 * @return bool|object
 	 */
 	public function check_info( $false, $action, $arg ) {
@@ -107,12 +122,15 @@ class Vc_Updating_Manager {
 			$array_replace = array(
 				'<h4>$2</h4>',
 				'</div><div>',
-				'</div><div>'
+				'</div><div>',
 			);
 			$information->name = vc_updater()->title;
+			$information->sections = (array) $information->sections;
 			$information->sections['changelog'] = '<div>' . preg_replace( $array_pattern, $array_replace, $information->sections['changelog'] ) . '</div>';
+
 			return $information;
 		}
+
 		return $false;
 	}
 
@@ -122,10 +140,11 @@ class Vc_Updating_Manager {
 	 * @return string $remote_version
 	 */
 	public function getRemote_version() {
-		$request = wp_remote_post( $this->update_path, array( 'body' => array( 'action' => 'version' ) ) );
+		$request = wp_remote_get( $this->update_path );
 		if ( ! is_wp_error( $request ) || wp_remote_retrieve_response_code( $request ) === 200 ) {
 			return $request['body'];
 		}
+
 		return false;
 	}
 
@@ -135,39 +154,24 @@ class Vc_Updating_Manager {
 	 * @return bool|object
 	 */
 	public function getRemote_information() {
-		$request = wp_remote_post( $this->update_path, array( 'body' => array( 'action' => 'info' ) ) );
+		$request = wp_remote_get( $this->update_path.'information.json' );
 		if ( ! is_wp_error( $request ) || wp_remote_retrieve_response_code( $request ) === 200 ) {
-			return unserialize( base64_decode( $request['body'] ) );
+			return json_decode( $request['body'] );
 		}
+
 		return false;
 	}
 
 	/**
-	 * Return the status of the plugin licensing
-	 *
-	 * @return boolean $remote_license
-	 */
-	public function getRemote_license() {
-		$request = wp_remote_post( $this->update_path, array( 'body' => array( 'action' => 'license' ) ) );
-		if ( ! is_wp_error( $request ) || wp_remote_retrieve_response_code( $request ) === 200 ) {
-			return $request['body'];
-		}
-		return false;
-	}
-	/**
 	 * Shows message on Wp plugins page with a link for updating from envato.
 	 */
 	public function addUpgradeMessageLink() {
-		$username = vc_settings()->get( 'envato_username' );
-		$api_key = vc_settings()->get( 'envato_api_key' );
-		$purchase_code = vc_settings()->get( 'js_composer_purchase_code' );
-		echo '<style type="text/css" media="all">tr#wpbakery-visual-composer + tr.plugin-update-tr a.thickbox + em { display: none; }</style>';
-		if ( empty( $username ) || empty( $api_key ) || empty( $purchase_code ) ) {
-			echo ' <a href="' . $this->url . '">' . __( 'Download new version from CodeCanyon.', 'js_composer' ) . '</a>';
-		} else {
-			// update.php?action=upgrade-plugin&plugin=testimonials-widget%2Ftestimonials-widget.php&_wpnonce=6178d48b6e
-			// echo '<a href="' . wp_nonce_url( admin_url( 'plugins.php?vc_action=vc_upgrade' ) ) . '">' . __( 'Update Visual Composer now.', 'js_composer' ) . '</a>';
-			echo '<a href="' . wp_nonce_url( admin_url( 'update.php?action=upgrade-plugin&plugin='.vc_plugin_name() ), 'upgrade-plugin_'.vc_plugin_name() ) . '">' . __( 'Update Visual Composer now.', 'js_composer' ) . '</a>';
+		$is_activated = vc_license()->isActivated();
+		if ( ! $is_activated ) {
+			$url = esc_url( vc_updater()->getUpdaterUrl() );
+			$redirect = sprintf( '<a href="%s" target="_blank">%s</a>', $url, __( 'settings', 'js_composer' ) );
+
+			echo sprintf( ' ' . __( 'To receive automatic updates license activation is required. Please visit %s to activate your Visual Composer.', 'js_composer' ), $redirect ) . sprintf( ' <a href="http://go.wpbakery.com/faq-update-in-theme" target="_blank">%s</a>', __( 'Got Visual Composer in theme?', 'js_composer' ) );
 		}
 	}
 }

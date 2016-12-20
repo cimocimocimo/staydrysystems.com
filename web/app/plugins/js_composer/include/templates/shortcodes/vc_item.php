@@ -1,9 +1,19 @@
 <?php
-$output = $el_class = $width = '';
-extract( shortcode_atts( array(
-	'el_class' => '',
-), $atts ) );
+if ( ! defined( 'ABSPATH' ) ) {
+	die( '-1' );
+}
 
-$el_class = $this->getExtraClass( $el_class );
+/**
+ * Shortcode attributes
+ * @var $atts
+ * @var $el_class
+ * Shortcode class
+ * @var $this WPBakeryShortCode
+ */
+$el_class = '';
+$atts = vc_map_get_attributes( $this->getShortcode(), $atts );
+extract( $atts );
 
-echo '<div class="vc-items' . $el_class . '">' . __( 'Item', "js_composer" ) . '</div>';
+$css = $this->getExtraClass( $el_class );
+
+echo '<div class="vc_items' . esc_attr( $css ) . '">' . __( 'Item', 'js_composer' ) . '</div>';

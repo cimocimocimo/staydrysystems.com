@@ -1,15 +1,18 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	die( '-1' );
+}
+
 /**
  * WPBakery Visual Composer shortcodes
  *
  * @package WPBakeryVisualComposer
  *
  */
-
 class WPBakeryShortCode_VC_Button extends WPBakeryShortCode {
+	protected function outputTitle( $title ) {
+		$icon = $this->settings( 'icon' );
 
-
-	public function outputTitle( $title ) {
-		return '';
+		return '<h4 class="wpb_element_title"><span class="vc_general vc_element-icon' . ( ! empty( $icon ) ? ' ' . $icon : '' ) . '"></span></h4>';
 	}
 }
