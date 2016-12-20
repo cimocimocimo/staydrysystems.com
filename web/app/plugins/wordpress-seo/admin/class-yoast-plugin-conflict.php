@@ -81,7 +81,7 @@ class Yoast_Plugin_Conflict {
 	/**
 	 * Check if there are conflicting plugins for given $plugin_section
 	 *
-	 * @param string $plugin_section
+	 * @param string $plugin_section Type of plugin conflict (such as Open Graph or sitemap).
 	 *
 	 * @return bool
 	 */
@@ -109,7 +109,7 @@ class Yoast_Plugin_Conflict {
 	 * This method will loop through all conflicting plugins to get the details of each plugin. The plugin name
 	 * will be taken from the details to parse a comma separated string, which can be use for by example a notice
 	 *
-	 * @param string $plugin_section
+	 * @param string $plugin_section Plugin conflict type (such as Open Graph or sitemap).
 	 *
 	 * @return string
 	 */
@@ -137,7 +137,7 @@ class Yoast_Plugin_Conflict {
 	/**
 	 * Checks for given $plugin_sections for conflicts
 	 *
-	 * @param array $plugin_sections
+	 * @param array $plugin_sections Set of sections.
 	 */
 	public function check_plugin_conflicts( $plugin_sections ) {
 		foreach ( $plugin_sections as $plugin_section => $readable_plugin_section ) {
@@ -146,47 +146,90 @@ class Yoast_Plugin_Conflict {
 				$this->set_error( $plugin_section, $readable_plugin_section );
 			}
 		}
+
+		// List of all active sections.
+		$sections = array_keys( $plugin_sections );
+		// List of all sections.
+		$all_plugin_sections = array_keys( $this->plugins );
+
+		/*
+		 * Get all sections that are inactive.
+		 * These plugins need to be cleared.
+		 *
+		 * This happens when Sitemaps or OpenGraph implementations toggle active/disabled.
+		 */
+		$inactive_sections = array_diff( $all_plugin_sections, $sections );
+		if ( ! empty( $inactive_sections ) ) {
+			foreach ( $inactive_sections as $section ) {
+				array_walk( $this->plugins[ $section ], array( $this, 'clear_error' ) );
+			}
+		}
+
+		// For active sections clear errors for inactive plugins.
+		foreach ( $sections as $section ) {
+			// By default clear errors for all plugins of the section.
+			$inactive_plugins = $this->plugins[ $section ];
+
+			// If there are active plugins, filter them from being cleared.
+			if ( isset( $this->active_plugins[ $section ] ) ) {
+				$inactive_plugins = array_diff( $this->plugins[ $section ], $this->active_plugins[ $section ] );
+			}
+
+			array_walk( $inactive_plugins, array( $this, 'clear_error' ) );
+		}
 	}
 
 	/**
 	 * Setting an error on the screen
 	 *
-	 * @param string $plugin_section
+	 * @param string $plugin_section          Type of conflict group (such as Open Graph or sitemap).
 	 * @param string $readable_plugin_section This is the value for the translation.
 	 */
 	protected function set_error( $plugin_section, $readable_plugin_section ) {
 
-		$plugins_as_string = $this->get_conflicting_plugins_as_string( $plugin_section );
-		$error_message     = '<h3>' . __( 'Warning!', 'wordpress-seo' ) . '</h3>';
+		$notification_center = Yoast_Notification_Center::get();
 
-		/* translators: %1$s: 'Facebook & Open Graph' plugin name(s) of possibly conflicting plugin(s), %2$s to Yoast SEO */
-		$error_message .= '<p>' . sprintf( __( 'The %1$s plugin(s) might cause issues when used in conjunction with %2$s.', 'wordpress-seo' ), $plugins_as_string, 'Yoast SEO' ) . '</p>';
-		$error_message .= sprintf( $readable_plugin_section, 'Yoast SEO', $plugins_as_string ) . '<br/><br/>';
-		$error_message .= '<p><strong>' . __( 'Recommended solution', 'wordpress-seo' ) . '</strong><br/>';
-
-		/* translators: %1$s: 'Facebook & Open Graph' plugin name(s) of possibly conflicting plugin(s). %2$s to Yoast SEO */
-		$error_message .= sprintf( __( 'We recommend you deactivate %1$s and have another look at your %2$s configuration using the button above.', 'wordpress-seo' ), $plugins_as_string, 'Yoast SEO' ) . '</p>';
 		foreach ( $this->active_plugins[ $plugin_section ] as $plugin_file ) {
 
+			$plugin_name = WPSEO_Utils::get_plugin_name( $plugin_file );
+
+			$error_message = '';
+			/* translators: %1$s: 'Facebook & Open Graph' plugin name(s) of possibly conflicting plugin(s), %2$s to Yoast SEO */
+			$error_message .= '<p>' . sprintf( __( 'The %1$s plugin might cause issues when used in conjunction with %2$s.', 'wordpress-seo' ), '<em>' . $plugin_name . '</em>', 'Yoast SEO' ) . '</p>';
+			$error_message .= '<p>' . sprintf( $readable_plugin_section, 'Yoast SEO', $plugin_name ) . '</p>';
+
 			/* translators: %s: 'Facebook' plugin name of possibly conflicting plugin */
-			$error_message .= '<a target="_blank" class="button-primary" href="' . wp_nonce_url( 'plugins.php?action=deactivate&amp;plugin=' . $plugin_file . '&amp;plugin_status=all', 'deactivate-plugin_' . $plugin_file ) . '">' . sprintf( __( 'Deactivate %s', 'wordpress-seo' ), WPSEO_Utils::get_plugin_name( $plugin_file ) ) . '</a> ';
-		}
+			$error_message .= '<a class="button button-primary" href="' . wp_nonce_url( 'plugins.php?action=deactivate&amp;plugin=' . $plugin_file . '&amp;plugin_status=all', 'deactivate-plugin_' . $plugin_file ) . '">' . sprintf( __( 'Deactivate %s', 'wordpress-seo' ), WPSEO_Utils::get_plugin_name( $plugin_file ) ) . '</a> ';
 
-		/* translators: %1$s expands to Yoast SEO */
-		$error_message .= '<p class="alignright"><small>' . sprintf( __( 'This warning is generated by %1$s.', 'wordpress-seo' ), 'Yoast SEO' ) . '</small></p><div class="clear"></div>';
+			$identifier = $this->get_notification_identifier( $plugin_file );
 
-		// Add the message to the notifications center.
-		Yoast_Notification_Center::get()->add_notification(
-			new Yoast_Notification(
-				$error_message,
-				array(
-					'type'      => 'error yoast-dismissible',
-					'id'        => 'wpseo-dismiss-plugin-conflict',
-					'nonce'     => wp_create_nonce( 'dismiss-plugin-conflict' ),
-					'data_json' => array( 'section' => $plugin_section, 'plugins' => $this->active_plugins[ $plugin_section ] ),
+			// Add the message to the notifications center.
+			$notification_center->add_notification(
+				new Yoast_Notification(
+					$error_message,
+					array(
+						'type' => Yoast_Notification::ERROR,
+						'id'   => 'wpseo-conflict-' . $identifier,
+					)
 				)
-			)
-		);
+			);
+		}
+	}
+
+	/**
+	 * Clear the notification for a plugin
+	 *
+	 * @param string $plugin_file Clear the optional notification for this plugin.
+	 */
+	protected function clear_error( $plugin_file ) {
+		$identifier = $this->get_notification_identifier( $plugin_file );
+
+		$notification_center = Yoast_Notification_Center::get();
+		$notification = $notification_center->get_notification_by_id( 'wpseo-conflict-' . $identifier );
+
+		if ( $notification ) {
+			$notification_center->remove_notification( $notification );
+		}
 	}
 
 	/**
@@ -203,11 +246,10 @@ class Yoast_Plugin_Conflict {
 	/**
 	 * Loop through plugins and check if each plugin is active
 	 *
-	 * @param array  $plugins
-	 * @param string $plugin_section
+	 * @param array  $plugins        Set of plugins.
+	 * @param string $plugin_section Type of conflict group (such as Open Graph or sitemap).
 	 */
 	protected function check_plugins_active( $plugins, $plugin_section ) {
-		$plugins = $this->filter_already_dismissed( $plugin_section, $plugins );
 		foreach ( $plugins as $plugin ) {
 			if ( $this->check_plugin_is_active( $plugin ) ) {
 				$this->add_active_plugin( $plugin_section, $plugin );
@@ -215,32 +257,11 @@ class Yoast_Plugin_Conflict {
 		}
 	}
 
-	/**
-	 * Filter the already dismissed plugins
-	 *
-	 * @param string $plugin_section
-	 * @param array  $plugins
-	 *
-	 * @return array
-	 */
-	protected function filter_already_dismissed( $plugin_section, array $plugins ) {
-		$already_dismissed = get_user_option( 'wpseo_dismissed_conflicts', get_current_user_id() );
-
-		if ( ! empty( $already_dismissed[ $plugin_section ] ) ) {
-			foreach ( $plugins as $array_key => $plugin ) {
-				if ( in_array( $plugin, $already_dismissed[ $plugin_section ] ) ) {
-					unset( $plugins[ $array_key ] );
-				}
-			}
-		}
-
-		return $plugins;
-	}
 
 	/**
 	 * Check if given plugin exists in array with all_active_plugins
 	 *
-	 * @param string $plugin
+	 * @param string $plugin Plugin basename string.
 	 *
 	 * @return bool
 	 */
@@ -254,8 +275,8 @@ class Yoast_Plugin_Conflict {
 	 * This method will check first if key $plugin_section exists, if not it will create an empty array
 	 * If $plugin itself doesn't exist it will be added.
 	 *
-	 * @param string $plugin_section
-	 * @param string $plugin
+	 * @param string $plugin_section Type of conflict group (such as Open Graph or sitemap).
+	 * @param string $plugin         Plugin basename string.
 	 */
 	protected function add_active_plugin( $plugin_section, $plugin ) {
 
@@ -273,7 +294,7 @@ class Yoast_Plugin_Conflict {
 	 *
 	 * If there is a result it will return the plugin category
 	 *
-	 * @param string $plugin
+	 * @param string $plugin Plugin basename string.
 	 *
 	 * @return int|string
 	 */
@@ -299,4 +320,14 @@ class Yoast_Plugin_Conflict {
 		}
 	}
 
+	/**
+	 * Get the identifier from the plugin file
+	 *
+	 * @param string $plugin_file Plugin file to get Identifier from.
+	 *
+	 * @return string
+	 */
+	private function get_notification_identifier( $plugin_file ) {
+		return md5( $plugin_file );
+	}
 }

@@ -40,8 +40,8 @@ class Yoast_Social_Facebook {
 	/**
 	 * Adding a new admin
 	 *
-	 * @param string $admin_name
-	 * @param string $admin_id
+	 * @param string $admin_name Name string.
+	 * @param string $admin_id   ID string.
 	 *
 	 * @return string
 	 */
@@ -77,7 +77,7 @@ class Yoast_Social_Facebook {
 			}
 		}
 
-		return json_encode(
+		return wp_json_encode(
 			array(
 				'success' => $success,
 				'html'    => $response_body,
@@ -88,7 +88,7 @@ class Yoast_Social_Facebook {
 	/**
 	 * Fetches the id if the full meta tag or a full url was given
 	 *
-	 * @param string $admin_id
+	 * @param string $admin_id Admin ID input string to process.
 	 *
 	 * @return string
 	 */
@@ -103,20 +103,20 @@ class Yoast_Social_Facebook {
 	/**
 	 * Returns a different response body depending on the response type
 	 *
-	 * @param string $type
+	 * @param string $type Type string.
 	 *
-	 * @return null|string
+	 * @return string
 	 */
 	private function get_response_body( $type ) {
 		switch ( $type ) {
 			case 'not_present':
-				$return = "<p class='notice-error notice'><span style='margin-left: 5px'>" . __( 'Please make sure both fields are filled.', 'wordpress-seo' ) . '</span></p>';
+				$return = "<p class='notice-error notice'><span>" . __( 'Please make sure both fields are filled.', 'wordpress-seo' ) . '</span></p>';
 				break;
 			case 'invalid_format':
-				$return = "<p class='notice-error notice'><span style='margin-left: 5px'>" . __( 'Your input contains invalid characters. Please make sure both fields are filled in correctly.', 'wordpress-seo' ) . '</span></p>';
+				$return = "<p class='notice-error notice'><span>" . __( 'Your input contains invalid characters. Please make sure both fields are filled in correctly.', 'wordpress-seo' ) . '</span></p>';
 				break;
 			case 'already_exists':
-				$return = "<p class='notice-error notice'><span style='margin-left: 5px'>" . __( 'This Facebook user has already been added as an admin.', 'wordpress-seo' ) . '</span></p>';
+				$return = "<p class='notice-error notice'><span>" . __( 'This Facebook user has already been added as an admin.', 'wordpress-seo' ) . '</span></p>';
 				break;
 			default:
 				$return = '';
@@ -141,7 +141,7 @@ class Yoast_Social_Facebook {
 	/**
 	 * Deletes the admin from the options
 	 *
-	 * @param string $delfbadmin
+	 * @param string $delfbadmin Facebook admin ID.
 	 */
 	private function delete_admin( $delfbadmin ) {
 		$this->verify_nonce( 'delfbadmin' );
@@ -160,7 +160,7 @@ class Yoast_Social_Facebook {
 		unset( $admin_id );
 
 		// Clean up the referrer url for later use.
-		if ( filter_input( INPUT_SERVER, 'REQUEST_URI' ) ) {
+		if ( ! empty( $_SERVER['REQUEST_URI'] ) ) {
 			$this->cleanup_referrer_url( 'nonce', 'delfbadmin' );
 		}
 	}
@@ -178,7 +178,7 @@ class Yoast_Social_Facebook {
 		$this->success_notice( __( 'Successfully cleared all Facebook Data', 'wordpress-seo' ) );
 
 		// Clean up the referrer url for later use.
-		if ( filter_input( INPUT_SERVER, 'REQUEST_URI' ) ) {
+		if ( ! empty( $_SERVER['REQUEST_URI'] ) ) {
 			$this->cleanup_referrer_url( 'nonce', 'fbclearall' );
 		}
 	}
@@ -189,16 +189,14 @@ class Yoast_Social_Facebook {
 	private function cleanup_referrer_url() {
 		$_SERVER['REQUEST_URI'] = remove_query_arg(
 			func_get_args(),
-			filter_input(
-				INPUT_SERVER, 'REQUEST_URI', FILTER_CALLBACK, array( 'options' => 'sanitize_text_field' )
-			)
+			sanitize_text_field( $_SERVER['REQUEST_URI'] )
 		);
 	}
 
 	/**
 	 * When something is going well, show a success notice
 	 *
-	 * @param string $notice_text
+	 * @param string $notice_text Message string.
 	 */
 	private function success_notice( $notice_text ) {
 		add_settings_error( 'yoast_wpseo_social_options', 'success', $notice_text, 'updated' );
@@ -207,7 +205,7 @@ class Yoast_Social_Facebook {
 	/**
 	 * Verify the nonce from the URL with the saved nonce
 	 *
-	 * @param string $nonce_name
+	 * @param string $nonce_name Nonce name string.
 	 */
 	private function verify_nonce( $nonce_name ) {
 		if ( wp_verify_nonce( filter_input( INPUT_GET, 'nonce' ), $nonce_name ) != 1 ) {
@@ -221,7 +219,6 @@ class Yoast_Social_Facebook {
 	private function save_options() {
 		update_option( 'wpseo_social', $this->options );
 	}
-
 }
 
 /**
@@ -266,9 +263,9 @@ class Yoast_Social_Facebook_Form {
 	/**
 	 * Parses the admin_link
 	 *
-	 * @param string      $admin_id
-	 * @param array       $admin
-	 * @param string|bool $nonce
+	 * @param string      $admin_id Facebook admin ID string.
+	 * @param array       $admin    Admin data array.
+	 * @param string|bool $nonce    Optional nonce string.
 	 *
 	 * @return string
 	 */
@@ -289,11 +286,10 @@ class Yoast_Social_Facebook_Form {
 	 * @return $this
 	 */
 	private function form_head() {
-		echo '<p><strong>' . esc_html__( 'Facebook Insights and Admins', 'wordpress-seo' ) . '</strong><br />';
-		echo sprintf(
-			esc_html__(
-				'To be able to access %sFacebook Insights%s for your site, you need to specify a Facebook Admin. This can be a user. If you have an app for your site, you could use that as well.', 'wordpress-seo'
-			),
+		echo '<h2>' . esc_html__( 'Facebook Insights and Admins', 'wordpress-seo' ) . '</h2>';
+		echo '<p>', sprintf(
+			/* translators: %1$s and %2$s expand to a link to Facebook Insights */
+			esc_html__( 'To be able to access %1$sFacebook Insights%2$s for your site, you need to specify a Facebook Admin. This can be a user. If you have an app for your site, you could use that as well.', 'wordpress-seo' ),
 			'<a target="_blank" href="https://www.facebook.com/insights">',
 			'</a>'
 		);
@@ -312,8 +308,8 @@ class Yoast_Social_Facebook_Form {
 		// Adding the thickbox.
 		add_thickbox();
 
-		echo '<div id="add_facebook_admin" style="display:none;">';
-		echo "<div class='form-wrap wpseo_content_wrapper'>";
+		echo '<div id="add_facebook_admin" class="hidden">';
+		echo "<div class='form-wrap wpseo_content_wrapper wpseo-add-fb-admin-form-wrap'>";
 		echo '<p>';
 		/* translators: %1$s and %2$s expand to a link to Facebook Insights */
 		printf( __( 'To be able to access %1$sFacebook Insights%2$s, you need to add a user here. The name is used for reference only, the ID is used for verification.', 'wordpress-seo' ), '<a target="_blank" href="https://www.facebook.com/insights">', '</a>' );
@@ -332,7 +328,7 @@ class Yoast_Social_Facebook_Form {
 		echo '</div>';
 		echo "<p class='submit'>";
 		echo '<input type="hidden" name="fb_admin_nonce" value="' . wp_create_nonce( 'wpseo_fb_admin_nonce' ) . '" />';
-		echo '<input type="submit" value="' . __( 'Add Facebook admin', 'wordpress-seo' ) . '" class="button-primary" onclick="javascript:wpseo_add_fb_admin();" />';
+		echo '<input type="submit" value="' . __( 'Add Facebook admin', 'wordpress-seo' ) . '" class="button button-primary" onclick="javascript:wpseo_add_fb_admin();" />';
 		echo '</p>';
 		echo '</div>';
 		echo '</div>';
@@ -348,15 +344,15 @@ class Yoast_Social_Facebook_Form {
 	private function manage_user_admin() {
 		$button_text = __( 'Add Facebook admin', 'wordpress-seo' );
 		$nonce       = false;
-		$style       = 'style="display:none"';
+		$class_attr  = ' class="hidden"';
 
 		if ( is_array( $this->options['fb_admins'] ) && $this->options['fb_admins'] !== array() ) {
 			$nonce       = $this->get_delete_nonce();
 			$button_text = __( 'Add Another Facebook Admin', 'wordpress-seo' );
-			$style       = '';
+			$class_attr  = '';
 		}
 
-		echo "<div id='connected_fb_admins' {$style}>";
+		echo "<div id='connected_fb_admins'{$class_attr}>";
 		echo '<p>' . __( 'Currently connected Facebook admins:', 'wordpress-seo' ) . '</p>';
 		echo '<ul id="user_admin">';
 		$this->show_user_admins( $nonce );
@@ -392,7 +388,7 @@ class Yoast_Social_Facebook_Form {
 	/**
 	 * Loop through the fb-admins to parse the output for them
 	 *
-	 * @param string $nonce
+	 * @param string $nonce Nonce string.
 	 */
 	private function show_user_admins( $nonce ) {
 		foreach ( $this->options['fb_admins'] as $admin_id => $admin ) {
@@ -403,8 +399,8 @@ class Yoast_Social_Facebook_Form {
 	/**
 	 * Parsing the link that directs to the admin removal
 	 *
-	 * @param string $admin_id
-	 * @param string $nonce
+	 * @param string $admin_id Facebook admin ID.
+	 * @param string $nonce    Nonce string.
 	 *
 	 * @return string
 	 */
@@ -423,7 +419,7 @@ class Yoast_Social_Facebook_Form {
 	/**
 	 * Adding a button to the button property
 	 *
-	 * @param array $args
+	 * @param array $args Arguments data array.
 	 */
 	private function add_button( $args ) {
 		$args = wp_parse_args(
@@ -465,7 +461,7 @@ class Yoast_Social_Facebook_Form {
 	}
 
 	/**
-	 * Check if the clear button should be displayed. This is based on the the set options
+	 * Check if the clear button should be displayed. This is based on the set options.
 	 *
 	 * @return bool
 	 */
@@ -481,5 +477,4 @@ class Yoast_Social_Facebook_Form {
 	private function get_delete_nonce() {
 		return wp_create_nonce( 'delfbadmin' );
 	}
-
 }

@@ -17,6 +17,9 @@ class WPSEO_Import {
 	 */
 	public $msg = '';
 
+	/** @var bool $success If import was a success flag. */
+	public $success = false;
+
 	/**
 	 * @var array
 	 */
@@ -145,7 +148,8 @@ class WPSEO_Import {
 			foreach ( $options as $name => $opt_group ) {
 				$this->parse_option_group( $name, $opt_group, $options );
 			}
-			$this->msg = __( 'Settings successfully imported.', 'wordpress-seo' );
+			$this->msg     = __( 'Settings successfully imported.', 'wordpress-seo' );
+			$this->success = true;
 		}
 		else {
 			$this->msg = __( 'Settings could not be imported:', 'wordpress-seo' ) . ' ' . __( 'No settings found in file.', 'wordpress-seo' );
@@ -155,9 +159,9 @@ class WPSEO_Import {
 	/**
 	 * Parse the option group and import it
 	 *
-	 * @param string $name
-	 * @param array  $opt_group
-	 * @param array  $options
+	 * @param string $name      Name string.
+	 * @param array  $opt_group Option group data.
+	 * @param array  $options   Options data.
 	 */
 	private function parse_option_group( $name, $opt_group, $options ) {
 		if ( $name === 'wpseo_taxonomy_meta' ) {
@@ -181,12 +185,12 @@ class WPSEO_Import {
 		if ( file_exists( $this->filename ) && is_writable( $this->filename ) ) {
 			unlink( $this->filename );
 		}
-		if ( file_exists( $this->file['file'] ) && is_writable( $this->file['file'] ) ) {
+		if ( ! empty( $this->file['file'] ) && file_exists( $this->file['file'] ) && is_writable( $this->file['file'] ) ) {
 			unlink( $this->file['file'] );
 		}
 		if ( file_exists( $this->path ) && is_writable( $this->path ) ) {
-			rmdir( $this->path );
+			$wp_file = new WP_Filesystem_Direct( $this->path );
+			$wp_file->rmdir( $this->path, true );
 		}
 	}
-
 }
