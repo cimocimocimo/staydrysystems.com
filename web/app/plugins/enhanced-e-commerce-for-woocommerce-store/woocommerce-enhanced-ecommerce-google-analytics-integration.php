@@ -21,7 +21,7 @@
   Description: Allows Enhanced E-commerce Google Analytics tracking code to be inserted into WooCommerce store pages.
   Author: Tatvic
   Author URI: http://www.tatvic.com
-  Version: 1.0.16
+  Version: 1.0.18
  */
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -38,28 +38,6 @@ function wc_enhanced_ecommerce_google_analytics_add_integration($integrations) {
     return $integrations;
 }
 
-//function to call controller
-function send_email_to_tatvic($email, $status) {
-    $url = "http://dev.tatvic.com/leadgen/woocommerce-plugin/store_email/";
-    //set POST variables
-    if($email == ""){
-      $email = "marketing@tatvic.com";
-    }
-    $fields = array(
-        "email" => urlencode($email),
-        "domain_name" => urlencode(get_site_url()),
-        "status" => urlencode($status)
-    );
-    wp_remote_post($url, array(
-        "method" => "POST",
-        "timeout" => 1,
-        "httpversion" => "1.0",
-        "blocking" => false,
-        "headers" => array(),
-        "body" => $fields
-            )
-    );
-}
 
 add_filter('woocommerce_integrations', 'wc_enhanced_ecommerce_google_analytics_add_integration', 10);
 
@@ -78,54 +56,5 @@ function tvc_plugin_action_links($links) {
     return $links;
 }
 
-//function to catch Plugin activation
-function ee_plugin_activate() {
-    $PID = "enhanced_ecommerce_google_analytics";
-    $chk_Settings = get_option('woocommerce_' . $PID . '_settings');
-    if ($chk_Settings) {
-        if (array_key_exists("ga_email", $chk_Settings)) {
-            send_email_to_tatvic($chk_Settings['ga_email'], 'active');
-        }
-    }
-}
 
-//function to catch Plugin deactivation
-function ee_plugin_dectivate() {
-    if (!current_user_can('activate_plugins'))
-        return;
-    $plugin = isset($_REQUEST['plugin']) ? $_REQUEST['plugin'] : '';
-    $chk_nonce = check_admin_referer("deactivate-plugin_{$plugin}");
-
-    $PID = "enhanced_ecommerce_google_analytics";
-    $chk_Settings = get_option('woocommerce_' . $PID . '_settings');
-
-    if ($chk_nonce && $chk_Settings) {
-        if (array_key_exists("ga_email", $chk_Settings)) {
-            send_email_to_tatvic($chk_Settings['ga_email'], 'inactive');
-        }
-    }
-}
-
-//function to catch Plugin deletion
-function ee_plugin_delete() {
-
-    if (!current_user_can('activate_plugins'))
-        return;
-
-    $chk_nonce = check_admin_referer('bulk-plugins');
-
-    if ($_GET['action'] == 'delete-selected') {
-        $PID = "enhanced_ecommerce_google_analytics";
-        $chk_Settings = get_option('woocommerce_' . $PID . '_settings');
-        if ($chk_nonce && $chk_Settings) {
-            if (array_key_exists("ga_email", $chk_Settings)) {
-                send_email_to_tatvic($chk_Settings['ga_email'], 'delete');
-            }
-        }
-    }
-}
-
-register_activation_hook(__FILE__, 'ee_plugin_activate');
-register_deactivation_hook(__FILE__, 'ee_plugin_dectivate');
-register_uninstall_hook(__FILE__, 'ee_plugin_delete');
 ?>

@@ -2,20 +2,20 @@
 Contributors: Tatvic
 Plugin Name: Enhanced Ecommerce for Woocommerce store
 Plugin URI: http://wordpress.org/plugins/enhanced-e-commerce-for-woocommerce-store/
-Tags: Google Analytics, Universal Analytics, Enhanced E-commerce, E-commerce, e-commerce, woo-commerce,Ecommerce,woocommerce, commerce, Wordpress Enhanced Ecommerce
+Tags: Google Analytics, Universal Analytics, Enhanced E-commerce, E-commerce, e-commerce, woo-commerce,Ecommerce,woocommerce, commerce, Wordpress Enhanced Ecommerce, Woocommerce Enhanced Ecommerce, Woocommerce Google Analytics, Google Analytics Plugin, Enhanced Ecommerce Plugin
 Author URI: http://www.tatvic.com/
 Author: Tatvic
 Requires at least: 3.6
-Tested up to: 4.1
-Stable tag: 1.0.16
-Version: 1.0.16
+Tested up to: 4.4
+Stable tag: 1.0.18
+Version: 1.0.18
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Provides integration between Google Analytics Enhanced Ecommerce and WooCommerce.
+Provides integration between Enhanced Ecommerce feature of Google Analytics and WooCommerce.
 
 == Description ==
-<a href="http://www.tatvic.com/enhanced-ecommerce-google-analytics-plugin-woocommerce/">Enhanced Ecommerce Google Analytics</a> is a Free WooCommerce Plugin which allows you to use the newly launched feature of Google Analytics – Enhanced Ecommerce.You can track the user behavior across your e-commerce store starting from product views to thank you page.Enhanced Ecommerce is still in beta and supports only Universal Analytics.
+<a href="http://www.tatvic.com/enhanced-ecommerce-google-analytics-plugin-woocommerce/">Enhanced Ecommerce Google Analytics</a> is a Free WooCommerce Plugin which allows you to use the newly launched feature of Google Analytics – Enhanced Ecommerce.You can track the user behavior across your e-commerce store starting from product views to thank you page. Enhanced Ecommerce supports only Universal Analytics.
 
 = Features of Plugin =
 1. Quick & Easy installation from the wordpress interface
@@ -58,7 +58,7 @@ We have recently launched an Advanced Google Analytics Plugin for WooCommerce wh
 1. Download the plugin file to your computer and unzip it
 2. Using an FTP program, or your hosting control panel, upload the unzipped plugin folder to your WordPress installation’s wp-content/plugins/ directory
 3. Activate the plugin from the Plugins menu within the WordPress admin
-4. Enter your email-address and Google Analytics ID for the plugin to enable the tracking code
+4. Enter your Universal Analytics ID for the plugin to enable the tracking code
 
 == Screenshots ==
 1. Enable Enhanced E-commerce for your profile/view. This is a profile / view level setting and can be accessed under Admin > View > E-commerce Settings. Also, add meaningful labels for your checkout steps. We recommend you to label as, Step 1 : Checkout View; Step 2 : Login; Step 3 : Proceed to payment;
@@ -161,4 +161,11 @@ Important Note: When you update the plugin, please save your settings again.
  * Email Field made optional
 
  = 1.0.16 - 01/04/2015 =
- * Minor Bug Fixes as per Woredpress Guidlines
+ * Minor Bug Fixes as per Wordpress Guidlines
+
+= 1.0.17 - 19/02/2016 =
+ * Fixed - Notice: Undefined index: tab
+ * Minor Bug Fixes as per Wordpress Guidlines
+
+ = 1.0.18 - 11/04/2016 =
+ * Fixed - Compatibility with Google Tag Manager for Wordpress by DuracellTomi

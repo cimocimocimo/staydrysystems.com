@@ -18,7 +18,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
      * @return void
      */
     //set plugin version
-    public $tvc_eeVer = '1.0.16';
+    public $tvc_eeVer = '1.0.18';
     public function __construct() {
         
          //Set Global Variables
@@ -40,18 +40,17 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         $this->init_settings();
 
             // Define user set variables -- Always use short names    
-            $this->ga_email = $this->get_option("ga_email");
-            $this->ga_id = $this->get_option("ga_id");
-            $this->ga_Dname = $this->get_option("ga_Dname");
+        $this->ga_id = $this->get_option("ga_id");
+        $this->ga_Dname = $this->get_option("ga_Dname");
         $this->ga_LC = get_woocommerce_currency(); //Local Currency yuppi! Got from Back end 
         //set local currency variable on all page
         $this->wc_version_compare("tvc_lc=" . json_encode($this->ga_LC) . ";");
-            $this->ga_ST = $this->get_option("ga_ST");
-            $this->ga_gCkout = $this->get_option("ga_gCkout") == "yes" ? true : false; //guest checkout
-            $this->ga_gUser = $this->get_option("ga_gUser") == "yes" ? true : false; //guest checkout
-            $this->ga_eeT = $this->get_option("ga_eeT");
-            $this->ga_DF = $this->get_option("ga_DF") == "yes" ? true : false;
-            $this->ga_imTh = $this->get_option("ga_imTh");
+        $this->ga_ST = $this->get_option("ga_ST");
+        $this->ga_gCkout = $this->get_option("ga_gCkout") == "yes" ? true : false; //guest checkout
+        $this->ga_gUser = $this->get_option("ga_gUser") == "yes" ? true : false; //guest checkout
+        $this->ga_eeT = $this->get_option("ga_eeT");
+        $this->ga_DF = $this->get_option("ga_DF") == "yes" ? true : false;
+        $this->ga_imTh = $this->get_option("ga_imTh");
 
                
          //Save Changes action for admin settings
@@ -59,7 +58,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
          
         // API Call to LS with e-mail
         // Tracking code
-        add_action("wp_head", array($this, "google_tracking_code"));
+        add_action("wp_head", array($this, "ee_settings"));
         add_action("woocommerce_thankyou", array($this, "ecommerce_tracking_code"));
 
         // Enhanced Ecommerce product impression hook
@@ -131,6 +130,110 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
     function add_plugin_details() {
         echo '<!--Enhanced Ecommerce Google Analytics Plugin for Woocommerce by Tatvic Plugin Version:'.$this->tvc_eeVer.'-->';
     }
+    /**
+     * check UA is enabled or not
+     *
+     * @access public
+     */
+    function admin_check_UA_enabled() {
+        
+       if(isset($_GET['tab']) && $_GET['tab'] =='integration' ){
+
+        echo '<script>
+               jQuery("#woocommerce_enhanced_ecommerce_google_analytics_ga_ST").change(function(){
+                t_ga_chk=jQuery(this).is(":checked");
+                
+                if(t_ga_chk){
+                   jQuery("#woocommerce_enhanced_ecommerce_google_analytics_ga_DF").removeAttr("disabled");
+                }else{
+                    jQuery("#woocommerce_enhanced_ecommerce_google_analytics_ga_DF").attr("disabled",true);
+                    t_display_chk=jQuery("#woocommerce_enhanced_ecommerce_google_analytics_ga_DF").is(":checked");
+                    if(t_display_chk){
+                      jQuery("#woocommerce_enhanced_ecommerce_google_analytics_ga_DF").removeAttr("checked");
+                    }                 }
+                   });
+                
+            //Pugin Promotion
+            jQuery("form#mainform").after("<a href=http://bit.ly/1yFqA04 target=_blank><img src='.plugins_url( '/woo_plugin_promotion.png' , __FILE__ ).' title=Actionable Google Analytics Plugin by Tatvic alt=Actionable Google Analytics Plugin by Tatvic></a>");
+            </script>';
+        }
+    }
+
+    /**
+     * Check if tracking is disabled
+     *
+     * @access private
+     * @param mixed $type
+     * @return bool
+     */
+    private function disable_tracking($type) {
+        if (is_admin() || current_user_can("manage_options") || (!$this->ga_id ) || "no" == $type) {
+            return true;
+        }
+    }
+
+    /**
+     * woocommerce version compare
+     *
+     * @access public
+     * @return void
+     */
+    function wc_version_compare($codeSnippet) {
+        global $woocommerce;
+        if (version_compare($woocommerce->version, "2.1", ">=")) {
+            wc_enqueue_js($codeSnippet);
+        } else {
+            $woocommerce->add_inline_js($codeSnippet);
+        }
+    }
+    /**
+     * Enhanced Ecommerce GA plugin Settings 
+     *
+     * @access public
+     * @return void
+     */
+    function ee_settings() {
+        global $woocommerce;
+
+        //common validation----start
+        if (is_admin() || current_user_can("manage_options") || $this->ga_ST == "no") {
+            return;
+        }
+        $tracking_id = $this->ga_id;
+
+        if (!$tracking_id) {
+            return;
+        }
+        //common validation----end
+
+        if (!empty($this->ga_Dname)) {
+            $set_domain_name = esc_js($this->ga_Dname);
+        } else {
+            $set_domain_name = "auto";
+        }
+
+        //add display features
+        if ($this->ga_DF) {
+            $ga_display_feature_code = 'ga("require", "displayfeatures");';
+        } else {
+            $ga_display_feature_code = "";
+        }
+
+        $code = '        
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,"script","//www.google-analytics.com/analytics.js","ga");
+                        ga("create", "' . esc_js($tracking_id) . '", "' . $set_domain_name . '");
+                        ' . $ga_display_feature_code . '
+                      
+                        ga("send", "pageview");';
+
+        //include this on all pages except order confirmation page.
+        if (!is_order_received_page()) {
+            echo "<script>" . $code . "</script>";
+        }
+    }
 
     /**
      * Initialise Settings Form Fields
@@ -140,14 +243,6 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
      */
     function init_form_fields() {
         $this->form_fields = array(
-            "ga_email" => array(
-                "title" => __("Email Address (Optional)", "woocommerce"),
-                "description" => __("Provide your work email address to receive plugin enhancement updates", "woocommerce"),
-                "type" => "email",
-                "placeholder" => "example@test.com",
-                "desc_tip" => true,
-                "default" => get_option("ga_email") // Backwards compat
-            ),
             "ga_id" => array(
                 "title" => __("Google Analytics ID", "woocommerce"),
                 "description" => __("Enter your Google Analytics ID here. You can login into your Google Analytics account to find your ID. e.g.<code>UA-XXXXX-X</code>", "woocommerce"),
@@ -208,72 +303,6 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                 "default" => get_option("ga_imTh") ? get_option("ga_imTh") : "6"  // Backwards compat
             ),          
         );
-        /* When user updates the email, post it to the remote server */
-         if (isset($_GET["tab"]) && isset($_REQUEST["section"]) && isset($_REQUEST["woocommerce_".$this->id."_ga_email"])) {
-            $current_tab = ( empty($_GET["tab"]) ) ? false : sanitize_text_field(urldecode($_GET["tab"]));
-            $current_section = ( empty($_REQUEST["section"]) ) ? false : sanitize_text_field(urldecode($_REQUEST["section"]));
-            $save_for_the_plugin = ($current_tab == "integration" ) && ($current_section == $this->id);
-
-            $update_made_for_email = $_REQUEST["woocommerce_".$this->id."_ga_email"] != $this->get_option("ga_email");
-            if ($save_for_the_plugin && $update_made_for_email) {
-                // if ($_REQUEST["woocommerce_".$this->id."_ga_email"] != "") 
-                {
-                    $email = $_REQUEST["woocommerce_".$this->id."_ga_email"];
-                    $this->send_email_to_tatvic($email,'active');
-                }
-            }
-        }
-    }
-
-    /**
-     * Google Analytics standard tracking
-     *
-     * @access public
-     * @return void
-     */
-    function google_tracking_code() {
-        global $woocommerce;
-
-        //common validation----start
-        if (is_admin() || current_user_can("manage_options") || $this->ga_ST == "no") {
-            return;
-        }
-
-        $tracking_id = $this->ga_id;
-
-        if (!$tracking_id) {
-            return;
-        }
-
-        //common validation----end
-
-        if (!empty($this->ga_Dname)) {
-            $set_domain_name = esc_js($this->ga_Dname);
-        } else {
-            $set_domain_name = "auto";
-        }
-
-        //add display features
-        if ($this->ga_DF) {
-            $ga_display_feature_code = 'ga("require", "displayfeatures");';
-        } else {
-            $ga_display_feature_code = "";
-        }
-
-        $code = '        
-(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,"script","//www.google-analytics.com/analytics.js","ga");
-                        ga("create", "' . esc_js($tracking_id) . '", "' . $set_domain_name . '");
-                        ' . $ga_display_feature_code . '
-                      
-                        ga("send", "pageview");';
-
-        //include this on all pages except order confirmation page.
-        if (!is_order_received_page()) {
-            echo "<script>" . $code . "</script>";
-        }
     }
 
     /**
@@ -286,16 +315,15 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
     function ecommerce_tracking_code($order_id) {
         global $woocommerce;
 
-        if ($this->disable_tracking($this->ga_eeT) || current_user_can("manage_options") || get_post_meta($order_id, "_ga_tracked", true) == 1)
+        if ($this->disable_tracking($this->ga_eeT) || current_user_can("manage_options") || get_post_meta($order_id, "_tracked", true) == 1)
             return;
 
         $tracking_id = $this->ga_id;
-
         if (!$tracking_id)
             return;
 
         // Doing eCommerce tracking so unhook standard tracking from the footer
-        remove_action("wp_footer", array($this, "google_tracking_code"));
+        remove_action("wp_footer", array($this, "ee_settings"));
 
         // Get the order and output tracking code
         $order = new WC_Order($order_id);
@@ -420,7 +448,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
 
         //check woocommerce version
         $this->wc_version_compare($code);
-        update_post_meta($order_id, "_ga_tracked", 1);
+        update_post_meta($order_id, "_tracked", 1);
     }
 
     /**
@@ -1080,91 +1108,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         //make product data json on check out page
         $this->wc_version_compare("tvc_ch=" . json_encode($chkout_json) . ";");
     }
-
-    /**
-     * Check if tracking is disabled
-     *
-     * @access private
-     * @param mixed $type
-     * @return bool
-     */
-    private function disable_tracking($type) {
-        if (is_admin() || current_user_can("manage_options") || (!$this->ga_id ) || "no" == $type) {
-            return true;
-        }
-    }
-
-    /**
-     * woocommerce version compare
-     *
-     * @access public
-     * @return void
-     */
-    function wc_version_compare($codeSnippet) {
-        global $woocommerce;
-        if (version_compare($woocommerce->version, "2.1", ">=")) {
-            wc_enqueue_js($codeSnippet);
-        } else {
-            $woocommerce->add_inline_js($codeSnippet);
-        }
-    }
-
-    /**
-     * check UA is enabled or not
-     *
-     * @access public
-     */
-    function admin_check_UA_enabled() {
-        $t_tab_name = $_GET['tab'];
-       if($t_tab_name=='integration'){
-
-        echo '<script>
-               jQuery("#woocommerce_enhanced_ecommerce_google_analytics_ga_ST").change(function(){
-                t_ga_chk=jQuery(this).is(":checked");
-                
-                if(t_ga_chk){
-                   jQuery("#woocommerce_enhanced_ecommerce_google_analytics_ga_DF").removeAttr("disabled");
-                }else{
-                    jQuery("#woocommerce_enhanced_ecommerce_google_analytics_ga_DF").attr("disabled",true);
-                    t_display_chk=jQuery("#woocommerce_enhanced_ecommerce_google_analytics_ga_DF").is(":checked");
-                    if(t_display_chk){
-                      jQuery("#woocommerce_enhanced_ecommerce_google_analytics_ga_DF").removeAttr("checked");
-                    }                 }
-                   });
-            //Pugin Promotion
-            jQuery("form#mainform").after("<a href=http://bit.ly/1yFqA04 target=_blank><img src=http://www.tatvic.com/blog/wp-content/uploads/2015/02/woo_plugin_promotion.png title=Actionable Google Analytics Plugin by Tatvic alt=Actionable Google Analytics Plugin by Tatvic></a>");
-            </script>';
-    }
-    }
-
-    /**
-     * Sending email to remote server
-     *
-     * @access public
-     * @return void
-     */
-    public function send_email_to_tatvic($email,$status) {
-        $url = "http://dev.tatvic.com/leadgen/woocommerce-plugin/store_email/";
-        //set POST variables
-        if($email == ""){
-
-            $email = "marketing@tatvic.com";
-        }
-        $fields = array(
-            "email" => urlencode($email),
-            "domain_name" => urlencode(get_site_url()),
-            "status"=>urlencode($status)
-        );
-     wp_remote_post($url, array(
-            "method" => "POST",
-            "timeout" => 1,
-            "httpversion" => "1.0",
-            "blocking" => false,
-            "headers" => array(),
-            "body" => $fields
-                )
-       );
-    }
+   
 
 }
 
