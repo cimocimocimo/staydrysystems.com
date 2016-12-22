@@ -45,25 +45,25 @@
         </div>
     </div>
 
-    <div style="margin-top: 5px;"><?php echo sprintf( '<a href="%s">' . __( 'Show more details' ) . '</a>', $more_details_url ); ?></div>
+    <div style="margin-top: 5px;"><?php echo sprintf( '<a href="%s">' . __( 'Show more details' ) . '</a>',
+			$more_details_url ); ?></div>
 </div>
 
 <script type="text/javascript">
-
+	<?php if ( ! empty( $chart ) ) : ?>
     dataArr = [['Day', 'Pageviews'],<?php
-		if ( $chart ) {
-			$arr = "";
-			foreach ( $chart as $row ) {
-				if ( $arr ) {
-					$arr .= ",";
-				}
-				$arr .= "['" . $row['day'] . "'," . $row['current'] . "]";
-			}
+	    $arr = "";
+	    foreach ( $chart as $row ) {
+		    if ( $arr ) {
+			    $arr .= ",";
+		    }
+		    $arr .= "['" . $row['day'] . "'," . $row['current'] . "]";
 		}
+
 		echo $arr;
 		?>];
 
     ga_dashboard.init(dataArr);
     ga_dashboard.events(dataArr);
-
+	<?php endif; ?>
 </script>

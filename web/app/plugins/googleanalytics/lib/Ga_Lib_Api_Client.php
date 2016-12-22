@@ -38,6 +38,12 @@ class Ga_Lib_Api_Client {
 	private $token;
 
 	/**
+	 * Keeps error messages.
+	 * @var array
+	 */
+	private $errors = array();
+
+	/**
 	 * Returns API client instance.
 	 *
 	 * @return Ga_Lib_Api_Client|null
@@ -49,6 +55,14 @@ class Ga_Lib_Api_Client {
 		}
 
 		return $instance;
+	}
+
+	/**
+	 * Returns errors array.
+	 * @return array
+	 */
+	public function get_errors() {
+		return $this->errors;
 	}
 
 	/**
@@ -73,12 +87,23 @@ class Ga_Lib_Api_Client {
 					return call_user_func( $callback );
 				}
 			} else {
-				throw new Exception( 'Unknown method: ' . $callback );
+				throw new Ga_Lib_Api_Client_Exception( 'Unknown method: ' . $callback );
 			}
-		} catch ( Exception $e ) {
-			// @todo: need to add exception
-			echo $e->getMessage();
+		} catch ( Ga_Lib_Api_Client_Exception $e ) {
+			$this->add_error( $e );
+		} catch ( Ga_Lib_Api_Request_Exception $e ) {
+			$this->add_error( $e );
 		}
+	}
+
+	/**
+	 * Prepares error data.
+	 *
+	 * @param Exception $e
+	 *
+	 */
+	private function add_error( Exception $e ) {
+		$this->errors[ $e->getCode() ] = array( 'class' => get_class( $e ), 'message' => $e->getMessage() );
 	}
 
 	/**
@@ -138,6 +163,19 @@ class Ga_Lib_Api_Client {
 		return new Ga_Lib_Api_Response( $response );
 	}
 
+	private function ga_auth_refresh_access_token( $refresh_token ) {
+		$request = array(
+			'refresh_token' => $refresh_token,
+			'grant_type'    => 'refresh_token',
+			'client_id'     => $this->config['client_id'],
+			'client_secret' => $this->config['client_secret']
+		);
+
+		$response = Ga_Lib_Api_Request::get_instance()->make_request( self::OAUTH2_TOKEN_ENDPOINT, $request );
+
+		return new Ga_Lib_Api_Response( $response );
+	}
+
 	/**
 	 * Get list of the analytics accounts.
 	 *
@@ -173,12 +211,36 @@ class Ga_Lib_Api_Client {
 	 * @param Ga_Lib_Api_Request $request
 	 *
 	 * @return Ga_Lib_Api_Request Returns response object
+	 * @throws Ga_Lib_Api_Client_Exception
 	 */
 	private function sign( Ga_Lib_Api_Request $request ) {
+		if ( empty( $this->token ) ) {
+			throw new Ga_Lib_Api_Client_Exception( 'Access Token is not available. Please reauthenticate' );
+		}
+
+		// Check if the token is set to expire in the next 30 seconds
+		// (or has already expired).
+		$this->check_access_token();
+
 		// Add the OAuth2 header to the request
 		$request->set_request_headers( array( 'Authorization: Bearer ' . $this->token['access_token'] ) );
 
 		return $request;
+	}
+
+	/**
+	 * Refresh and save refreshed Access Token.
+	 *
+	 * @param $refresh_token
+	 */
+	public function refresh_access_token( $refresh_token ) {
+		// Request for a new Access Token
+		$response = $this->ga_auth_refresh_access_token( $refresh_token );
+		Ga_Admin::save_access_token( $response, $refresh_token );
+
+		// Set new access token
+		$token = Ga_Helper::get_option( Ga_Admin::GA_OAUTH_AUTH_TOKEN_OPTION_NAME );
+		$this->set_access_token( json_decode( $token, true ) );
 	}
 
 	/**
@@ -187,12 +249,15 @@ class Ga_Lib_Api_Client {
 	 * @return bool
 	 */
 	public function is_authorized() {
-		$authorized = true;
-		if ( $this->is_access_token_expired() ) {
-			$authorized = false;
+		if ( ! empty( $this->token ) ) {
+			try {
+				$this->check_access_token();
+			} catch ( Ga_Lib_Api_Client_Exception $e ) {
+				$this->add_error( $e );
+			}
 		}
 
-		return $authorized;
+		return ! empty( $this->token ) && ! $this->is_access_token_expired();
 	}
 
 	/**
@@ -203,10 +268,25 @@ class Ga_Lib_Api_Client {
 		if ( null == $this->token ) {
 			return true;
 		}
-
+		if ( ! empty( $this->token['error'] ) ) {
+			return true;
+		}
 		// Check if the token is expired in the next 30 seconds.
 		$expired = ( $this->token['created'] + ( $this->token['expires_in'] - 30 ) ) < time();
 
 		return $expired;
 	}
+
+	private function check_access_token() {
+		if ( $this->is_access_token_expired() ) {
+			if ( empty( $this->token['refresh_token'] ) ) {
+				throw new Ga_Lib_Api_Client_Exception( 'Refresh token is not available. Please re-authenticate.' );
+			} else {
+				$this->refresh_access_token( $this->token['refresh_token'] );
+			}
+		}
+	}
+}
+
+class Ga_Lib_Api_Client_Exception extends Exception {
 }

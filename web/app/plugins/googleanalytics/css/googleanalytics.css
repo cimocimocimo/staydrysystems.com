@@ -132,8 +132,8 @@ label.ga_checkbox_label {
 .ga-chart {
 }
 
-.label-grey{
-    color:#ccc;
+.label-grey {
+    color: #ccc;
 }
 
 .ga-tooltip {
@@ -162,11 +162,13 @@ label.ga_checkbox_label {
     width: auto;
     z-index: 1;
 }
-.ga-tt-abs{
+
+.ga-tt-abs {
     display: inline-block;
     position: absolute;
     margin-top: 0px;
 }
+
 .ga-tooltip:hover .ga-tooltiptext {
     visibility: visible;
 }

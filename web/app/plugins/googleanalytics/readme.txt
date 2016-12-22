@@ -2,8 +2,8 @@
 Contributors: ShareThis
 Tags: analytics, dashboard, google, google analytics, google analytics plugin, javascript, marketing, pageviews, statistics, stats, tracking, visits, web stats, widget, analytics dashboard, google analytics dashboard, google analytics widget, google analytics dashboard
 Requires at least: 3.8
-Tested up to: 4.7.0
-Stable tag: trunk
+Tested up to: 4.7
+Stable tag: 2.0.3
 
 Use Google Analytics on your Wordpress site without touching any code, and view visitor reports right in your Wordpress admin dashboard!
 
@@ -47,15 +47,21 @@ By downloading and installing this plugin you are agreeing to the <a href="http:
 
 == Changelog ==
 
+= 2.0.3 =
+* Reliability improvements for Google Analytics access
+* Better connection to Google Analytics API
+* Fixed the save settings issue, thanks @biologix @tanshaydar
+* Minor bug fixes
+
+= 2.0.2 =
+* Fixed issues related to older versions of PHP
+* Fixed terms of service notice
+* Added better support for HTTP proxy, thanks @usrlocaldick for the suggestion
+* Added better support when WP_PLUGIN_DIR are already set, thanks @heiglandreas for the tip
+* Added support for PHP version 5.2.17
+
 = 2.0.1 =
-* Completely redesigned with new features!
-* Updated with the latest Google Analytics code
-* No need to find your GA property ID and copy it over, just sign in with Google and choose your site
-* See analytics right inside the plugin, the past 7 days vs your previous 7 days
-* Shows pageviews, users, pages per session and bounce rate + top 5 traffic referrals
-* Wordpress Dashboard widget for 7, 30 or 90 days graph and top site usage stats
-* Disable tracking for logged in users like admins or editors for more reliable analytics
-* Support for the old PHP versions
+* Fix for old versions of PHP
 
 = 2.0.0 =
 * Completely redesigned with new features!

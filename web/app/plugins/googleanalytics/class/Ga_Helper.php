@@ -7,16 +7,33 @@ class Ga_Helper {
 	const GA_DEFAULT_WEB_ID = "UA-0000000-0";
 
 	const GA_STATISTICS_PAGE_URL = "admin.php?page=googleanalytics";
-	
+
 	const GA_SETTINGS_PAGE_URL = "admin.php?page=googleanalytics/settings";
-	
+
 	const DASHBOARD_PAGE_NAME = "dashboard";
+
+	const PHP_VERSION_REQUIRED = "5.2.17";
 
 	/**
 	 * Init plugin actions.
 	 *
 	 */
 	public static function init() {
+
+		// Displays errors related to required PHP version
+		if ( ! self::is_php_version_valid() ) {
+			add_action( 'admin_notices', 'Ga_Admin::admin_notice_googleanalytics_php_version' );
+
+			return false;
+		}
+
+		// Displays errors related to required WP version
+		if ( ! self::is_wp_version_valid() ) {
+			add_action( 'admin_notices', 'Ga_Admin::admin_notice_googleanalytics_wp_version' );
+
+			return false;
+		}
+
 		if ( ! is_admin() ) {
 			Ga_Frontend::add_actions();
 		}
@@ -127,6 +144,8 @@ class Ga_Helper {
 	 */
 	public static function add_ga_dashboard_widget() {
 		echo self::get_ga_dashboard_widget();
+
+		Ga_Admin::display_api_errors();
 	}
 
 	/**
@@ -172,7 +191,12 @@ class Ga_Helper {
 	 *
 	 * @return string|false Returns JSON data string
 	 */
-	public static function get_ga_dashboard_widget_data_json( $date_range = null, $metric = null, $text_mode = false, $ajax = false ) {
+	public static function get_ga_dashboard_widget_data_json(
+		$date_range = null,
+		$metric = null,
+		$text_mode = false,
+		$ajax = false
+	) {
 		if ( empty( $date_range ) ) {
 			$date_range = '30daysAgo';
 		}
@@ -196,22 +220,22 @@ class Ga_Helper {
 	 */
 	private static function get_dashboard_widget_data( $date_range, $metric = null ) {
 		$selected = self::get_selected_account_data( true );
+		if ( self::is_authorized() && self::is_account_selected() ) {
+			$query_params = Ga_Stats::get_query( 'main_chart', $selected['view_id'], $date_range, $metric );
+			$stats_data   = Ga_Admin::api_client()->call( 'ga_api_data', array(
 
-		$query_params = Ga_Stats::get_query( 'main_chart', $selected['view_id'], $date_range, $metric );
-		$stats_data   = Ga_Admin::api_client()->call( 'ga_api_data', array(
+				$query_params
+			) );
 
-			$query_params
-		) );
+			$boxes_query = Ga_Stats::get_query( 'dashboard_boxes', $selected['view_id'], $date_range );
+			$boxes_data  = Ga_Admin::api_client()->call( 'ga_api_data', array(
 
-		$boxes_query = Ga_Stats::get_query( 'dashboard_boxes', $selected['view_id'], $date_range );
-		$boxes_data  = Ga_Admin::api_client()->call( 'ga_api_data', array(
-
-			$boxes_query
-		) );
-
+				$boxes_query
+			) );
+		}
 		$chart = ! empty( $stats_data ) ? Ga_Stats::get_dashboard_chart( $stats_data->getData() ) : array();
 		$boxes = ! empty( $boxes_data ) ? Ga_Stats::get_dashboard_boxes_data( $boxes_data->getData() ) : array();
-		
+
 		return array(
 
 			'chart' => $chart,
@@ -232,14 +256,16 @@ class Ga_Helper {
 	 */
 	public static function get_chart_page( $view, $params ) {
 
-		$message = sprintf( __( 'Statistics can only be seen after you authenticate with your Google account on the <a href="%s">Settings page</a>.' ), admin_url( self::GA_SETTINGS_PAGE_URL ) );
+		$message = sprintf( __( 'Statistics can only be seen after you authenticate with your Google account on the <a href="%s">Settings page</a>.' ),
+			admin_url( self::GA_SETTINGS_PAGE_URL ) );
 
 		if ( self::is_authorized() && ! self::is_code_manually_enabled() ) {
 			if ( self::is_account_selected() ) {
 				if ( $params ) {
 					return Ga_View::load( $view, $params, true );
 				} else {
-					return self::ga_oauth_notice( sprintf( 'Please configure your <a href="%s">Google Analytics settings</a>.', admin_url( self::GA_SETTINGS_PAGE_URL ) ) );
+					return self::ga_oauth_notice( sprintf( 'Please configure your <a href="%s">Google Analytics settings</a>.',
+						admin_url( self::GA_SETTINGS_PAGE_URL ) ) );
 				}
 			} else {
 				return self::ga_oauth_notice( $message );
@@ -286,16 +312,31 @@ class Ga_Helper {
 	}
 
 	/**
-	 * Loads ga notice HTML code with gicen message included.
+	 * Loads ga notice HTML code with given message included.
 	 *
 	 * @param string $message
+	 * $param bool $cannot_activate Whether the plugin cannot be activated
 	 *
 	 * @return string
 	 */
 	public static function ga_oauth_notice( $message ) {
 		return Ga_View::load( 'ga_oauth_notice', array(
-
 			'msg' => $message
+		), true );
+	}
+
+	/**
+	 * Displays notice following the WP style.
+	 *
+	 * @param $message
+	 * @param string $type
+	 *
+	 * @return string
+	 */
+	public static function ga_wp_notice( $message, $type = '' ) {
+		return Ga_View::load( 'ga_wp_notice', array(
+			'type' => empty( $type ) ? Ga_Admin::NOTICE_WARNING : $type,
+			'msg'  => $message
 		), true );
 	}
 
@@ -343,9 +384,10 @@ class Ga_Helper {
 	 */
 	public static function format_percent( $text ) {
 		$text = self::add_plus( $text );
+
 		return $text . '%';
 	}
-	
+
 	/**
 	 * Adds plus sign before number.
 	 *
@@ -354,9 +396,10 @@ class Ga_Helper {
 	 * @return string
 	 */
 	public static function add_plus( $number ) {
-		if ( $number > 0 ){
+		if ( $number > 0 ) {
 			return '+' . $number;
 		}
+
 		return $number;
 	}
 
@@ -378,22 +421,41 @@ class Ga_Helper {
 
 		return version_compare( $wp_version, Ga_Admin::MIN_WP_VERSION, 'ge' );
 	}
-	
+
 	/**
 	 * Check if terms are accepted
 	 *
 	 * @return bool
-	 */	
+	 */
 	public static function are_terms_accepted() {
 		return self::get_option( Ga_Admin::GA_SHARETHIS_TERMS_OPTION_NAME );
 	}
-	
+
 	/**
 	 * Check if sharethis scripts enabled
 	 *
 	 * @return bool
-	 */	
+	 */
 	public static function is_sharethis_included() {
 		return GA_SHARETHIS_SCRIPTS_INCLUDED;
-	}	
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public static function is_php_version_valid() {
+		$p        = '#(\.0+)+($|-)#';
+		$ver1     = preg_replace( $p, '', phpversion() );
+		$ver2     = preg_replace( $p, '', self::PHP_VERSION_REQUIRED );
+		$operator = 'ge';
+		$compare  = isset( $operator ) ?
+			version_compare( $ver1, $ver2, $operator ) :
+			version_compare( $ver1, $ver2 );
+
+		return $compare;
+	}
+
+	public static function get_current_url() {
+		return $_SERVER['REQUEST_URI'];
+	}
 }

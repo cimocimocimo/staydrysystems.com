@@ -37,10 +37,10 @@ const GA_FORM_ID = "ga_form";
         click: function (selector, callback) {
             $(selector).live('click', callback);
         },
-        codeManuallyCallback: function ( terms_accepted ) {
+        codeManuallyCallback: function (terms_accepted) {
             const button_disabled = $('#ga_authorize_with_google_button').attr('disabled');
             const selector_disabled = $('#ga_account_selector').attr('disabled');
-            if ( terms_accepted ) {
+            if (terms_accepted) {
                 if (button_disabled) {
                     $('#ga_authorize_with_google_button').removeAttr('disabled').next().hide();
                 } else {
