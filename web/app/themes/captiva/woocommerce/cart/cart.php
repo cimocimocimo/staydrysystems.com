@@ -129,7 +129,6 @@ do_action( 'woocommerce_before_cart' );
                 <?php woocommerce_cart_totals(); ?>
 
                 <input type="submit" class="button update-button" name="update_cart" value="<?php _e( 'Update Cart', 'captiva' ); ?>" /> 
-                <input type="submit" class="button checkout-button " name="proceed" value="<?php _e( 'Proceed to Checkout', 'captiva' ); ?>" />
 
                 <?php do_action( 'woocommerce_proceed_to_checkout' ); ?>
 

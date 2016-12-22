@@ -152,3 +152,7 @@ Tags: light, white, two-columns, three-columns, right-sidebar, custom-background
 #top .topbar-phone-number a:focus {
     text-decoration: none !important;
 }
+
+.cap-menu-default {
+    border: 1px solid #eeeeee;
+}

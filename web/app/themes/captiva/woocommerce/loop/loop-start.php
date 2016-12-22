@@ -9,9 +9,11 @@
 global $captiva_options, $woocommerce_loop;
 
 $product_layout = $captiva_options['product_layout'];
-$woo_product_grid_count = $woocommerce_loop["columns"];
-?>
+if (array_key_exists('columns', $woocommerce_loop)){
+    $woo_product_grid_count = $woocommerce_loop["columns"];
+}
 
+?>
 
 <div class="product-wrap">
     <div class="row">

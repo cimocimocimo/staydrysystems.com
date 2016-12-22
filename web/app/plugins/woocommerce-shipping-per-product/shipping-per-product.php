@@ -192,7 +192,7 @@ if ( is_woocommerce_active() ) {
 		     * @access public
 		     * @return void
 		     */
-		    function calculate_shipping( $package ) {
+		    function calculate_shipping( $package=array() ) {
 		    	global $woocommerce;
 
 		    	$_tax 	= new WC_Tax();
