@@ -126,6 +126,18 @@ if (!empty($_SESSION['cap_header_top'])){
                     <div class="container">
                         <div class="row">
                             <div class="top-msg-wrap col-lg-6 col-md-6 col-sm-6 hidden-xs">
+                                <div class="payment-acceptance-logos">
+                                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/staydry/images/visa-logo.svg" alt="Order online securely with Visa">
+                                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/staydry/images/mastercard-logo.svg" alt="Order online securely with Mastercard">
+                                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/staydry/images/paypal-p-logo.svg" alt="Order online securely with PayPal">
+                                </div>
+                                <div class="topbar-phone-number">
+                                    <a href="tel:1-866-944-0449">
+                                        <span class="top-line">Order by Phone or Online</span>
+                                        <br>
+                                        <span class="bottom-line">1-866-944-0449</span>
+                                    </a>
+                                </div>
                                 <?php
                                 if ( $cap_topbar_message ) {
                                     ?>

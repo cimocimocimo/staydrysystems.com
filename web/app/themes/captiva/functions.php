@@ -275,7 +275,8 @@ if ( class_exists( 'WPBakeryVisualComposerAbstract' ) ) {
 
     // Set VC tpl override directory
     $vcdir = get_stylesheet_directory() . '/customvc/vc_templates/';
-    vc_set_template_dir( $vcdir );
+    vc_set_shortcodes_templates_dir( $vcdir );
+    # vc_set_template_dir( $vcdir );
 
     // Remove VC nag looking for key - Captiva has an extended lic.
     if ( is_admin() ) :

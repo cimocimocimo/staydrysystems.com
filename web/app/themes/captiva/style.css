@@ -116,3 +116,39 @@ Tags: light, white, two-columns, three-columns, right-sidebar, custom-background
     float: left;
     width: 160px;
 }
+
+.payment-acceptance-logos {
+    float: left;
+    margin-right: 16px
+}
+
+.payment-acceptance-logos img {
+    margin: 8px 4px;
+}
+
+#top ul li a {
+    color: #005C81 !important;
+}
+
+#top .topbar-phone-number {
+    float: left;
+    text-align: center
+}
+
+#top .topbar-phone-number a {
+    font-weight: 700;
+    color: white !important;
+}
+#top .topbar-phone-number a .top-line {
+    font-size: 13px;
+}
+#top .topbar-phone-number a .bottom-line {
+    font-size: 23px;
+}
+
+
+#top .topbar-phone-number a:hover,
+#top .topbar-phone-number a:active,
+#top .topbar-phone-number a:focus {
+    text-decoration: none !important;
+}

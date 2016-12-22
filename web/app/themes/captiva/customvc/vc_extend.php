@@ -185,11 +185,10 @@ vc_add_param( "vc_separator", array(
     "description" => ""
 ) );
 
-
 /*
-  Lets call wpb_map function to "register" our custom shortcode within Visual Composer interface.
+  Lets call vc_map function to "register" our custom shortcode within Visual Composer interface.
  */
-wpb_map( array(
+vc_map( array(
     "name" => __( "Captiva latest blog posts", 'captiva' ),
     "base" => "captiva_latest_posts",
     "class" => "",
@@ -218,7 +217,7 @@ wpb_map( array(
     )
 ) );
 
-wpb_map( array(
+vc_map( array(
     "name" => __( "Captiva top reviews", 'captiva' ),
     "base" => "captiva_topreviews",
     "class" => "",
@@ -238,7 +237,7 @@ wpb_map( array(
     )
 ) );
 
-wpb_map( array(
+vc_map( array(
     "name" => __( "Captiva Logos", 'captiva' ),
     "base" => "captiva_logos",
     "class" => "",
@@ -258,7 +257,7 @@ wpb_map( array(
     )
 ) );
 
-wpb_map( array(
+vc_map( array(
     "name" => __( "WooCommerce Latest Products Carousel", 'captiva' ),
     "base" => "captiva_woo_latest_products",
     "class" => "",
@@ -300,7 +299,7 @@ wpb_map( array(
     )
 ) );
 
-wpb_map( array(
+vc_map( array(
     "name" => __( "WooCommerce Featured Products Carousel", 'captiva' ),
     "base" => "captiva_woo_featured_products",
     "class" => "",
@@ -342,7 +341,7 @@ wpb_map( array(
     )
 ) );
 
-wpb_map( array(
+vc_map( array(
     "name" => __( "Captiva Latest Showcase", 'captiva' ),
     "base" => "captiva_latest_portfolio",
     "class" => "",
@@ -371,7 +370,7 @@ wpb_map( array(
     )
 ) );
 
-wpb_map( array(
+vc_map( array(
     "name" => __( "Captiva Testimonials", 'captiva' ),
     "base" => "captiva_testimonials",
     "class" => "",
@@ -400,7 +399,7 @@ wpb_map( array(
     )
 ) );
 
-wpb_map( array(
+vc_map( array(
     "name" => __( "Captiva Google Map", 'captiva' ),
     "base" => "captiva_map",
     "class" => "",
@@ -465,7 +464,7 @@ wpb_map( array(
     )
 ) );
 
-wpb_map( array(
+vc_map( array(
     "name" => __( "Captiva Message Box", 'captiva' ),
     "base" => "captiva_promo",
     "class" => "",
@@ -521,7 +520,7 @@ wpb_map( array(
     )
 ) );
 
-wpb_map( array(
+vc_map( array(
     "name" => __( "Captiva Content Strip", 'captiva' ),
     "base" => "captiva_content_strip",
     "class" => "",
@@ -751,7 +750,7 @@ wpb_map( array(
 ) );
 
 
-wpb_map( array(
+vc_map( array(
     "name" => __( "Captiva Video Banner", 'captiva' ),
     "base" => "captiva_video_banner",
     "class" => "",
