@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "73743cc15e4cbd1cbb12c675e3144b69",
-    "content-hash": "5cd20feac0d87fe1f2bc3a5affa57801",
+    "hash": "ba6f45cca6f055e7b16b76f960f00f6a",
+    "content-hash": "8d36bb9d557f3b850efb813b4155f226",
     "packages": [
         {
             "name": "composer/installers",
@@ -283,6 +283,26 @@
             "homepage": "https://wordpress.org/plugins/contact-form-7/"
         },
         {
+            "name": "wpackagist-plugin/duracelltomi-google-tag-manager",
+            "version": "1.5.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/duracelltomi-google-tag-manager/",
+                "reference": "tags/1.5.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/duracelltomi-google-tag-manager.1.5.1.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/duracelltomi-google-tag-manager/"
+        },
+        {
             "name": "wpackagist-plugin/maintenance",
             "version": "2.7.1",
             "source": {
@@ -313,7 +333,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/w3-total-cache.0.9.5.1.zip",
-                "reference": null,
+                "reference": "tags/0.9.5.1",
                 "shasum": null
             },
             "require": {
