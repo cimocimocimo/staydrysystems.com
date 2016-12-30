@@ -98,7 +98,11 @@ if (!empty($_SESSION['cap_header_top'])){
        <?php wp_head(); ?>
     </head>
     <body id="skrollr-body" <?php body_class(); ?>>
-        <?php
+    <?php
+    if ( function_exists( 'gtm4wp_the_gtm_tag' ) ) {
+        gtm4wp_the_gtm_tag();
+    }
+
         $cap_preloader_status = $captiva_options['cap_preloader'];
         if ( $cap_preloader_status == 'enabled' ) {
             ?>
