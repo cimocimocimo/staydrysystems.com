@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH WooCommerce Ajax Product filter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-13 16:11+0200\n"
-"PO-Revision-Date: 2016-06-13 16:11+0200\n"
+"POT-Creation-Date: 2017-01-17 14:07+0100\n"
+"PO-Revision-Date: 2017-01-17 14:07+0100\n"
 "Last-Translator: Caner Öncel <caneroncel@gmail.com>\n"
 "Language-Team: Caner Öncel <caneroncel@gmail.com>\n"
 "Language: tr\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.8.9\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
 "_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
@@ -58,7 +58,7 @@ msgstr "Terim"
 
 # @ yit
 #: includes/functions.yith-wcan.php:57
-#: widgets/class.yith-wcan-navigation-widget.php:706
+#: widgets/class.yith-wcan-navigation-widget.php:716
 msgid "Color"
 msgstr "Renk"
 
@@ -142,21 +142,21 @@ msgid "Scroll top anchor"
 msgstr ""
 
 #: settings/frontend-options.php:58
-msgid "Enter here the HTML tag for the scroll to top feature on mobiles"
+msgid "Enter here the HTML tag for the scroll to top feature"
 msgstr ""
 
-#: templates/admin/premium.php:203 templates/admin/premium.php:425
+#: templates/admin/premium.php:203 templates/admin/premium.php:441
 #, php-format
 msgid ""
 "Upgrade to %1$spremium version%2$s of %1$sYITH WooCommerce Ajax Product "
 "Filter%2$s to benefit from all features!"
 msgstr ""
 
-#: templates/admin/premium.php:206 templates/admin/premium.php:428
+#: templates/admin/premium.php:206 templates/admin/premium.php:444
 msgid "UPGRADE"
 msgstr ""
 
-#: templates/admin/premium.php:207 templates/admin/premium.php:429
+#: templates/admin/premium.php:207 templates/admin/premium.php:445
 msgid "to the premium version"
 msgstr ""
 
@@ -324,6 +324,17 @@ msgid ""
 "two which refresh the main view of categories and/or tags."
 msgstr ""
 
+#: templates/admin/premium.php:426
+msgid "Scroll to top"
+msgstr ""
+
+#: templates/admin/premium.php:429
+msgid ""
+"Scroll to top is a feature to improve user experience on your site. Soon "
+"after filtering the product list, the page will be automatically scrolled to "
+"the top so the user can immediately see the filtered list. "
+msgstr ""
+
 #: widgets/class.yith-wcan-navigation-widget.php:36
 msgid "Filter the list of products without reloading the page"
 msgstr ""
@@ -333,72 +344,72 @@ msgctxt "Admin: Widget Title"
 msgid "YITH WooCommerce Ajax Product Filter"
 msgstr ""
 
-#: widgets/class.yith-wcan-navigation-widget.php:139
+#: widgets/class.yith-wcan-navigation-widget.php:150
 msgid "Filters:"
 msgstr ""
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:705
+#: widgets/class.yith-wcan-navigation-widget.php:715
 msgid "List"
 msgstr "Liste"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:707
+#: widgets/class.yith-wcan-navigation-widget.php:717
 msgid "Label"
 msgstr "Etiket"
 
-#: widgets/class.yith-wcan-navigation-widget.php:708
+#: widgets/class.yith-wcan-navigation-widget.php:718
 msgid "Dropdown"
 msgstr "Açılır Menü"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:715
-#: widgets/class.yith-wcan-reset-navigation-widget.php:99
+#: widgets/class.yith-wcan-navigation-widget.php:725
+#: widgets/class.yith-wcan-reset-navigation-widget.php:102
 msgid "Title"
 msgstr "Başlık"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:721
+#: widgets/class.yith-wcan-navigation-widget.php:731
 msgid "Type:"
 msgstr "Tür:"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:732
+#: widgets/class.yith-wcan-navigation-widget.php:742
 msgid "Query Type:"
 msgstr "Sorgu Tipi:"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:734
+#: widgets/class.yith-wcan-navigation-widget.php:744
 msgid "AND"
 msgstr "VE"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:735
+#: widgets/class.yith-wcan-navigation-widget.php:745
 msgid "OR"
 msgstr "VEYA"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:741
+#: widgets/class.yith-wcan-navigation-widget.php:751
 msgid "Attribute:"
 msgstr "Özellikler:"
 
-#: widgets/class.yith-wcan-navigation-widget.php:748
+#: widgets/class.yith-wcan-navigation-widget.php:758
 msgid "Display (default All):"
 msgstr "Görüntüleme (Varsayılan tümü):"
 
-#: widgets/class.yith-wcan-navigation-widget.php:750
+#: widgets/class.yith-wcan-navigation-widget.php:760
 msgid "All (no hierarchical)"
 msgstr "Tümü"
 
-#: widgets/class.yith-wcan-navigation-widget.php:751
+#: widgets/class.yith-wcan-navigation-widget.php:761
 msgid "All (hierarchical)"
 msgstr ""
 
-#: widgets/class.yith-wcan-navigation-widget.php:752
+#: widgets/class.yith-wcan-navigation-widget.php:762
 msgid "Only Parent"
 msgstr "Sadece Ebeveyn"
 
-#: widgets/class.yith-wcan-navigation-widget.php:759
+#: widgets/class.yith-wcan-navigation-widget.php:769
 msgid "CSS custom class"
 msgstr ""
 
@@ -410,11 +421,11 @@ msgstr ""
 msgid "YITH WooCommerce Ajax Reset Filter"
 msgstr ""
 
-#: widgets/class.yith-wcan-reset-navigation-widget.php:92
+#: widgets/class.yith-wcan-reset-navigation-widget.php:95
 msgid "Reset All Filters"
 msgstr "Tüm Filtreleri Sıfırla"
 
-#: widgets/class.yith-wcan-reset-navigation-widget.php:105
+#: widgets/class.yith-wcan-reset-navigation-widget.php:108
 msgid "Button Label"
 msgstr "Buton Metni"
 

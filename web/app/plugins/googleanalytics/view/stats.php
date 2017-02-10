@@ -1,43 +1,47 @@
 <div class="wrap ga-wrap" id="ga-stats-container">
-    <div class="panel panel-default">
-        <div class="panel-heading"><strong><?php _e( "Pageviews - Last 7 days vs previous 7 days" ) ?></strong></div>
-        <div class="panel-body ga-chart">
+	<?php if ( ! empty( $chart ) ) : ?>
+    <div class="ga-panel ga-panel-default">
+        <div class="ga-panel-heading"><strong><?php _e( "Pageviews - Last 7 days vs previous 7 days" ) ?></strong></div>
+        <div class="ga-panel-body ga-chart">
             <div id="chart_div" style="width: 100%;"></div>
             <div class="ga-loader-wrapper stats-page">
                 <div class="ga-loader stats-page-loader"></div>
             </div>
         </div>
     </div>
+	<?php endif; ?>
 
-    <div class="panel panel-default">
-        <div class="panel-heading"><strong><?php _e( "Comparison - Last 7 days vs previous 7 days" ) ?></strong></div>
-        <div class="panel-body">
-            <div id="boxes-container">
-                <div class="row">
-					<?php if ( ! empty( $boxes ) ) : ?>
-						<?php foreach ( $boxes as $box ) : ?>
-                            <div class="col-md-3">
-                                <div class="panel panel-default">
-                                    <div class="panel-body ga-box-centered">
-                                        <div style="font-size: 16px;"><?php echo $box['label'] ?></div>
-                                        <div style="color: <?php echo $box['color'] ?>; font-size: 24px;"><?php echo Ga_Helper::format_percent( $box['diff'] ); ?></div>
-                                        <div style="color: grey; font-size: 16px;"><?php echo $box['comparison'] ?></div>
-                                    </div>
+	<?php if ( ! empty( $boxes ) ) : ?>
+    <div class="ga-panel ga-panel-default">
+        <div class="ga-panel-heading"><strong><?php _e( "Comparison - Last 7 days vs previous 7 days" ) ?></strong>
+        </div>
+        <div class="ga-panel-body">
+            <div class="ga-row">
+					<?php foreach ( $boxes as $box ) : ?>
+                        <div class="ga-box">
+                            <div class="ga-panel ga-panel-default">
+                                <div class="ga-panel-body ga-box-centered">
+                                    <div class="ga-box-label"><?php echo $box['label'] ?></div>
+                                    <div class="ga-box-diff"
+                                         style="color: <?php echo $box['color'] ?>;"><?php echo Ga_Helper::format_percent( $box['diff'] ); ?></div>
+                                    <div class="ga-box-comparison"><?php echo $box['comparison'] ?></div>
                                 </div>
                             </div>
-						<?php endforeach; ?>
-					<?php endif; ?>
-                </div>
+                        </div>
+					<?php endforeach; ?>
             </div>
         </div>
     </div>
+	<?php endif; ?>
+
 	<?php if ( ! empty( $sources ) ) : ?>
-        <div class="panel panel-default">
-            <div class="panel-heading"><strong><?php _e( "Top 5 Traffic Sources for the past 7 days" ) ?></strong></div>
-            <div class="panel-body">
+        <div class="ga-panel ga-panel-default">
+            <div class="ga-panel-heading"><strong><?php _e( "Top 5 Traffic Sources for the past 7 days" ) ?></strong>
+            </div>
+            <div class="ga-panel-body">
 
                 <div id="table-container">
-                    <table class="table table-bordered">
+                    <table class="ga-table">
                         <tr>
                             <td colspan="2">
                             </td>
@@ -49,20 +53,22 @@
                             </th>
                         </tr>
                         <tr>
-                            <td style="width: 20%; font-size: 20px;text-align:center" colspan="2"></td>
-                            <td class="col-md-2" style="text-align: right">
+                            <td colspan="2"></td>
+                            <td class="ga-col-pageviews" style="text-align: right">
                                 <div style="font-size: 16px;"><?php echo $sources['total'] ?></div>
                                 <div style="color: grey; font-size: 10px;">% of
                                     Total: <?php echo Ga_Helper::format_percent( ( ! empty( $sources['total'] ) ) ? number_format( $sources['sum'] / $sources['total'] * 100,
-										2, '.', ' ' ) : 100 ); ?>
+										2, '.', ' ' ) : 100 );
+									?>
                                     (<?php echo $sources['sum'] ?>)
                                 </div>
                             </td>
-                            <td class="col-md-5" style="text-align: right">
+                            <td class="ga-col-progressbar" style="text-align: right">
                                 <div style="font-size: 16px;"><?php echo $sources['total'] ?></div>
                                 <div style="color: grey; font-size: 10px;">% of
                                     Total: <?php echo Ga_Helper::format_percent( ( ! empty( $sources['total'] ) ) ? number_format( $sources['sum'] / $sources['total'] * 100,
-										2, '.', ' ' ) : 100 ); ?>
+										2, '.', ' ' ) : 100 );
+									?>
                                     (<?php echo $sources['sum'] ?>)
                                 </div>
                             </td>
@@ -70,9 +76,9 @@
 						<?php foreach ( $sources['rows'] as $key => $source ): ?>
                             <tr>
                                 <td style="width: 5%;text-align: right"><?php echo $key ?>.</td>
-                                <td style="width: 10%;">
+                                <td class="ga-col-name">
 									<?php if ( $source['name'] != '(direct) / (none)' ) : ?>
-                                        <a href="<?php echo $source['url'] ?>"
+                                        <a class="ga-source-name" href="<?php echo $source['url'] ?>"
                                            target="_blank"><?php echo $source['name'] ?></a>
 									<?php else: ?>
 										<?php echo $source['name'] ?>

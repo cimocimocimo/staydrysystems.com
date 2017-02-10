@@ -267,7 +267,7 @@ jQuery(function ($) {
 
                 //trigger ready event
                 $(document).trigger("ready");
-                $(document).trigger("yith-wcan-ajax-filtered");
+                $(document).trigger("yith-wcan-ajax-filtered", [response]);
                 $(window).trigger("scroll");
                 if( is_reset ){
                     if( typeof $.fn.slider != 'undefined' ){
@@ -280,7 +280,7 @@ jQuery(function ($) {
                 }
 
                 //See al categories in ajax
-                see_all_taxonomies()
+                see_all_taxonomies();
             }
         });
     };
@@ -297,8 +297,6 @@ jQuery(function ($) {
     $(document).on('click', '.yith-wcan a', function (e) {
         $(this).yith_wcan_ajax_filters(e, this);
     });
-
-
 
     /*AJAX NAVIGATION DROPDOWN STYLE*/
     function yit_open_select_dropdown(element) {
@@ -387,5 +385,27 @@ jQuery(function ($) {
         return url
             .replace(new RegExp('[?&]' + parameter + '=[^&#]*(#.*)?$'), '$1')
             .replace(new RegExp('([?&])' + parameter + '=[^&]*&'), '$1');
+    }
+
+    /* === Flatsome Theme Support === */
+    if( yith_wcan.flatsome.is_enabled == 1 && yith_wcan.flatsome.lazy_load_enabled == 1 ) {
+        $( document ).on('yith-wcan-ajax-filtered', function(event, response){
+            //Lazy Load
+            var context = $(document);
+            jQuery('.lazy-load', context).each(function (index, element) {
+                var $element = jQuery(element);
+                var waypoint = $element.waypoint(function (direction) {
+                    if($element.hasClass('lazy-load-active')) return;
+                    var src = $element.data('src');
+                    var srcset = $element.data('srcset');
+                    if(src) $element.attr('src', src);
+                    if(srcset) $element.attr('srcset', srcset);
+                    $element.imagesLoaded( function() {
+                        $element.addClass('lazy-load-active').removeClass('lazy-load');
+                    });
+                    //this.destroy();
+                }, { offset: '140%' });
+            });
+        });
     }
 });

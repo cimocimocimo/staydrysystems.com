@@ -54,7 +54,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                 return;
             }
 
-            if( defined( 'YITH_WCBR_PREMIUM_INIT' ) && YITH_WCBR_PREMIUM_INIT ) {
+            if( yith_wcan_brands_enabled() ) {
                 $this->brand_taxonomy = YITH_WCBR::$brands_taxonomy;
             }
 
@@ -110,6 +110,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                 }
 
                 if ( in_array( $display_type, apply_filters( 'yith_wcan_display_type_list', array( 'list' ) ) ) ) {
+
                     $ancestors = yith_wcan_wp_get_terms(
                         array(
                             'taxonomy'      => $taxonomy,
@@ -119,7 +120,16 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                         )
                     );
 
-                    if( ! empty( $ancestors ) ){
+                    if( ! empty( $ancestors ) && ! is_wp_error( $ancestors ) ){
+
+                        if( 'product' == yith_wcan_get_option( 'yith_wcan_ajax_shop_terms_order', 'alphabetical' )  ){
+                            usort( $ancestors, 'yit_terms_sort' );
+                        }
+
+                        else{
+                            usort( $ancestors, 'yit_alphabetical_terms_sort' );
+                        }
+
                         foreach( $ancestors as $ancestor ){
                             $tree[ $ancestor->term_id ] = yit_reorder_hierachical_categories( $ancestor->term_id, $taxonomy );
                         }
@@ -352,7 +362,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                                 $this->found = true;
                             }
 
-                            if ( $count == 0 && ! $option_is_set ) {
+                            if ( apply_filters( 'yith_wcan_skip_no_products_color', $count == 0 && ! $option_is_set ) ) {
                                 continue;
                             }
 
@@ -971,11 +981,12 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
 
                    if (isset($_GET[$this->brand_taxonomy])) {
                        $brands = is_array( $_GET[$this->brand_taxonomy] ) ? array() : get_term_by('slug', $_GET[$this->brand_taxonomy], $this->brand_taxonomy);
-                       if ( $brands instanceof WP_Term && $brands->term_id != $term->term_id) {
+                       if ( $brands instanceof WP_Term && $brands->term_id != $term->term_id ) {
                            $link = add_query_arg($this->brand_taxonomy, urlencode($brands->slug), $link);
                        }
-                    }
 
+
+                    }
 
                     if (isset($_GET['product_cat'])) {
                         $categories_filter_operator = 'and' == $query_type ? '+' : ',';
@@ -1050,20 +1061,24 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                     $link = esc_url( urldecode( apply_filters( 'woocommerce_layered_nav_link', $link ) ) );
 
                     $li_printed = false;
+                    $to_print = false;
 
                     if( $count > 0 || $option_is_set ) {
+                        $to_print = true;
                         printf( '<li %s><a href="%s">%s</a>', $class, $link, $term->name );
                         $li_printed = true;
                     }
 
                     else {
-                        $to_print = apply_filters( 'yith_wcan_hide_no_products_attributes', ! $filter_by_tags_hierarchical && $query_type != 'and' );
+                        $to_print = apply_filters( 'yith_wcan_show_no_products_attributes', ! $filter_by_tags_hierarchical && $query_type != 'and' );
 
                         $to_print && printf( '<li %s><span>%s</span>', $class, $term->name );
                         $li_printed = true;
                     }
 
-                    if ( $count != 0 && apply_filters( "{$args['widget_id']}-show_product_count", true, $instance ) ) {
+                    $show_count = $count != 0 && apply_filters( "{$args['widget_id']}-show_product_count", true, $instance );
+
+                    if ( $to_print && apply_filters( 'yith_wcan_force_show_count', true || $show_count ) ) {
                         echo ' <small class="count">' . $count . '</small><div class="clear"></div>';
                     }
 

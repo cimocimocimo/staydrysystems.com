@@ -4,7 +4,7 @@ Contributors: yithemes
 Tags: woocommerce ajax product filter download, woocommerce, widget, ajax, ajax filtered nav, ajax navigation, ajax filtered navigation, woocommerce layered navigation, woocommerce layered nav, product filter, product filters, ajax product filter, woocommerce ajax product filter, woocommerce filters, sidebar filter, sidebar ajax filter, ajax price filter, price filter, product sorting, woocommerce filter, taxonomy filter, attribute filter, attributes filter, woocommerce product sort, ajax sort, woocommerce ajax product filter, advanced product filters, ajax product filters, filters, woocommerce ajax product filters, woocommerce product filters, woocommerce product filters, category filter, attribute filters, woocommerce products filter, woocommerce price filter, yit, yith, yithemes
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 3.1.0
+Stable tag: 3.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -143,7 +143,7 @@ You can get more features with the premium version of YITH WooCommerce Ajax Prod
 = How can I try the full-featured plugin? =
 
 If you want to see a demonstration version of the premium plugin, you can see it installed on two different WooCommerce sites, either in [this page]( http://plugins.yithemes.com/yith-woocommerce-ajax-product-filter/?preview) or in [this page](http://preview.yithemes.com/bazar/shop/). Browse it and try all options available so that you can see how your plugin looks like.
-
+ 
 == Screenshots ==
 
 1. Admin - Appearance -> Widget: WooCommerce Filter Widget List Style
@@ -158,6 +158,24 @@ If you want to see a demonstration version of the premium plugin, you can see it
 10. Admin: YIT Plugins -> Ajax Product Filter -> Custom Style
 
 == Changelog ==
+
+= 3.1.2 - Released: 17 January, 2017 =
+
+* Tweak: Support for YITH WooCommerce Brands add-on FREE
+* Fix: Product image disappears after filter with lazy load option enabled
+* Fix: Empty li tag with query type OR in categories filter
+* Fix: Reset widget doesn't works with categories
+* Fix: Order by doesn't works with filter type list, label and dropdown
+* Dev: yith_wcan_brands_enabled hook
+
+= 3.1.1 - Released: 28 December, 2016 =
+
+* Added: yit_get_terms_args hook
+* Added: yith_wcan_skip_no_products_color hook
+* Added: yith_wcan_show_no_products_attributes hook
+* Added: yith_wcan_after_reset_widget hook
+* Added: yith_wcan_before_reset_widget hook
+* Removed: yith_wcan_hide_no_products_attributes hook
 
 = 3.1.0 - Released: 05 December, 2016 =
 

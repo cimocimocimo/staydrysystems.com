@@ -2,52 +2,31 @@
 
 class Ga_Frontend {
 
-	public static function insights_googleanalytics() {
-		if ( is_ssl() ) {
-			$url = 'https://ws.sharethis.com/button/st_insights.js';
-		} else {
-			$url = 'http://w.sharethis.com/button/st_insights.js';
+	const GA_SHARETHIS_PLATFORM_URL = '//platform-api.sharethis.com/js/sharethis.js';
+
+	public static function platform_sharethis() {
+		$url = self::GA_SHARETHIS_PLATFORM_URL . '#product=ga';
+		if ( get_option( Ga_Admin::GA_SHARETHIS_PROPERTY_ID ) ) {
+			$url = $url . '&property=' . get_option( Ga_Admin::GA_SHARETHIS_PROPERTY_ID );
 		}
-		$url = add_query_arg( array(
-
-			'publisher' => '75560ae7-5c5f-483e-936f-e426496af114',
-			'product'   => 'GA'
-		), $url );
-		wp_register_script( GA_NAME . '-sharethis', $url, null, null, false );
-		wp_enqueue_script( GA_NAME . '-sharethis' );
-	}
-
-	public static function loader_tag_googleanalytics( $tag, $handle ) {
-		if ( GA_NAME . '-sharethis' === $handle ) {
-			$tag = str_replace( '<script', '<script id=\'st_insights_js\'', $tag );
-		}
-
-		return $tag;
+		wp_register_script( GA_NAME . '-platform-sharethis', $url, null, null, false );
+		wp_enqueue_script( GA_NAME . '-platform-sharethis' );
 	}
 
 	/**
 	 * Adds frontend actions hooks.
 	 */
 	public static function add_actions() {
-		if ( Ga_Helper::can_add_ga_code() ) {
-			add_action( 'wp_head', 'Ga_Frontend::googleanalytics' );
-			if ( get_option( Ga_Admin::GA_SHARETHIS_TERMS_OPTION_NAME ) && Ga_Helper::is_sharethis_included() ) {
-				add_action( 'wp_enqueue_scripts', 'Ga_Frontend::insights_googleanalytics' );
-				add_filter( 'script_loader_tag', 'Ga_Frontend::loader_tag_googleanalytics', 10, 2 );
-			}
+		if ( Ga_Helper::are_features_enabled() ) {
+			add_action( 'wp_enqueue_scripts', 'Ga_Frontend::platform_sharethis' );
 		}
+		add_action( 'wp_footer', 'Ga_Frontend::insert_ga_script' );
 	}
 
-	/**
-	 * Displays Google Analytics Tracking code.
-	 */
-	public static function googleanalytics() {
-		$web_property_id = self::get_web_property_id();
-		if ( Ga_Helper::is_configured( $web_property_id ) ) {
-			Ga_View::load( 'ga_code', array(
-				'data' => array(
-					Ga_Admin::GA_WEB_PROPERTY_ID_OPTION_NAME => $web_property_id
-				)
+	public static function insert_ga_script() {
+		if ( Ga_Helper::can_add_ga_code() || Ga_Helper::is_all_feature_disabled() ) {
+			Ga_View_Core::load( 'ga_googleanalytics_loader', array(
+				'ajaxurl' => add_query_arg( Ga_Controller_Core::ACTION_PARAM_NAME, 'googleanalytics_get_script', home_url() )
 			) );
 		}
 	}
@@ -57,12 +36,13 @@ class Ga_Frontend {
 	 *
 	 * @return string Web Property Id
 	 */
-	private static function get_web_property_id() {
+	public static function get_web_property_id() {
 		$web_property_id = get_option( Ga_Admin::GA_WEB_PROPERTY_ID_OPTION_NAME );
-		if ( Ga_Helper::is_code_manually_enabled() ) {
+		if ( Ga_Helper::is_code_manually_enabled() || Ga_Helper::is_all_feature_disabled() ) {
 			$web_property_id = get_option( Ga_Admin::GA_WEB_PROPERTY_ID_MANUALLY_VALUE_OPTION_NAME );
 		}
 
 		return $web_property_id;
 	}
+
 }

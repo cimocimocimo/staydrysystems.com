@@ -225,6 +225,11 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
                             'is_enabled' => class_exists( 'Avada' ),
                             'sort_count' => 'ul.sort-count.order-dropdown'
                         ),
+                        /* Flatsome Theme Support */
+                        'flatsome'              => array(
+                            'is_enabled'         => function_exists( 'flatsome_option' ),
+                            'lazy_load_enabled'  => get_theme_mod( 'lazy_load_images' )
+                        ),
                     )
                 );
 

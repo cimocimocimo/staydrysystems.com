@@ -1,4 +1,5 @@
 <script>
+(function() {
     (function (i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
         i[r] = i[r] || function () {
@@ -9,8 +10,9 @@
         a.async = 1;
         a.src = g;
         m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    })(window, document, 'script', 'https://google-analytics.com/analytics.js', 'ga');
 
     ga('create', '<?php echo esc_attr( $data[ Ga_Admin::GA_WEB_PROPERTY_ID_OPTION_NAME ] ); ?>', 'auto');
     ga('send', 'pageview');
+	})();
 </script>

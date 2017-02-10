@@ -2,17 +2,17 @@
 
 class Ga_Helper {
 
-	const ROLE_ID_PREFIX = "role-id-";
-
-	const GA_DEFAULT_WEB_ID = "UA-0000000-0";
-
-	const GA_STATISTICS_PAGE_URL = "admin.php?page=googleanalytics";
-
-	const GA_SETTINGS_PAGE_URL = "admin.php?page=googleanalytics/settings";
-
-	const DASHBOARD_PAGE_NAME = "dashboard";
-
-	const PHP_VERSION_REQUIRED = "5.2.17";
+	const ROLE_ID_PREFIX					 = "role-id-";
+	const GA_DEFAULT_WEB_ID				 = "UA-0000000-0";
+	const GA_STATISTICS_PAGE_URL			 = "admin.php?page=googleanalytics";
+	const GA_SETTINGS_PAGE_URL			 = "admin.php?page=googleanalytics/settings";
+	const GA_TRENDING_PAGE_URL			 = 'admin.php?page=googleanalytics/trending';
+	const DASHBOARD_PAGE_NAME				 = "dashboard";
+	const PHP_VERSION_REQUIRED			 = "5.2.17";
+	const GA_WP_MODERN_VERSION			 = "4.1";
+	const GA_TOOLTIP_TERMS_NOT_ACCEPTED	 = 'Please accept the terms to use this feature.';
+	const GA_TOOLTIP_FEATURES_DISABLED	 = 'Click the Enable button at the top to start using this feature.';
+	const GA_DEBUG_MODE					 = false;
 
 	/**
 	 * Init plugin actions.
@@ -21,28 +21,36 @@ class Ga_Helper {
 	public static function init() {
 
 		// Displays errors related to required PHP version
-		if ( ! self::is_php_version_valid() ) {
+		if ( !self::is_php_version_valid() ) {
 			add_action( 'admin_notices', 'Ga_Admin::admin_notice_googleanalytics_php_version' );
 
 			return false;
 		}
 
 		// Displays errors related to required WP version
-		if ( ! self::is_wp_version_valid() ) {
+		if ( !self::is_wp_version_valid() ) {
 			add_action( 'admin_notices', 'Ga_Admin::admin_notice_googleanalytics_wp_version' );
 
 			return false;
 		}
 
-		if ( ! is_admin() ) {
+		if ( !is_admin() ) {
 			Ga_Frontend::add_actions();
+
+			$frontend_controller = new Ga_Frontend_Controller();
+			$frontend_controller->handle_actions();
 		}
 
 		if ( is_admin() ) {
 			Ga_Admin::add_filters();
 			Ga_Admin::add_actions();
-			Ga_Admin::init_oauth();
-			Ga_Admin::handle_actions();
+
+			if ( false === self::is_trending_page() ) {
+				Ga_Admin::init_oauth();
+			}
+
+			$admin_controller = new Ga_Admin_Controller();
+			$admin_controller->handle_actions();
 		}
 	}
 
@@ -53,7 +61,7 @@ class Ga_Helper {
 	public static function is_plugin_page() {
 		$site = get_current_screen();
 
-		return preg_match( '/' . GA_NAME . '/', $site->base );
+		return preg_match( '/' . GA_NAME . '/i', $site->base ) || preg_match( '/' . GA_NAME . '/i', $_SERVER[ 'REQUEST_URI' ] );
 	}
 
 	/**
@@ -67,6 +75,16 @@ class Ga_Helper {
 	}
 
 	/**
+	 * Checks if current page is a trending page.
+	 * @return number
+	 */
+	public static function is_trending_page() {
+		$site_uri = urldecode( basename( $_SERVER[ 'REQUEST_URI' ] ) );
+
+		return preg_match( '/' . preg_quote( self::GA_TRENDING_PAGE_URL, '/' ) . '/', $site_uri, $matches ) == 1;
+	}
+
+	/**
 	 * Check whether the plugin is configured.
 	 *
 	 * @param String $web_id
@@ -74,7 +92,7 @@ class Ga_Helper {
 	 * @return boolean
 	 */
 	public static function is_configured( $web_id ) {
-		return $web_id !== self::GA_DEFAULT_WEB_ID;
+		return ( $web_id !== self::GA_DEFAULT_WEB_ID ) && !empty( $web_id );
 	}
 
 	/**
@@ -84,7 +102,7 @@ class Ga_Helper {
 	 */
 	public static function get_user_roles() {
 		global $wp_roles;
-		if ( ! isset( $wp_roles ) ) {
+		if ( !isset( $wp_roles ) ) {
 			$wp_roles = new WP_Roles();
 		}
 
@@ -121,15 +139,15 @@ class Ga_Helper {
 	 * @return boolean
 	 */
 	public static function can_add_ga_code() {
-		$current_user  = wp_get_current_user();
-		$user_roles    = ! empty( $current_user->roles ) ? $current_user->roles : array();
-		$exclude_roles = json_decode( get_option( Ga_Admin::GA_EXCLUDE_ROLES_OPTION_NAME ), true );
+		$current_user	 = wp_get_current_user();
+		$user_roles		 = !empty( $current_user->roles ) ? $current_user->roles : array();
+		$exclude_roles	 = json_decode( get_option( Ga_Admin::GA_EXCLUDE_ROLES_OPTION_NAME ), true );
 
 		array_walk( $user_roles, 'Ga_Helper::prepare_role' );
 
 		$return = true;
 		foreach ( $user_roles as $role ) {
-			if ( ! empty( $exclude_roles[ $role ] ) ) {
+			if ( !empty( $exclude_roles[ $role ] ) ) {
 				$return = false;
 				break;
 			}
@@ -144,8 +162,6 @@ class Ga_Helper {
 	 */
 	public static function add_ga_dashboard_widget() {
 		echo self::get_ga_dashboard_widget();
-
-		Ga_Admin::display_api_errors();
 	}
 
 	/**
@@ -167,14 +183,14 @@ class Ga_Helper {
 
 		if ( $text_mode ) {
 			return self::get_chart_page( 'ga_dashboard_widget' . ( $ajax ? "_ajax" : "" ), array(
-				'chart' => $data['chart'],
-				'boxes' => $data['boxes']
+				'chart'	 => $data[ 'chart' ],
+				'boxes'	 => $data[ 'boxes' ]
 			) );
 		} else {
 			echo self::get_chart_page( 'ga_dashboard_widget' . ( $ajax ? "_ajax" : "" ), array(
-				'chart'            => $data['chart'],
-				'boxes'            => $data['boxes'],
-				'more_details_url' => admin_url( self::GA_STATISTICS_PAGE_URL )
+				'chart'				 => $data[ 'chart' ],
+				'boxes'				 => $data[ 'boxes' ],
+				'more_details_url'	 => admin_url( self::GA_STATISTICS_PAGE_URL )
 			) );
 		}
 
@@ -192,10 +208,7 @@ class Ga_Helper {
 	 * @return string|false Returns JSON data string
 	 */
 	public static function get_ga_dashboard_widget_data_json(
-		$date_range = null,
-		$metric = null,
-		$text_mode = false,
-		$ajax = false
+	$date_range = null, $metric = null, $text_mode = false, $ajax = false
 	) {
 		if ( empty( $date_range ) ) {
 			$date_range = '30daysAgo';
@@ -221,25 +234,22 @@ class Ga_Helper {
 	private static function get_dashboard_widget_data( $date_range, $metric = null ) {
 		$selected = self::get_selected_account_data( true );
 		if ( self::is_authorized() && self::is_account_selected() ) {
-			$query_params = Ga_Stats::get_query( 'main_chart', $selected['view_id'], $date_range, $metric );
-			$stats_data   = Ga_Admin::api_client()->call( 'ga_api_data', array(
-
+			$query_params	 = Ga_Stats::get_query( 'main_chart', $selected[ 'view_id' ], $date_range, $metric );
+			$stats_data		 = Ga_Admin::api_client()->call( 'ga_api_data', array(
 				$query_params
 			) );
 
-			$boxes_query = Ga_Stats::get_query( 'dashboard_boxes', $selected['view_id'], $date_range );
-			$boxes_data  = Ga_Admin::api_client()->call( 'ga_api_data', array(
-
+			$boxes_query = Ga_Stats::get_query( 'dashboard_boxes', $selected[ 'view_id' ], $date_range );
+			$boxes_data	 = Ga_Admin::api_client()->call( 'ga_api_data', array(
 				$boxes_query
 			) );
 		}
-		$chart = ! empty( $stats_data ) ? Ga_Stats::get_dashboard_chart( $stats_data->getData() ) : array();
-		$boxes = ! empty( $boxes_data ) ? Ga_Stats::get_dashboard_boxes_data( $boxes_data->getData() ) : array();
+		$chart	 = !empty( $stats_data ) ? Ga_Stats::get_dashboard_chart( $stats_data->getData() ) : array();
+		$boxes	 = !empty( $boxes_data ) ? Ga_Stats::get_dashboard_boxes_data( $boxes_data->getData() ) : array();
 
 		return array(
-
-			'chart' => $chart,
-			'boxes' => $boxes
+			'chart'	 => $chart,
+			'boxes'	 => $boxes
 		);
 	}
 
@@ -256,16 +266,14 @@ class Ga_Helper {
 	 */
 	public static function get_chart_page( $view, $params ) {
 
-		$message = sprintf( __( 'Statistics can only be seen after you authenticate with your Google account on the <a href="%s">Settings page</a>.' ),
-			admin_url( self::GA_SETTINGS_PAGE_URL ) );
+		$message = sprintf( __( 'Statistics can only be seen after you authenticate with your Google account on the <a href="%s">Settings page</a>.' ), admin_url( self::GA_SETTINGS_PAGE_URL ) );
 
-		if ( self::is_authorized() && ! self::is_code_manually_enabled() ) {
+		if ( self::is_authorized() && !self::is_code_manually_enabled() && !self::is_all_feature_disabled() ) {
 			if ( self::is_account_selected() ) {
 				if ( $params ) {
-					return Ga_View::load( $view, $params, true );
+					return Ga_View_Core::load( $view, $params, true );
 				} else {
-					return self::ga_oauth_notice( sprintf( 'Please configure your <a href="%s">Google Analytics settings</a>.',
-						admin_url( self::GA_SETTINGS_PAGE_URL ) ) );
+					return self::ga_oauth_notice( sprintf( 'Please configure your <a href="%s">Google Analytics settings</a>.', admin_url( self::GA_SETTINGS_PAGE_URL ) ) );
 				}
 			} else {
 				return self::ga_oauth_notice( $message );
@@ -294,7 +302,7 @@ class Ga_Helper {
 	public static function get_option( $name ) {
 		$opt = get_option( $name );
 
-		return ! empty( $opt ) ? $opt : null;
+		return !empty( $opt ) ? $opt : null;
 	}
 
 	/**
@@ -308,7 +316,7 @@ class Ga_Helper {
 	public static function update_option( $name, $value ) {
 		$opt = update_option( $name, $value );
 
-		return ! empty( $opt ) ? $opt : null;
+		return !empty( $opt ) ? $opt : null;
 	}
 
 	/**
@@ -320,7 +328,7 @@ class Ga_Helper {
 	 * @return string
 	 */
 	public static function ga_oauth_notice( $message ) {
-		return Ga_View::load( 'ga_oauth_notice', array(
+		return Ga_View_Core::load( 'ga_oauth_notice', array(
 			'msg' => $message
 		), true );
 	}
@@ -330,13 +338,17 @@ class Ga_Helper {
 	 *
 	 * @param $message
 	 * @param string $type
+	 * @param $is_dismissable
+	 * @param $action
 	 *
 	 * @return string
 	 */
-	public static function ga_wp_notice( $message, $type = '' ) {
-		return Ga_View::load( 'ga_wp_notice', array(
-			'type' => empty( $type ) ? Ga_Admin::NOTICE_WARNING : $type,
-			'msg'  => $message
+	public static function ga_wp_notice( $message, $type = '', $is_dismissable = false, $action = array() ) {
+		return Ga_View_Core::load( 'ga_wp_notice', array(
+			'type'			 => empty( $type ) ? Ga_Admin::NOTICE_WARNING : $type,
+			'msg'			 => $message,
+			'is_dismissable' => $is_dismissable,
+			'action'		 => $action
 		), true );
 	}
 
@@ -348,16 +360,15 @@ class Ga_Helper {
 	 * @return mixed
 	 */
 	public static function get_selected_account_data( $assoc = false ) {
-		$data = json_decode( self::get_option( Ga_Admin::GA_SELECTED_ACCOUNT ) );
-		$data = ( ! empty( $data ) && count( $data ) == 3 ) ? $data : false;
+		$data	 = json_decode( self::get_option( Ga_Admin::GA_SELECTED_ACCOUNT ) );
+		$data	 = (!empty( $data ) && count( $data ) == 3 ) ? $data : false;
 
 		if ( $data ) {
 			if ( $assoc ) {
 				return array(
-
-					'account_id'      => $data[0],
-					'web_property_id' => $data[1],
-					'view_id'         => $data[2]
+					'account_id'		 => $data[ 0 ],
+					'web_property_id'	 => $data[ 1 ],
+					'view_id'			 => $data[ 2 ]
 				);
 			} else {
 				return $data;
@@ -444,18 +455,111 @@ class Ga_Helper {
 	 * @return mixed
 	 */
 	public static function is_php_version_valid() {
-		$p        = '#(\.0+)+($|-)#';
-		$ver1     = preg_replace( $p, '', phpversion() );
-		$ver2     = preg_replace( $p, '', self::PHP_VERSION_REQUIRED );
-		$operator = 'ge';
-		$compare  = isset( $operator ) ?
-			version_compare( $ver1, $ver2, $operator ) :
-			version_compare( $ver1, $ver2 );
+		$p			 = '#(\.0+)+($|-)#';
+		$ver1		 = preg_replace( $p, '', phpversion() );
+		$ver2		 = preg_replace( $p, '', self::PHP_VERSION_REQUIRED );
+		$operator	 = 'ge';
+		$compare	 = isset( $operator ) ?
+		version_compare( $ver1, $ver2, $operator ) :
+		version_compare( $ver1, $ver2 );
 
 		return $compare;
 	}
 
 	public static function get_current_url() {
-		return $_SERVER['REQUEST_URI'];
+		return $_SERVER[ 'REQUEST_URI' ];
 	}
+
+	public static function create_url( $url, $data = array() ) {
+		return !empty( $data ) ? ( strstr( $url, '?' ) ? ( $url . '&' ) : ( $url . '?' ) ) . http_build_query( $data ) : $url;
+	}
+
+	public static function handle_url_message( $data ) {
+		if ( !empty( $_GET[ 'ga_msg' ] ) ) {
+			$invite_result = json_decode( base64_decode( $_GET[ 'ga_msg' ] ), true );
+			if ( !empty( $invite_result[ 'status' ] ) && !empty( $invite_result[ 'message' ] ) ) {
+				$data[ 'ga_msg' ] = Ga_Helper::ga_wp_notice( $invite_result[ 'message' ], $invite_result[ 'status' ], true );
+			}
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Create base64 url message
+	 *
+	 * @param $msg
+	 * @param $status
+	 *
+	 * @return string
+	 */
+	public static function create_url_msg( $msg, $status ) {
+		$msg = array( 'status' => $status, 'message' => $msg );
+
+		return base64_encode( json_encode( $msg ) );
+	}
+
+	public static function is_all_feature_disabled() {
+		return self::get_option( Ga_Admin::GA_DISABLE_ALL_FEATURES );
+	}
+
+	public static function are_features_enabled() {
+		return self::are_terms_accepted() && !self::is_all_feature_disabled();
+	}
+
+	public static function are_sharethis_properties_verified() {
+		return ( get_option( Ga_Admin::GA_SHARETHIS_VERIFICATION_RESULT ) && self::are_sharethis_properties_set() );
+	}
+
+	public static function are_sharethis_properties_ready_to_verify() {
+		return ( self::are_sharethis_properties_set() && !get_option( Ga_Admin::GA_SHARETHIS_VERIFICATION_RESULT ) );
+	}
+
+	public static function are_sharethis_properties_set() {
+		return ( get_option( Ga_Admin::GA_SHARETHIS_PROPERTY_ID ) && get_option( Ga_Admin::GA_SHARETHIS_PROPERTY_SECRET ) );
+	}
+
+	public static function is_plugin_version_with_trending_content() {
+		return ( version_compare( get_option( Ga_Admin::GA_VERSION_OPTION_NAME ), Ga_Admin::GA_SHARETHIS_TRENDING_CONTENT_PLUGIN_VERSION, '>=' ) );
+	}
+
+	public static function should_create_sharethis_property() {
+		return ( self::is_plugin_version_with_trending_content() && self::are_features_enabled() && !self::are_sharethis_properties_set() );
+	}
+
+	public static function should_verify_sharethis_installation() {
+		return ( self::is_plugin_version_with_trending_content() && self::are_features_enabled() && self::are_sharethis_properties_ready_to_verify() );
+	}
+
+	public static function should_load_trending_alerts() {
+		return ( self::is_plugin_version_with_trending_content() && self::are_features_enabled() && self::are_sharethis_properties_verified() );
+	}
+
+	public static function get_tooltip() {
+		if ( !self::are_terms_accepted() ) {
+			return self::GA_TOOLTIP_TERMS_NOT_ACCEPTED;
+		} else if ( !self::are_features_enabled() ) {
+			return self::GA_TOOLTIP_FEATURES_DISABLED;
+		} else {
+			return '';
+		}
+	}
+
+	public static function is_wp_old() {
+		return version_compare( get_bloginfo( 'version' ), self::GA_WP_MODERN_VERSION, 'lt' );
+	}
+
+	public static function should_load_ga_javascript( $web_property_id ) {
+		return ( self::is_configured( $web_property_id ) && ( self::can_add_ga_code() || self::is_all_feature_disabled() ) );
+	}
+
+	/**
+	 * @return string
+	 */
+	public static function get_account_id() {
+		$account_id = json_decode( Ga_Helper::get_option( Ga_Admin::GA_SELECTED_ACCOUNT ) );
+
+		return ! empty( $account_id[0] ) ? $account_id[0] : '';
+	}
+
 }

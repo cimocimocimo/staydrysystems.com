@@ -155,10 +155,10 @@ function wpr2x_wp_retina_2x() {
 		</form>
 
 		<!-- REMOVE BUTTON ALL -->
-		<a id='wr2x_remove_button_all' onclick='wr2x_delete_all()' class='button button-red' style='float: right;'><img style='position: relative; top: 3px; left: -2px; margin-right: 3px; width: 16px; height: 16px;' src='<?php echo plugin_dir_url( __FILE__ ); ?>img/burn.png' /><?php _e("Bulk Delete", 'wp-retina-2x'); ?></a>
+		<a id='wr2x_remove_button_all' onclick='wr2x_delete_all()' class='button button-red' style='float: right;'><img style='position: relative; top: 3px; left: -2px; margin-right: 3px; width: 16px; height: 16px;' src='<?php echo plugin_dir_url( __FILE__ ); ?>img/burn.png' /><?php _e("Bulk Delete (Retina Only)", 'wp-retina-2x'); ?></a>
 
 		<!-- GENERATE ALL -->
-		<a id='wr2x_generate_button_all' onclick='wr2x_generate_all()' class='button-primary' style='float: right; margin-right: 5px;'><img style='position: relative; top: 3px; left: -2px; margin-right: 3px; width: 16px; height: 16px;' src='<?php echo plugin_dir_url( __FILE__ ); ?>img/photo-album--plus.png' /><?php _e("Bulk Generate", 'wp-retina-2x'); ?></a>
+		<a id='wr2x_generate_button_all' onclick='wr2x_generate_all()' class='button-primary' style='float: right; margin-right: 5px;'><img style='position: relative; top: 3px; left: -2px; margin-right: 3px; width: 16px; height: 16px;' src='<?php echo plugin_dir_url( __FILE__ ); ?>img/photo-album--plus.png' /><?php _e("Bulk Generate (Thumbnails & Retina)", 'wp-retina-2x'); ?></a>
 
 
 		<!-- PROGRESS -->

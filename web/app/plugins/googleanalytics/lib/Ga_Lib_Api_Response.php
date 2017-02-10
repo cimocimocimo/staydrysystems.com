@@ -2,14 +2,17 @@
 
 class Ga_Lib_Api_Response {
 
+	public static $empty_response = array( '', '' );
 	private $header;
 	private $body;
 	private $data;
 
-	function __construct( $raw_response ) {
-		$this->setHeader( $raw_response[0] );
-		$this->setBody( $raw_response[1] );
-		$this->setData( json_decode( $raw_response[1], true ) );
+	function __construct( $raw_response = null ) {
+		if (!empty($raw_response)) {
+		$this->setHeader( $raw_response[ 0 ] );
+		$this->setBody( $raw_response[ 1 ] );
+		$this->setData( json_decode( $raw_response[ 1 ], true ) );
+	}
 	}
 
 	public function setHeader( $header ) {
@@ -35,4 +38,5 @@ class Ga_Lib_Api_Response {
 	public function getData() {
 		return $this->data;
 	}
+
 }

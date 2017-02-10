@@ -133,7 +133,7 @@ if (!class_exists('YIT_Metabox')) {
             $this->set_tabs();
 
 
-            add_action('add_meta_boxes', array($this, 'register_metabox'));
+            add_action('add_meta_boxes', array($this, 'register_metabox'),99);
             add_action('save_post', array($this, 'save_postdata'));
             add_action('admin_enqueue_scripts', array($this, 'enqueue'), 15);
 
@@ -414,6 +414,7 @@ if (!class_exists('YIT_Metabox')) {
          */
         public function register_metabox($post_type)
         {
+
             if (in_array($post_type, (array)$this->options['pages'])) {
                 add_meta_box($this->id, $this->options['label'], array($this, 'show'), $post_type, $this->options['context'], $this->options['priority']);
             }
@@ -476,12 +477,31 @@ if (!class_exists('YIT_Metabox')) {
                 }
             }
 
-            if (!in_array($post_type, (array)$this->options['pages'])) {
+            /*if (!in_array($post_type, (array)$this->options['pages'])) {
                 return $post_id;
-            }
+            }*/
 
             $this->reorder_tabs();
 
+            if(isset($_POST['yit_metaboxes'])) {
+                $yit_metabox_data = $_POST['yit_metaboxes'];
+
+                if(is_array($yit_metabox_data)) {
+
+                    foreach ($yit_metabox_data as $field_name => $field_value) {
+
+                        if(! add_post_meta($post_id, $field_name, $field_value, true) )
+                        {
+                            update_post_meta($post_id, $field_name, $field_value);
+                        }
+
+
+                    }
+
+                }
+
+
+            }
 
             foreach ($this->tabs as $tab) {
 
@@ -501,8 +521,7 @@ if (!class_exists('YIT_Metabox')) {
                     }
                 }
             }
-
-
+            
         }
 
         /**

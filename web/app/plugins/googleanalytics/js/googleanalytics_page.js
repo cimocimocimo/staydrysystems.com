@@ -2,6 +2,10 @@ const GA_ACCESS_CODE_MODAL_ID = "ga_access_code_modal";
 const GA_ACCESS_CODE_TMP_ID = "ga_access_code_tmp";
 const GA_ACCESS_CODE_ID = "ga_access_code";
 const GA_FORM_ID = "ga_form";
+const GA_MODAL_CLOSE_ID = 'ga_close';
+const GA_MODAL_BTN_CLOSE_ID = 'ga_btn_close';
+const GA_GOOGLE_AUTH_BTN_ID = 'ga_authorize_with_google_button';
+const GA_SAVE_ACCESS_CODE_BTN_ID = 'ga_save_access_code';
 
 (function ($) {
 
@@ -10,7 +14,7 @@ const GA_FORM_ID = "ga_form";
         authorize: function (e, url) {
             e.preventDefault();
             ga_popup.url = url;
-            $('#' + GA_ACCESS_CODE_MODAL_ID).appendTo("body").modal('show');
+            $('#' + GA_ACCESS_CODE_MODAL_ID).appendTo("body").show();
             ga_popup.open();
         },
         open: function () {
@@ -32,6 +36,15 @@ const GA_FORM_ID = "ga_form";
             }
         }
     };
+
+    ga_modal = {
+        hide: function () {
+            $('#' + GA_ACCESS_CODE_MODAL_ID).hide();
+            ga_loader.hide();
+            $('#' + GA_SAVE_ACCESS_CODE_BTN_ID).removeAttr('disabled');
+        }
+    };
+
     ga_events = {
 
         click: function (selector, callback) {
@@ -58,13 +71,47 @@ const GA_FORM_ID = "ga_form";
             $('#ga_manually_wrapper').toggle();
         },
         initModalEvents: function () {
-            $('#' + GA_ACCESS_CODE_MODAL_ID).on('shown.bs.modal', function () {
+            $('#' + GA_GOOGLE_AUTH_BTN_ID).on('click', function () {
                 $('#' + GA_ACCESS_CODE_TMP_ID).focus();
             });
 
-            $('#' + GA_ACCESS_CODE_MODAL_ID).on('hide.bs.modal', function () {
-                ga_loader.hide();
-                $('#ga_save_access_code').removeAttr('disabled');
+            $('#' + GA_MODAL_CLOSE_ID + ', #' + GA_MODAL_BTN_CLOSE_ID).on('click', function () {
+                ga_modal.hide();
+            });
+        }
+    };
+
+    /**
+     * Handles "disable all features" switch button
+     * @type {{init: ga_switcher.init}}
+     */
+    ga_switcher = {
+        init: function (state) {
+            var checkbox = $("#ga-disable");
+
+            if (state) {
+                checkbox.prop('checked', 'checked');
+            } else {
+                checkbox.removeProp('checked');
+            }
+
+            $("#ga-slider").on("click", function (e) {
+                var manually_enter_not_checked = $('#ga_enter_code_manually').not(':checked');
+                if (checkbox.not(':checked').length > 0) {
+                    if (confirm('This will disable Dashboards, Viral Alerts and Google API')) {
+                        setTimeout(function () {
+                            window.location.href = GA_DISABLE_FEATURE_URL;
+                        }, 350);
+                    } else {
+                        setTimeout(function () {
+                            checkbox.removeProp('checked');
+                        }, 350);
+                    }
+                } else { // disable
+                    setTimeout(function () {
+                        window.location.href = GA_ENABLE_FEATURE_URL;
+                    }, 350);
+                }
             });
         }
     };

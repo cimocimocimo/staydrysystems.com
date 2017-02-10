@@ -6,9 +6,9 @@ Tags: Google Analytics, Universal Analytics, Enhanced E-commerce, E-commerce, e-
 Author URI: http://www.tatvic.com/
 Author: Tatvic
 Requires at least: 3.6
-Tested up to: 4.4
-Stable tag: 1.0.18
-Version: 1.0.18
+Tested up to: 4.7
+Stable tag: 1.0.19
+Version: 1.0.19
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -38,8 +38,6 @@ Provides integration between Enhanced Ecommerce feature of Google Analytics and 
 * Enable Enhanced E-commerce for your profile/view. This is a profile / view level setting and can be accessed under Admin > View > E-commerce Settings
 
 * Add meaningful labels for your checkout steps. We recommend you to label as, Step 1 : Checkout View; Step 2 : Billing Info; Step 3 : Proceed to payment
-
-* Remove standard E-commerce code from thank you along with the ecommerce.js which is included by <code>ga('require', 'ecommerce', 'ecommerce.js');</code>. If you are using a third party plugin for e-commerce tracking, you would have to disable the plugin.
 
 * Activate our plug-in from the Settings page. You can access the setting page from here WooCommerce -> Settings ->Integration ->Enhanced Ecommerce Google Analytics.
 
@@ -75,6 +73,10 @@ This plugin will add the settings to the Integration tab, to be found in the Woo
 
 Starting the WooCommerce 2.1 release there are no conflicts. However for earlier the plugin might conflict with the default Google Analytics integration for WooCommerce.
 
+= Do I Need to add any custom code for it? =
+
+As our plugin automatically tracks all the Enhanced Ecommerce data ( including product name, price, etc dynamically) for your store, you don't need to add any custom code to track Ecommerce events on your store from your end.
+
 = Why are my PayPal transaction data not getting recorded in GA? =
 
 If you are facing this issue, please check if you have configured auto return in PayPal settings.  Configuring auto return will resolve your issue. Here’s a PayPal <a href="https://www.paypal.com/in/cgi-bin/webscr?cmd=p/mer/express_return_summary-outside" target="_blank">documentation</a> & WooCommerce <a href="http://docs.woothemes.com/document/paypal-standard/#section-5" target="_blank">documentation</a> on understanding & setting up Auto Return.
@@ -89,9 +91,36 @@ Following are one or more reasons:
 
 * If you have just installed our plugin, then please wait for at-least 24 hours before you 	start seeing any data in your GA. If you still face this issue after 24 hours, please reach out to us via <a href="https://wordpress.org/support/plugin/enhanced-e-commerce-for-woocommerce-store" target="_blank">support thread</a>.
 
+= Since I have Implemented GA Script (UA tag) Via GTM, I didn't enable Add Universal Analytics Tracking Code option, but seems that it is not working. =
+
+When you have the UA script/tag implemented via your GTM, it may happen sometimes that the script might take/make any delay in loading on your store, due to which our plugin may not work well on your store.
+
+Reason :
+
+* Our Plugin's script works/fetches the data based on the GA's default tracker ('ga' in the case of Universal Analytics script used in our plugin). While you implement the UA tracking script from your GTM, the script in your store may not be able to initialize the tracker, which in turn will hinder the plugin from populating insights in your Analytics account.
+
+= Where I can see my all Enhanced Ecommerce Reports (Eg. Sales Report,Product Performance Report)? =
+
+You can Find all The Enhanced Ecommerce Reports in your Analytics Account under Conversions --> Ecommerce.
+
 = Products with Multi variant not getting recorded in GA =
 
-Currently our plugin does not support products with multiple variant & hence you may not see their transaction data in GA. Additionally, we have planned to add the same feature in our upcoming release
+Currently our plugin does not support products with multiple variant & hence you may not see their transaction data in GA. Additionally, we have planned to add the same feature in our upcoming release.
+
+= I have noticed that some transactions are missing in my GA account, compared to my Woocmmerce backend (Orders) =
+
+Possible reasons for not getting the accurate Transactions (in sales performance report) are as below :
+
+* If a user completes the transaction via a 3rd party payment gateway and is not redirected back to your store’s thank you page.
+
+* If any javascript error is detected on the "thank you" page of your store which may restrict plugin's code to get executed further.
+
+* Some browsers and common ad blocking programs block certain JavaScripts
+(including GA's script), which means Google Analytics is unable to record transactions.
+
+* The user has left the page before the transaction has had a chance to send to Google Analytics.
+
+Additionally, GA is a trend analysis tool, and as such cannot be expected to be 100% accurate. However, if the variance is greater than 10%, we request you to contact us!
 
 = My Ecommerce transaction data are not getting recorded in GA =
 
@@ -101,7 +130,11 @@ Hence, this may result into missing transaction data in your GA. You can resolve
 
 = Does your Plugin support Product Refund? =
 
-Our existing plugin does not track product refund data, however you can buy our <a href="http://bit.ly/1yFqA04" target="_blank">paid plugin</a> to get access to product Refund data 
+Our existing plugin does not track product refund data, however you can buy our <a href="https://codecanyon.net/item/actionable-google-analytics-for-woocommerce/9899552" target="_blank">paid plugin</a> to get access to product Refund data 
+
+= Does your plugin supports Multilingual Wordpress site? =
+
+Our plugin does not support Multilingual Wordpress site.
 
 = How to verify if you have implemented the Plugin well? =
 
@@ -169,3 +202,7 @@ Important Note: When you update the plugin, please save your settings again.
 
  = 1.0.18 - 11/04/2016 =
  * Fixed - Compatibility with Google Tag Manager for Wordpress by DuracellTomi
+
+ = 1.0.19 - 21/12/2016 =
+ * Fixed - Compatibility with Wordpress 4.7 & Woocommerce 2.6.x
+ * Minor Bug Fixes.

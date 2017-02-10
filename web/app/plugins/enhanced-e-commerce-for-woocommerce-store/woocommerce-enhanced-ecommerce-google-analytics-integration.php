@@ -21,7 +21,7 @@
   Description: Allows Enhanced E-commerce Google Analytics tracking code to be inserted into WooCommerce store pages.
   Author: Tatvic
   Author URI: http://www.tatvic.com
-  Version: 1.0.18
+  Version: 1.0.19
  */
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -42,9 +42,9 @@ function wc_enhanced_ecommerce_google_analytics_add_integration($integrations) {
 add_filter('woocommerce_integrations', 'wc_enhanced_ecommerce_google_analytics_add_integration', 10);
 
 //plugin action links on plugin page
-add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'tvc_plugin_action_links');
+add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'tvc_ee_plugin_action_links');
 
-function tvc_plugin_action_links($links) {
+function tvc_ee_plugin_action_links($links) {
     global $woocommerce;
     if (version_compare($woocommerce->version, "2.1", ">=")) {
         $setting_url = 'admin.php?page=wc-settings&tab=integration';
@@ -53,6 +53,7 @@ function tvc_plugin_action_links($links) {
     }
     $links[] = '<a href="' . get_admin_url(null, $setting_url) . '">Settings</a>';
     $links[] = '<a href="https://wordpress.org/plugins/enhanced-e-commerce-for-woocommerce-store/faq/" target="_blank">FAQ</a>';
+    $links[] = '<a href="http://plugins.tatvic.com/downloads/EE-Woocommerce-Plugin-Documentation.pdf" target="_blank">Documentation</a>';
     return $links;
 }
 

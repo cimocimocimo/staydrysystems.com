@@ -12,4 +12,5 @@ class Ga_Hook {
 		register_deactivation_hook( $plugin_file_path, 'Ga_Admin::deactivate_googleanalytics' );
 		register_uninstall_hook( $plugin_file_path, 'Ga_Admin::uninstall_googleanalytics' );
 	}
+
 }

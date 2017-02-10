@@ -7,7 +7,7 @@
  *
  * @class 		WC_Enhanced_Ecommerce_Google_Analytics
  * @extends		WC_Integration
- * @author     Jigar Navadiya <jigar@tatvic.com>
+ * @author      Jigar Navadiya <jigar@tatvic.com>
  */
 class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
 
@@ -18,7 +18,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
      * @return void
      */
     //set plugin version
-    public $tvc_eeVer = '1.0.18';
+    public $tvc_eeVer = '1.0.19';
     public function __construct() {
         
          //Set Global Variables
@@ -59,6 +59,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         // API Call to LS with e-mail
         // Tracking code
         add_action("wp_head", array($this, "ee_settings"));
+       
         add_action("woocommerce_thankyou", array($this, "ecommerce_tracking_code"));
 
         // Enhanced Ecommerce product impression hook
@@ -85,6 +86,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         
          //Advanced Store data Tracking
         add_action("wp_footer", array($this, "tvc_store_meta_data"));
+         
     }
     /**
      * Get store meta data for trouble shoot
@@ -314,7 +316,6 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
      */
     function ecommerce_tracking_code($order_id) {
         global $woocommerce;
-
         if ($this->disable_tracking($this->ga_eeT) || current_user_can("manage_options") || get_post_meta($order_id, "_tracked", true) == 1)
             return;
 
@@ -572,7 +573,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         //declare all variable as a global which will used for make json
         global $homepage_json_fp,$homepage_json_ATC_link, $homepage_json_rp,$prodpage_json_relProd,$catpage_json,$prodpage_json_ATC_link,$catpage_json_ATC_link;
         //is home page then make all necessory json
-        if (is_home()) {
+        if (is_home() || is_front_page()) {
             if (!is_array($homepage_json_fp) && !is_array($homepage_json_rp) && !is_array($homepage_json_ATC_link)) {
                 $homepage_json_fp = array();
                 $homepage_json_rp = array();
@@ -782,7 +783,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                 }
                 
                 ';
-        if(is_home()){
+        if(is_home() || is_front_page()){
        $hmpg_impressions_jQ .='
                 if(tvc_fp.length !== 0){
                     t_products_impre_clicks(tvc_fp,"fp","Featured Products");		
@@ -813,6 +814,21 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                     });   
              
                 ';
+        }else if(is_search()){
+            $hmpg_impressions_jQ .='
+                //shop page json
+                if(tvc_pgc.length !== 0){
+                    t_products_impre_clicks(tvc_pgc,"srch","Search Results");   
+                }
+                //shop page prod click
+                jQuery("a:not(.product_type_variable, .product_type_grouped)").on("click",function(){
+                    t_url=jQuery(this).attr("href");
+                     //cat page prod call for click
+                     prod_exists_in_JSON(t_url,catpage_json,"Search Results","srch");
+                     });
+                
+                     
+        '; 
         }else if (is_product()) {
                 //product page releted products
                 $hmpg_impressions_jQ .='
@@ -865,21 +881,6 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                 
                      
         '; 
-        }else if(is_search()){
-            $hmpg_impressions_jQ .='
-                //shop page json
-                if(tvc_pgc.length !== 0){
-                    t_products_impre_clicks(tvc_pgc,"srch","Search Results");	
-                }
-                //shop page prod click
-                jQuery("a:not(.product_type_variable, .product_type_grouped)").on("click",function(){
-                    t_url=jQuery(this).attr("href");
-                     //cat page prod call for click
-                     prod_exists_in_JSON(t_url,catpage_json,"Search Results","srch");
-                     });
-                
-                     
-        '; 
         }
         //common ATC link for Category page , Shop Page and Search Page
         if(is_product_category() || is_shop() || is_search()){
@@ -898,7 +899,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         }
         
         //on home page, product page , category page
-        if (is_home() || is_product() || is_product_category() || is_search() || is_shop()){
+        if (is_home() || is_front_page() || is_product() || is_product_category() || is_search() || is_shop()){
             $this->wc_version_compare($hmpg_impressions_jQ);
         }
     }

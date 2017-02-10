@@ -4,6 +4,10 @@
     margin: 0px auto !important;
     margin-top: 10px !important;
     margin-right: 0px !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333333;
 }
 
 .ga_container {
@@ -136,6 +140,11 @@ label.ga_checkbox_label {
     color: #ccc;
 }
 
+.trending-link, .trending-link:hover {
+    color: #47C2B6;
+    text-decoration: none;
+}
+
 .ga-tooltip {
     position: relative;
     cursor: not-allowed;
@@ -144,7 +153,11 @@ label.ga_checkbox_label {
 .ga-tooltip input[disabled] {
     cursor: not-allowed;
 }
-
+.ga-tooltip .trending-link {
+    color: #ccc;
+    pointer-events: none;
+    cursor: not-allowed;
+}
 .ga-tooltiptext {
     background-color: #ffe692;
     border: 1px solid #ffb900;
@@ -162,6 +175,11 @@ label.ga_checkbox_label {
     width: auto;
     z-index: 1;
 }
+.ga-tooltiptext-trending {
+    position: absolute;
+    margin-left: 200px;
+    margin-top: 30px;
+}
 
 .ga-tt-abs {
     display: inline-block;
@@ -171,4 +189,54 @@ label.ga_checkbox_label {
 
 .ga-tooltip:hover .ga-tooltiptext {
     visibility: visible;
+}
+
+.ga-trending-h2 {
+    font-size: 1.6em;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.ga-trending-h3 {
+    font-size: 1.3em;
+    margin: 10px 0;
+    font-weight: normal;
+}
+.trending-table-container{
+    max-width: 1000px;
+    text-align:left;
+}
+.weight-normal{
+    font-weight: normal;
+}
+
+.trending-time {
+    width: 100px;
+}
+
+.ga-love-text {
+    display: block;
+    margin-top: 20px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.ga-trending-loader {
+    margin: 50px 25px;
+    display: none;
+    width: 50%;
+    padding: 100px 50px;
+}
+
+.ga-trending-loader-wrapper {
+    float: left;
+    padding: 10px;
+}
+
+.ga-trending-loading-text {
+    color: black;
+    width: 200px;
+    font-size: 12pt;
+    height: 65px;
+    float: left;
 }

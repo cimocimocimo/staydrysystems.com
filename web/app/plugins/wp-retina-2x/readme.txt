@@ -3,8 +3,8 @@ Contributors: TigrouMeow
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=H2S7S3G4XMJ6J
 Tags: retina, images, image, responsive, lazysizes, lazy, attachment, media, files, iphone, ipad, high-dpi
 Requires at least: 3.5
-Tested up to: 4.7
-Stable tag: 4.7.5
+Tested up to: 4.7.1
+Stable tag: 4.7.7
 
 Make your website look beautiful and crisp on modern displays by creating and displaying retina images. WP 4.4+ is also supported and enhanced.
 
@@ -18,9 +18,9 @@ This plugin does two things: it creates the image files required by the High-DPI
 
 **Optimized**. The plugin is very fast and optimized. It doesn't create anything in the database.
 
-**Pro**. When activated, the Pro version adds support for Retina for full-size, support for lazy-loading for your responsive images and various options.
+**Pro**. When activated, the Pro version adds support for Retina for full-size, support for lazy-loading for your responsive images and various options. And it supports my work :)
 
-**WP 4.4+**. Since 4.4, WP has support for Responsive Images. WP Retina 2x handles this well and nicely adds the retina images in the src-set created by WordPress. The HTML for the images not handled by WP 4.4 will also be handled by the plugin. Moreover, the plugin also has two options specific to WP 4.4+. One is to disable the Responsive Image support, the second one is to disable the additional image size called Medium Large.
+**Responsive Images**. WP has support for Responsive Images and this plugin handles this nicely by adding the retina images in the src-set created by WordPress. The HTML for the images not handled by WP 4.4 (outside posts) will also be handled by the plugin (pick "Picturefill" method for this). The plugin also provides an option to disable the 'Medium Large' created by WordPress which is actually not useful (it's a hack basically), this plugin does it better.
 
 **CSS & Background Images**. The plugin cannot inject CSS to handles the images added through CSS, that's both too dangerous and potentially very incorrect. However, in its Pro version and with PictureFill, you get an option to replace the inline CSS background image by their retina equivalent.
 
@@ -33,6 +33,14 @@ More information and tutorial available one http://meowapps.com/wp-retina-2x/.
 3. Check if it works! - if it doesn't, read the FAQ, the tutorial, and check the forums.
 
 == Changelog ==
+
+= 4.7.7 =
+* Add: The Generate button (and the bulk Generate) will now also Re-Generate the thumbnails as well (like the Renerate Thumbnails plugin). If you are interested in a option to disable this behavior, please say so in the WP forums.
+* Info: If you are using Lightroom, please have a look at my plugin for synchronizing your Lightroom to WordPress, it has been live for more than two years and it works perfectly: http://meowapps.com/wplr-sync/. It's my best plugin.
+
+= 4.7.6 =
+* Fix: Issue with Pro being non-Pro outside of WP Admin.
+* Fix: Retina debugging file was not being created properly.
 
 = 4.7.5 =
 * Fix: Don't delete the full-size Retina if we re-generate.

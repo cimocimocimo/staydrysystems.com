@@ -500,7 +500,14 @@ function wr2x_wp_ajax_wr2x_generate() {
 
 	$attachmentId = intval( $_POST['attachmentId'] );
 	wr2x_delete_attachment( $attachmentId, false );
-	$meta = wp_get_attachment_metadata( $attachmentId );
+
+	// Regenerate the Thumbnails
+	$file = get_attached_file( $attachmentId );
+	$meta = wp_generate_attachment_metadata( $attachmentId, $file );
+	wp_update_attachment_metadata( $attachmentId, $meta );
+
+	// Regenerate Retina
+	//$meta = wp_get_attachment_metadata( $attachmentId );
 	wr2x_generate_images( $meta );
 
 	// RESULTS FOR RETINA DASHBOARD

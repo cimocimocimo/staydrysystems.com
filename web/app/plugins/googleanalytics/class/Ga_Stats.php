@@ -42,17 +42,17 @@ class Ga_Stats {
 	 * @return array Sources query
 	 */
 	public static function sources_query( $id_view ) {
-		$reports_requests   = array();
-		$reports_requests[] = array(
-			'viewId'           => $id_view,
-			'dateRanges'       => self::set_date_ranges( '7daysAgo', 'yesterday' ),
-			'metrics'          => self::set_metrics( array( 'ga:pageviews' ) ),
-			'includeEmptyRows' => true,
-			'pageSize'         => 5,
-			'dimensions'       => self::set_dimensions( 'ga:sourceMedium' ),
-			'orderBys'         => self::set_order_bys( 'ga:pageviews', 'DESCENDING' ),
+		$reports_requests	 = array();
+		$reports_requests[]	 = array(
+			'viewId'			 => $id_view,
+			'dateRanges'		 => self::set_date_ranges( '7daysAgo', 'yesterday' ),
+			'metrics'			 => self::set_metrics( array( 'ga:pageviews' ) ),
+			'includeEmptyRows'	 => true,
+			'pageSize'			 => 5,
+			'dimensions'		 => self::set_dimensions( 'ga:sourceMedium' ),
+			'orderBys'			 => self::set_order_bys( 'ga:pageviews', 'DESCENDING' ),
 		);
-		$query              = array(
+		$query				 = array(
 			'reportRequests' => $reports_requests
 		);
 
@@ -68,11 +68,11 @@ class Ga_Stats {
 	 * @return array Dashboard boxes query
 	 */
 	public static function dashboard_boxes_query( $id_view, $date_range ) {
-		$reports_requests   = array();
-		$reports_requests[] = array(
-			'viewId'           => $id_view,
-			'dateRanges'       => self::set_date_ranges( $date_range, 'yesterday' ),
-			'metrics'          => self::set_metrics( array(
+		$reports_requests	 = array();
+		$reports_requests[]	 = array(
+			'viewId'			 => $id_view,
+			'dateRanges'		 => self::set_date_ranges( $date_range, 'yesterday' ),
+			'metrics'			 => self::set_metrics( array(
 				'ga:sessions',
 				'ga:pageviews',
 				'ga:pageviewsPerSession',
@@ -80,10 +80,10 @@ class Ga_Stats {
 				'ga:avgTimeOnPage',
 				'ga:percentNewSessions',
 			) ),
-			'includeEmptyRows' => true,
-			'dimensions'       => self::set_dimensions( 'ga:date' )
+			'includeEmptyRows'	 => true,
+			'dimensions'		 => self::set_dimensions( 'ga:date' )
 		);
-		$query              = array(
+		$query				 = array(
 			'reportRequests' => $reports_requests
 		);
 
@@ -98,20 +98,20 @@ class Ga_Stats {
 	 * @return array Boxes query
 	 */
 	public static function boxes_query( $id_view ) {
-		$reports_requests   = array();
-		$reports_requests[] = array(
-			'viewId'           => $id_view,
-			'dateRanges'       => self::set_date_ranges( '7daysAgo', 'yesterday', '14daysAgo', '8daysAgo' ),
-			'metrics'          => self::set_metrics( array(
+		$reports_requests	 = array();
+		$reports_requests[]	 = array(
+			'viewId'			 => $id_view,
+			'dateRanges'		 => self::set_date_ranges( '7daysAgo', 'yesterday', '14daysAgo', '8daysAgo' ),
+			'metrics'			 => self::set_metrics( array(
 				'ga:users',
 				'ga:pageviews',
 				'ga:pageviewsPerSession',
 				'ga:BounceRate'
 			) ),
-			'includeEmptyRows' => true,
-			'dimensions'       => self::set_dimensions( 'ga:date' )
+			'includeEmptyRows'	 => true,
+			'dimensions'		 => self::set_dimensions( 'ga:date' )
 		);
-		$query              = array(
+		$query				 = array(
 			'reportRequests' => $reports_requests
 		);
 
@@ -140,15 +140,15 @@ class Ga_Stats {
 			$metric = 'ga:' . $metric;
 		}
 
-		$reports_requests   = array();
-		$reports_requests[] = array(
-			'viewId'           => $id_view,
-			'dateRanges'       => $date_ranges,
-			'metrics'          => self::set_metrics( $metric ),
-			'includeEmptyRows' => true,
-			'dimensions'       => self::set_dimensions( 'ga:date' )
+		$reports_requests	 = array();
+		$reports_requests[]	 = array(
+			'viewId'			 => $id_view,
+			'dateRanges'		 => $date_ranges,
+			'metrics'			 => self::set_metrics( $metric ),
+			'includeEmptyRows'	 => true,
+			'dimensions'		 => self::set_dimensions( 'ga:date' )
 		);
-		$query              = array(
+		$query				 = array(
 			'reportRequests' => $reports_requests
 		);
 
@@ -164,10 +164,10 @@ class Ga_Stats {
 	 * @return array OrderBys
 	 */
 	public static function set_order_bys( $name, $sort ) {
-		$order   = array();
+		$order	 = array();
 		$order[] = array(
-			'fieldName' => $name,
-			'sortOrder' => $sort,
+			'fieldName'	 => $name,
+			'sortOrder'	 => $sort,
 		);
 
 		return $order;
@@ -205,8 +205,8 @@ class Ga_Stats {
 	 * @return array Dimensions
 	 */
 	public static function set_dimensions( $name ) {
-		$dimensions   = array();
-		$dimensions[] = array(
+		$dimensions		 = array();
+		$dimensions[]	 = array(
 			'name' => $name
 		);
 
@@ -224,15 +224,15 @@ class Ga_Stats {
 	 * @return array Date ranges
 	 */
 	public static function set_date_ranges( $start_date, $end_date, $prev_start_date = '', $prev_end_date = '' ) {
-		$date_danges   = array();
-		$date_danges[] = array(
-			'startDate' => $start_date,
-			'endDate'   => $end_date
+		$date_danges	 = array();
+		$date_danges[]	 = array(
+			'startDate'	 => $start_date,
+			'endDate'	 => $end_date
 		);
-		if ( ! empty( $prev_start_date ) and ! empty( $prev_end_date ) ) {
+		if ( !empty( $prev_start_date ) and ! empty( $prev_end_date ) ) {
 			$date_danges[] = array(
-				'startDate' => $prev_start_date,
-				'endDate'   => $prev_end_date
+				'startDate'	 => $prev_start_date,
+				'endDate'	 => $prev_end_date
 			);
 		}
 
@@ -247,14 +247,14 @@ class Ga_Stats {
 	 * @return array Response rows
 	 */
 	public static function prepare_response( $data ) {
-		$data = self::get_reports_from_response( $data );
+		$data		 = self::get_reports_from_response( $data );
 		self::handle_more_reports( $data );
-		$report = self::get_single_report( $data );
+		$report		 = self::get_single_report( $data );
 		self::get_report_column_header( $report );
 		$report_data = self::get_report_data( $report );
 		self::get_totals( $report_data );
 		self::get_row_count( $report_data );
-		$rows = self::get_rows( $report_data );
+		$rows		 = self::get_rows( $report_data );
 
 		return $rows;
 	}
@@ -267,8 +267,8 @@ class Ga_Stats {
 	 * @return array Dimensions
 	 */
 	public static function get_dimensions( $row ) {
-		if ( ! empty( $row['dimensions'] ) ) {
-			return $row['dimensions'];
+		if ( !empty( $row[ 'dimensions' ] ) ) {
+			return $row[ 'dimensions' ];
 		}
 
 		return false;
@@ -282,8 +282,8 @@ class Ga_Stats {
 	 * @return array Metrics
 	 */
 	public static function get_metrics( $row ) {
-		if ( ! empty( $row['metrics'] ) ) {
-			return $row['metrics'];
+		if ( !empty( $row[ 'metrics' ] ) ) {
+			return $row[ 'metrics' ];
 		}
 
 		return false;
@@ -297,8 +297,8 @@ class Ga_Stats {
 	 * @return array Rows
 	 */
 	public static function get_rows( $report_data ) {
-		if ( ! empty( $report_data['rows'] ) ) {
-			return $report_data['rows'];
+		if ( !empty( $report_data[ 'rows' ] ) ) {
+			return $report_data[ 'rows' ];
 		}
 
 		return false;
@@ -312,8 +312,8 @@ class Ga_Stats {
 	 * @return array Row count
 	 */
 	public static function get_row_count( $report_data ) {
-		if ( ! empty( $report_data['rowCount'] ) ) {
-			return $report_data['rowCount'];
+		if ( !empty( $report_data[ 'rowCount' ] ) ) {
+			return $report_data[ 'rowCount' ];
 		}
 
 		return false;
@@ -327,8 +327,8 @@ class Ga_Stats {
 	 * @return array Totals
 	 */
 	public static function get_totals( $report_data ) {
-		if ( ! empty( $report_data['totals'] ) ) {
-			return $report_data['totals'];
+		if ( !empty( $report_data[ 'totals' ] ) ) {
+			return $report_data[ 'totals' ];
 		}
 
 		return false;
@@ -342,8 +342,8 @@ class Ga_Stats {
 	 * @return array Reports
 	 */
 	public static function get_reports_from_response( $data ) {
-		if ( ! empty( $data['reports'] ) ) {
-			return $data['reports'];
+		if ( !empty( $data[ 'reports' ] ) ) {
+			return $data[ 'reports' ];
 		}
 
 		return false;
@@ -381,9 +381,9 @@ class Ga_Stats {
 	 * @return array Report
 	 */
 	public static function get_single_report( $data ) {
-		if ( ! empty( $data ) ) {
+		if ( !empty( $data ) ) {
 			foreach ( $data as $report ) {
-				if ( ! empty( $report ) ) {
+				if ( !empty( $report ) ) {
 					return $report;
 				}
 			}
@@ -400,9 +400,9 @@ class Ga_Stats {
 	 * @return array Row
 	 */
 	public static function get_single_row( $rows ) {
-		if ( ! empty( $rows ) ) {
+		if ( !empty( $rows ) ) {
 			foreach ( $rows as $row ) {
-				if ( ! empty( $row ) ) {
+				if ( !empty( $row ) ) {
 					return $row;
 				}
 			}
@@ -419,8 +419,8 @@ class Ga_Stats {
 	 * @return array Column header
 	 */
 	public static function get_report_column_header( $data ) {
-		if ( ! empty( $data['columnHeader'] ) ) {
-			return $data['columnHeader'];
+		if ( !empty( $data[ 'columnHeader' ] ) ) {
+			return $data[ 'columnHeader' ];
 		}
 
 		return false;
@@ -434,8 +434,8 @@ class Ga_Stats {
 	 * @return array data
 	 */
 	public static function get_report_data( $data ) {
-		if ( ! empty( $data['data'] ) ) {
-			return $data['data'];
+		if ( !empty( $data[ 'data' ] ) ) {
+			return $data[ 'data' ];
 		}
 
 		return false;
@@ -450,18 +450,18 @@ class Ga_Stats {
 	 */
 	public static function get_chart( $response_data ) {
 		$chart_data = array();
-		if ( ! empty( $response_data ) ) {
-			$data                           = ( ! empty( $response_data['reports'] ) && ! empty( $response_data['reports'][0] ) && ! empty( $response_data['reports'][0]['data'] ) ) ? $response_data['reports'][0]['data'] : array();
-			$rows                           = ( ! empty( $data['rows'] ) ) ? $data['rows'] : array();
-			if ( ! empty( $rows ) ) {
+		if ( !empty( $response_data ) ) {
+			$data	 = (!empty( $response_data[ 'reports' ] ) && !empty( $response_data[ 'reports' ][ 0 ] ) && !empty( $response_data[ 'reports' ][ 0 ][ 'data' ] ) ) ? $response_data[ 'reports' ][ 0 ][ 'data' ] : array();
+			$rows	 = (!empty( $data[ 'rows' ] ) ) ? $data[ 'rows' ] : array();
+			if ( !empty( $rows ) ) {
 				foreach ( $rows as $key => $row ) {
 					if ( $key < 7 ) {
-						$chart_data[ $key ]['previous']     = ! empty( $row['metrics'][1]['values'][0] ) ? $row['metrics'][1]['values'][0] : 0;
-						$chart_data[ $key ]['previous-day'] = date( 'M j', strtotime( $row['dimensions'][0] ) );
+						$chart_data[ $key ][ 'previous' ]		 = !empty( $row[ 'metrics' ][ 1 ][ 'values' ][ 0 ] ) ? $row[ 'metrics' ][ 1 ][ 'values' ][ 0 ] : 0;
+						$chart_data[ $key ][ 'previous-day' ]	 = date( 'M j', strtotime( $row[ 'dimensions' ][ 0 ] ) );
 					} else {
-						$chart_data[ $key - 7 ]['day']     = date( 'M j', strtotime( $row['dimensions'][0] ) );
-						$chart_data[ $key - 7 ]['current'] = ! empty( $row['metrics'][0]['values'][0] ) ? $row['metrics'][0]['values'][0] : 0;
-						$chart_data['date'] = strtotime( $row['dimensions'][0] );
+						$chart_data[ $key - 7 ][ 'day' ]		 = date( 'M j', strtotime( $row[ 'dimensions' ][ 0 ] ) );
+						$chart_data[ $key - 7 ][ 'current' ]	 = !empty( $row[ 'metrics' ][ 0 ][ 'values' ][ 0 ] ) ? $row[ 'metrics' ][ 0 ][ 'values' ][ 0 ] : 0;
+						$chart_data[ 'date' ]					 = strtotime( $row[ 'dimensions' ][ 0 ] );
 					}
 				}
 			}
@@ -479,14 +479,14 @@ class Ga_Stats {
 	 */
 	public static function get_dashboard_chart( $response_data ) {
 		$chart_data = array();
-		if ( ! empty( $response_data ) ) {
-			$data = ( ! empty( $response_data['reports'] ) && ! empty( $response_data['reports'][0] ) && ! empty( $response_data['reports'][0]['data'] ) ) ? $response_data['reports'][0]['data'] : array();
-			$rows = ( ! empty( $data['rows'] ) ) ? $data['rows'] : array();
-			if ( ! empty( $rows ) ) {
+		if ( !empty( $response_data ) ) {
+			$data	 = (!empty( $response_data[ 'reports' ] ) && !empty( $response_data[ 'reports' ][ 0 ] ) && !empty( $response_data[ 'reports' ][ 0 ][ 'data' ] ) ) ? $response_data[ 'reports' ][ 0 ][ 'data' ] : array();
+			$rows	 = (!empty( $data[ 'rows' ] ) ) ? $data[ 'rows' ] : array();
+			if ( !empty( $rows ) ) {
 				foreach ( $rows as $row ) {
 					$chart_data[] = array(
-						'day'     => date( 'M j', strtotime( $row['dimensions'][0] ) ),
-						'current' => ! empty( $row['metrics'][0]['values'][0] ) ? $row['metrics'][0]['values'][0] : 0
+						'day'		 => date( 'M j', strtotime( $row[ 'dimensions' ][ 0 ] ) ),
+						'current'	 => !empty( $row[ 'metrics' ][ 0 ][ 'values' ][ 0 ] ) ? $row[ 'metrics' ][ 0 ][ 'values' ][ 0 ] : 0
 					);
 				}
 			}
@@ -503,13 +503,13 @@ class Ga_Stats {
 	 * @return array boxes data
 	 */
 	public static function get_boxes( $data ) {
-		if ( ! empty( $data ) ) {
-			$data = self::get_reports_from_response( $data );
+		if ( !empty( $data ) ) {
+			$data		 = self::get_reports_from_response( $data );
 			self::handle_more_reports( $data );
-			$report = self::get_single_report( $data );
+			$report		 = self::get_single_report( $data );
 			self::get_report_column_header( $report );
 			$report_data = self::get_report_data( $report );
-			$totals = self::get_totals( $report_data );
+			$totals		 = self::get_totals( $report_data );
 
 			return self::get_boxes_from_totals( $totals );
 		}
@@ -523,19 +523,19 @@ class Ga_Stats {
 	 * @return array boxes data
 	 */
 	public static function get_boxes_from_totals( $totals ) {
-		if ( ! empty( $totals ) ) {
+		if ( !empty( $totals ) ) {
 			$boxes_data = array();
 			foreach ( $totals as $key => $total ) {
 				if ( $key == 0 ) {
-					$boxes_data['Users']['current']               = $total['values'][0];
-					$boxes_data['Pageviews']['current']           = $total['values'][1];
-					$boxes_data['PageviewsPerSession']['current'] = $total['values'][2];
-					$boxes_data['BounceRate']['current']          = round( $total['values'][3], 2 );
+					$boxes_data[ 'Users' ][ 'current' ]					 = $total[ 'values' ][ 0 ];
+					$boxes_data[ 'Pageviews' ][ 'current' ]				 = $total[ 'values' ][ 1 ];
+					$boxes_data[ 'PageviewsPerSession' ][ 'current' ]	 = $total[ 'values' ][ 2 ];
+					$boxes_data[ 'BounceRate' ][ 'current' ]			 = round( $total[ 'values' ][ 3 ], 2 );
 				} else {
-					$boxes_data['Users']['previous']               = $total['values'][0];
-					$boxes_data['Pageviews']['previous']           = $total['values'][1];
-					$boxes_data['PageviewsPerSession']['previous'] = $total['values'][2];
-					$boxes_data['BounceRate']['previous']          = round( $total['values'][3], 2 );
+					$boxes_data[ 'Users' ][ 'previous' ]				 = $total[ 'values' ][ 0 ];
+					$boxes_data[ 'Pageviews' ][ 'previous' ]			 = $total[ 'values' ][ 1 ];
+					$boxes_data[ 'PageviewsPerSession' ][ 'previous' ]	 = $total[ 'values' ][ 2 ];
+					$boxes_data[ 'BounceRate' ][ 'previous' ]			 = round( $total[ 'values' ][ 3 ], 2 );
 				}
 			}
 
@@ -553,38 +553,30 @@ class Ga_Stats {
 	 * @return array boxes data
 	 */
 	public static function prepare_boxes( $boxes_data ) {
-		$boxes_data['Users']['diff']                     = ( $boxes_data['Users']['previous'] > 0 ) ? round( ( $boxes_data['Users']['current'] - $boxes_data['Users']['previous'] ) / $boxes_data['Users']['previous'] * 100,
-			2 ) : 100;
-		$boxes_data['Pageviews']['diff']                 = ( $boxes_data['Pageviews']['previous'] > 0 ) ? round( ( $boxes_data['Pageviews']['current'] - $boxes_data['Pageviews']['previous'] ) / $boxes_data['Pageviews']['previous'] * 100,
-			2 ) : 100;
-		$boxes_data['PageviewsPerSession']['diff']       = ( $boxes_data['PageviewsPerSession']['previous'] > 0 ) ? round( ( $boxes_data['PageviewsPerSession']['current'] - $boxes_data['PageviewsPerSession']['previous'] ) / $boxes_data['PageviewsPerSession']['previous'] * 100,
-			2 ) : 100;
-		$boxes_data['BounceRate']['diff']                = ( $boxes_data['BounceRate']['previous'] > 0 ) ? round( ( $boxes_data['BounceRate']['current'] - $boxes_data['BounceRate']['previous'] ) / $boxes_data['BounceRate']['previous'] * 100,
-			2 ) : 100;
-		$boxes_data['Users']['diff']                     = ( $boxes_data['Users']['previous'] == 0 && $boxes_data['Users']['current'] == 0 ) ? 0 : $boxes_data['Users']['diff'];
-		$boxes_data['Pageviews']['diff']                 = ( $boxes_data['Pageviews']['previous'] == 0 && $boxes_data['Pageviews']['current'] == 0 ) ? 0 : $boxes_data['Pageviews']['diff'];
-		$boxes_data['PageviewsPerSession']['diff']       = ( $boxes_data['PageviewsPerSession']['previous'] == 0 && $boxes_data['PageviewsPerSession']['current'] == 0 ) ? 0 : $boxes_data['PageviewsPerSession']['diff'];
-		$boxes_data['BounceRate']['diff']                = ( $boxes_data['BounceRate']['previous'] == 0 && $boxes_data['BounceRate']['current'] == 0 ) ? 0 : $boxes_data['BounceRate']['diff'];
-		$boxes_data['Users']['label']                    = 'Users';
-		$boxes_data['Pageviews']['label']                = 'Pageviews';
-		$boxes_data['PageviewsPerSession']['label']      = 'Pages / Session';
-		$boxes_data['BounceRate']['label']               = 'Bounce Rate';
-		$boxes_data['Users']['comparison']               = $boxes_data['Users']['current'] . ' vs ' . $boxes_data['Users']['previous'];
-		$boxes_data['Pageviews']['comparison']           = $boxes_data['Pageviews']['current'] . ' vs ' . $boxes_data['Pageviews']['previous'];
-		$boxes_data['PageviewsPerSession']['comparison'] = self::number_format_clean( $boxes_data['PageviewsPerSession']['current'],
-				2, '.', ',' ) . ' vs ' . self::number_format_clean( $boxes_data['PageviewsPerSession']['previous'], 2,
-				'.', ',' );
-		$boxes_data['BounceRate']['comparison']          = self::number_format_clean( $boxes_data['BounceRate']['current'],
-				2, '.', ',' ) . '% vs ' . self::number_format_clean( $boxes_data['BounceRate']['previous'], 2, '.',
-				',' ) . '%';
-		$boxes_data['Users']['color']                    = ( $boxes_data['Users']['diff'] > 0 ) ? 'green' : 'red';
-		$boxes_data['Pageviews']['color']                = ( $boxes_data['Pageviews']['diff'] > 0 ) ? 'green' : 'red';
-		$boxes_data['PageviewsPerSession']['color']      = ( $boxes_data['PageviewsPerSession']['diff'] > 0 ) ? 'green' : 'red';
-		$boxes_data['BounceRate']['color']               = ( $boxes_data['BounceRate']['diff'] > 0 ) ? 'red' : 'green';
-		$boxes_data['Users']['color']                    = ( $boxes_data['Users']['diff'] != 0 ) ? $boxes_data['Users']['color'] : 'black';
-		$boxes_data['Pageviews']['color']                = ( $boxes_data['Pageviews']['diff'] != 0 ) ? $boxes_data['Pageviews']['color'] : 'black';
-		$boxes_data['PageviewsPerSession']['color']      = ( $boxes_data['PageviewsPerSession']['diff'] != 0 ) ? $boxes_data['PageviewsPerSession']['color'] : 'black';
-		$boxes_data['BounceRate']['color']               = ( $boxes_data['BounceRate']['diff'] != 0 ) ? $boxes_data['BounceRate']['color'] : 'black';
+		$boxes_data[ 'Users' ][ 'diff' ]					 = ( $boxes_data[ 'Users' ][ 'previous' ] > 0 ) ? round( ( $boxes_data[ 'Users' ][ 'current' ] - $boxes_data[ 'Users' ][ 'previous' ] ) / $boxes_data[ 'Users' ][ 'previous' ] * 100, 2 ) : 100;
+		$boxes_data[ 'Pageviews' ][ 'diff' ]				 = ( $boxes_data[ 'Pageviews' ][ 'previous' ] > 0 ) ? round( ( $boxes_data[ 'Pageviews' ][ 'current' ] - $boxes_data[ 'Pageviews' ][ 'previous' ] ) / $boxes_data[ 'Pageviews' ][ 'previous' ] * 100, 2 ) : 100;
+		$boxes_data[ 'PageviewsPerSession' ][ 'diff' ]		 = ( $boxes_data[ 'PageviewsPerSession' ][ 'previous' ] > 0 ) ? round( ( $boxes_data[ 'PageviewsPerSession' ][ 'current' ] - $boxes_data[ 'PageviewsPerSession' ][ 'previous' ] ) / $boxes_data[ 'PageviewsPerSession' ][ 'previous' ] * 100, 2 ) : 100;
+		$boxes_data[ 'BounceRate' ][ 'diff' ]				 = ( $boxes_data[ 'BounceRate' ][ 'previous' ] > 0 ) ? round( ( $boxes_data[ 'BounceRate' ][ 'current' ] - $boxes_data[ 'BounceRate' ][ 'previous' ] ) / $boxes_data[ 'BounceRate' ][ 'previous' ] * 100, 2 ) : 100;
+		$boxes_data[ 'Users' ][ 'diff' ]					 = ( $boxes_data[ 'Users' ][ 'previous' ] == 0 && $boxes_data[ 'Users' ][ 'current' ] == 0 ) ? 0 : $boxes_data[ 'Users' ][ 'diff' ];
+		$boxes_data[ 'Pageviews' ][ 'diff' ]				 = ( $boxes_data[ 'Pageviews' ][ 'previous' ] == 0 && $boxes_data[ 'Pageviews' ][ 'current' ] == 0 ) ? 0 : $boxes_data[ 'Pageviews' ][ 'diff' ];
+		$boxes_data[ 'PageviewsPerSession' ][ 'diff' ]		 = ( $boxes_data[ 'PageviewsPerSession' ][ 'previous' ] == 0 && $boxes_data[ 'PageviewsPerSession' ][ 'current' ] == 0 ) ? 0 : $boxes_data[ 'PageviewsPerSession' ][ 'diff' ];
+		$boxes_data[ 'BounceRate' ][ 'diff' ]				 = ( $boxes_data[ 'BounceRate' ][ 'previous' ] == 0 && $boxes_data[ 'BounceRate' ][ 'current' ] == 0 ) ? 0 : $boxes_data[ 'BounceRate' ][ 'diff' ];
+		$boxes_data[ 'Users' ][ 'label' ]					 = 'Users';
+		$boxes_data[ 'Pageviews' ][ 'label' ]				 = 'Pageviews';
+		$boxes_data[ 'PageviewsPerSession' ][ 'label' ]		 = 'Pages / Session';
+		$boxes_data[ 'BounceRate' ][ 'label' ]				 = 'Bounce Rate';
+		$boxes_data[ 'Users' ][ 'comparison' ]				 = $boxes_data[ 'Users' ][ 'current' ] . ' vs ' . $boxes_data[ 'Users' ][ 'previous' ];
+		$boxes_data[ 'Pageviews' ][ 'comparison' ]			 = $boxes_data[ 'Pageviews' ][ 'current' ] . ' vs ' . $boxes_data[ 'Pageviews' ][ 'previous' ];
+		$boxes_data[ 'PageviewsPerSession' ][ 'comparison' ] = self::number_format_clean( $boxes_data[ 'PageviewsPerSession' ][ 'current' ], 2, '.', ',' ) . ' vs ' . self::number_format_clean( $boxes_data[ 'PageviewsPerSession' ][ 'previous' ], 2, '.', ',' );
+		$boxes_data[ 'BounceRate' ][ 'comparison' ]			 = self::number_format_clean( $boxes_data[ 'BounceRate' ][ 'current' ], 2, '.', ',' ) . '% vs ' . self::number_format_clean( $boxes_data[ 'BounceRate' ][ 'previous' ], 2, '.', ',' ) . '%';
+		$boxes_data[ 'Users' ][ 'color' ]					 = ( $boxes_data[ 'Users' ][ 'diff' ] > 0 ) ? 'green' : 'red';
+		$boxes_data[ 'Pageviews' ][ 'color' ]				 = ( $boxes_data[ 'Pageviews' ][ 'diff' ] > 0 ) ? 'green' : 'red';
+		$boxes_data[ 'PageviewsPerSession' ][ 'color' ]		 = ( $boxes_data[ 'PageviewsPerSession' ][ 'diff' ] > 0 ) ? 'green' : 'red';
+		$boxes_data[ 'BounceRate' ][ 'color' ]				 = ( $boxes_data[ 'BounceRate' ][ 'diff' ] > 0 ) ? 'red' : 'green';
+		$boxes_data[ 'Users' ][ 'color' ]					 = ( $boxes_data[ 'Users' ][ 'diff' ] != 0 ) ? $boxes_data[ 'Users' ][ 'color' ] : 'black';
+		$boxes_data[ 'Pageviews' ][ 'color' ]				 = ( $boxes_data[ 'Pageviews' ][ 'diff' ] != 0 ) ? $boxes_data[ 'Pageviews' ][ 'color' ] : 'black';
+		$boxes_data[ 'PageviewsPerSession' ][ 'color' ]		 = ( $boxes_data[ 'PageviewsPerSession' ][ 'diff' ] != 0 ) ? $boxes_data[ 'PageviewsPerSession' ][ 'color' ] : 'black';
+		$boxes_data[ 'BounceRate' ][ 'color' ]				 = ( $boxes_data[ 'BounceRate' ][ 'diff' ] != 0 ) ? $boxes_data[ 'BounceRate' ][ 'color' ] : 'black';
 
 		return $boxes_data;
 	}
@@ -620,39 +612,37 @@ class Ga_Stats {
 	 * @return array sources data
 	 */
 	public static function get_sources( $data ) {
-		if ( ! empty( $data ) ) {
-			$data = self::get_reports_from_response( $data );
+		if ( !empty( $data ) ) {
+			$data		 = self::get_reports_from_response( $data );
 			self::handle_more_reports( $data );
-			$report = self::get_single_report( $data );
+			$report		 = self::get_single_report( $data );
 			self::get_report_column_header( $report );
 			$report_data = self::get_report_data( $report );
-			$rows = self::get_rows( $report_data );
-			$totals = self::get_totals( $report_data );
-			$totalCount = array();
-			if ( ! empty( $totals ) ) {
+			$rows		 = self::get_rows( $report_data );
+			$totals		 = self::get_totals( $report_data );
+			$totalCount	 = array();
+			if ( !empty( $totals ) ) {
 				foreach ( $totals as $key => $total ) {
-					$totalCount = $total['values'][0];
+					$totalCount = $total[ 'values' ][ 0 ];
 				}
 			}
 			$sources = array(
-				'total' => $totalCount,
-				'sum'   => 0,
-				'rows'  => array(),
+				'total'	 => $totalCount,
+				'sum'	 => 0,
+				'rows'	 => array(),
 			);
-			if ( ! empty( $rows ) ) {
+			if ( !empty( $rows ) ) {
 				$i = 1;
 				foreach ( $rows as $row ) {
-					if ( ! empty( $row ) ) {
+					if ( !empty( $row ) ) {
 						foreach ( $row as $key => $value ) {
 							if ( $key == 'dimensions' ) {
-								$sources['rows'][ $i ]['name'] = $value[0];
-								$sources['rows'][ $i ]['url'] = 'http://' . substr( $value[0], 0,
-										strpos( $value[0], '/' ) - 1 );
+								$sources[ 'rows' ][ $i ][ 'name' ]	 = $value[ 0 ];
+								$sources[ 'rows' ][ $i ][ 'url' ]	 = 'http://' . substr( $value[ 0 ], 0, strpos( $value[ 0 ], '/' ) - 1 );
 							} elseif ( $key == 'metrics' ) {
-								$sources['rows'][ $i ]['number']  = $value[0]['values'][0];
-								$sources['rows'][ $i ]['percent'] = ( ! empty( $totalCount ) ) ? round( $value[0]['values'][0] / $totalCount * 100,
-									2 ) : 0;
-								$sources['sum'] += $value[0]['values'][0];
+								$sources[ 'rows' ][ $i ][ 'number' ]	 = $value[ 0 ][ 'values' ][ 0 ];
+								$sources[ 'rows' ][ $i ][ 'percent' ]	 = (!empty( $totalCount ) ) ? round( $value[ 0 ][ 'values' ][ 0 ] / $totalCount * 100, 2 ) : 0;
+								$sources[ 'sum' ] += $value[ 0 ][ 'values' ][ 0 ];
 							}
 						}
 						$i ++;
@@ -674,40 +664,41 @@ class Ga_Stats {
 	 * @return array dashboard boxes data
 	 */
 	public static function get_dashboard_boxes_data( $data ) {
-		if ( ! empty( $data ) ) {
-			$data = self::get_reports_from_response( $data );
+		if ( !empty( $data ) ) {
+			$data								 = self::get_reports_from_response( $data );
 			self::handle_more_reports( $data );
-			$report = self::get_single_report( $data );
+			$report								 = self::get_single_report( $data );
 			self::get_report_column_header( $report );
-			$report_data                       = self::get_report_data( $report );
-			$totals                            = self::get_totals( $report_data );
-			$boxes_data                        = array();
-			$boxes_data['Sessions'] = array(
-				'label' => 'Visits',
-				'value' => $totals[0]['values'][0],
+			$report_data						 = self::get_report_data( $report );
+			$totals								 = self::get_totals( $report_data );
+			$boxes_data							 = array();
+			$boxes_data[ 'Sessions' ]				 = array(
+				'label'	 => 'Visits',
+				'value'	 => $totals[ 0 ][ 'values' ][ 0 ],
 			);
-			$boxes_data['Pageviews'] = array(
-				'label' => 'Pageviews',
-				'value' => $totals[0]['values'][1],
+			$boxes_data[ 'Pageviews' ]			 = array(
+				'label'	 => 'Pageviews',
+				'value'	 => $totals[ 0 ][ 'values' ][ 1 ],
 			);
-			$boxes_data['pageviewsPerSession'] = array(
-				'label' => 'Pages / Visit',
-				'value' => self::number_format_clean( $totals[0]['values'][2], 2, '.', ',' ),
+			$boxes_data[ 'pageviewsPerSession' ]	 = array(
+				'label'	 => 'Pages / Visit',
+				'value'	 => self::number_format_clean( $totals[ 0 ][ 'values' ][ 2 ], 2, '.', ',' ),
 			);
-			$boxes_data['BounceRate']          = array(
-				'label' => 'Bounce Rate',
-				'value' => self::number_format_clean( $totals[0]['values'][3], 2, '.', ',' ) . '%',
+			$boxes_data[ 'BounceRate' ]			 = array(
+				'label'	 => 'Bounce Rate',
+				'value'	 => self::number_format_clean( $totals[ 0 ][ 'values' ][ 3 ], 2, '.', ',' ) . '%',
 			);
-			$boxes_data['avgTimeOnPage'] = array(
-				'label' => 'Avg. Time on Site',
-				'value' => gmdate( "H:i:s", $totals[0]['values'][4] ),
+			$boxes_data[ 'avgTimeOnPage' ]		 = array(
+				'label'	 => 'Avg. Time on Site',
+				'value'	 => gmdate( "H:i:s", $totals[ 0 ][ 'values' ][ 4 ] ),
 			);
-			$boxes_data['percentNewSessions'] = array(
-				'label' => '% of New Visits',
-				'value' => self::number_format_clean( $totals[0]['values'][5], 2, '.', ',' ),
+			$boxes_data[ 'percentNewSessions' ]	 = array(
+				'label'	 => '% of New Visits',
+				'value'	 => self::number_format_clean( $totals[ 0 ][ 'values' ][ 5 ], 2, '.', ',' ),
 			);
 
 			return $boxes_data;
 		}
 	}
+
 }

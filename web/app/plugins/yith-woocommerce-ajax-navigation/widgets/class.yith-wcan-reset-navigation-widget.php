@@ -41,6 +41,9 @@ if ( ! class_exists( 'YITH_WCAN_Reset_Navigation_Widget' ) ) {
             $min_price = isset( $_GET['min_price'] ) ? esc_attr( $_GET['min_price'] ) : 0;
             $max_price = isset( $_GET['max_price'] ) ? esc_attr( $_GET['max_price'] ) : 0;
 
+            $after_widget  = apply_filters( 'yith_wcan_after_reset_widget', $after_widget );
+            $before_widget = apply_filters( 'yith_wcan_before_reset_widget', $before_widget );
+
             ob_start();
 
             if ( count( $_chosen_attributes ) > 0 || $min_price > 0 || $max_price > 0 || apply_filters( 'yith_woocommerce_reset_filters_attributes', false ) ) {
@@ -52,7 +55,7 @@ if ( ! class_exists( 'YITH_WCAN_Reset_Navigation_Widget' ) ) {
                 //clean the url
                 if( ! isset( $_GET['source_id'] ) ){
                     //$link = yit_curPageURL();
-                    $link = yit_get_woocommerce_layered_nav_link();
+                    $link = get_post_type_archive_link( 'product' );//yit_get_woocommerce_layered_nav_link();
                     foreach ( (array) $_chosen_attributes as $taxonomy => $data ) {
                         $taxonomy_filter = str_replace( 'pa_', '', $taxonomy );
                         $link            = remove_query_arg( 'filter_' . $taxonomy_filter, $link );
