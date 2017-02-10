@@ -83,6 +83,7 @@ foreach($slides['properties']['attrs'] as $key => $val) {
 $init = implode(', ', $init);
 
 // Fix multiple jQuery issue
+$data = array();
 $data[] = '<script type="text/javascript">';
 $data[] = 'var lsjQuery = jQuery;';
 // $data[] = "var curSkin = '{$slides['properties']['attrs']['skin']}';";
