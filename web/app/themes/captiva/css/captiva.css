@@ -6517,15 +6517,16 @@ body .jp-carousel-info h2 {
 
 .content-area table.cart td.product-remove a {
     font-size: 13px;
-    color: #999;
+    color: #444;
     padding: 4px 8px;
-    border: 1px solid #eee;
+    border: 2px solid #444;
     border-radius: 20px;
     text-align: center;
+
 }
 
 .content-area table.cart td.product-remove a:hover {
-    border: 1px solid #222;
+    border: 2px solid #222;
     border-radius: 0px;
     text-decoration: none;
 }
@@ -6602,8 +6603,8 @@ body .jp-carousel-info h2 {
 .woocommerce .update-button {
     background: #fff !important;
     font-weight: 700;
-    border: 2px solid #e2e2e2;
-    color: #aeaeae;
+    border: 2px solid #444;
+    color: #444;
 }
 
 .woocommerce-page .container .cart-collaterals input.update-button:hover, 
