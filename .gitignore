@@ -20,6 +20,7 @@ web/app/uploads/*
 !web/app/plugins/woocommerce
 !web/app/plugins/woocommerce-incremental-product-quantities
 !web/app/plugins/woocommerce-shipping-per-product
+!web/app/plugins/woocommerce-table-rate-shipping
 !web/app/plugins/woosidebars
 !web/app/plugins/woothemes-updater
 !web/app/plugins/wordpress-seo
