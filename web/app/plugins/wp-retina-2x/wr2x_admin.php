@@ -1,16 +1,16 @@
 <?php
 
-include "common/meow_admin.php";
+register_deactivation_hook( 'Meow_WR2X_Admin', 'wr2x_deactivate' );
+register_activation_hook( 'Meow_WR2X_Admin', 'wr2x_activate' );
 
-class WR2X_Admin extends Meow_Admin {
+include "common/admin.php";
 
-	public function __construct() {
-		parent::__construct( 'wr2x', 'retina' );
+class Meow_WR2X_Admin extends MeowApps_Admin {
 
-		$method = get_option( 'wr2x_method', 666 );
-		if ( $method == 666 )
-			$this->initial_setup();
+	public $core = null;
 
+	public function __construct( $prefix, $mainfile, $domain ) {
+		parent::__construct( $prefix, $mainfile, $domain );
 		if ( is_admin() ) {
 			add_action( 'admin_menu', array( $this, 'app_menu' ) );
 			add_action( 'admin_notices', array( $this, 'admin_notices' ) );
@@ -20,41 +20,25 @@ class WR2X_Admin extends Meow_Admin {
 	function admin_notices() {
 		if ( delete_transient( 'wr2x_flush_rules' ) ) {
 			global $wp_rewrite;
-			WR2X_Admin::generate_rewrite_rules( $wp_rewrite, true );
+			Meow_WR2X_Admin::generate_rewrite_rules( $wp_rewrite, true );
 		}
+		if ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'photon' ) ) {
+			echo "<div class='error' style='margin-top: 20px;'><p>";
+			_e( "JetPack's <b>Photon</b> module is not compatible with WP Retina 2x. A common alternative is to use <a href='http://tracking.maxcdn.com/c/97349/3982/378'>MaxCDN</a> (very popular) instead, or CloudFlare.", 'wp-retina-2x' );
+			echo "</p></div>";
+    }
 	}
 
-	function initial_setup() {
-		$ignore_sizes = $this->old_getoption( 'ignore_sizes', 'wr2x_basics', array() );
-		update_option( 'wr2x_ignore_sizes', $ignore_sizes, false );
-		$auto_generate = $this->old_getoption( 'auto_generate', 'wr2x_basics', true );
-		update_option( 'wr2x_auto_generate', $auto_generate, true );
-		$method = $this->old_getoption( 'method', 'wr2x_advanced', 'Picturefill' );
-		update_option( 'wr2x_method', $method, true );
-		$full_size = $this->old_getoption( 'full_size', 'wr2x_basics', false );
-		update_option( 'wr2x_full_size', $full_size, false );
-		$disable_responsive = $this->old_getoption( 'disable_responsive', 'wr2x_basics', false );
-		update_option( 'wr2x_disable_responsive', $disable_responsive, false );
-		$disable_medium_large = $this->old_getoption( 'disable_medium_large', 'wr2x_basics', true );
-		update_option( 'wr2x_disable_medium_large', $disable_medium_large, false );
-		$debug = $this->old_getoption( 'debug', 'wr2x_advanced', false );
-		update_option( 'wr2x_debug', $debug, false );
-		$cdn_domain = $this->old_getoption( 'cdn_domain', 'wr2x_advanced', '' );
-		update_option( 'wr2x_cdn_domain', $cdn_domain, false );
-		$picturefill_keep_src = $this->old_getoption( 'picturefill_keep_src', 'wr2x_advanced', false );
-		update_option( 'wr2x_picturefill_keep_src', $picturefill_keep_src, false );
-		$picturefill_lazysizes = $this->old_getoption( 'picturefill_lazysizes', 'wr2x_advanced', false );
-		update_option( 'wr2x_picturefill_lazysizes', $picturefill_lazysizes, false );
-		$picturefill_noscript = $this->old_getoption( 'picturefill_noscript', 'wr2x_advanced', false );
-		update_option( 'wr2x_picturefill_noscript', $picturefill_noscript, false );
-		$hide_retina_column = $this->old_getoption( 'hide_retina_column', 'wr2x_advanced', false );
-		update_option( 'wr2x_hide_retina_column', $hide_retina_column, false );
-		$hide_retina_dashboard = $this->old_getoption( 'hide_retina_dashboard', 'wr2x_advanced', false );
-		update_option( 'wr2x_hide_retina_dashboard', $hide_retina_dashboard, false );
-		delete_option( 'wr2x_basics' );
-		delete_option( 'wr2x_advanced' );
-		delete_option( 'wr2x_pro' );
-	}
+  static function activate() {
+  	global $wp_rewrite;
+  	$wp_rewrite->flush_rules();
+  }
+
+  static function deactivate() {
+  	remove_filter( 'generate_rewrite_rules', array( 'Meow_WR2X_Admin', 'generate_rewrite_rules' ) );
+  	global $wp_rewrite;
+  	$wp_rewrite->flush_rules();
+  }
 
 	static function generate_rewrite_rules( $wp_rewrite, $flush = false ) {
 		global $wp_rewrite;
@@ -89,42 +73,46 @@ class WR2X_Admin extends Meow_Admin {
 
 			// SUBMENU > Settings > Basic Settings
 			add_settings_section( 'wr2x_settings', null, null, 'wr2x_settings-menu' );
-			add_settings_field( 'wr2x_ignore_sizes', "Disabled Sizes",
+			add_settings_field( 'wr2x_ignore_sizes', __( "Disabled Sizes", 'wp-retina-2x' ),
 				array( $this, 'admin_ignore_sizes_callback' ),
 				'wr2x_settings-menu', 'wr2x_settings' );
-			add_settings_field( 'wr2x_auto_generate', "Auto Generate",
+			add_settings_field( 'wr2x_auto_generate', __( "Auto Generate", 'wp-retina-2x' ),
 				array( $this, 'admin_auto_generate_callback' ),
 				'wr2x_settings-menu', 'wr2x_settings' );
-			add_settings_field( 'wr2x_method', "Method",
+			add_settings_field( 'wr2x_method', __( "Method", 'wp-retina-2x' ),
 				array( $this, 'admin_method_callback' ),
 				'wr2x_settings-menu', 'wr2x_settings' );
-			add_settings_field( 'wr2x_full_size', "Full Size Retina<br />(Pro)",
+			add_settings_field( 'wr2x_full_size', __( "Full Size Retina", 'wp-retina-2x' ) . "<br />(Pro)",
 				array( $this, 'admin_full_size_callback' ),
 				'wr2x_settings-menu', 'wr2x_settings' );
-			add_settings_field( 'wr2x_method', "Method",
-				array( $this, 'admin_method_callback' ),
+			// add_settings_field( 'wr2x_method', __( "Method", 'wp-retina-2x' ),
+			// 	array( $this, 'admin_method_callback' ),
+			// 	'wr2x_settings-menu', 'wr2x_settings' );
+			add_settings_field( 'wr2x_quality', __( "Retina Quality", 'wp-retina-2x' ),
+				array( $this, 'admin_quality_callback' ),
 				'wr2x_settings-menu', 'wr2x_settings' );
 
 			register_setting( 'wr2x_settings', 'wr2x_ignore_sizes' );
 			register_setting( 'wr2x_settings', 'wr2x_auto_generate' );
 			register_setting( 'wr2x_settings', 'wr2x_full_size' );
 			register_setting( 'wr2x_settings', 'wr2x_method' );
+			register_setting( 'wr2x_settings', 'wr2x_quality' );
 
 			// SUBMENU > Settings > Advanced Settings
 			add_settings_section( 'wr2x_advanced_settings', null, null, 'wr2x_advanced_settings-menu' );
-			add_settings_field( 'wr2x_disable_responsive', "Disable Responsive",
+			add_settings_field( 'wr2x_disable_responsive', __( "Disable Responsive", 'wp-retina-2x' ),
 				array( $this, 'admin_disable_responsive_callback' ),
 				'wr2x_advanced_settings-menu', 'wr2x_advanced_settings' );
-			add_settings_field( 'wr2x_disable_medium_large', "Disable Medium Large",
+			add_settings_field( 'wr2x_disable_medium_large', __( "Disable Medium Large", 'wp-retina-2x' ),
 				array( $this, 'admin_disable_medium_large_callback' ),
 				'wr2x_advanced_settings-menu', 'wr2x_advanced_settings' );
-			add_settings_field( 'wr2x_cdn_domain', "Custom CDN Domain<br />(Pro)",
+			add_settings_field( 'wr2x_cdn_domain', __( "Custom CDN Domain", 'wp-retina-2x' ) . "<br />(Pro)",
 				array( $this, 'admin_cdn_domain_callback' ),
 				'wr2x_advanced_settings-menu', 'wr2x_advanced_settings' );
-			add_settings_field( 'wr2x_over_http_check', "Over HTTP Check<br />(Pro)",
+			add_settings_field( 'wr2x_over_http_check', __( "Over HTTP Check", 'wp-retina-2x' ) . "<br />(Pro)",
 				array( $this, 'admin_over_http_check_callback' ),
 				'wr2x_advanced_settings-menu', 'wr2x_advanced_settings' );
-			add_settings_field( 'wr2x_debug', "Debug",
+			add_settings_field( 'wr2x_debug', __( "Debug", 'wp-retina-2x' ),
 				array( $this, 'admin_debug_callback' ),
 				'wr2x_advanced_settings-menu', 'wr2x_advanced_settings' );
 
@@ -156,19 +144,27 @@ class WR2X_Admin extends Meow_Admin {
 
 			// SUBMENU > Settings > Admin UI
 			add_settings_section( 'wr2x_ui_settings', null, null, 'wr2x_ui_settings-menu' );
-			add_settings_field( 'wr2x_hide_retina_column', "Retina Column",
+			add_settings_field( 'wr2x_hide_retina_column', __( "Retina Column", 'wp-retina-2x' ),
 				array( $this, 'admin_hide_retina_column_callback' ),
 				'wr2x_ui_settings-menu', 'wr2x_ui_settings' );
-			add_settings_field( 'wr2x_hide_retina_dashboard', "Retina Dashboard",
+			add_settings_field( 'wr2x_hide_retina_dashboard', __( "Retina Dashboard", 'wp-retina-2x' ),
 				array( $this, 'admin_hide_retina_dashboard_callback' ),
+				'wr2x_ui_settings-menu', 'wr2x_ui_settings' );
+			add_settings_field( 'wr2x_hide_pro', __( "Pro Information", 'wp-retina-2x' ),
+				array( $this, 'admin_hide_pro_callback' ),
 				'wr2x_ui_settings-menu', 'wr2x_ui_settings' );
 
 			register_setting( 'wr2x_ui_settings', 'wr2x_hide_retina_column' );
 			register_setting( 'wr2x_ui_settings', 'wr2x_hide_retina_dashboard' );
+			register_setting( 'wr2x_ui_settings', 'wr2x_hide_pro' );
 	}
 
 	function admin_settings() {
-		$method = get_option( "wr2x_method", 'Picturefill' );
+		$method = get_option( 'wr2x_method', 'Picturefill' );
+		$quality = get_option( 'wr2x_quality', 90 );
+		if ( $quality > 100 || $quality < 0 )
+			update_option( 'wr2x_quality', 90, false );
+
 		?>
 		<div class="wrap">
 			<?php echo $this->display_title( "WP Retina 2x" );  ?>
@@ -288,12 +284,12 @@ class WR2X_Admin extends Meow_Admin {
 		$ignore_sizes = get_option( 'wr2x_ignore_sizes' );
 		if ( empty( $ignore_sizes ) )
 			$ignore_sizes = array();
-		$wpsizes = wr2x_get_image_sizes();
+		$wpsizes = $this->core->get_image_sizes();
 		$sizes = array();
 		$html = "";
 		foreach ( $wpsizes as $name => $attr ) {
 			$html .= '<input type="checkbox" name="wr2x_ignore_sizes[' . $name . ']" value="1" ' .
-				( array_key_exists( $name, $ignore_sizes ) ? 'checked' : '' ) . '/>' . sprintf( "<label><div style='float: left; text-align: right; margin-right: 5px; width: 20px;'>%s</div> <b>%s</b></label> <small>(Normal: %dx%d, Retina: %dx%d)</small>", Meow_Admin::size_shortname( $name ), $name, $attr['width'], $attr['height'], $attr['width'] * 2, $attr['height'] * 2 ) . '<br>';
+				( array_key_exists( $name, $ignore_sizes ) ? 'checked' : '' ) . '/>' . sprintf( "<label><div style='float: left; text-align: right; margin-right: 5px; width: 20px;'>%s</div> <b>%s</b></label> <small>(Normal: %dx%d, Retina: %dx%d)</small>", MeowApps_Admin::size_shortname( $name ), $name, $attr['width'], $attr['height'], $attr['width'] * 2, $attr['height'] * 2 ) . '<br>';
 		}
 		$html .= '<br /><small class="description">'  .
 			__( 'The selected sizes will <b>not</b> have their retina equivalent generated.', 'wp-retina-2x' ) . '</small>';
@@ -324,14 +320,6 @@ class WR2X_Admin extends Meow_Admin {
     echo $html;
   }
 
-	function admin_full_size_callback( $args ) {
-    $value = get_option( 'wr2x_full_size', null );
-		$html = '<input ' . disabled( $this->is_pro(), false, false ) . ' type="checkbox" id="wr2x_full_size" name="wr2x_full_size" value="1" ' .
-			checked( 1, get_option( 'wr2x_full_size' ), false ) . '/>';
-    $html .= '<label>Enable</label><br /><small>Checks for retina for full-size will be enabled and upload features made available in the <i>Retina Dashboard</i>.</small>';
-    echo $html;
-  }
-
 	function admin_method_callback( $args ) {
     $value = get_option( 'wr2x_method', 'none' );
 		$html = '<select id="wr2x_method" name="wr2x_method">
@@ -345,6 +333,21 @@ class WR2X_Admin extends Meow_Admin {
     echo $html;
   }
 
+	function admin_full_size_callback( $args ) {
+    $value = get_option( 'wr2x_full_size', null );
+		$html = '<input ' . disabled( $this->is_registered(), false, false ) . ' type="checkbox" id="wr2x_full_size" name="wr2x_full_size" value="1" ' .
+			checked( 1, get_option( 'wr2x_full_size' ), false ) . '/>';
+    $html .= '<label>Enable</label><br /><small>Checks for retina for full-size will be enabled and upload features made available in the <i>Retina Dashboard</i>.</small>';
+    echo $html;
+  }
+
+	function admin_quality_callback( $args ) {
+    $value = get_option( 'wr2x_quality', 90 );
+		$html = '<input type="number" id="wr2x_quality" name="wr2x_quality" value="' . $value . '" />';
+    $html .= __( '<br /><small>Sets image compression quality on a 1-100% scale as an integer (1-100). Default is 90. Only for JPG.</small>', 'wp-retina-2x' );
+    echo $html;
+  }
+
 	function admin_debug_callback( $args ) {
     $value = get_option( 'wr2x_debug', null );
 		$html = '<input type="checkbox" id="wr2x_debug" name="wr2x_debug" value="1" ' .
@@ -355,14 +358,14 @@ class WR2X_Admin extends Meow_Admin {
 
 	function admin_cdn_domain_callback( $args ) {
     $value = get_option( 'wr2x_cdn_domain', null );
-		$html = '<input ' . disabled( $this->is_pro(), false, false ) . ' type="text" id="wr2x_cdn_domain" name="wr2x_cdn_domain" value="' . $value . '" />';
+		$html = '<input ' . disabled( $this->is_registered(), false, false ) . ' type="text" id="wr2x_cdn_domain" name="wr2x_cdn_domain" value="' . $value . '" />';
     $html .= __( '<br /><small>If not empty, your site domain will be replaced with this CDN domain (PictureFill and HTML Rewrite only).</small>', 'wp-retina-2x' );
     echo $html;
   }
 
 	function admin_over_http_check_callback( $args ) {
     $value = get_option( 'wr2x_over_http_check', null );
-		$html = '<input type="checkbox" id="wr2x_over_http_check" name="wr2x_over_http_check" value="1" ' .
+		$html = '<input ' . disabled( $this->is_registered(), false, false ) . ' type="checkbox" id="wr2x_over_http_check" name="wr2x_over_http_check" value="1" ' .
 			checked( 1, get_option( 'wr2x_over_http_check' ), false ) . '/>';
     $html .= __( '<label>Enable</label><br /><small>Normally, the plugin checks if the Retina files exists through your filesystem. With this option, it will check using HTTP requests, that will enable Retina on exotic WordPress installs and also for images hosted on different servers.</small>', 'wp-retina-2x' );
     echo $html;
@@ -378,7 +381,7 @@ class WR2X_Admin extends Meow_Admin {
 
 	function admin_picturefill_lazysizes_callback( $args ) {
     $value = get_option( 'wr2x_picturefill_lazysizes', null );
-		$html = '<input ' . disabled( $this->is_pro(), false, false ) . ' type="checkbox" id="wr2x_picturefill_lazysizes"
+		$html = '<input ' . disabled( $this->is_registered(), false, false ) . ' type="checkbox" id="wr2x_picturefill_lazysizes"
 			name="wr2x_picturefill_lazysizes" value="1" ' .
 			checked( 1, get_option( 'wr2x_picturefill_lazysizes' ), false ) . '/>';
     $html .= __( '<label>Enabled</label><br /><small>Retina images will not be loaded until the visitor gets close to them. HTML will be rewritten and the lazysizes script will be also loaded. </small>', 'wp-retina-2x' );
@@ -387,7 +390,7 @@ class WR2X_Admin extends Meow_Admin {
 
 	function admin_picturefill_noscript_callback( $args ) {
     $value = get_option( 'wr2x_picturefill_noscript', null );
-		$html = '<input ' . disabled( $this->is_pro(), false, false ) . ' type="checkbox" id="wr2x_picturefill_noscript"
+		$html = '<input type="checkbox" id="wr2x_picturefill_noscript"
 			name="wr2x_picturefill_noscript" value="1" ' .
 			checked( 1, get_option( 'wr2x_picturefill_noscript' ), false ) . '/>';
     $html .= __( '<label>Disable</label><br /><small>Only <a href="http://caniuse.com/#feat=srcset" target="_blank">the browsers with src-set support</a> will display Retina images. You can also choose this if you want to load the Picturefill Polyfill script manually or if it is already loaded by your theme.</small>', 'wp-retina-2x' );
@@ -396,7 +399,7 @@ class WR2X_Admin extends Meow_Admin {
 
 	function admin_picturefill_css_background_callback( $args ) {
     $value = get_option( 'wr2x_picturefill_css_background', null );
-		$html = '<input type="checkbox" id="wr2x_picturefill_css_background" name="wr2x_picturefill_css_background" value="1" ' .
+		$html = '<input ' . disabled( $this->is_registered(), false, false ) . ' type="checkbox" id="wr2x_picturefill_css_background" name="wr2x_picturefill_css_background" value="1" ' .
 			checked( 1, get_option( 'wr2x_picturefill_css_background' ), false ) . '/>';
     $html .= __( '<label>Retina-ize</label><br /><small>In your HTML, inline CSS Background will be replaced by the Retina version of the image.</small>', 'wp-retina-2x' );
     echo $html;
@@ -418,25 +421,13 @@ class WR2X_Admin extends Meow_Admin {
     echo $html;
   }
 
-	/**
-	 *
-	 * GET / SET OPTIONS (TO REMOVE)
-	 *
-	 */
-
-	function old_getoption( $option, $section, $default = '' ) {
-		$options = get_option( $section );
-		if ( isset( $options[$option] ) ) {
-	        if ( $options[$option] == "off" ) {
-	            return false;
-	        }
-	        if ( $options[$option] == "on" ) {
-	            return true;
-	        }
-			return $options[$option];
-	    }
-		return $default;
-	}
+	function admin_hide_pro_callback( $args ) {
+    $value = get_option( 'wr2x_hide_pro', null );
+		$html = '<input type="checkbox" id="wr2x_hide_pro" name="wr2x_hide_pro" value="1" ' .
+			checked( 1, get_option( 'wr2x_hide_pro' ), false ) . '/>';
+    $html .= __( '<label>Hide</label><br /><small>Hide information about Pro version.</small>', 'wp-retina-2x' );
+    echo $html;
+  }
 
 }
 

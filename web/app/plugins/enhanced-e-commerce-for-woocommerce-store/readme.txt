@@ -6,16 +6,16 @@ Tags: Google Analytics, Universal Analytics, Enhanced E-commerce, E-commerce, e-
 Author URI: http://www.tatvic.com/
 Author: Tatvic
 Requires at least: 3.6
-Tested up to: 4.7
-Stable tag: 1.0.19
-Version: 1.0.19
+Tested up to: 4.8
+Stable tag: 1.0.21
+Version: 1.0.21
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Provides integration between Enhanced Ecommerce feature of Google Analytics and WooCommerce.
 
 == Description ==
-<a href="http://www.tatvic.com/enhanced-ecommerce-google-analytics-plugin-woocommerce/">Enhanced Ecommerce Google Analytics</a> is a Free WooCommerce Plugin which allows you to use the newly launched feature of Google Analytics – Enhanced Ecommerce.You can track the user behavior across your e-commerce store starting from product views to thank you page. Enhanced Ecommerce supports only Universal Analytics.
+<a href="http://www.tatvic.com/enhanced-ecommerce-google-analytics-plugin-woocommerce/">Enhanced Ecommerce Google Analytics</a> is a Free Plugin for Woocommerce stores which allows you to use the newly launched feature of Google Analytics – Enhanced Ecommerce.You can track the user behavior across your e-commerce store starting from product views to thank you page. Enhanced Ecommerce is only supported by Universal Analytics.
 
 = Features of Plugin =
 1. Quick & Easy installation from the wordpress interface
@@ -50,7 +50,15 @@ Provides integration between Enhanced Ecommerce feature of Google Analytics and 
 * All the product sections on product page will be fired as Related Product and will be available in product list performance report.
 
 = Need an Advanced Google Analytics Plugin? =
-We have recently launched an Advanced Google Analytics Plugin for WooCommerce which includes tracking of 9 Reports of Enhanced Ecommerce, User ID Tracking, Product Refund, I.P. Anonymization, 15+ Custom Dimenensions & Metrics, Form Field Tracking, Content Grouping & much more. <a href="http://bit.ly/1yFqA04" target="_blank">Learn More</a>
+We have recently launched an Advanced Google Analytics Plugin for WooCommerce which includes tracking of 9 Reports of Enhanced Ecommerce, User ID Tracking, Product Refund, I.P. Anonymization, 15+ Custom Dimenensions & Metrics, Form Field Tracking, Content Grouping & much more. <a href="https://codecanyon.net/item/actionable-google-analytics-for-woocommerce/9899552" target="_blank">Learn More</a>
+
+== Note : ==
+== Our plugin does not support the below features out of the box ==
+* Highly Customized store
+* Child/Custom Themes
+* Product types other than Simple Product
+* Store with the Subscription product for Orders.
+* Ecommerce Pages with Shortcodes
 
 == Installation ==
 1. Download the plugin file to your computer and unzip it
@@ -75,7 +83,7 @@ Starting the WooCommerce 2.1 release there are no conflicts. However for earlier
 
 = Do I Need to add any custom code for it? =
 
-As our plugin automatically tracks all the Enhanced Ecommerce data ( including product name, price, etc dynamically) for your store, you don't need to add any custom code to track Ecommerce events on your store from your end.
+As our plugin automatically tracks all the Enhanced Ecommerce data ( including product name, price, etc dynamically) for your store, you don't need to add any custom/manual code to trackEcommerce events on your store from your end.
 
 = Why are my PayPal transaction data not getting recorded in GA? =
 
@@ -127,6 +135,9 @@ Additionally, GA is a trend analysis tool, and as such cannot be expected to be 
 Please check if you have auto return configured in your payment gateway settings. If a user completes the transaction via a 3rd party payment gateway and is not redirected back to your store’s thank you page, our plugin will not be able to send the transaction data.
 
 Hence, this may result into missing transaction data in your GA. You can resolve this issue by configuring auto return in your payment gateway settings.
+
+= Does this plugin help me create/configure goals/funnels in my GA account? =
+Configuring goals are out of the scope of our plugin. Our plugin is designed to track checkout funnels only.
 
 = Does your Plugin support Product Refund? =
 
@@ -205,4 +216,11 @@ Important Note: When you update the plugin, please save your settings again.
 
  = 1.0.19 - 21/12/2016 =
  * Fixed - Compatibility with Wordpress 4.7 & Woocommerce 2.6.x
+ * Minor Bug Fixes.
+
+ = 1.0.20 - 14/04/2017 =
+ * Fixed - Compatibility with Woocommerce 3.x
+ * Minor Bug Fixes.
+
+ = 1.0.21 - 12/05/2017 =
  * Minor Bug Fixes.

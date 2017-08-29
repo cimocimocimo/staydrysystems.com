@@ -1,6 +1,6 @@
 jQuery( document ).ready( function( $ ){
 
-    var cart_redirect_after_add = typeof( wc_add_to_cart_params ) !== 'undefined' ? wc_add_to_cart_params.cart_redirect_after_add : '',
+    var cart_redirect_after_add = ( typeof( wc_add_to_cart_params ) !== 'undefined' && wc_add_to_cart_params !== null ) ? wc_add_to_cart_params.cart_redirect_after_add : '',
         this_page = window.location.toString(),
         checkboxes = $( '.wishlist_table tbody input[type="checkbox"]:not(:disabled)');
 
@@ -111,17 +111,6 @@ jQuery( document ).ready( function( $ ){
                     table.stop(true).css('opacity', '1').unblock();
                 }
 
-                if( typeof $.prettyPhoto != 'undefined' ) {
-                    $('a[data-rel="prettyPhoto[ask_an_estimate]"]').prettyPhoto({
-                        hook              : 'data-rel',
-                        social_tools      : false,
-                        theme             : 'pp_woocommerce',
-                        horizontal_padding: 20,
-                        opacity           : 0.8,
-                        deeplinking       : false
-                    });
-                }
-
                 checkboxes.off('change');
                 checkboxes = $( '.wishlist_table tbody input[type="checkbox"]');
 
@@ -130,6 +119,7 @@ jQuery( document ).ready( function( $ ){
                 }
 
                 handle_wishlist_checkbox();
+                init_wishlist_pretty_photo();
             } );
         } );
 
@@ -150,6 +140,8 @@ jQuery( document ).ready( function( $ ){
 
         handle_wishlist_checkbox();
 
+        init_wishlist_pretty_photo();
+
     } ).trigger('yith_wcwl_init');
 
     /**
@@ -166,17 +158,6 @@ jQuery( document ).ready( function( $ ){
      * @since 2.0.7
      */
     function init_handling_after_ajax(){
-        if( typeof $.prettyPhoto != 'undefined' ) {
-            $('a[data-rel="prettyPhoto[ask_an_estimate]"]').prettyPhoto({
-                hook              : 'data-rel',
-                social_tools      : false,
-                theme             : 'pp_woocommerce',
-                horizontal_padding: 20,
-                opacity           : 0.8,
-                deeplinking       : false
-            });
-        }
-
         checkboxes.off('change');
         checkboxes = $( '.wishlist_table tbody input[type="checkbox"]');
 
@@ -185,6 +166,7 @@ jQuery( document ).ready( function( $ ){
         }
 
         handle_wishlist_checkbox();
+        init_wishlist_pretty_photo();
     }
 
     /**
@@ -568,6 +550,29 @@ jQuery( document ).ready( function( $ ){
 
             $('#custom_add_to_cart').attr( 'href', url );
         } );
+    }
+
+    /**
+     * Init PrettyPhoto for all links withi the plugin that open a popup
+     *
+     * @return void
+     * @since 2.0.16
+     */
+    function init_wishlist_pretty_photo(){
+        if( typeof $.prettyPhoto == 'undefined' ){
+            return;
+        }
+
+        $('a[data-rel^="prettyPhoto[add_to_wishlist_"]').add('a[data-rel="prettyPhoto[ask_an_estimate]"]')
+            .unbind( 'click' )
+            .prettyPhoto({
+                hook              : 'data-rel',
+                social_tools      : false,
+                theme             : 'pp_woocommerce',
+                horizontal_padding: 20,
+                opacity           : 0.8,
+                deeplinking       : false
+            });
     }
 
     /**

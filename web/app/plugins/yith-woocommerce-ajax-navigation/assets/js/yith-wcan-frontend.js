@@ -408,4 +408,7 @@ jQuery(function ($) {
             });
         });
     }
+
+    /* Browser History Back/Prev Button */
+    window.addEventListener('popstate', function (e) { window.location.reload(true); });
 });

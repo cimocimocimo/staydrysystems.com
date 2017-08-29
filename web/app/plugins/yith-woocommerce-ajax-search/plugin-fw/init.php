@@ -1,7 +1,7 @@
 <?php
 /**
  * Framework Name: YIT Plugin Framework
- * Version: 2.9.38
+ * Version: 2.9.65
  * Author: Yithemes
  * Text Domain: yith-plugin-fw
  * Domain Path: /languages/
@@ -18,8 +18,6 @@
  * It is also available through the world-wide-web at this URL:
  * http://www.gnu.org/licenses/gpl-3.0.txt
  */
-
-// test
 
 if ( ! defined ( 'ABSPATH' ) ) {
     exit;
@@ -56,3 +54,5 @@ if ( ! function_exists ( 'yit_maybe_plugin_fw_loader' ) ) {
         }
     }
 }
+
+

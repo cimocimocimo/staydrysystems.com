@@ -26,6 +26,9 @@ class WPBakeryShortCode_VC_Tta_Tabs extends WPBakeryShortCode_VC_Tta_Accordion {
 					'delay' => intval( $autoplay ) * 1000,
 				) ) ) . '"';
 		}
+		if ( ! empty( $this->atts['el_id'] ) ) {
+			$attributes[] = 'id="' . esc_attr( $this->atts['el_id'] ) . '"';
+		}
 
 		return implode( ' ', $attributes );
 	}
@@ -151,8 +154,7 @@ class WPBakeryShortCode_VC_Tta_Tabs extends WPBakeryShortCode_VC_Tta_Accordion {
 		$html[] = '<div class="vc_tta-tabs-container">';
 		$html[] = '<ul class="vc_tta-tabs-list">';
 		if ( ! $isPageEditabe ) {
-			$strict_bounds = ( 'vc_tta_tabs' === $this->shortcode );
-			$active_section = $this->getActiveSection( $atts, $strict_bounds );
+			$active_section = $this->getActiveSection( $atts, false );
 
 			foreach ( WPBakeryShortCode_VC_Tta_Section::$section_info as $nth => $section ) {
 				$classes = array( 'vc_tta-tab' );

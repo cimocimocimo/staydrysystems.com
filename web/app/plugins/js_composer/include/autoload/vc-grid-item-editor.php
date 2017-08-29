@@ -49,9 +49,9 @@ function vc_grid_item_editor_init() {
  */
 function vc_grid_item_render_preview() {
 	vc_user_access()->checkAdminNonce()->validateDie()->wpAny( array(
-			'edit_post',
-			(int) vc_request_param( 'post_id' ),
-		) )->validateDie()->part( 'grid_builder' )->can()->validateDie();
+		'edit_post',
+		(int) vc_request_param( 'post_id' ),
+	) )->validateDie()->part( 'grid_builder' )->can()->validateDie();
 
 	require_once vc_path_dir( 'PARAMS_DIR', 'vc_grid_item/class-vc-grid-item.php' );
 	$grid_item = new Vc_Grid_Item();
@@ -231,15 +231,15 @@ function vc_gitem_content_shortcodes() {
 	require_once vc_path_dir( 'PARAMS_DIR', 'vc_grid_item/class-vc-grid-item.php' );
 	$grid_item = new Vc_Grid_Item();
 	$invalid_shortcodes = apply_filters( 'vc_gitem_zone_grid_item_not_content_shortcodes', array(
-			'vc_gitem',
-			'vc_gitem_animated_block',
-			'vc_gitem_zone',
-			'vc_gitem_zone_a',
-			'vc_gitem_zone_b',
-			'vc_gitem_zone_c',
-			'vc_gitem_row',
-			'vc_gitem_col',
-		) );
+		'vc_gitem',
+		'vc_gitem_animated_block',
+		'vc_gitem_zone',
+		'vc_gitem_zone_a',
+		'vc_gitem_zone_b',
+		'vc_gitem_zone_c',
+		'vc_gitem_row',
+		'vc_gitem_col',
+	) );
 
 	return array_diff( array_keys( $grid_item->shortcodes() ), $invalid_shortcodes );
 }

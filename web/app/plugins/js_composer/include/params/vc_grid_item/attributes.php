@@ -112,16 +112,21 @@ function vc_gitem_template_attribute_post_image_url( $value, $data ) {
 		'post' => null,
 		'data' => '',
 	), $data ) );
+	$extraImageMeta = explode( ':', $data );
+	$size = 'large'; // default size
+	if ( isset( $extraImageMeta[1] ) ) {
+		$size = $extraImageMeta[1];
+	}
 	if ( 'attachment' === $post->post_type ) {
-		$src = wp_get_attachment_image_src( $post->ID, 'large' );
+		$src = vc_get_image_by_size( $post->ID, $size );
 	} else {
 		$attachment_id = get_post_thumbnail_id( $post->ID );
-		$src = wp_get_attachment_image_src( $attachment_id, 'large' );
+		$src = vc_get_image_by_size( $attachment_id, $size );
 	}
 	if ( empty( $src ) && ! empty( $data ) ) {
 		$output = esc_attr( rawurldecode( $data ) );
 	} elseif ( ! empty( $src ) ) {
-		$output = $src[0];
+		$output = is_array( $src ) ? $src[0] : $src;
 	} else {
 		$output = vc_asset_url( 'vc/vc_gitem_image.png' );
 	}
@@ -210,14 +215,18 @@ function vc_gitem_template_attribute_post_image_background_image_css( $value, $d
 		'post' => null,
 		'data' => '',
 	), $data ) );
+	$size = 'large'; // default size
+	if ( ! empty( $data ) ) {
+		$size = $data;
+	}
 	if ( 'attachment' === $post->post_type ) {
-		$src = wp_get_attachment_image_src( $post->ID, 'large' );
+		$src = vc_get_image_by_size( $post->ID, $size );
 	} else {
 		$attachment_id = get_post_thumbnail_id( $post->ID );
-		$src = wp_get_attachment_image_src( $attachment_id, 'large' );
+		$src = vc_get_image_by_size( $attachment_id, $size );
 	}
 	if ( ! empty( $src ) ) {
-		$output = 'background-image: url(\'' . $src[0] . '\') !important;';
+		$output = 'background-image: url(\'' . ( is_array( $src ) ? $src[0] : $src ) . '\') !important;';
 	} else {
 		$output = 'background-image: url(\'' . vc_asset_url( 'vc/vc_gitem_image.png' ) . '\') !important;';
 	}

@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Shortcode attributes
  * @var $title
  * @var $el_class
+ * @var $el_id
  * @var $type
  * @var $style
  * @var $legend
@@ -19,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Shortcode class
  * @var $this WPBakeryShortCode_Vc_Line_Chart
  */
-$el_class = $title = $type = $legend = $style = $tooltips = $animation = $x_values = $values = $css = $css_animation = '';
+$el_class = $el_id = $title = $type = $legend = $style = $tooltips = $animation = $x_values = $values = $css = $css_animation = '';
 $atts = vc_map_get_attributes( $this->getShortcode(), $atts );
 extract( $atts );
 
@@ -180,7 +181,9 @@ if ( $legend ) {
 	$legend_html = '<ul class="vc_chart-legend">' . $legend_html . '</ul>';
 	$canvas_html = '<div class="vc_chart-with-legend">' . $canvas_html . '</div>';
 }
-
+if ( ! empty( $el_id ) ) {
+	$options[] = 'id="' . esc_attr( $el_id ) . '"';
+}
 $output = '
 <div class="' . esc_attr( $css_class ) . '" ' . implode( ' ', $options ) . '>
 	' . $title . '

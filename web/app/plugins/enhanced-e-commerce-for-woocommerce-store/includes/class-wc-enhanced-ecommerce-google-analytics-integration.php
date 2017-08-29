@@ -5,8 +5,8 @@
  *
  * Allows tracking code to be inserted into store pages.
  *
- * @class 		WC_Enhanced_Ecommerce_Google_Analytics
- * @extends		WC_Integration
+ * @class       WC_Enhanced_Ecommerce_Google_Analytics
+ * @extends     WC_Integration
  * @author      Jigar Navadiya <jigar@tatvic.com>
  */
 class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
@@ -18,20 +18,20 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
      * @return void
      */
     //set plugin version
-    public $tvc_eeVer = '1.0.19';
+    public $tvc_eeVer = '1.0.21';
     public function __construct() {
         
          //Set Global Variables
         global $homepage_json_fp,$homepage_json_ATC_link, $homepage_json_rp,$prodpage_json_relProd,$catpage_json,
-               $prodpage_json_ATC_link,$catpage_json_ATC_link;
-        
+               $prodpage_json_ATC_link,$catpage_json_ATC_link,$woocommerce;
+       if (version_compare($woocommerce->version, "2.1", ">="))
         //define plugin ID       
         $this->id = "enhanced_ecommerce_google_analytics";
         $this->method_title = __("Enhanced Ecommerce Google Analytics", "enhanced-e-commerce-for-woocommerce-store");
-        $this->method_description = __("Enhanced Ecommerce is a new feature of Universal Analytics that generates detailed statistics about the users journey from product page to thank you page on your e-store. <br/><a href='http://www.tatvic.com/blog/enhanced-ecommerce/' target='_blank'>Know more about Enhanced Ecommerce.</a><br/><br/><b>Quick Tip:</b> We recently launched an Advanced Google Analytics Plugin for WooCommerce! The plugin offers tracking of 9 Reports of Enhanced Ecommerce, User ID Tracking, 15+ Custom Dimenensions & Metrics, Content Grouping & much more. <a href='http://bit.ly/1yFqA04' target='_blank'>Learn More</a>", "woocommerce");
+        $this->method_description = __("Enhanced Ecommerce is a new feature of Universal Analytics that generates detailed statistics about the users journey from product page to thank you page on your e-store. <br/><a href='http://www.tatvic.com/blog/enhanced-ecommerce/' target='_blank'>Know more about Enhanced Ecommerce.</a><br/><br/><b>Quick Tip:</b> We recently launched an Advanced Google Analytics Plugin for WooCommerce! The plugin offers tracking of 9 Reports of Enhanced Ecommerce, User ID Tracking, 15+ Custom Dimenensions & Metrics, Content Grouping & much more. <a href='https://codecanyon.net/item/actionable-google-analytics-for-woocommerce/9899552' target='_blank'>Learn More</a>", "woocommerce");
 
-
-        //session for product position count //session_start removed bcoz it gives warning
+        //session for product position count
+        //session_start removed bcoz it gives warning
         $_SESSION['t_npcnt']=0;
         $_SESSION['t_fpcnt']=0;
         // Load the integration form
@@ -50,12 +50,12 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         $this->ga_gUser = $this->get_option("ga_gUser") == "yes" ? true : false; //guest checkout
         $this->ga_eeT = $this->get_option("ga_eeT");
         $this->ga_DF = $this->get_option("ga_DF") == "yes" ? true : false;
-        $this->ga_imTh = $this->get_option("ga_imTh");
+        $this->ga_imTh = $this->get_option("ga_imTh") == "" ? 6 : $this->get_option("ga_imTh"); 
 
                
          //Save Changes action for admin settings
          add_action("woocommerce_update_options_integration_" . $this->id, array($this, "process_admin_options"));
-         
+        
         // API Call to LS with e-mail
         // Tracking code
         add_action("wp_head", array($this, "ee_settings"));
@@ -75,12 +75,12 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         // Event tracking code
         add_action("woocommerce_after_add_to_cart_button", array($this, "add_to_cart"));
         
-		//Enable display feature code checkbox 
+        //Enable display feature code checkbox 
         add_action("admin_footer", array($this, "admin_check_UA_enabled"));
 
         //add version details in footer
         add_action("wp_footer", array($this, "add_plugin_details"));
-		
+        
         //Add Dev ID
         add_action("wp_head", array($this, "add_dev_id"), 1);
         
@@ -156,7 +156,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                    });
                 
             //Pugin Promotion
-            jQuery("form#mainform").after("<a href=http://bit.ly/1yFqA04 target=_blank><img src='.plugins_url( '/woo_plugin_promotion.png' , __FILE__ ).' title=Actionable Google Analytics Plugin by Tatvic alt=Actionable Google Analytics Plugin by Tatvic></a>");
+            jQuery("form#mainform").after("<a href=https://codecanyon.net/item/actionable-google-analytics-for-woocommerce/9899552 target=_blank><img src='.plugins_url( '/woo_plugin_promotion.png' , __FILE__ ).' title=Actionable Google Analytics Plugin by Tatvic alt=Actionable Google Analytics Plugin by Tatvic></a>");
             </script>';
         }
     }
@@ -182,6 +182,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
      */
     function wc_version_compare($codeSnippet) {
         global $woocommerce;
+    
         if (version_compare($woocommerce->version, "2.1", ">=")) {
             wc_enqueue_js($codeSnippet);
         } else {
@@ -250,7 +251,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                 "description" => __("Enter your Google Analytics ID here. You can login into your Google Analytics account to find your ID. e.g.<code>UA-XXXXX-X</code>", "woocommerce"),
                 "type" => "text",
                 "placeholder" => "UA-XXXXX-X",
-                "desc_tip"	=>  true,
+                "desc_tip"  =>  true,
                 "default" => get_option("ga_id") // Backwards compat
             ),
             "ga_Dname" => array(
@@ -258,7 +259,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                 "description" => sprintf(__("Enter your domain name here (Optional)")),
                 "type" => "text",
                 "placeholder" => "",
-                "desc_tip"	=>  true,
+                "desc_tip"  =>  true,
                 "default" => get_option("ga_Dname") ? get_option("ga_Dname") : "auto"
             ),
             "ga_ST" => array(
@@ -267,7 +268,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                 "description" => sprintf(__("This feature adds Universal Analytics Tracking Code to your Store. You don't need to enable this if using a 3rd party analytics plugin.", "woocommerce")),
                 "type" => "checkbox",
                 "checkboxgroup" => "start",
-                "desc_tip"	=>  true,
+                "desc_tip"  =>  true,
                 "default" => get_option("ga_ST") ? get_option("ga_ST") : "no"  // Backwards compat
             ),
             "ga_DF" => array(
@@ -281,7 +282,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                 "label" => __("Add Enhanced Ecommerce Tracking Code", "woocommerce"),
                 "type" => "checkbox",
                 "checkboxgroup" => "",
-                "desc_tip"	=>  true,
+                "desc_tip"  =>  true,
                 "description" => sprintf(__("This feature adds Enhanced Ecommerce Tracking Code to your Store", "woocommerce")),
                 "default" => get_option("ga_eeT") ? get_option("ga_eeT")  : "no"  // Backwards compat
             ),
@@ -289,7 +290,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                 "label" => __("Add Code to Track the Login Step of Guest Users (Optional)", "woocommerce"),
                 "type" => "checkbox",
                 "checkboxgroup" => "",
-                "desc_tip"	=>  true,
+                "desc_tip"  =>  true,
                 "description" => sprintf(__("If you have Guest Check out enable, we recommend you to add this code", "woocommerce")),
                 "default" => get_option("ga_gUser") ? get_option("ga_gUser") : "no"  // Backwards compat
             ),
@@ -298,15 +299,15 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                 "description" => sprintf(__("This feature sets Impression threshold for category page. It sends hit after these many numbers of products impressions", "woocommerce")),
                 "type" => "number",
                 "desc_tip" =>  true,
-		"css"=>"width:112px !important;",
-		'custom_attributes' => array(
+        "css"=>"width:112px !important;",
+        'custom_attributes' => array(
                 'min' => "1",
                 ),
                 "default" => get_option("ga_imTh") ? get_option("ga_imTh") : "6"  // Backwards compat
             ),          
         );
     }
-
+   
     /**
      * Google Analytics eCommerce tracking
      *
@@ -363,13 +364,13 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         }
 
         $code = '(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,"script","//www.google-analytics.com/analytics.js","ga");
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,"script","//www.google-analytics.com/analytics.js","ga");
                         
-			ga("create", "' . esc_js($tracking_id) . '", "' . $set_domain_name . '");
+            ga("create", "' . esc_js($tracking_id) . '", "' . $set_domain_name . '");
                         ' . $ga_display_feature_code . '
-			ga("require", "ec", "ec.js");
+            ga("require", "ec", "ec.js");
                         ' . $ga_pageview . '
                         ';
         // Order items
@@ -381,7 +382,12 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                   $categories=esc_js(woocommerce_get_formatted_variation($_product->variation_data, true));
                 } else {
                     $out = array();
-                    $categories = get_the_terms($_product->id, "product_cat");
+                    if(version_compare($woocommerce->version, "2.7", "<")){
+                         $categories = get_the_terms($_product->id, "product_cat");
+                    }else{
+                         $categories = get_the_terms($_product->get_id(), "product_cat");
+                    }
+                   
                     if ($categories) {
                         foreach ($categories as $category) {
                             $out[] = $category->name;
@@ -391,7 +397,8 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                 }
 
                 //orderpage Prod json
-                $orderpage_prod_Array[get_permalink($_product->id)]=array(
+                if(version_compare($woocommerce->version, "2.7", "<")){
+                    $orderpage_prod_Array[get_permalink($_product->id)]=array(
                         "tvc_id" => esc_html($_product->id),
                         "tvc_i" => esc_js($_product->get_sku() ? $_product->get_sku() : $_product->id),
                         "tvc_n" => esc_js($item["name"]),
@@ -399,6 +406,17 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                         "tvc_c" => $categories,
                         "tvc_q"=>esc_js($item["qty"])
                       );
+                }else{
+                     $orderpage_prod_Array[get_permalink($_product->get_id())]=array(
+                        "tvc_id" => esc_html($_product->get_id()),
+                        "tvc_i" => esc_js($_product->get_sku() ? $_product->get_sku() : $_product->get_id()),
+                        "tvc_n" => esc_js($item["name"]),
+                        "tvc_p" => esc_js($order->get_item_total($item)),
+                        "tvc_c" => $categories,
+                        "tvc_q"=>esc_js($item["qty"])
+                      );
+                }
+               
             }
             //make json for prod meta data on order page
            $this->wc_version_compare("tvc_oc=" . json_encode($orderpage_prod_Array) . ";");
@@ -414,10 +432,10 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
             //orderpage transcation data json
                 $orderpage_trans_Array=array(
                                 "id"=> esc_js($order->get_order_number()),      // Transaction ID. Required
-				"affiliation"=> esc_js(get_bloginfo('name')), // Affiliation or store name
-				"revenue"=>esc_js($order->get_total()),        // Grand Total
+                "affiliation"=> esc_js(get_bloginfo('name')), // Affiliation or store name
+                "revenue"=>esc_js($order->get_total()),        // Grand Total
                                 "tax"=> esc_js($order->get_total_tax()),        // Tax
-				"shipping"=> esc_js($tvc_sc),    // Shipping
+                "shipping"=> esc_js($tvc_sc),    // Shipping
                                 "coupon"=>$coupons_list  
                       );
                  //make json for trans data on order page
@@ -433,16 +451,16 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                     "category": tvc_oc[t_item].tvc_c,
                     "price": tvc_oc[t_item].tvc_p,
                     "quantity": tvc_oc[t_item].tvc_q,
-			});
+            });
             }
             ga("ec:setAction","purchase", {
-				"id": tvc_td.id,
-				"affiliation": tvc_td.affiliation,
-				"revenue": tvc_td.revenue,
+                "id": tvc_td.id,
+                "affiliation": tvc_td.affiliation,
+                "revenue": tvc_td.revenue,
                                 "tax": tvc_td.tax,
-				"shipping": tvc_td.shipping,
+                "shipping": tvc_td.shipping,
                                 "coupon": tvc_td.coupon
-			});
+            });
                         
         ga("send", "event", "Enhanced-Ecommerce","load", "order_confirmation", {"nonInteraction": 1});      
     ';
@@ -464,8 +482,12 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         //return if not product page       
         if (!is_single())
             return;
-        global $product;
-        $category = get_the_terms($product->ID, "product_cat");
+        global $product,$woocommerce;
+        if(version_compare($woocommerce->version, "2.7", "<")){
+             $category = get_the_terms($product->ID, "product_cat");
+        }else{
+            $category = get_the_terms($product->get_id(), "product_cat");
+        }
         $categories = "";
         if ($category) {
             foreach ($category as $term) {
@@ -490,8 +512,8 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                               });
                               ga("ec:setAction", "add");
                               ga("send", "event", "Enhanced-Ecommerce","click", "add_to_cart_click", {"nonInteraction": 1});                              
-			});
-		';
+            });
+        ';
         //check woocommerce version
         $this->wc_version_compare($code);
     }
@@ -508,8 +530,12 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
             return;
         }
 
-        global $product;
-        $category = get_the_terms($product->ID, "product_cat");
+        global $product,$woocommerce;
+        if(version_compare($woocommerce->version, "2.7", "<")){
+             $category = get_the_terms($product->ID, "product_cat");
+        }else{
+            $category = get_the_terms($product->get_id(), "product_cat");
+        }
         $categories = "";
         if ($category) {
             foreach ($category as $term) {
@@ -519,13 +545,24 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         //remove last comma(,) if multiple categories are there
         $categories = rtrim($categories, ",");
         //product detail view json
-        $prodpage_detail_json = array(
+        if(version_compare($woocommerce->version, "2.7", "<")){
+            $prodpage_detail_json = array(
             "tvc_id" => esc_html($product->id),
             "tvc_i" => $product->get_sku() ? $product->get_sku() : $product->id,                   
             "tvc_n" => $product->get_title(),
             "tvc_c" => $categories,
             "tvc_p" => $product->get_price()
         );
+        }else{
+            $prodpage_detail_json = array(
+            "tvc_id" => esc_html($product->get_id()),
+            "tvc_i" => $product->get_sku() ? $product->get_sku() : $product->get_id(),                   
+            "tvc_n" => $product->get_title(),
+            "tvc_c" => $categories,
+            "tvc_p" => $product->get_price()
+        );
+        }
+        
         if (empty($prodpage_detail_json)) { //prod page array
             $prodpage_detail_json = array();
         }
@@ -556,13 +593,20 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
      */
     public function bind_product_metadata() {
 
+        
         if ($this->disable_tracking($this->ga_eeT)) {
             return;
         }
 
-        global $product;
-        $category = get_the_terms($product->ID, "product_cat");
+        global $product,$woocommerce;
+        if (version_compare($woocommerce->version, "2.7", "<")) {
+                    $category = get_the_terms($product->Id, "product_cat");
+            } else {
+                     $category = get_the_terms($product->get_id(), "product_cat");
+            }
+        
         $categories = "";
+
         if ($category) {
             foreach ($category as $term) {
                 $categories.=$term->name . ",";
@@ -579,12 +623,18 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                 $homepage_json_rp = array();
                 $homepage_json_ATC_link=array();                
             }
+
                 // ATC link Array
-                $homepage_json_ATC_link[$product->add_to_cart_url()]=array("ATC-link"=>get_permalink($product->id));
+                if(version_compare($woocommerce->version, "2.7", "<")){
+                    $homepage_json_ATC_link[$product->add_to_cart_url()]=array("ATC-link"=>get_permalink($product->id));
+                }else{
+                    $homepage_json_ATC_link[$product->add_to_cart_url()]=array("ATC-link"=>get_permalink($product->get_id()));
+                }
               //check if product is featured product or not  
             if ($product->is_featured()) {
-               //check if product is already exists in homepage featured json    
-               if(!array_key_exists(get_permalink($product->id),$homepage_json_fp)){
+               //check if product is already exists in homepage featured json   
+               if(version_compare($woocommerce->version, "2.7", "<")){
+                    if(!array_key_exists(get_permalink($product->id),$homepage_json_fp)){
                 $homepage_json_fp[get_permalink($product->id)] = array(
                         "tvc_id" => esc_html($product->id),
                         "tvc_i" => esc_html($product->get_sku() ? $product->get_sku() : $product->id),
@@ -605,9 +655,34 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                         "tvc_c" => esc_html($categories)
                 );
                }
+               }else{
+                    if(!array_key_exists(get_permalink($product->get_id()),$homepage_json_fp)){
+                $homepage_json_fp[get_permalink($product->get_id())] = array(
+                        "tvc_id" => esc_html($product->get_id()),
+                        "tvc_i" => esc_html($product->get_sku() ? $product->get_sku() : $product->get_id()),
+                        "tvc_n" => esc_html($product->get_title()),
+                        "tvc_n" => esc_html($product->get_price()),
+                        "tvc_c" => esc_html($categories),
+                        "tvc_po" => ++$_SESSION['t_fpcnt'],
+                        "ATC-link"=>$product->add_to_cart_url()
+                );
+                //else add product in homepage recent product json
+               }else {
+                    $homepage_json_rp[get_permalink($product->get_id())] =array(
+                        "tvc_id" => esc_html($product->get_id()),
+                        "tvc_i" => esc_html($product->get_sku() ? $product->get_sku() : $product->get_id()),
+                        "tvc_n" => esc_html($product->get_title()),
+                        "tvc_p" => esc_html($product->get_price()),
+                        "tvc_po" => ++$_SESSION['t_npcnt'],
+                        "tvc_c" => esc_html($categories)
+                );
+               }
+               }
+               
             } else {
-                //else prod add in homepage recent json    
-                $homepage_json_rp[get_permalink($product->id)] =array(
+                //else prod add in homepage recent json  
+                if(version_compare($woocommerce->version, "2.7", "<")){
+                    $homepage_json_rp[get_permalink($product->id)] =array(
                         "tvc_id" => esc_html($product->id),
                         "tvc_i" => esc_html($product->get_sku() ? $product->get_sku() : $product->id),
                         "tvc_n" => esc_html($product->get_title()),
@@ -615,6 +690,17 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                         "tvc_po" => ++$_SESSION['t_npcnt'],
                         "tvc_c" => esc_html($categories)
                 );
+                }else{
+                    $homepage_json_rp[get_permalink($product->get_id())] =array(
+                        "tvc_id" => esc_html($product->get_id()),
+                        "tvc_i" => esc_html($product->get_sku() ? $product->get_sku() : $product->get_id()),
+                        "tvc_n" => esc_html($product->get_title()),
+                        "tvc_p" => esc_html($product->get_price()),
+                        "tvc_po" => ++$_SESSION['t_npcnt'],
+                        "tvc_c" => esc_html($categories)
+                );
+                }
+                
             }
         }
         //if product page then related product page array
@@ -622,10 +708,11 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
             if(!is_array($prodpage_json_relProd) && !is_array($prodpage_json_ATC_link)){
                 $prodpage_json_relProd = array();
                 $prodpage_json_ATC_link = array();
-    }
-                // ATC link Array
+            }
+            // ATC link Array
+            if(version_compare($woocommerce->version, "2.7", "<")){
                 $prodpage_json_ATC_link[$product->add_to_cart_url()]=array("ATC-link"=>get_permalink($product->id));
-
+              
             $prodpage_json_relProd[get_permalink($product->id)] = array(
                         "tvc_id" => esc_html($product->id),
                         "tvc_i" => esc_html($product->get_sku() ? $product->get_sku() : $product->id),
@@ -634,6 +721,20 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                         "tvc_c" => esc_html($categories),
                         "tvc_po" => ++$_SESSION['t_npcnt'],
                 );
+            }else{
+                 $prodpage_json_ATC_link[$product->add_to_cart_url()]=array("ATC-link"=>get_permalink($product->get_id()));
+              
+            $prodpage_json_relProd[get_permalink($product->get_id())] = array(
+                        "tvc_id" => esc_html($product->get_id()),
+                        "tvc_i" => esc_html($product->get_sku() ? $product->get_sku() : $product->get_id()),
+                        "tvc_n" => esc_html($product->get_title()),
+                        "tvc_p" => esc_html($product->get_price()),
+                        "tvc_po" => ++$_SESSION['t_npcnt'],
+                        "tvc_c" => esc_html($categories)
+                        
+                );
+            }
+               
         }
         //category page, search page and shop page json
         else if (is_product_category() || is_search() || is_shop()) {
@@ -642,9 +743,10 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                  $catpage_json_ATC_link=array();
              }
              //cat page ATC array
-             $catpage_json_ATC_link[$product->add_to_cart_url()]=array("ATC-link"=>get_permalink($product->id));
-             
-             $catpage_json[get_permalink($product->id)] =array(
+             if(version_compare($woocommerce->version, "2.7", "<")){
+                $catpage_json_ATC_link[$product->add_to_cart_url()]=array("ATC-link"=>get_permalink($product->id));
+
+                  $catpage_json[get_permalink($product->id)] =array(
                         "tvc_id" => esc_html($product->id),
                         "tvc_i" => esc_html($product->get_sku() ? $product->get_sku() : $product->id),
                         "tvc_n" => esc_html($product->get_title()),
@@ -652,6 +754,20 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                         "tvc_c" => esc_html($categories),
                         "tvc_po" => ++$_SESSION['t_npcnt'], 
                 );
+             }else{
+                $catpage_json_ATC_link[$product->add_to_cart_url()]=array("ATC-link"=>get_permalink($product->get_id()));
+
+                $catpage_json[get_permalink($product->get_id())] =array(
+                        "tvc_id" => esc_html($product->get_id()),
+                        "tvc_i" => esc_html($product->get_sku() ? $product->get_sku() : $product->get_id()),
+                        "tvc_n" => esc_html($product->get_title()),
+                        "tvc_p" => esc_html($product->get_price()),
+                        "tvc_po" => ++$_SESSION['t_npcnt'],
+                        "tvc_c" => esc_html($categories)
+                         
+                );
+             }
+             
             }
     }
 
@@ -665,9 +781,10 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         if ($this->disable_tracking($this->ga_eeT)) {
             return;
         }
+        
         //get impression threshold
         $impression_threshold = $this->ga_imTh;
-
+        
         //Product impression on Home Page
         global $homepage_json_fp,$homepage_json_ATC_link, $homepage_json_rp,$prodpage_json_relProd,$catpage_json,$prodpage_json_ATC_link,$catpage_json_ATC_link;
         //home page json for featured products and recent product sections
@@ -708,16 +825,16 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         $hmpg_impressions_jQ = '
                   ga("require", "ec", "ec.js");
                   ga("set", "&cu", tvc_lc);
-		function t_products_impre_clicks(t_json_name,t_action,t_list){
+        function t_products_impre_clicks(t_json_name,t_action,t_list){
                    t_send_threshold=0;
                    t_prod_pos=0;
                    
                     t_json_length=Object.keys(t_json_name).length
                         
                     for(var t_item in t_json_name) {
-			t_send_threshold++;
-			t_prod_pos++;
-	            			
+            t_send_threshold++;
+            t_prod_pos++;
+                            
                  ga("ec:addImpression", {   
                             "id": t_json_name[t_item].tvc_i,
                             "name": t_json_name[t_item].tvc_n,
@@ -726,8 +843,8 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                             "price": t_json_name[t_item].tvc_p,
                             "position": t_json_name[t_item].tvc_po,
                         });
-						
-		if(t_json_length > ' . esc_js($impression_threshold) . '){
+                        
+        if(t_json_length > ' . esc_js($impression_threshold) .' ){
                            if((t_send_threshold%' . esc_js($impression_threshold) . ')==0){
                             t_json_length=t_json_length-' . esc_js($impression_threshold) . ';
                             ga("send", "event", "Enhanced-Ecommerce","load","product_impression_"+t_action , {"nonInteraction": 1});  
@@ -738,28 +855,28 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                        if(t_json_length==0){
                         ga("send", "event", "Enhanced-Ecommerce","load", "product_impression_"+t_action, {"nonInteraction": 1});  
                         }
-		}	
+        }   
                 }
-		}
+        }
                 
-		//function for comparing urls in json object
-		function prod_exists_in_JSON(t_url,t_json_name,t_list,t_action){
+        //function for comparing urls in json object
+        function prod_exists_in_JSON(t_url,t_json_name,t_list,t_action){
                                     if(t_json_name.hasOwnProperty(t_url)){
                                         t_call_fired=true;
-					ga("ec:addProduct", {              
-					    "id": t_json_name[t_url].tvc_i,
+                    ga("ec:addProduct", {              
+                        "id": t_json_name[t_url].tvc_i,
                                             "name": t_json_name[t_url].tvc_n,
                                             "category": t_json_name[t_url].tvc_c,
                                             "price": t_json_name[t_url].tvc_p,
                                             "position": t_json_name[t_url].tvc_po,
-					});
-					ga("ec:setAction", "click", {"list": t_list});
-					ga("send", "event", "Enhanced-Ecommerce","click", "product_click_"+t_action, {"nonInteraction": 1});  
+                    });
+                    ga("ec:setAction", "click", {"list": t_list});
+                    ga("send", "event", "Enhanced-Ecommerce","click", "product_click_"+t_action, {"nonInteraction": 1});  
                                    }else{
                                    t_call_fired=false;
-				}
+                }
                                 return t_call_fired;
-			}
+            }
                 function prod_ATC_link_exists(t_url,t_ATC_json_name,t_prod_data_json,t_qty){
                     t_prod_url_key=t_ATC_json_name[t_url]["ATC-link"];
                     
@@ -777,7 +894,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                               ga("send", "event", "Enhanced-Ecommerce","click", "add_to_cart_click",{"nonInteraction": 1});     
                               }else{
                                    t_call_fired=false;
-		}    
+        }    
                          return t_call_fired;
                  
                 }
@@ -786,13 +903,13 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         if(is_home() || is_front_page()){
        $hmpg_impressions_jQ .='
                 if(tvc_fp.length !== 0){
-                    t_products_impre_clicks(tvc_fp,"fp","Featured Products");		
+                    t_products_impre_clicks(tvc_fp,"fp","Featured Products");       
                 }
                 if(tvc_rcp.length !== 0){
-                    t_products_impre_clicks(tvc_rcp,"rp","Recent Products");	
+                    t_products_impre_clicks(tvc_rcp,"rp","Recent Products");    
                 }
                 jQuery("a:not([href*=add-to-cart],.product_type_variable, .product_type_grouped)").on("click",function(){
-			t_url=jQuery(this).attr("href");
+            t_url=jQuery(this).attr("href");
                         //home page call for click
                         t_call_fired=prod_exists_in_JSON(t_url,tvc_fp,"Featured Products","fp");
                         if(!t_call_fired){
@@ -801,7 +918,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                 });
                 //ATC click
                 jQuery("a[href*=add-to-cart]").on("click",function(){
-			t_url=jQuery(this).attr("href");
+            t_url=jQuery(this).attr("href");
                         t_qty=$(this).parent().find("input[name=quantity]").val();
                              //default quantity 1 if quantity box is not there             
                             if(t_qty=="" || t_qty===undefined){
@@ -816,24 +933,23 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                 ';
         }else if(is_search()){
             $hmpg_impressions_jQ .='
-                //shop page json
+                //search page json
                 if(tvc_pgc.length !== 0){
                     t_products_impre_clicks(tvc_pgc,"srch","Search Results");   
                 }
-                //shop page prod click
+                //search page prod click
                 jQuery("a:not(.product_type_variable, .product_type_grouped)").on("click",function(){
                     t_url=jQuery(this).attr("href");
                      //cat page prod call for click
                      prod_exists_in_JSON(t_url,catpage_json,"Search Results","srch");
                      });
                 
-                     
-        '; 
+            '; 
         }else if (is_product()) {
                 //product page releted products
                 $hmpg_impressions_jQ .='
                 if(tvc_rdp.length !== 0){
-                    t_products_impre_clicks(tvc_rdp,"rdp","Related Products");	
+                    t_products_impre_clicks(tvc_rdp,"rdp","Related Products");  
                 }          
                 //product click - image and product name
                 jQuery("a:not(.product_type_variable, .product_type_grouped)").on("click",function(){
@@ -843,7 +959,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                 });  
                 //Prod ATC link click in related product section
                 jQuery("a[href*=add-to-cart]").on("click",function(){
-			t_url=jQuery(this).attr("href");
+            t_url=jQuery(this).attr("href");
                         t_qty=$(this).parent().find("input[name=quantity]").val();
                              //default quantity 1 if quantity box is not there             
                             if(t_qty=="" || t_qty===undefined){
@@ -856,7 +972,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
             $hmpg_impressions_jQ .='
                 //category page json
                 if(tvc_pgc.length !== 0){
-                    t_products_impre_clicks(tvc_pgc,"cp","Category Page");	
+                    t_products_impre_clicks(tvc_pgc,"cp","Category Page");  
                 }
                //Prod category ATC link click in related product section
                 jQuery("a:not(.product_type_variable, .product_type_grouped)").on("click",function(){
@@ -870,7 +986,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
             $hmpg_impressions_jQ .='
                 //shop page json
                 if(tvc_pgc.length !== 0){
-                    t_products_impre_clicks(tvc_pgc,"sp","Shop Page");	
+                    t_products_impre_clicks(tvc_pgc,"sp","Shop Page");  
                 }
                 //shop page prod click
                 jQuery("a:not(.product_type_variable, .product_type_grouped)").on("click",function(){
@@ -887,7 +1003,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
             $hmpg_impressions_jQ .='
                      //ATC link click
                 jQuery("a[href*=add-to-cart]").on("click",function(){
-			t_url=jQuery(this).attr("href");
+            t_url=jQuery(this).attr("href");
                         t_qty=$(this).parent().find("input[name=quantity]").val();
                              //default quantity 1 if quantity box is not there             
                             if(t_qty=="" || t_qty===undefined){
@@ -918,8 +1034,13 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         $cartpage_prod_array_main = array();
         //echo "<pre>".print_r($woocommerce->cart->cart_contents,TRUE)."</pre>";
         foreach ($woocommerce->cart->cart_contents as $key => $item) {
-            $prod_meta = get_product($item["product_id"]);
-            
+            //Version compare
+            if (version_compare($woocommerce->version, "2.7", "<")) {
+                    $prod_meta = get_product($item["product_id"]);
+            } else {
+                     $prod_meta = wc_get_product($item["product_id"]);
+            }
+
             $cart_remove_link=html_entity_decode($woocommerce->cart->get_remove_url($key));
                        
             $category = get_the_terms($item["product_id"], "product_cat");
@@ -931,15 +1052,25 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
             }
             //remove last comma(,) if multiple categories are there
             $categories = rtrim($categories, ",");
-            $cartpage_prod_array_main[$cart_remove_link] =array(
+            if(version_compare($woocommerce->version, "2.7", "<")){
+                $cartpage_prod_array_main[$cart_remove_link] =array(
                     "tvc_id" => esc_html($prod_meta->id),
                     "tvc_i" => esc_html($prod_meta->get_sku() ? $prod_meta->get_sku() : $prod_meta->id),
                     "tvc_n" => esc_html($prod_meta->get_title()),
                     "tvc_p" => esc_html($prod_meta->get_price()),
                     "tvc_c" => esc_html($categories),
                     "tvc_q"=>$woocommerce->cart->cart_contents[$key]["quantity"]
-            );
-
+                );
+            }else{
+                $cartpage_prod_array_main[$cart_remove_link] =array(
+                    "tvc_id" => esc_html($prod_meta->get_id()),
+                    "tvc_i" => esc_html($prod_meta->get_sku() ? $prod_meta->get_sku() : $prod_meta->get_id()),
+                    "tvc_n" => esc_html($prod_meta->get_title()),
+                    "tvc_p" => esc_html($prod_meta->get_price()),
+                    "tvc_c" => esc_html($categories),
+                    "tvc_q"=>$woocommerce->cart->cart_contents[$key]["quantity"]
+                );
+            }
         }
 
         //Cart Page item Array to Json
@@ -982,14 +1113,14 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                 ga("require", "ec", "ec.js");
                 ga("set", "&cu", tvc_lc);
                 for(var t_item in tvc_ch){
-					ga("ec:addProduct", {
-						"id": tvc_ch[t_item].tvc_i,
-						"name": tvc_ch[t_item].tvc_n,
-						"category": tvc_ch[t_item].tvc_c,
-						"price": tvc_ch[t_item].tvc_p,
-						"quantity": tvc_ch[t_item].tvc_q
-					});
-					}';
+                    ga("ec:addProduct", {
+                        "id": tvc_ch[t_item].tvc_i,
+                        "name": tvc_ch[t_item].tvc_n,
+                        "category": tvc_ch[t_item].tvc_c,
+                        "price": tvc_ch[t_item].tvc_p,
+                        "quantity": tvc_ch[t_item].tvc_q
+                    });
+                    }';
 
         $code_step_1 = $code . 'ga("ec:setAction","checkout",{"step": 1});';
         $code_step_1 .= 'ga("send", "event", "Enhanced-Ecommerce","load","checkout_step_1",{"nonInteraction": 1});';
@@ -1011,14 +1142,14 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         $code= '
                
                 for(var t_item in tvc_ch){
-					ga("ec:addProduct", {
-						"id": tvc_ch[t_item].tvc_i,
-						"name": tvc_ch[t_item].tvc_n,
-						"category": tvc_ch[t_item].tvc_c,
-						"price": tvc_ch[t_item].tvc_p,
-						"quantity": tvc_ch[t_item].tvc_q
-					});
-					}';
+                    ga("ec:addProduct", {
+                        "id": tvc_ch[t_item].tvc_i,
+                        "name": tvc_ch[t_item].tvc_n,
+                        "category": tvc_ch[t_item].tvc_c,
+                        "price": tvc_ch[t_item].tvc_p,
+                        "quantity": tvc_ch[t_item].tvc_q
+                    });
+                    }';
 
         $code_step_2 = $code . 'ga("ec:setAction","checkout",{"step": 2});';
         $code_step_2 .= 'ga("send", "event", "Enhanced-Ecommerce","load","checkout_step_2",{"nonInteraction": 1});';
@@ -1046,14 +1177,14 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         }
         $code= '
             for(var t_item in tvc_ch){
-					ga("ec:addProduct", {
-						"id": tvc_ch[t_item].tvc_i,
-						"name": tvc_ch[t_item].tvc_n,
-						"category": tvc_ch[t_item].tvc_c,
-						"price": tvc_ch[t_item].tvc_p,
-						"quantity": tvc_ch[t_item].tvc_q
-					});
-					}';
+                    ga("ec:addProduct", {
+                        "id": tvc_ch[t_item].tvc_i,
+                        "name": tvc_ch[t_item].tvc_n,
+                        "category": tvc_ch[t_item].tvc_c,
+                        "price": tvc_ch[t_item].tvc_p,
+                        "quantity": tvc_ch[t_item].tvc_q
+                    });
+                    }';
 
         //check if guest check out is enabled or not
         $step_2_on_proceed_to_pay = (!is_user_logged_in() && !$this->ga_gCkout ) || (!is_user_logged_in() && $this->ga_gCkout && $this->ga_gUser);
@@ -1084,7 +1215,12 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         $code = "";
         //get all items added into the cart
         foreach ($woocommerce->cart->cart_contents as $item) {
-            $p = get_product($item["product_id"]);
+            //Version Compare
+            if ( version_compare($woocommerce->version, "2.7", "<")) {
+                    $p = get_product($item["product_id"]);
+            } else {
+                    $p = wc_get_product($item["product_id"]);
+            }
 
             $category = get_the_terms($item["product_id"], "product_cat");
             $categories = "";
@@ -1095,7 +1231,8 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
             }
             //remove last comma(,) if multiple categories are there
             $categories = rtrim($categories, ",");
-             $chkout_json[get_permalink($p->id)] = array(
+            if(version_compare($woocommerce->version, "2.7", "<")){
+                $chkout_json[get_permalink($p->id)] = array(
                 "tvc_id" => esc_html($p->id),
                 "tvc_i" => esc_js($p->get_sku() ? $p->get_sku() : $p->id),
                 "tvc_n" => esc_js($p->get_title()),
@@ -1103,14 +1240,23 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                 "tvc_c" => $categories,
                 "tvc_q" => esc_js($item["quantity"]),
                 "isfeatured"=>$p->is_featured()
-            );
+                );
+            }else{
+                $chkout_json[get_permalink($p->get_id())] = array(
+                "tvc_id" => esc_html($p->get_id()),
+                "tvc_i" => esc_js($p->get_sku() ? $p->get_sku() : $p->get_id()),
+                "tvc_n" => esc_js($p->get_title()),
+                "tvc_p" => esc_js($p->get_price()),
+                "tvc_c" => $categories,
+                "tvc_q" => esc_js($item["quantity"]),
+                "isfeatured"=>$p->is_featured()
+                );
+            }
+             
         }
         //return $code;
         //make product data json on check out page
         $this->wc_version_compare("tvc_ch=" . json_encode($chkout_json) . ";");
     }
-   
-
 }
-
 ?>

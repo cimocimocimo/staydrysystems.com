@@ -49,7 +49,7 @@ if ( ! class_exists( 'YITH_WCWL_Init' ) ) {
 		 * @var string
 		 * @since 1.0.0
 		 */
-		public $version = '2.0.16';
+		public $version = '2.1.2';
 
 		/**
 		 * Plugin database version
@@ -271,35 +271,33 @@ if ( ! class_exists( 'YITH_WCWL_Init' ) ) {
 		 * @since 1.0.0
 		 */
 		public function enqueue_styles_and_stuffs() {
-			global $woocommerce;
+            $woocommerce_base = WC()->template_path();
+			$assets_path = str_replace( array( 'http:', 'https:' ), '', WC()->plugin_url() ) . '/assets/';
 
-			$assets_path = str_replace( array( 'http:', 'https:' ), '', $woocommerce->plugin_url() ) . '/assets/';
+			wp_register_style( 'jquery-selectBox', YITH_WCWL_URL . 'assets/css/jquery.selectBox.css', array(), '1.2.0' );
+			wp_register_style( 'yith-wcwl-main', YITH_WCWL_URL . 'assets/css/style.css', array(), $this->version );
+			wp_register_style( 'yith-wcwl-font-awesome', YITH_WCWL_URL . 'assets/css/font-awesome.min.css', array(), '4.7.0' );
 
-			if( function_exists( 'WC' ) ){
-				$woocommerce_base = WC()->template_path();
-			}
-			else{
-				$woocommerce_base = WC_TEMPLATE_PATH;
-			}
+			wp_enqueue_style( 'woocommerce_prettyPhoto_css', $assets_path . 'css/prettyPhoto.css' );
+			wp_enqueue_style( 'jquery-selectBox' );
 
 			$located = locate_template( array(
 				$woocommerce_base . 'wishlist.css',
 				'wishlist.css'
 			) );
 
-			wp_register_style( 'woocommerce_prettyPhoto_css', $assets_path . 'css/prettyPhoto.css', array(), '3.1.6' );
-			wp_register_style( 'jquery-selectBox', YITH_WCWL_URL . 'assets/css/jquery.selectBox.css', array(), '1.2.0' );
-			wp_register_style( 'yith-wcwl-main', YITH_WCWL_URL . 'assets/css/style.css', array(), $this->version );
-			wp_register_style( 'yith-wcwl-user-main', str_replace( get_template_directory(), get_template_directory_uri(), $located ), array(), $this->version );
-			wp_register_style( 'yith-wcwl-font-awesome', YITH_WCWL_URL . 'assets/css/font-awesome.min.css', array(), '4.3.0' );
-
-			wp_enqueue_style( 'woocommerce_prettyPhoto_css' );
-			wp_enqueue_style( 'jquery-selectBox' );
-
 			if ( ! $located ) {
 				wp_enqueue_style( 'yith-wcwl-main' );
 			}
 			else {
+				$stylesheet_directory = get_stylesheet_directory();
+				$stylesheet_directory_uri = get_stylesheet_directory_uri();
+				$template_directory = get_template_directory();
+				$template_directory_uri = get_template_directory_uri();
+
+				$style_url = ( strpos( $located, $stylesheet_directory ) ) ? str_replace( $stylesheet_directory, $stylesheet_directory_uri, $located ) : str_replace( $template_directory, $template_directory_uri, $located );
+
+				wp_register_style( 'yith-wcwl-user-main', $style_url, array(), $this->version );
 				wp_enqueue_style( 'yith-wcwl-user-main' );
 			}
 
@@ -309,16 +307,23 @@ if ( ! class_exists( 'YITH_WCWL_Init' ) ) {
 			$colors_styles = array();
 			$frontend_css  = '';
 			if ( get_option( 'yith_wcwl_frontend_css' ) == 'no' ) {
-				foreach ( $this->colors_options as $name => $option ) {
-					$colors_styles[$name] = '';
+				if ( is_array( $this->colors_options ) && ! empty( $this->colors_options ) ) {
+					foreach ( $this->colors_options as $name => $option ) {
 
-					foreach ( $option as $id => $value ) {
-						$colors_styles[$name] .= str_replace( '_', '-', $id ) . ':' . $value . ';';
+						$colors_styles[ $name ] = '';
+
+						if ( is_array( $option ) && ! empty( $option ) ) {
+							foreach ( $option as $id => $value ) {
+								$colors_styles[ $name ] .= str_replace( '_', '-', $id ) . ':' . $value . ';';
+							}
+						}
 					}
 				}
 
-				foreach ( $this->rules as $id => $rule ) {
-					$frontend_css .= $rule . '{' . $colors_styles[$id] . '}';
+				if ( is_array( $this->rules ) && ! empty( $this->rules ) ) {
+					foreach ( $this->rules as $id => $rule ) {
+						$frontend_css .= $rule . '{' . $colors_styles[ $id ] . '}';
+					}
 				}
 			}
 
@@ -332,9 +337,6 @@ if ( ! class_exists( 'YITH_WCWL_Init' ) ) {
 				}
 				?>
 			</style>
-			<script type="text/javascript">
-				var yith_wcwl_plugin_ajax_web_url = '<?php echo admin_url('admin-ajax.php', 'relative') ?>';
-			</script>
 		<?php
 		}
 
@@ -345,28 +347,19 @@ if ( ! class_exists( 'YITH_WCWL_Init' ) ) {
 		 * @since 1.0.0
 		 */
 		public function enqueue_scripts() {
-			global $woocommerce;
-
-			if( function_exists( 'WC' ) ){
-				$woocommerce_base = WC()->template_path();
-			}
-			else{
-				$woocommerce_base = WC_TEMPLATE_PATH;
-			}
+            $woocommerce_base = WC()->template_path();
+			$assets_path = str_replace( array( 'http:', 'https:' ), '', WC()->plugin_url() ) . '/assets/';
+			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 			$located = locate_template( array(
 				$woocommerce_base . 'wishlist.js',
 				'wishlist.js'
 			) );
 
-			$assets_path = str_replace( array( 'http:', 'https:' ), '', $woocommerce->plugin_url() ) . '/assets/';
-			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-
-			wp_enqueue_script( 'prettyPhoto', $assets_path . 'js/prettyPhoto/jquery.prettyPhoto' . $suffix . '.js', array( 'jquery' ), '3.1.5', true );
-			wp_enqueue_script( 'prettyPhoto-init', $assets_path . 'js/prettyPhoto/jquery.prettyPhoto.init' . $suffix . '.js', array( 'jquery','prettyPhoto' ), defined( 'WC_VERSION' ) ? WC_VERSION : WOOCOMMERCE_VERSION, true );
+			wp_enqueue_script( 'prettyPhoto', $assets_path . 'js/prettyPhoto/jquery.prettyPhoto' . $suffix . '.js', array( 'jquery' ), '3.1.6', true );
 			wp_enqueue_script( 'jquery-selectBox', YITH_WCWL_URL . 'assets/js/jquery.selectBox.min.js', array( 'jquery' ), '1.2.0', true );
 			wp_register_script( 'jquery-yith-wcwl', YITH_WCWL_URL . 'assets/js/jquery.yith-wcwl.js', array( 'jquery', 'jquery-selectBox' ), $this->version, true );
-			wp_register_script( 'jquery-yith-wcwl-user', str_replace( get_template_directory(), get_template_directory_uri(), $located ), array( 'jquery', 'jquery-selectBox' ), $this->version, true );
+			wp_register_script( 'jquery-yith-wcwl-user', str_replace( get_stylesheet_directory(), get_stylesheet_directory_uri(), $located ), array( 'jquery', 'jquery-selectBox' ), $this->version, true );
 
 			$yith_wcwl_l10n = array(
 				'ajax_url' => admin_url( 'admin-ajax.php', 'relative' ),

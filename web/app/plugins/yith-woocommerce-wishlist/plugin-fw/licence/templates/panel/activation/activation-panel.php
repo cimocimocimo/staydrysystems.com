@@ -25,7 +25,7 @@ $num_members_products_activate  = $this->get_number_of_membership_products();
     <div class="licence-check-section">
         <form method="post" id="licence-check-update" action="<?php echo admin_url( 'admin-ajax.php' ) ?>">
             <span class="licence-label" style="display: block;"><?php _e( 'Have you updated your licenses? Have you asked for an extension? Update information concerning your products.', 'yith-plugin-fw' ); ?></span>
-            <input type="hidden" name="action" value="update_licence_information-<?php echo $this->get_product_type(); ?>" />
+            <input type="hidden" name="action" value="yith_update_licence_information-<?php echo $this->get_product_type(); ?>" />
             <input type="submit" name="submit" value="<?php _e( 'Update license information', 'yith-plugin-fw' ) ?>" class="button-licence licence-check" />
             <div class="spinner"></div>
         </form>
@@ -61,7 +61,7 @@ $num_members_products_activate  = $this->get_number_of_membership_products();
                                     <input type="submit" name="submit" value="<?php _e( 'Activate', 'yith-plugin-fw' )?>" class="button-licence licence-activation" data-formid="<?php echo $info['product_id'] ?>"/>
                                 </td>
                             </tr>
-                            <input type="hidden" name="action" value="activate-<?php echo $this->get_product_type(); ?>" />
+                            <input type="hidden" name="action" value="yith_activate-<?php echo $this->get_product_type(); ?>" />
                             <input type="hidden" name="product_init" value="<?php echo $init ?>" />
                         </tbody>
                     </table>
@@ -94,7 +94,7 @@ $num_members_products_activate  = $this->get_number_of_membership_products();
                     <?php if( $this->show_extra_info ) : ?>
                         <th><?php _e( 'Remaining', 'yith-plugin-fw' ) ?></th>
                         <?php if( $num_members_products_activate ) : ?>
-                            <th><?php _e( 'Membership', 'yith-plugin-fw' ) ?></th>
+                            <th><?php _e( 'Club Subscription', 'yith-plugin-fw' ) ?></th>
                         <?php endif; ?>
                     <?php endif; ?>
 
@@ -138,12 +138,12 @@ $num_members_products_activate  = $this->get_number_of_membership_products();
                                 data-licence-email="<?php echo $info['licence']['email'] ?>"
                                 data-licence-key="<?php echo $info['licence']['licence_key'] ?>"
                                 data-product-init="<?php echo $init ?>"
-                                data-action="deactivate-<?php echo $this->get_product_type(); ?>">
+                                data-action="yith_deactivate-<?php echo $this->get_product_type(); ?>">
                                 <?php _e( 'Deactivate', 'yith-plugin-fw' ) ?>
                             </a>
 
                             <?php if( ! $info['licence']['is_membership'] && $this->show_renew_button ) : ?>
-                                <a class="button-licence licence-renew" href="<?php echo $this->get_renewing_uri( $info['licence']['licence_key'] ) ?>" target="_blank">
+                                <a class="button-licence licence-renew" href="<?php echo esc_url( $this->get_renewing_uri( $info['licence']['licence_key'] ) ) ?>" target="_blank">
                                     <?php _e( 'Renew', 'yith-plugin-fw' ) ?>
                                 </a>
                             <?php endif; ?>

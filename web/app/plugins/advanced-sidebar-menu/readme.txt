@@ -3,9 +3,9 @@
 Contributors: Mat Lipe
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal%40matlipe%2ecom&lc=US&item_name=Advanced%20Sidebar%20Menu&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
 Tags: menus, sidebar menu, hierarchy, category menu, pages menu
-Requires at least: 4.4.0
-Tested up to: 4.7.0
-Stable tag: 6.1.5
+Requires at least: 4.6.0
+Tested up to: 4.8.0
+Stable tag: 6.3.0
 
 == Description ==
 
@@ -25,9 +25,8 @@ Keeps the menu clean and usable. Only related items display so you don't have to
    <li>Include the highest level parent page</li>
    <li>Include the highest level parent page even with no Children</li>
    <li>Order Pages By (date, title, page order)</li>
-   <li>Use built in styling (very plain styling currently but plans for more advanced in near future versions)</li>
+   <li>Use built in styling (very plain styling, for more advanced styling <a href="https://matlipe.com/product/advanced-sidebar-menu-pro/">Go Pro!</a>)</li>
    <li>Exclude pages</li>
-   <li>Legacy Mode - For those who like the way it was pre version 4.0</li>
    <li>Always display child Pages</li>
    <li>Number of levels of child pages to display</li>
 </ol>  
@@ -37,7 +36,7 @@ Keeps the menu clean and usable. Only related items display so you don't have to
    <li>Add a title to the widget</li>
    <li>Include Parent Category</li>
    <li>Include Parent Even with no Children</li>
-  <li>Use Built in Styling</li>
+  <li>Use built in styling (very plain styling, for more advanced styling <a href="https://matlipe.com/product/advanced-sidebar-menu-pro/">Go Pro!</a>)</li>
   <li>Display Categories on Single Posts</li>
    <li>To display each Single Posts Category in a new widget or in same list</li>
    <li>Exclude Categories</li>
@@ -83,10 +82,6 @@ Developer docs may be found here:
 The .pot file may be found in the plugins' languages folder. Use the 'advanced-sidebar-menu' text domain.
 
 
-= Version 4.0+ is not displaying the same as previous version of the plugin. How do I bring this back? =
-
-You will find a checkbox in the widget options for Legacy Mode. 
-
 = How do I change the styling of the current page? =
 
 You may add css to your theme's style.css to change the way the menu looks
@@ -110,28 +105,27 @@ There is a checkbox in the widget options as of version 3.2 that will display th
 = How do you edit the output or built in css? =
 
 Create a folder in your child theme named "advanced-sidebar-menu" copy any of the files from the "views" folder into
-the folder you just created. You may edit the files at will to change the output or css?
+the folder you just created. You may edit the files at will to change the output or css.
 You must have the option checked to use the built in CSS (in the widget) to be able to edit the css file in this way.
-The Others will work always.
 
 
 = Does the menu change for each page you are on? =
 
-Yes. Based on whatever parents and children pages you are on, the menu will change automatically.
+Yes. Based on whatever page you are on, the menu will change automatically to display the current parents and children.
 
 = How does this work with styling the page? =
 
-As of version 1.1 this will automatically generate class names for each level for menu system. 
+This will automatically generate class names for each level for menu system.
 You can add classes to your theme's style.css file to style it accordingly. 
 You may want to use something like margins to set the levels apart.
 
-
-= What if I want functionality which is not built in? =
-
-I do offer premium services for building custom add-ons for additional functionality. Otherwise you are welcome to alter the code in any way or build your own add-ons. keep in mind, if you edit the code directly, it will break on update. The best way to customize is using the built in filters or template overrides. If you have a cool add-on you have developed, let me know, I may want to publish your work.
-
-
 == Changelog ==
+= 6.3.0
+* Improve category class handling for pro version accordion support
+
+= 6.2.0 =
+* Improve sorting of categories
+
 = 6.1.0 =
 * Improve page list view
 * Add advanced_sidebar_menu_list_pages_args filter

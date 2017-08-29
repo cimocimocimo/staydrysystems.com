@@ -33,7 +33,7 @@ if ( ! class_exists( 'YIT_Upgrade' ) ) {
 		/**
 		 * @var string api server url
 		 */
-		protected $_package_url = 'http://www.yithemes.com';
+		protected $_package_url = 'https://yithemes.com';
 
 		/**
 		 * @var array The registered plugins
@@ -93,7 +93,7 @@ if ( ! class_exists( 'YIT_Upgrade' ) ) {
 
 			/* === HOOKS === */
 			if ( ! is_multisite() || is_plugin_active_for_network( $plugin_init ) ) {
-				add_action( 'admin_init', array( $this, 'remove_wp_plugin_update_row' ), 15 );
+				add_action( 'load-plugins.php', array( $this, 'remove_wp_plugin_update_row' ), 25 );
 				add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'check_update' ) );
 			} else if ( is_multisite() && current_user_can( 'update_plugins' ) ) {
 				$transient = 'yith_register_' . md5( $plugin_slug );
@@ -433,17 +433,26 @@ if ( ! class_exists( 'YIT_Upgrade' ) ) {
 			$wp_list_table = _get_list_table( 'WP_MS_Themes_List_Table' );
 
 			if ( is_network_admin() || ! is_multisite() || true ) {
-				echo '<tr class="plugin-update-tr"><td colspan="' . $wp_list_table->get_column_count() . '" class="plugin-update colspanchange"><div class="update-message">';
+				global $wp_version;
+				$is_wp_4_6 = version_compare( $wp_version, '4.6', '>=' );
+
+				echo '<tr class="plugin-update-tr' . ( is_plugin_active( $init ) ? ' active' : '' ) . '"><td colspan="' . $wp_list_table->get_column_count() . '" class="plugin-update colspanchange">';
+
+				echo '<div class="update-message' . ( $is_wp_4_6 ? ' notice inline notice-warning notice-alt' : '' ) . '">';
+
+				echo( $is_wp_4_6 ? '<p>' : '' );
 
 				if ( ! current_user_can( 'update_plugins' ) ) {
-					printf( __( 'There is a new version of %1$s available. <a href="%2$s" class="thickbox yit-changelog-button" title="%3$s">View version %4$s details</a>.', 'yith-plugin-fw' ), $this->_plugins[ $init ]['info']['Name'], esc_url( $details_url ), esc_attr( $this->_plugins[ $init ]['info']['Name'] ), $r->new_version );
+					printf( __( 'There is a new version of %1$s available. <a href="%2$s" class="thickbox yit-changelog-button open-plugin-details-modal" title="%3$s">View version %4$s details</a>.', 'yith-plugin-fw' ), $this->_plugins[ $init ]['info']['Name'], esc_url( $details_url ), esc_attr( $this->_plugins[ $init ]['info']['Name'] ), $r->new_version );
 				} elseif ( is_plugin_active_for_network( $init ) ) {
-					printf( __( 'There is a new version of %1$s available. <a href="%2$s" class="thickbox yit-changelog-button" title="%3$s">View version %4$s details</a>. <em>You have to activate the plugin on a single site of the network to benefit from automatic updates.</em>', 'yith-plugin-fw' ), $this->_plugins[ $init ]['info']['Name'], esc_url( $details_url ), esc_attr( $this->_plugins[ $init ]['info']['Name'] ), $r->new_version );
+					printf( __( 'There is a new version of %1$s available. <a href="%2$s" class="thickbox yit-changelog-button open-plugin-details-modal" title="%3$s">View version %4$s details</a>. <em>You have to activate the plugin on a single site of the network to benefit from automatic updates.</em>', 'yith-plugin-fw' ), $this->_plugins[ $init ]['info']['Name'], esc_url( $details_url ), esc_attr( $this->_plugins[ $init ]['info']['Name'] ), $r->new_version );
 				} elseif ( empty( $r->package ) ) {
-					printf( __( 'There is a new version of %1$s available. <a href="%2$s" class="thickbox yit-changelog-button" title="%3$s">View version %4$s details</a>. <em>Automatic update is unavailable for this plugin, please <a href="%5$s" title="License activation">activate</a> your copy of %6s.</em>', 'yith-plugin-fw' ), $this->_plugins[ $init ]['info']['Name'], esc_url( $details_url ), esc_attr( $this->_plugins[ $init ]['info']['Name'] ), $r->new_version, YIT_Plugin_Licence()->get_licence_activation_page_url(), $this->_plugins[ $init ]['info']['Name'] );
+					printf( __( 'There is a new version of %1$s available. <a href="%2$s" class="thickbox yit-changelog-button open-plugin-details-modal" title="%3$s">View version %4$s details</a>. <em>Automatic update is unavailable for this plugin, please <a href="%5$s" title="License activation">activate</a> your copy of %6s.</em>', 'yith-plugin-fw' ), $this->_plugins[ $init ]['info']['Name'], esc_url( $details_url ), esc_attr( $this->_plugins[ $init ]['info']['Name'] ), $r->new_version, YIT_Plugin_Licence()->get_licence_activation_page_url(), $this->_plugins[ $init ]['info']['Name'] );
 				} else {
-					printf( __( 'There is a new version of %1$s available. <a href="%2$s" class="thickbox yit-changelog-button" title="%3$s">View version %4$s details</a> or <a href="%5$s">update now</a>.', 'yith-plugin-fw' ), $this->_plugins[ $init ]['info']['Name'], esc_url( $details_url ), esc_attr( $this->_plugins[ $init ]['info']['Name'] ), $r->new_version, wp_nonce_url( self_admin_url( 'update.php?action=upgrade-plugin&plugin=' ) . $init, 'upgrade-plugin_' . $init ) );
+					printf( __( 'There is a new version of %1$s available. <a href="%2$s" class="thickbox yit-changelog-button open-plugin-details-modal" title="%3$s">View version %4$s details</a> or <a href="%5$s">update now</a>.', 'yith-plugin-fw' ), $this->_plugins[ $init ]['info']['Name'], esc_url( $details_url ), esc_attr( $this->_plugins[ $init ]['info']['Name'] ), $r->new_version, wp_nonce_url( self_admin_url( 'update.php?action=upgrade-plugin&plugin=' ) . $init, 'upgrade-plugin_' . $init ) );
 				}
+
+				echo( $is_wp_4_6 ? '</p>' : '' );
 
 				/**
 				 * Fires at the end of the update message container in each
@@ -475,7 +484,7 @@ if ( ! class_exists( 'YIT_Upgrade' ) ) {
 		 */
 		public function remove_wp_plugin_update_row() {
 			foreach ( $this->_plugins as $init => $plugin ) {
-				remove_action( "after_plugin_row_{$init}", 'wp_plugin_update_row', 10, 2 );
+				remove_action( "after_plugin_row_{$init}", 'wp_plugin_update_row', 10 );
 				add_action( "after_plugin_row_{$init}", array( $this, 'plugin_update_row' ) );
 				add_action( "in_theme_update_message-{$init}", array( $this, 'in_theme_update_message' ), 10, 3 );
 			}

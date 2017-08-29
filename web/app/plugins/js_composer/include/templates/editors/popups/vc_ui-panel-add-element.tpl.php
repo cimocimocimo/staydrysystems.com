@@ -35,6 +35,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<?php endif; ?>
 					</ul>
 					<div class="vc_clearfix"></div>
+					<?php if ( vc_user_access()->part( 'presets' )->checkStateAny( true, null )->get() ) : ?>
+						<div class="vc_align_center">
+							<span class="vc_general vc_ui-button vc_ui-button-action vc_ui-button-shape-rounded vc_ui-button-fw" data-vc-manage-elements style="display:none;"><?php _e( 'Manage elements', 'js_composer' ); ?></span>
+						</div>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>

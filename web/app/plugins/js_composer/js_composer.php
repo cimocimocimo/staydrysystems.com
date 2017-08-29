@@ -3,7 +3,7 @@
 Plugin Name: WPBakery Visual Composer
 Plugin URI: http://vc.wpbakery.com
 Description: Drag and drop page builder for WordPress. Take full control over your WordPress site, build any layout you can imagine – no programming knowledge required.
-Version: 5.0.1
+Version: 5.2
 Author: Michael M - WPBakery.com
 Author URI: http://wpbakery.com
 */
@@ -19,7 +19,7 @@ if ( ! defined( 'WPB_VC_VERSION' ) ) {
 	/**
 	 *
 	 */
-	define( 'WPB_VC_VERSION', '5.0.1' );
+	define( 'WPB_VC_VERSION', '5.2' );
 }
 
 /**
@@ -209,19 +209,13 @@ class Vc_Manager {
 	}
 
 	/**
-	 * Cloning disabled
+	 * prevent the instance from being cloned (which would create a second instance of it)
 	 */
 	private function __clone() {
 	}
 
 	/**
-	 * Serialization disabled
-	 */
-	private function __sleep() {
-	}
-
-	/**
-	 * De-serialization disabled
+	 * prevent from being unserialized (which would create a second instance of it)
 	 */
 	private function __wakeup() {
 	}
@@ -730,6 +724,10 @@ class Vc_Manager {
 			// DI Set edit form
 			require_once $this->path( 'EDITORS_DIR', 'popups/class-vc-shortcode-edit-form.php' );
 			$vc->setEditForm( new Vc_Shortcode_Edit_Form() );
+
+			// DI Set preset new modal editor.
+			require_once $this->path( 'EDITORS_DIR', 'popups/class-vc-preset-panel-editor.php' );
+			$vc->setPresetPanelEditor( new Vc_Preset_Panel_Editor() );
 
 			$this->factory['vc'] = $vc;
 			do_action( 'vc_after_init_vc' );

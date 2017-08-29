@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH WooCommerce Ajax Product Filter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-17 14:07+0100\n"
-"PO-Revision-Date: 2017-01-17 14:07+0100\n"
+"POT-Creation-Date: 2017-07-04 16:52+0200\n"
+"PO-Revision-Date: 2017-07-04 16:52+0200\n"
 "Last-Translator: Your Inspiration Themes <plugins@yithemes.com>\n"
 "Language-Team: \n"
 "Language: it_IT\n"
@@ -54,11 +54,11 @@ msgstr "Documentazione Plugin"
 #: includes/functions.yith-wcan.php:57 includes/functions.yith-wcan.php:71
 #: includes/functions.yith-wcan.php:93
 msgid "Term"
-msgstr "Termine"
+msgstr "Proprietà"
 
 # @ yit
 #: includes/functions.yith-wcan.php:57
-#: widgets/class.yith-wcan-navigation-widget.php:716
+#: widgets/class.yith-wcan-navigation-widget.php:843
 msgid "Color"
 msgstr "Colore"
 
@@ -75,7 +75,7 @@ msgstr "Colore 2"
 # @ yit
 #: includes/functions.yith-wcan.php:93
 msgid "Labels"
-msgstr "Etichette"
+msgstr "Etichetta"
 
 #: init.php:46
 msgid ""
@@ -90,8 +90,6 @@ msgid ""
 "You can't activate the free version of YITH WooCommerce Ajax Product Filter "
 "while you are using the premium one."
 msgstr ""
-"Non è possibile attivare la versione gratuita di YITH WooCommerce Ajax "
-"Product Filter se stai già utilizzando la versione premium"
 
 #: settings/custom-style-options.php:24
 msgid "Enter here your custom CSS rules:"
@@ -104,7 +102,7 @@ msgstr "Impostazioni frontend"
 #: settings/frontend-options.php:25
 msgctxt "Admin panel: option description"
 msgid "How To:"
-msgstr "Come fare per..."
+msgstr "Descrizione"
 
 #: settings/frontend-options.php:27
 msgctxt "Admin: Panel section description"
@@ -124,7 +122,7 @@ msgstr ""
 
 #: settings/frontend-options.php:33
 msgid "Product Container"
-msgstr "Contenitore prodotti"
+msgstr "Contenitore Prodotti"
 
 #: settings/frontend-options.php:34
 msgid "Enter here the CSS class or id for the product container"
@@ -132,7 +130,7 @@ msgstr "Inserisci qui la classe CSS or l'ID del contenitore prodotto"
 
 #: settings/frontend-options.php:41
 msgid "Shop Pagination Container"
-msgstr "Contenitore paginazione"
+msgstr "Contenitore Paginazione"
 
 #: settings/frontend-options.php:42
 msgid "Enter here the CSS class or id for the shop pagination container"
@@ -141,7 +139,7 @@ msgstr ""
 
 #: settings/frontend-options.php:49
 msgid "Result Count Container"
-msgstr "Contenitore conteggio risultati"
+msgstr "Contenitore Conteggio Prodotti"
 
 #: settings/frontend-options.php:50
 msgid "Enter here the CSS class or id for the results count container"
@@ -149,10 +147,26 @@ msgstr "Inserisci qui la classe CSS o l'ID dei risultati del conteggio"
 
 #: settings/frontend-options.php:57
 msgid "Scroll top anchor"
-msgstr "Torna su"
+msgstr "Tag html per la funzione Scroll Top"
 
 #: settings/frontend-options.php:58
 msgid "Enter here the HTML tag for the scroll to top feature"
+msgstr ""
+
+#: settings/frontend-options.php:65
+msgid "Order by"
+msgstr "Ordina per"
+
+#: settings/frontend-options.php:66
+msgid "Sort by number of products contained or alphabetically"
+msgstr "Ordina per numero di prodotti contenuti or in ordine alfabetico"
+
+#: settings/frontend-options.php:70
+msgid "Alphabetically"
+msgstr "In ordine alfabetico"
+
+#: settings/frontend-options.php:71
+msgid "WooCommerce Default"
 msgstr ""
 
 #: templates/admin/premium.php:203 templates/admin/premium.php:441
@@ -161,24 +175,22 @@ msgid ""
 "Upgrade to %1$spremium version%2$s of %1$sYITH WooCommerce Ajax Product "
 "Filter%2$s to benefit from all features!"
 msgstr ""
-"Aggiorna alla %1$sversione premium%2$s di %1$sYITH WooCommerce Ajax Product "
-"Filter%2$s per usufruire di tutte le sue funzionalità!"
 
 #: templates/admin/premium.php:206 templates/admin/premium.php:444
 msgid "UPGRADE"
-msgstr "AGGIORNA"
+msgstr ""
 
 #: templates/admin/premium.php:207 templates/admin/premium.php:445
 msgid "to the premium version"
-msgstr "alla versione premium"
+msgstr ""
 
 #: templates/admin/premium.php:213
 msgid "Premium Features"
-msgstr "Funzionalità premium"
+msgstr ""
 
 #: templates/admin/premium.php:221
 msgid "Two more layouts"
-msgstr "Due layout in più"
+msgstr ""
 
 #: templates/admin/premium.php:224
 #, php-format
@@ -192,19 +204,10 @@ msgid ""
 "On%2$s plugin, you will be able to offer the freedom to filter your shop "
 "products by brands thanks to the ajax technology."
 msgstr ""
-"Il widget YITH WooCommerce Ajax product Filter si arricchisce ulteriormente "
-"con 2 nuove tipologie di layout per il filtro dei prodotti del tuo negozio. "
-"1$sBicolor%2$s, perfetto per quegli attributi che fanno riferimento a due "
-"colori contemporaneamente (bianco/nero), per un impatto visivo immediato per "
-"l’utente finale. Scegli la tipologia %1$sTag%2$s se, invece, vuoi che i tuoi "
-"prodotti possano essere filtrati per tag prodotto. E se stai usando "
-"contemporaneamente anche YITH WooCommerce Brands Add-On, potrai offrire la "
-"possibilità di filtrare per marca i prodotti del tuo negozio grazie alla "
-"tecnologia AJAX."
 
 #: templates/admin/premium.php:234
 msgid "Price range"
-msgstr "Intervallo di prezzo"
+msgstr ""
 
 #: templates/admin/premium.php:237
 #, php-format
@@ -214,16 +217,10 @@ msgid ""
 "Price Filter, %1$syou can set unlimited price ranges:%2$s your users will be "
 "able to filter products selecting on the ranges you have set."
 msgstr ""
-"Uno dei filtri maggiormente richiesti dagli utenti all’interno di un e-"
-"commerce è la possibilità di selezionare i prodotti sulla base del prezzo. "
-"Grazie a YITH WooCommerce Filtro Ajax Elenco Prezzi %1$spotrai definire "
-"infiniti intervalli di prezzo%2$s, così da permettere ai tuoi utenti di "
-"filtrare i prodotti selezionando uno degli intervalli di prezzo da te "
-"definiti."
 
 #: templates/admin/premium.php:253
 msgid "Ajax Stock/On Sale Filters"
-msgstr "Filtri AJAX per Disponibili/In offerta"
+msgstr ""
 
 #: templates/admin/premium.php:256
 #, php-format
@@ -233,14 +230,10 @@ msgid ""
 "the available ones.%3$s %1$sAn additional feature for an e-commerce site "
 "that is worthy!%2$s"
 msgstr ""
-"Un nuovo widget per la versione premium del plugin. Con esso chiunque si "
-"trovi a navigare tra le pagine del tuo negozio potrà visualizzare solo i "
-"prodotti in offerta e/o i prodotti al momento disponibili.%3$s %1$sUna "
-"caratteristica aggiuntiva per un e-commerce che vale!%2$s"
 
 #: templates/admin/premium.php:266
 msgid "Product sorting"
-msgstr "Ordinamento prodotti"
+msgstr ""
 
 #: templates/admin/premium.php:269
 #, php-format
@@ -250,28 +243,20 @@ msgid ""
 "need to reload the page. Products can be sorted by rate, sales, price or "
 "publication date."
 msgstr ""
-"Con il nuovo widget %1$sYITH WooCommerce Disposizione Ajax%2$s, permetterai "
-"ai tuoi utenti di ordinare i prodotti in AJAX, senza la necessità di dover "
-"attendere che la pagina ricarichi. I prodotti possono essere ordinati in "
-"base alla valutazione, al numero di vendite, al prezzo o alla data di "
-"pubblicazione."
 
 #: templates/admin/premium.php:285
 msgid "Customized loader"
-msgstr "Immagine di caricamento personalizzata"
+msgstr ""
 
 #: templates/admin/premium.php:288
 msgid ""
 "From the plugin option panel, you can choose to upload a new icon for your "
 "loader: in this way, it will better meet your needs."
 msgstr ""
-"Dal pannello opzioni del plugin, potrai scegliere di caricare una nuova "
-"icona da mostrare durante il caricamento di una pagina: in questo modo, sarà "
-"ancora più adatto alle tue esigenze."
 
 #: templates/admin/premium.php:298
 msgid "WooCommerce Price Filter"
-msgstr "Filtro prezzi di WooCommerce"
+msgstr ""
 
 #: templates/admin/premium.php:301
 #, php-format
@@ -281,11 +266,6 @@ msgid ""
 "%2$s and activate the %1$sAjax mode%2$s to apply the filter immediately, "
 "without reloading the page."
 msgstr ""
-"Sfrutta le potenzialità della versione premium del plugin per modificare il "
-"comportamento predefinito del Filtro prezzi di WooCommerce. Cambia il "
-"%1$slayout del filtro%2$s e attiva la %1$smodalità AJAX%2$s così che il "
-"filtro possa essere applicato istantaneamente senza dover ricaricare la "
-"pagina."
 
 #: templates/admin/premium.php:317
 msgid "SEO"
@@ -298,15 +278,10 @@ msgid ""
 "generated by the plugin, or not: with the latter, you will be free to avoid "
 "possible penalizations that may apply to your site."
 msgstr ""
-"La gestione AJAX del plugin comporta l’aggiunta di specifiche query all’URL "
-"della pagina corrente. Scegli tu se permettere ai motori di ricerca di "
-"indicizzare gli URL generati dal plugin o meno: in tal modo sarai messo "
-"nelle condizioni di evitare eventuali penalizzazioni che potrebbero essere "
-"applicate al tuo sito."
 
 #: templates/admin/premium.php:330
 msgid " Filter by category"
-msgstr " Filtra per categoria"
+msgstr ""
 
 #: templates/admin/premium.php:333
 #, php-format
@@ -314,13 +289,10 @@ msgid ""
 "Configure the widget to let your users filter product by a %1$sselected "
 "category%2$s. Your users will be even happier to browse your shop."
 msgstr ""
-"Configura il widget per dare ai tuoi utenti la possibilità di filtrare i "
-"prodotti in base alla %1$scategoria selezionata%2$s. I tuoi utenti saranno "
-"ancora più felici di navigare all’interno del tuo negozio."
 
 #: templates/admin/premium.php:349
 msgid "FILTER ORDERING"
-msgstr "ORDINAMENTO FILTRI"
+msgstr ""
 
 #: templates/admin/premium.php:352
 msgid ""
@@ -328,14 +300,10 @@ msgid ""
 "product archieve pages: classic alphabetical order or decreasing order, "
 "based on the number of products contained in each filter."
 msgstr ""
-"Scegli l’ordinamento migliore per i filtri presenti all’interno delle tue "
-"pagine archivio prodotti: classico ordinamento alfabetico o un elenco di "
-"filtri ordinati in maniera decrescente in base al numero di prodotti "
-"contenuti in ogni filtro."
 
 #: templates/admin/premium.php:362
 msgid "Filter style"
-msgstr "Stile filtri"
+msgstr "Stile filtro"
 
 #: templates/admin/premium.php:365
 msgid ""
@@ -343,14 +311,10 @@ msgid ""
 "plugin gives you the possibility to show filters in \"checkbox\" style. "
 "Users will experience a new look of your pages while filtering products."
 msgstr ""
-"Oltre al classico stile di visualizzazione, con la versione premium del "
-"plugin puoi optare per una visualizzazione dei filtri in stile “checkbox”. "
-"Mentre filtrano i prodotti, i tuoi utenti vedranno le pagine con un nuovo "
-"aspetto."
 
 #: templates/admin/premium.php:381
 msgid "Page url"
-msgstr "URL della pagina"
+msgstr ""
 
 #: templates/admin/premium.php:384
 msgid ""
@@ -358,14 +322,10 @@ msgid ""
 "the same url or let it get automatically updated every time user applies a "
 "filter to the products list of your shop."
 msgstr ""
-"Ad ogni filtro applicato viene generato un nuovo URL per la pagina. Sta a te "
-"scegliere se mantenere lo stesso URL o far sì che si aggiorni "
-"automaticamente ogni volta che l’utente applica un filtro alla lista dei "
-"prodotti del tuo negozio."
 
 #: templates/admin/premium.php:394
 msgid "Filter by tag"
-msgstr "Filtra per tag"
+msgstr ""
 
 #: templates/admin/premium.php:397
 msgid ""
@@ -374,15 +334,10 @@ msgid ""
 "addition, you could organize your tags in a hierarchy and have appropriate "
 "tools for a better management of your products."
 msgstr ""
-"Se utilizzi i tag come un potente strumento di classificazione dei tuoi "
-"prodotti, configura un filtro ad hoc in maniera tale che anche i filtri per "
-"tag funzionino in AJAX. Inoltre, puoi anche creare una struttura gerarchica "
-"per i tuoi tag ed avere gli strumenti adatti per una migliore gestione dei "
-"tuoi prodotti."
 
 #: templates/admin/premium.php:413
 msgid "Reset"
-msgstr "Reset"
+msgstr ""
 
 #: templates/admin/premium.php:416
 msgid ""
@@ -392,12 +347,6 @@ msgid ""
 "manages this action by a specific button which reset filters and by other "
 "two which refresh the main view of categories and/or tags."
 msgstr ""
-"L’esperienza dell'utente sul sito richiede praticità ed intuito. Ecco perché "
-"è impensabile deselezionare un filtro uno per volta per tornare alla vista "
-"principale quando sono stati applicati molti filtri. Il plugin gestisce "
-"questa opzione con uno specifico pulsante per reimpostare i filtri e con "
-"altri due per ripristinare la visualizzazione principale di categorie e/o "
-"tag."
 
 #: templates/admin/premium.php:426
 msgid "Scroll to top"
@@ -419,72 +368,72 @@ msgctxt "Admin: Widget Title"
 msgid "YITH WooCommerce Ajax Product Filter"
 msgstr "YITH WooCommerce Filtro Prodotti Ajax"
 
-#: widgets/class.yith-wcan-navigation-widget.php:150
+#: widgets/class.yith-wcan-navigation-widget.php:151
 msgid "Filters:"
 msgstr "Filtri:"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:715
+#: widgets/class.yith-wcan-navigation-widget.php:842
 msgid "List"
-msgstr "Elenco"
+msgstr "Lista"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:717
+#: widgets/class.yith-wcan-navigation-widget.php:844
 msgid "Label"
 msgstr "Etichetta"
 
-#: widgets/class.yith-wcan-navigation-widget.php:718
+#: widgets/class.yith-wcan-navigation-widget.php:845
 msgid "Dropdown"
 msgstr "Menu a tendina"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:725
-#: widgets/class.yith-wcan-reset-navigation-widget.php:102
+#: widgets/class.yith-wcan-navigation-widget.php:852
+#: widgets/class.yith-wcan-reset-navigation-widget.php:114
 msgid "Title"
 msgstr "Titolo"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:731
+#: widgets/class.yith-wcan-navigation-widget.php:858
 msgid "Type:"
 msgstr "Tipo:"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:742
+#: widgets/class.yith-wcan-navigation-widget.php:869
 msgid "Query Type:"
 msgstr "Tipo Query:"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:744
+#: widgets/class.yith-wcan-navigation-widget.php:871
 msgid "AND"
 msgstr "E"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:745
+#: widgets/class.yith-wcan-navigation-widget.php:872
 msgid "OR"
 msgstr "O"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:751
+#: widgets/class.yith-wcan-navigation-widget.php:878
 msgid "Attribute:"
 msgstr "Attributo:"
 
-#: widgets/class.yith-wcan-navigation-widget.php:758
+#: widgets/class.yith-wcan-navigation-widget.php:885
 msgid "Display (default All):"
-msgstr "Visualizza (predefinito: tutti)"
+msgstr "Visualizza (default Tutti)"
 
-#: widgets/class.yith-wcan-navigation-widget.php:760
+#: widgets/class.yith-wcan-navigation-widget.php:887
 msgid "All (no hierarchical)"
 msgstr "Tutti (non gerarchico)"
 
-#: widgets/class.yith-wcan-navigation-widget.php:761
+#: widgets/class.yith-wcan-navigation-widget.php:888
 msgid "All (hierarchical)"
 msgstr "Tutti (gerarchico)"
 
-#: widgets/class.yith-wcan-navigation-widget.php:762
+#: widgets/class.yith-wcan-navigation-widget.php:889
 msgid "Only Parent"
 msgstr "Solo Principali"
 
-#: widgets/class.yith-wcan-navigation-widget.php:769
+#: widgets/class.yith-wcan-navigation-widget.php:896
 msgid "CSS custom class"
 msgstr "Classe CSS custom"
 
@@ -497,17 +446,13 @@ msgstr ""
 msgid "YITH WooCommerce Ajax Reset Filter"
 msgstr "YITH WooCommerce Filtro Ajax Reset"
 
-#: widgets/class.yith-wcan-reset-navigation-widget.php:95
+#: widgets/class.yith-wcan-reset-navigation-widget.php:107
 msgid "Reset All Filters"
 msgstr "Resetta tutti i filtri"
 
-#: widgets/class.yith-wcan-reset-navigation-widget.php:108
+#: widgets/class.yith-wcan-reset-navigation-widget.php:120
 msgid "Button Label"
 msgstr "Etichetta Pulsante"
-
-#~ msgid "Enter here the HTML tag for the scroll to top feature on mobiles"
-#~ msgstr ""
-#~ "Inserisci qui il tag HTML per la funzionalità \"Torna su\" su mobile"
 
 #~ msgid "Settings"
 #~ msgstr "Impostazioni"
@@ -518,17 +463,8 @@ msgstr "Etichetta Pulsante"
 #~ msgid "Enter here the HTML tag for the widget title"
 #~ msgstr "Inserisci qui il tag HTML per il titolo del widget"
 
-#~ msgid "Order by"
-#~ msgstr "Ordina per"
-
-#~ msgid "Sort by number of products contained or alphabetically"
-#~ msgstr "Ordina per numero di prodotti contenuti or in ordine alfabetico"
-
 #~ msgid "Number of products"
 #~ msgstr "Numero di prodotti"
-
-#~ msgid "Alphabetically"
-#~ msgstr "In ordine alfabetico"
 
 #~ msgid "Select the filter style"
 #~ msgstr "Seleziona lo stile del filtro"
@@ -613,7 +549,7 @@ msgstr "Etichetta Pulsante"
 
 #~ msgctxt "Referer to original WooCommerce Price Filter Widget"
 #~ msgid "Ajax WooCommerce Price Filter"
-#~ msgstr "Price Filter di WooCommerce in ajax"
+#~ msgstr "Filtro prezzi di WooCommerce in AJAX"
 
 #~ msgid "Use AJAX WooCommerce price filter"
 #~ msgstr "Utilizza il filtro prezzo di WooCommerce in AJAX"
@@ -623,7 +559,7 @@ msgstr "Etichetta Pulsante"
 #~ msgstr "Slider filtro prezzi WooCommerce"
 
 #~ msgid "Use WooCommerce price filter with slider"
-#~ msgstr "Utilizza il Price Filter di WooCommerce con slider"
+#~ msgstr "Utilizza il Filtro prezzi di WooCommerce con slider"
 
 #~ msgctxt "Referer to original WooCommerce Price Filter Widget"
 #~ msgid "Instant WooCommerce Price Filter slider"
@@ -636,11 +572,11 @@ msgstr "Etichetta Pulsante"
 
 #~ msgctxt "Referer to original WooCommerce Price Filter Widget"
 #~ msgid "Dropdown for WooCommerce Price Filter"
-#~ msgstr "Menu a tendina per Price Filter di WooCommerce"
+#~ msgstr "Menu a tendina per il Filtro prezzi di WooCommerce"
 
 #~ msgid "Add dropdown effect to original WooCommerce Price Filter widget"
 #~ msgstr ""
-#~ "Aggiunge l'effetto di menu a tendina all'originale Price Filter di "
+#~ "Aggiunge l'effetto di menu a tendina all'originale Filtro prezzi di "
 #~ "WooCommerce"
 
 #~ msgctxt "Referer to original WooCommerce Price Filter Widget"
@@ -845,6 +781,10 @@ msgstr "Etichetta Pulsante"
 #~ msgid "Show \"In Stock\" filter"
 #~ msgstr "Mostra filtro \"Disponibili\""
 
+#~ msgid "Enter here the HTML tag for the scroll to top feature on mobiles"
+#~ msgstr ""
+#~ "Inserisci qui il tag HTML per la funzionalità \"Torna su\" su mobile"
+
 #~ msgid "Put here the HTML tag for the widget title"
 #~ msgstr "Inserisci qui il tag HTML per il titolo del widget"
 
@@ -1030,7 +970,7 @@ msgstr "Etichetta Pulsante"
 #~ msgstr "Lista Filtri:"
 
 # @ yit
-#~ msgid "Reset all filters setted by YITH WooCommerce Ajax Navigation"
+#~ msgid "Reset all filters set by YITH WooCommerce Ajax Navigation"
 #~ msgstr "Resetta tutti i filtri settati da YITH WooCommerce Ajax Navigation"
 
 # @ yit

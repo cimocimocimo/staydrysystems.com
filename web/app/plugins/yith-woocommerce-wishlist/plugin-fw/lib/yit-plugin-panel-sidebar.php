@@ -166,6 +166,10 @@ if ( !class_exists( 'YIT_Plugin_Panel_Sidebar' ) ) {
          * @author     Leanza Francesco <leanzafrancesco@gmail.com>
          */
         public function get_remote_widgets() {
+            $load_remote_widgets = apply_filters( 'yit_panel_sidebar_load_remote_widgets', true );
+            if ( !$load_remote_widgets )
+                return array();
+
             $remote_widgets = get_transient( self::$transient_remote_widgets );
             $updated        = get_transient( self::$transient_updated_remote_widgets );
             $is_debug       = defined( 'YIT_FW_REMOTE_WIDGETS_DEBUG' ) && YIT_FW_REMOTE_WIDGETS_DEBUG;
@@ -209,11 +213,11 @@ if ( !class_exists( 'YIT_Plugin_Panel_Sidebar' ) ) {
                         if ( !isset( $xml_widget->id ) )
                             continue;
 
-                        $widget_id    = (string)$xml_widget->id;
+                        $widget_id    = (string) $xml_widget->id;
                         $widget_array = array();
                         foreach ( $enabled_args as $key ) {
                             if ( isset( $xml_widget->$key ) ) {
-                                $widget_array[ $key ] = (string)$xml_widget->$key;
+                                $widget_array[ $key ] = (string) $xml_widget->$key;
                             } else {
                                 if ( $key == 'priority' ) {
                                     $widget_array[ $key ] = $last_remote_priority;
@@ -224,7 +228,7 @@ if ( !class_exists( 'YIT_Plugin_Panel_Sidebar' ) ) {
                         $remote_widgets[ $widget_id ] = $widget_array;
                     }
 
-                    $xml_expiration = isset( $xml_data->expiration ) ? (string)$xml_data->expiration : '';
+                    $xml_expiration = isset( $xml_data->expiration ) ? (string) $xml_data->expiration : '';
                     if ( !empty( $xml_expiration ) ) {
                         $expiration = strtotime( $xml_expiration ) - strtotime( 'now' );
                         // if the XML is expired removes widgets
@@ -253,8 +257,7 @@ if ( !class_exists( 'YIT_Plugin_Panel_Sidebar' ) ) {
                     if ( $expiration < 1 ) {
                         $expiration = 1 * DAY_IN_SECONDS + $four_days_random;
                     }
-                }
-                catch ( Exception $e ) {
+                } catch ( Exception $e ) {
 
                 }
 

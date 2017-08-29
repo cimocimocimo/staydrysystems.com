@@ -92,17 +92,18 @@ class Advanced_Sidebar_Menu_List_Pages{
 	 * Used in the view
 	 *
 	 * @param int                        $parent_id - $asm->top_id
-	 * @param Advanced_Sidebar_Menu_Menu $class
+	 * @param Advanced_Sidebar_Menu_Menu $asm
 	 */
-	public function __construct( $parent_id, $class ){
+	public function __construct( $parent_id, $asm ){
 
 		$this->top_parent_id = $parent_id;
 
 		$args = array(
-			'post_type'   => $class->post_type,
-			'sort_column' => $class->order_by,
-			'exclude'     => $class->exclude,
-			'levels'      => $class->levels
+			'post_type'   => $asm->post_type,
+			'sort_column' => $asm->order_by,
+			'sort_order'  => $asm->order,
+			'exclude'     => $asm->exclude,
+			'levels'      => $asm->levels,
 		);
 
 		$this->parse_args( $args );
@@ -180,7 +181,7 @@ class Advanced_Sidebar_Menu_List_Pages{
 	 *
 	 * List the pages very similar to wp_list_pages
 	 *
-	 * @return string|void
+	 * @return string
 	 */
 	public function list_pages() {
 
@@ -192,17 +193,17 @@ class Advanced_Sidebar_Menu_List_Pages{
 
 				$this->output .= $this->list_grandchild_pages( $page->ID );
 
-			$this->output .= "</li>\n";
+			$this->output .= '</li>' . "\n";
 
 		}
 
 		$this->output = apply_filters( 'wp_list_pages', $this->output, $this->args );
 
-		if( $this->args[ 'echo' ] ){
-			echo $this->output;
-		} else {
+		if( !$this->args[ 'echo' ] ){
 			return $this->output;
 		}
+
+		echo $this->output;
 	}
 
 
@@ -311,5 +312,17 @@ class Advanced_Sidebar_Menu_List_Pages{
 		return $return;
 	}
 
+
+	/**
+	 *
+	 * @param \Advanced_Sidebar_Menu_Menu $menu
+	 *
+	 * @static
+	 *
+	 * @return \Advanced_Sidebar_Menu_List_Pages
+	 */
+	public static function factory( Advanced_Sidebar_Menu_Menu $menu ){
+		return new self( $menu->top_id, $menu );
+	}
 
 }

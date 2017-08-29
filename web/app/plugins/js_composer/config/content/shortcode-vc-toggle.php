@@ -82,9 +82,6 @@ $params = array_merge( array(
 		'heading' => __( 'Element ID', 'js_composer' ),
 		'param_name' => 'el_id',
 		'description' => sprintf( __( 'Enter optional ID. Make sure it is unique, and it is valid as w3c specification: %s (Must not have spaces)', 'js_composer' ), '<a target="_blank" href="http://www.w3schools.com/tags/att_global_id.asp">' . __( 'link', 'js_composer' ) . '</a>' ),
-		'settings' => array(
-			'auto_generate' => true,
-		),
 	),
 	array(
 		'type' => 'textfield',

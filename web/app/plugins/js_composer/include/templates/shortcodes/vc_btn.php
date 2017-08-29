@@ -15,6 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @var $link
  * @var $title
  * @var $button_block
+ * @var $el_id
  * @var $el_class
  * @var $outline_custom_color
  * @var $outline_custom_hover_background
@@ -46,26 +47,6 @@ $styles = array();
 $icon_wrapper = false;
 $icon_html = false;
 $attributes = array();
-
-$colors = array(
-	'blue' => '#5472d2',
-	'turquoise' => '#00c1cf',
-	'pink' => '#fe6c61',
-	'violet' => '#8d6dc4',
-	'peacoc' => '#4cadc9',
-	'chino' => '#cec2ab',
-	'mulled-wine' => '#50485b',
-	'vista-blue' => '#75d69c',
-	'orange' => '#f7be68',
-	'sky' => '#5aa1e3',
-	'green' => '#6dab3c',
-	'juicy-pink' => '#f4524d',
-	'sandy-brown' => '#f79468',
-	'purple' => '#b97ebb',
-	'black' => '#2a2a2a',
-	'grey' => '#ebebeb',
-	'white' => '#ffffff',
-);
 
 $atts = vc_map_get_attributes( $this->getShortcode(), $atts );
 extract( $atts );
@@ -177,8 +158,8 @@ if ( 'custom' === $style ) {
 	}
 } elseif ( 'gradient' === $style || 'gradient-custom' === $style ) {
 
-	$gradient_color_1 = $colors[ $gradient_color_1 ];
-	$gradient_color_2 = $colors[ $gradient_color_2 ];
+	$gradient_color_1 = vc_convert_vc_color( $gradient_color_1 );
+	$gradient_color_2 = vc_convert_vc_color( $gradient_color_2 );
 
 	$button_text_color = '#fff';
 	if ( 'gradient-custom' === $style ) {
@@ -243,9 +224,12 @@ if ( ! empty( $custom_onclick ) && $custom_onclick_code ) {
 }
 
 $attributes = implode( ' ', $attributes );
-
+$wrapper_attributes = array();
+if ( ! empty( $el_id ) ) {
+	$wrapper_attributes[] = 'id="' . esc_attr( $el_id ) . '"';
+}
 ?>
-<div class="<?php echo trim( esc_attr( $css_class ) ) ?>">
+<div class="<?php echo trim( esc_attr( $css_class ) ) ?>" <?php echo implode( ' ', $wrapper_attributes ); ?>>
 	<?php
 	if ( $use_link ) {
 		echo '<a ' . $attributes . '>' . $button_html . '</a>';

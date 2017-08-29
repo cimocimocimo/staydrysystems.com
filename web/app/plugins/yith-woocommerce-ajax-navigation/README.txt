@@ -3,8 +3,8 @@
 Contributors: yithemes
 Tags: woocommerce ajax product filter download, woocommerce, widget, ajax, ajax filtered nav, ajax navigation, ajax filtered navigation, woocommerce layered navigation, woocommerce layered nav, product filter, product filters, ajax product filter, woocommerce ajax product filter, woocommerce filters, sidebar filter, sidebar ajax filter, ajax price filter, price filter, product sorting, woocommerce filter, taxonomy filter, attribute filter, attributes filter, woocommerce product sort, ajax sort, woocommerce ajax product filter, advanced product filters, ajax product filters, filters, woocommerce ajax product filters, woocommerce product filters, woocommerce product filters, category filter, attribute filters, woocommerce products filter, woocommerce price filter, yit, yith, yithemes
 Requires at least: 4.0
-Tested up to: 4.7
-Stable tag: 3.1.2
+Tested up to: 4.8
+Stable tag: 3.4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -143,7 +143,7 @@ You can get more features with the premium version of YITH WooCommerce Ajax Prod
 = How can I try the full-featured plugin? =
 
 If you want to see a demonstration version of the premium plugin, you can see it installed on two different WooCommerce sites, either in [this page]( http://plugins.yithemes.com/yith-woocommerce-ajax-product-filter/?preview) or in [this page](http://preview.yithemes.com/bazar/shop/). Browse it and try all options available so that you can see how your plugin looks like.
- 
+
 == Screenshots ==
 
 1. Admin - Appearance -> Widget: WooCommerce Filter Widget List Style
@@ -158,6 +158,63 @@ If you want to see a demonstration version of the premium plugin, you can see it
 10. Admin: YIT Plugins -> Ajax Product Filter -> Custom Style
 
 == Changelog ==
+
+= 3.4.3 - Released: 04 Jul, 2017 =
+
+* Fix: No filtered results with Page Builder by SiteOrigin
+* Fix: Warning with salient theme
+* Fix: Reset filter use term_taxonomy_id instead of term_id
+
+= 3.4.2 - Released: 05 Jun, 2017 =
+
+* New: Support to Basel theme
+* Fix: Unable to filter in vendor page
+
+= 3.4.1 Released: 18 May, 2017 =
+
+* Fix: Issue with reset button in product_cat page
+
+= 3.4.0 - Released: 08 May, 2017 =
+
+* New: Sorting option for free version
+* Fix: Issue with current filter in product tag page
+* Fix: Unable to filter with qTranslateX and Socute theme
+* Fix: Unable to filter with qTranslateX and YITH theme FW 1.0
+* Fix: Issue with reset button in product_tag page
+
+
+= 3.3.2 - Released: 19 April, 2017 =
+
+* New: Support for Salient theme
+* New: Support for WooCommerce Grid/List view
+* Tweak: Create dropdown style dynamically
+* Fix: Filter by label and filter by dropdown lost current filter
+* Fix: Reset button doesn't works fine on product category page
+* Fix: Support to visibility taxonomy in WooCommerce 3.0.x
+
+= 3.3.1 - Released: 20 MArch, 2017 =
+
+* Fix: Filter by color lost current filter
+
+= 3.3.0 - Released: 24 February, 2017 =
+
+* New: Support to WooCoomerce 2.7-beta3
+* Fix: missing argument 2 in yith_wcan_exclude_terms and yith_wcan_include_terms hook
+
+= 3.2.0 - Released: 20 February, 2017 =
+
+* Add: Back/Next browser button integration
+* Tweak: Filter uri management
+* Tweak: Add filter to force widget dropdown reinit
+* Tweak: YITH Brands integration
+* Fix: Unable to hide product count for attributes
+* Fix: Lost brands on 2nd filter step
+* Fix: Current filter disappears in label, dropdown and color style
+* Fix: Filter by attribute (all styles) lost current category in product category page
+* Fix: Missing queried object in filter type list
+* Fix: Conflict in search page
+* Dev: yith_wcan_unfiltered_product_ids hook
+
 
 = 3.1.2 - Released: 17 January, 2017 =
 

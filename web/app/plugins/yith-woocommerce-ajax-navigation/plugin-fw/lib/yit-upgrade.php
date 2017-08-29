@@ -33,7 +33,7 @@ if ( ! class_exists( 'YIT_Upgrade' ) ) {
 		/**
 		 * @var string api server url
 		 */
-		protected $_package_url = 'http://www.yithemes.com';
+		protected $_package_url = 'https://yithemes.com';
 
 		/**
 		 * @var array The registered plugins

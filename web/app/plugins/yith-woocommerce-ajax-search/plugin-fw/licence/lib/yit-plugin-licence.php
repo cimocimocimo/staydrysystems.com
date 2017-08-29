@@ -71,9 +71,9 @@ if ( !class_exists( 'YIT_Plugin_Licence' ) ) {
             );
 
             add_action( 'admin_menu', array( $this, 'add_submenu_page' ), 99 );
-            add_action( "wp_ajax_activate-{$this->_product_type}", array( $this, 'activate' ) );
-            add_action( "wp_ajax_deactivate-{$this->_product_type}", array( $this, 'deactivate' ) );
-            add_action( "wp_ajax_update_licence_information-{$this->_product_type}", array( $this, 'update_licence_information' ) );
+            add_action( "wp_ajax_yith_activate-{$this->_product_type}", array( $this, 'activate' ) );
+            add_action( "wp_ajax_yith_deactivate-{$this->_product_type}", array( $this, 'deactivate' ) );
+            add_action( "wp_ajax_yith_update_licence_information-{$this->_product_type}", array( $this, 'update_licence_information' ) );
             add_action( 'yit_licence_after_check', array( $this, 'licence_after_check' ) );
         }
 

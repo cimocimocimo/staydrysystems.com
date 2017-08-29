@@ -38,7 +38,7 @@ $name = $this->get_name_field( $option['id'] );
         <?php
         $file = $db_value;
         if ( preg_match( '/(jpg|jpeg|png|gif|ico)$/', $file ) ) {
-            echo "<img src=\"" . $this->settings['plugin-url'] . "/plugin-fw/assets/images/sleep.png\" data-src=\"$file\" />";
+            echo isset( $this->settings['plugin-url'] ) ? "<img src=\"" . $this->settings['plugin-url'] . "/plugin-fw/assets/images/sleep.png\" data-src=\"$file\" />" : '';
         }
         ?>
     </div>

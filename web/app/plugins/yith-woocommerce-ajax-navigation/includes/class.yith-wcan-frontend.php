@@ -45,12 +45,15 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
          */
         public function __construct( $version ) {
 
-            $theme_support = apply_filters( 'yith_wcan_theme_use_wp_the_query_object', array( 
-                'porto' 
+            $theme_support = apply_filters( 'yith_wcan_theme_use_wp_the_query_object', array(
+                    'porto'
                 ) 
             );
-            
-            if( in_array( strtolower( wp_get_theme()->name ), $theme_support ) || class_exists( 'QTX_Translator' ) ){
+
+            $current_theme = strtolower( wp_get_theme()->Template );
+            $is_qTranlateX_enabled = class_exists( 'QTX_Translator' );
+
+            if( in_array( $current_theme, $theme_support ) || $is_qTranlateX_enabled ){
                 add_filter( 'yith_wcan_use_wp_the_query_object', '__return_true' );
             }
 
@@ -117,6 +120,18 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 
                 $filtered_posts   = array();
                 $queried_post_ids = array();
+
+                $problematic_theme = array(
+                    'basel'
+                );
+
+                $is_qTranslateX_and_yit_core_1_0_0 = class_exists( 'QTX_Translator' ) && defined('YIT_CORE_VERSION') && '1.0.0' == YIT_CORE_VERSION;
+                $is_problematic_theme = in_array( wp_get_theme()->get_template(), $problematic_theme );
+
+                if( $is_qTranslateX_and_yit_core_1_0_0 || $is_problematic_theme || class_exists( 'SiteOrigin_Panels' ) ){
+                    add_filter( 'yith_wcan_skip_layered_nav_query', '__return_true' );
+                }
+
                 $query_filtered_posts = $this->layered_nav_query();
 
                 foreach ( $posts as $post ) {
@@ -170,7 +185,7 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
                     );
                 }
 
-                $this->unfiltered_product_ids = get_posts( $unfiltered_args );
+                $this->unfiltered_product_ids = apply_filters( 'yith_wcan_unfiltered_product_ids', get_posts( $unfiltered_args ), $query, $current_wp_query );
                 $this->filtered_product_ids   = $queried_post_ids;
 
                 // Also store filtered posts ids...
@@ -244,8 +259,11 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
          * @return array
          */
         public function layered_nav_query( $filtered_posts  = array() ) {
-            $_chosen_attributes = YITH_WCAN()->get_layered_nav_chosen_attributes();
+            if( apply_filters( 'yith_wcan_skip_layered_nav_query', false ) ){
+                return $filtered_posts;
+            }
 
+            $_chosen_attributes = YITH_WCAN()->get_layered_nav_chosen_attributes();
             $is_product_taxonomy = false;
             if( is_product_taxonomy() ){
                 $is_product_taxonomy = array(
@@ -265,7 +283,7 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
                     'and' => false,
                     'or'  => false
                 );
-                
+
                 foreach ( $_chosen_attributes as $attribute => $data ) {
                     $matched_products_from_attribute = array();
                     $filtered = false;
@@ -277,8 +295,6 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
                                 'post_type' 	=> 'product',
                                 'numberposts' 	=> -1,
                                 'post_status' 	=> 'publish',
-                                'meta_key'      => '_visibility',
-                                'meta_value'    => 'visible',
                                 'fields' 		=> 'ids',
                                 'no_found_rows' => true,
                                 'suppress_filters'       => true,
@@ -291,11 +307,12 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
                                 )
                             );
 
+                            $args = yit_product_visibility_meta( $args );
 
                             if( $is_product_taxonomy ){
                                 $args['tax_query'][] = $is_product_taxonomy;
                             }
-                            
+
                             //TODO: Increase performance for get_posts()
                             $post_ids = apply_filters( 'woocommerce_layered_nav_query_post_ids', get_posts( $args ), $args, $attribute, $value );
 
@@ -351,18 +368,17 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
                     'post_type'        => 'product',
                     'numberposts'      => - 1,
                     'post_status'      => 'publish',
-                    'meta_key'         => '_visibility',
-                    'meta_value'       => 'visible',
                     'fields'           => 'ids',
                     'no_found_rows'    => true,
                     'suppress_filters' => true,
                     'tax_query'        => array()
                 );
 
-
                 if( $is_product_taxonomy ){
                     $args['tax_query'][] = $is_product_taxonomy;
                 }
+
+                $args = yit_product_visibility_meta( $args );
 
                 $queried_object = is_object( get_queried_object() ) ? get_queried_object() : false;
 

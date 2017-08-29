@@ -1,10 +1,9 @@
 === WP Retina 2x ===
 Contributors: TigrouMeow
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=H2S7S3G4XMJ6J
 Tags: retina, images, image, responsive, lazysizes, lazy, attachment, media, files, iphone, ipad, high-dpi
 Requires at least: 3.5
-Tested up to: 4.7.1
-Stable tag: 4.7.7
+Tested up to: 4.7
+Stable tag: 5.0.5
 
 Make your website look beautiful and crisp on modern displays by creating and displaying retina images. WP 4.4+ is also supported and enhanced.
 
@@ -34,9 +33,21 @@ More information and tutorial available one http://meowapps.com/wp-retina-2x/.
 
 == Changelog ==
 
+= 5.0.5 =
+* Fix: There was a issue with the .htaccess rewriting (Class ‘Meow_Admin’ not found).
+* Update: Core was totally re-organized and cleaned. Ready for nice updates.
+* Update: LazyLoading from version 2.0 to 3.0.
+* Info: There will be an important warning showing up during this update. It is an important annoucement.
+
+= 4.8.0 =
+* Add: Retina Image Quality for JPG (between 0 and 100). I know this little setting was really wanted :)
+* Fix: Disabled sizes weren't really disabled in the UI.
+* Fix: Notices about Ignore appearing in other screens.
+* Add: Handles incompatibility with JetPack's Photon.
+* Info: If you are using Lightroom, please have a look at my plugin for synchronizing your Lightroom to WordPress: http://meowapps.com/wplr-sync/. And if youi love my Retina plugin, please write a little review here: https://wordpress.org/support/plugin/wp-retina-2x/reviews/?rate=5#new-post. Thank you :)
+
 = 4.7.7 =
 * Add: The Generate button (and the bulk Generate) will now also Re-Generate the thumbnails as well (like the Renerate Thumbnails plugin). If you are interested in a option to disable this behavior, please say so in the WP forums.
-* Info: If you are using Lightroom, please have a look at my plugin for synchronizing your Lightroom to WordPress, it has been live for more than two years and it works perfectly: http://meowapps.com/wplr-sync/. It's my best plugin.
 
 = 4.7.6 =
 * Fix: Issue with Pro being non-Pro outside of WP Admin.

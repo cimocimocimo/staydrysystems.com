@@ -10,14 +10,15 @@
  */
 class Advanced_Sidebar_Menu_Menu {
 
-	var $instance; //The widget instance
-	var $top_id; //Either the top cat or page
-	var $exclude = array();
-	var $ancestors; //For the category ancestors
-	var $count = 1; //Count for grandchild levels
-	var $order_by;
-	var $taxonomy; //For filters to override the taxonomy
-	var $current_term; //Current category or taxonomy
+	public $instance; //The widget instance
+	public $top_id; //Either the top cat or page
+	public $exclude = array();
+	public $ancestors; //For the category ancestors
+	public $count = 1; //Count for grandchild levels
+	public $order_by = null;
+	public $order = 'ASC';
+	public $taxonomy; //For filters to override the taxonomy
+	public $current_term; //Current category or taxonomy
 
 	/**
 	 * args
@@ -36,6 +37,16 @@ class Advanced_Sidebar_Menu_Menu {
 	public $post_type = 'page';
 
 	public $levels = 100;
+
+
+	/**
+	 * The instance arguments from the current widget
+	 *
+	 * @return []
+	 */
+	public function get_widget_instance(){
+		return $this->instance;
+	}
 
 
 	/**
@@ -67,6 +78,8 @@ class Advanced_Sidebar_Menu_Menu {
 	 * @since 4.1.3
 	 *
 	 * @param string $name - name of checkbox
+	 *
+	 * @return bool
 	 */
 	function checked( $name ) {
 		if( isset( $this->instance[ $name ] ) && $this->instance[ $name ] == 'checked' ){
@@ -74,21 +87,6 @@ class Advanced_Sidebar_Menu_Menu {
 		}
 
 		return false;
-
-	}
-
-
-	/**
-	 * Used by a uasort to sort taxonomy arrays by term order
-	 *
-	 * @since 4.3.0
-	 */
-	function sortTerms( $a, $b ) {
-		if( !isset( $a->{$this->order_by} ) || !isset( $b->{$this->order_by} ) ){
-			return 0;
-		}
-
-		return $a->{$this->order_by} > $b->{$this->order_by};
 
 	}
 
@@ -124,7 +122,7 @@ class Advanced_Sidebar_Menu_Menu {
 	/**
 	 * Removes the closing </li> tag from a list item to allow for child menus inside of it
 	 *
-	 * @param string $item - an <li></li> item
+	 * @param string|bool $item - an <li></li> item
 	 *
 	 * @return string|bool
 	 * @since 4.7.13
@@ -135,6 +133,28 @@ class Advanced_Sidebar_Menu_Menu {
 		}
 
 		return substr( trim( $item ), 0, -5 );
+	}
+
+
+	/**
+	 * If a category has children add the has_children class
+	 *
+	 * @param [] $classes
+	 * @param \WP_Term $category
+	 *
+	 * @return array
+	 */
+	public function add_has_children_category_class( $classes, $category ) {
+		$children = get_terms( $category->taxonomy, array(
+			'parent'     => $category->term_id,
+			'hide_empty' => false,
+			'number'     => 1,
+		) );
+		if( !empty( $children ) ){
+			$classes[] = 'has_children';
+		}
+
+		return $classes;
 	}
 
 
@@ -175,6 +195,10 @@ class Advanced_Sidebar_Menu_Menu {
 			$classes[ ] = 'current_page_parent';
 		}
 
+		if( $this->has_children( $this_menu_item->ID ) ){
+			$classes[] = 'has_children';
+		}
+
 		return $classes;
 	}
 
@@ -185,7 +209,7 @@ class Advanced_Sidebar_Menu_Menu {
 	 *
 	 * @param \WP_Term $cat the cat object
 	 *
-	 * @since 6.13.13
+	 * @return bool
 	 */
 	function first_level_category( $cat ) {
 
@@ -205,7 +229,7 @@ class Advanced_Sidebar_Menu_Menu {
 	 *
 	 * @param \WP_Term $cat the cat
 	 *
-	 * @since 6.13.13
+	 * @return bool
 	 */
 	function second_level_cat( $cat ) {
 
@@ -303,5 +327,26 @@ class Advanced_Sidebar_Menu_Menu {
 		}
 	}
 
-} //End class
+	/*** static ***********/
+	/**
+	 * current
+	 *
+	 * @static
+	 * @var Advanced_Sidebar_Menu_Menu
+	 */
+	private static $current;
 
+
+	public static function factory( array $instance, array $args ){
+		self::$current = new self();
+		self::$current->instance = $instance;
+		self::$current->args = $args;
+
+		return self::$current;
+	}
+
+
+	public static function get_current(){
+		return self::$current;
+	}
+}

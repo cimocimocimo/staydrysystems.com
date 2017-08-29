@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php endif ?>
 <?php endif ?>
 
-<div class="vc_row-fluid vc_column">
+<div class="vc_row-fluid vc_column vc_google_fonts_form_field-preview-wrapper">
 	<div class="wpb_element_label"><?php _e( 'Google Fonts preview', 'js_composer' ); ?>:</div>
 	<div class="vc_google_fonts_form_field-preview-container">
 		<span><?php _e( 'Grumpy wizards make toxic brew for the evil Queen and Jack.', 'js_composer' ); ?></span>

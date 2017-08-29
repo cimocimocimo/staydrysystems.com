@@ -42,6 +42,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
 
         function widget( $args, $instance ) {
             $_chosen_attributes = YITH_WCAN()->get_layered_nav_chosen_attributes();
+            $queried_object     = get_queried_object();
 
             extract( $args );
             $_attributes_array = yit_wcan_get_product_taxonomy();
@@ -111,7 +112,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
 
                 if ( in_array( $display_type, apply_filters( 'yith_wcan_display_type_list', array( 'list' ) ) ) ) {
 
-                    $ancestors = yith_wcan_wp_get_terms(
+                                     $ancestors = yith_wcan_wp_get_terms(
                         array(
                             'taxonomy'      => $taxonomy,
                             'parent'        => 0,
@@ -126,7 +127,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                             usort( $ancestors, 'yit_terms_sort' );
                         }
 
-                        else{
+                        elseif( 'alphabetical' == yith_wcan_get_option( 'yith_wcan_ajax_shop_terms_order', 'alphabetical' ) ){
                             usort( $ancestors, 'yit_alphabetical_terms_sort' );
                         }
 
@@ -161,7 +162,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                     foreach ( $terms as $term ) {
 
                         // Get count based on current view - uses transients
-                        $transient_name = 'wc_ln_count_' . md5( sanitize_key( $taxonomy ) . sanitize_key( $term->term_id ) );
+                        //$transient_name = 'wc_ln_count_' . md5( sanitize_key( $taxonomy ) . sanitize_key( $term->term_id ) );
 
                         //if ( false === ( $_products_in_term = get_transient( $transient_name ) ) ) {
 
@@ -178,11 +179,11 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                             $count = sizeof( array_intersect( $_products_in_term, YITH_WCAN()->frontend->layered_nav_product_ids ) );
 
                             // skip the term for the current archive
-                            if ( $current_term == $term->$filter_term_field ) {
-                                continue;
-                            }
+//                            if ( $current_term == $term->$filter_term_field ) {
+//                                continue;
+//                            }
 
-                            if ( $count > 0 && $current_term !== $term->$filter_term_field ) {
+                            if ( $count > 0 ) {
                                 $this->found = true;
                             }
 
@@ -195,9 +196,9 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                         else {
 
                             // skip the term for the current archive
-                            if ( $current_term == $term->$filter_term_field ) {
-                                continue;
-                            }
+//                            if ( $current_term == $term->$filter_term_field ) {
+//                                continue;
+//                            }
 
                             $count = sizeof( array_intersect( $_products_in_term, YITH_WCAN()->frontend->unfiltered_product_ids ) );
 
@@ -229,7 +230,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                                 if ( $name !== $taxonomy ) {
 
                                     // Exclude query arg for current term archive term
-                                    while ( $in_array_function( $current_term, $data['terms'] ) ) {
+                                    while ( $in_array_function( $term->slug, $data['terms'] ) ) {
                                         $key = array_search( $current_term, $data );
                                         unset( $data['terms'][$key] );
                                     }
@@ -261,11 +262,19 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                             $link = add_query_arg( 'product_tag', urlencode( $_GET['product_tag'] ), $link );
                         }
 
+                        elseif( is_product_tag() && $queried_object ){
+                            $link = add_query_arg( array( 'product_tag' => $queried_object->slug ), $link );
+                        }
+
                         if ( isset( $_GET[ $this->brand_taxonomy ] ) ) {
-                            $brands = get_term_by( 'name', $_GET[ $this->brand_taxonomy ], $this->brand_taxonomy );
+                            $brands = get_term_by( 'slug', $_GET[ $this->brand_taxonomy ], $this->brand_taxonomy );
                             if( $brands instanceof WP_Term && $brands->term_id != $term->term_id ){
                                 $link = add_query_arg( $this->brand_taxonomy, urlencode( $brands->slug ), $link );
                             }
+                        }
+
+                        elseif( is_tax( $this->brand_taxonomy ) && $queried_object ) {
+                            $link = add_query_arg( array( $this->brand_taxonomy => $queried_object->slug ), $link );
                         }
 
                         if( isset( $_GET['product_cat'] ) ){
@@ -276,6 +285,43 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                                 implode( apply_filters( 'yith_wcan_categories_filter_operator', $categories_filter_operator, $display_type ), $_chosen_categories ),
                                 $link
                             );
+                        }
+
+                        elseif( is_product_category() && $queried_object ){
+                            //Removed @JoseCostaRos
+                            $link = add_query_arg( array( 'product_cat' => $queried_object->slug ), $link );
+                        }
+
+                        if( is_product_taxonomy() && ! yit_is_filtered_uri() && $term->term_id != $queried_object->term_id ){
+
+                            $link = add_query_arg(
+                                array(
+                                    'source_id'                 => $queried_object->term_id,
+                                    'source_tax'                => $queried_object->taxonomy,
+                                    $queried_object->taxonomy   => $queried_object->slug
+                                ), $link );
+                        }
+
+                        if ( isset( $_GET['source_id'] ) && isset( $_GET['source_tax'] ) ) {
+                            $add_source_id = true;
+                            if( $term->term_id == $queried_object->term_id ){
+                                $parse = parse_url( $link );
+                                if( empty( $parse['query'] ) ){
+                                    $add_source_id = false;
+                                }
+                            }
+
+                            if( $add_source_id ) {
+                                $args = array( 'source_id' => $_GET['source_id'], 'source_tax' => $_GET['source_tax'] );
+                                if( isset( $_GET[ $queried_object->taxonomy ] ) ){
+                                    $args[ $queried_object->taxonomy ] = $_GET[ $queried_object->taxonomy ];
+                                }
+                                $link = add_query_arg( $args, $link );
+                            }
+                        }
+
+                        if( isset( $_GET['yith_shop_vendor'] ) ){
+                            $link = add_query_arg( array( 'yith_shop_vendor' => $_GET['yith_shop_vendor'] ), $link );
                         }
 
                         // Current Filter = this widget
@@ -352,13 +398,12 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                         if ( $query_type == 'and' ) {
 
                             $count = sizeof( array_intersect( $_products_in_term, YITH_WCAN()->frontend->layered_nav_product_ids ) );
-
                             // skip the term for the current archive
-                            if ( $current_term == $term->$filter_term_field ) {
-                                continue;
-                            }
+//                            if ( $current_term == $term->$filter_term_field ) {
+//                                continue;
+//                            }
 
-                            if ( $count > 0 && $current_term !== $term->$filter_term_field ) {
+                            if ( $count > 0 ) {
                                 $this->found = true;
                             }
 
@@ -371,9 +416,9 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                         else {
 
                             // skip the term for the current archive
-                            if ( $current_term == $term->$filter_term_field ) {
-                                continue;
-                            }
+//                            if ( $current_term == $term->$filter_term_field ) {
+//                                continue;
+//                            }
 
                             $count = sizeof( array_intersect( $_products_in_term, YITH_WCAN()->frontend->unfiltered_product_ids ) );
 
@@ -405,7 +450,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                                 if ( $name !== $taxonomy ) {
 
                                     // Exclude query arg for current term archive term
-                                    while ( $in_array_function( $current_term, $data['terms'] ) ) {
+                                    while ( $in_array_function( $term->slug, $data['terms'] ) ) {
                                         $key = array_search( $current_term, $data );
                                         unset( $data['terms'][$key] );
                                     }
@@ -437,11 +482,19 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                             $link = add_query_arg( 'product_tag', urlencode( $_GET['product_tag'] ), $link );
                         }
 
+                        elseif( is_product_tag() && $queried_object ){
+                            $link = add_query_arg( array( 'product_tag' => $queried_object->slug ), $link );
+                        }
+
                         if ( isset( $_GET[ $this->brand_taxonomy ] ) ) {
-                            $brands = get_term_by( 'name', $_GET[ $this->brand_taxonomy ], $this->brand_taxonomy );
+                            $brands = get_term_by( 'slug', $_GET[ $this->brand_taxonomy ], $this->brand_taxonomy );
                             if( $brands instanceof WP_Term && $brands->term_id != $term->term_id ){
                                 $link = add_query_arg( $this->brand_taxonomy, urlencode( $brands->slug ), $link );
                             }
+                        }
+
+                        elseif( is_tax( $this->brand_taxonomy ) && $queried_object ) {
+                            $link = add_query_arg( array( $this->brand_taxonomy => $queried_object->slug ), $link );
                         }
 
                         if( isset( $_GET['product_cat'] ) ){
@@ -452,6 +505,39 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                                 implode( apply_filters( 'yith_wcan_categories_filter_operator', $categories_filter_operator, $display_type ), $_chosen_categories ),
                                 $link
                             );
+                        }
+
+                        elseif( is_product_category() && $queried_object ){
+                            //Removed @JoseCostaRos
+                            $link = add_query_arg( array( 'product_cat' => $queried_object->slug ), $link );
+                        }
+
+                        if( is_product_taxonomy() && ! yit_is_filtered_uri() && $term->term_id != $queried_object->term_id ){
+                            $link = add_query_arg(
+                                array(
+                                    'source_id'                 => $queried_object->term_id,
+                                    'source_tax'                => $queried_object->taxonomy,
+                                    $queried_object->taxonomy   => $queried_object->slug
+                                ), $link );
+                        }
+
+                        if ( isset( $_GET['source_id'] ) && isset( $_GET['source_tax'] ) ) {
+                            $add_source_id = true;
+                            if( $term->term_id == $queried_object->term_id ){
+                                $parse = parse_url( $link );
+                                if( empty( $parse['query'] ) ){
+                                    $add_source_id = false;
+                                }
+                            }
+
+                            if( $add_source_id ) {
+                                $args = array( 'source_id' => $_GET['source_id'], 'source_tax' => $_GET['source_tax'] );
+                                $link = add_query_arg( $args, $link );
+                            }
+                        }
+
+                        if( isset( $_GET['yith_shop_vendor'] ) ){
+                            $link = add_query_arg( array( 'yith_shop_vendor' => $_GET['yith_shop_vendor'] ), $link );
                         }
 
                         // Current Filter = this widget
@@ -489,7 +575,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                         $term_id = yit_wcan_localize_terms( $term->term_id, $taxonomy );
 
                         if ( ! empty( $instance['colors'][$term_id] ) ) {
-                            $li_style = apply_filters( "{$args['widget_id']}-li_style", 'background-color:' . $instance['colors'][$term_id] . ';', $instance );
+                            $li_style = apply_filters( "{$this->id}-li_style", 'background-color:' . $instance['colors'][$term_id] . ';', $instance );
 
                             echo '<li ' . $class . '>';
 
@@ -511,7 +597,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                     foreach ( $terms as $term ) {
 
                         // Get count based on current view - uses transients
-                        $transient_name = 'wc_ln_count_' . md5( sanitize_key( $taxonomy ) . sanitize_key( $term->term_id ) );
+//                        $transient_name = 'wc_ln_count_' . md5( sanitize_key( $taxonomy ) . sanitize_key( $term->term_id ) );
 
                         //if ( false === ( $_products_in_term = get_transient( $transient_name ) ) ) {
 
@@ -528,11 +614,11 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                             $count = sizeof( array_intersect( $_products_in_term, YITH_WCAN()->frontend->layered_nav_product_ids ) );
 
                             // skip the term for the current archive
-                            if ( $current_term == $term->$filter_term_field ) {
-                                continue;
-                            }
+//                            if ( $current_term == $term->$filter_term_field ) {
+//                                continue;
+//                            }
 
-                            if ( $count > 0 && $current_term !== $term->$filter_term_field ) {
+                            if ( $count > 0 ) {
                                 $this->found = true;
                             }
 
@@ -545,9 +631,9 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                         else {
 
                             // skip the term for the current archive
-                            if ( $current_term == $term->$filter_term_field ) {
-                                continue;
-                            }
+//                            if ( $current_term == $term->$filter_term_field ) {
+//                                continue;
+//                            }
 
                             $count = sizeof( array_intersect( $_products_in_term, YITH_WCAN()->frontend->unfiltered_product_ids ) );
 
@@ -579,7 +665,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                                 if ( $name !== $taxonomy ) {
 
                                     // Exclude query arg for current term archive term
-                                    while ( $in_array_function( $current_term, $data['terms'] ) ) {
+                                    while ( $in_array_function( $term->slug, $data['terms'] ) ) {
                                         $key = array_search( $current_term, $data );
                                         unset( $data['terms'][$key] );
                                     }
@@ -611,11 +697,19 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                             $link = add_query_arg( 'product_tag', urlencode( $_GET['product_tag'] ), $link );
                         }
 
+                        elseif( is_product_tag() && $queried_object ){
+                            $link = add_query_arg( array( 'product_tag' => $queried_object->slug ), $link );
+                        }
+
                         if ( isset( $_GET[ $this->brand_taxonomy ] ) ) {
-                            $brands = get_term_by( 'name', $_GET[ $this->brand_taxonomy ], $this->brand_taxonomy );
+                            $brands = get_term_by( 'slug', $_GET[ $this->brand_taxonomy ], $this->brand_taxonomy );
                             if( $brands instanceof WP_Term && $brands->term_id != $term->term_id ){
                                 $link = add_query_arg( $this->brand_taxonomy, urlencode( $brands->slug ), $link );
                             }
+                        }
+
+                        elseif( is_tax( $this->brand_taxonomy ) && $queried_object ) {
+                            $link = add_query_arg( array( $this->brand_taxonomy => $queried_object->slug ), $link );
                         }
 
                         if( isset( $_GET['product_cat'] ) ){
@@ -626,6 +720,39 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                                 implode( apply_filters( 'yith_wcan_categories_filter_operator', $categories_filter_operator, $display_type ), $_chosen_categories ),
                                 $link
                             );
+                        }
+
+                        elseif( is_product_category() && $queried_object ){
+                            //Removed @JoseCostaRos
+                            $link = add_query_arg( array( 'product_cat' => $queried_object->slug ), $link );
+                        }
+
+                        if( is_product_taxonomy() && ! yit_is_filtered_uri() && $term->term_id != $queried_object->term_id ){
+                            $link = add_query_arg(
+                                array(
+                                    'source_id'                 => $queried_object->term_id,
+                                    'source_tax'                => $queried_object->taxonomy,
+                                    $queried_object->taxonomy   => $queried_object->slug
+                                ), $link );
+                        }
+
+                        if ( isset( $_GET['source_id'] ) && isset( $_GET['source_tax'] ) ) {
+                            $add_source_id = true;
+                            if( $term->term_id == $queried_object->term_id ){
+                                $parse = parse_url( $link );
+                                if( empty( $parse['query'] ) ){
+                                    $add_source_id = false;
+                                }
+                            }
+
+                            if( $add_source_id ) {
+                                $args = array( 'source_id' => $_GET['source_id'], 'source_tax' => $_GET['source_tax'] );
+                                $link = add_query_arg( $args, $link );
+                            }
+                        }
+
+                        if( isset( $_GET['yith_shop_vendor'] ) ){
+                            $link = add_query_arg( array( 'yith_shop_vendor' => $_GET['yith_shop_vendor'] ), $link );
                         }
 
                         // Current Filter = this widget
@@ -871,6 +998,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
             $_chosen_attributes = YITH_WCAN()->get_layered_nav_chosen_attributes();
             $in_array_function  = apply_filters( 'yith_wcan_in_array_ignor_case', false ) ? 'yit_in_array_ignore_case' : 'in_array';
             $terms              = apply_filters( 'yith_wcan_get_list_html_terms', $terms, $taxonomy, $instance );
+            $queried_object     = get_queried_object();
             foreach ( $terms as $parent_id => $term_ids ) {
                 $term = get_term_by( 'id', $parent_id, $taxonomy );
 
@@ -898,7 +1026,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                 if( $echo ) {
 
                     // Get count based on current view - uses transients
-                    $transient_name = 'wc_ln_count_' . md5(sanitize_key($taxonomy) . sanitize_key($term->term_id));
+                    //$transient_name = 'wc_ln_count_' . md5(sanitize_key($taxonomy) . sanitize_key($term->term_id));
 
                     //if ( false === ( $_products_in_term = get_transient( $transient_name ) ) ) {
 
@@ -979,13 +1107,38 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                         $link = add_query_arg('product_tag', urlencode($_GET['product_tag']), $link);
                     }
 
+                    elseif( is_product_tag() && $queried_object && $current_term != $queried_object->slug ){
+                        $link = add_query_arg( array( 'product_tag' => $queried_object->slug ), $link );
+                    }
+
                    if (isset($_GET[$this->brand_taxonomy])) {
                        $brands = is_array( $_GET[$this->brand_taxonomy] ) ? array() : get_term_by('slug', $_GET[$this->brand_taxonomy], $this->brand_taxonomy);
                        if ( $brands instanceof WP_Term && $brands->term_id != $term->term_id ) {
                            $link = add_query_arg($this->brand_taxonomy, urlencode($brands->slug), $link);
                        }
+                    }
 
+                   elseif( ! empty( $this->brand_taxonomy ) && is_tax( $this->brand_taxonomy ) && $queried_object ) {
+                       $link = add_query_arg( array( $this->brand_taxonomy => $queried_object->slug ), $link );
+                   }
 
+                    if ( isset( $_GET['source_id'] ) && isset( $_GET['source_tax'] ) ) {
+                        $add_source_id = true;
+                        if( $term->term_id == $queried_object->term_id ){
+                            $parse = parse_url( $link );
+                            if( empty( $parse['query'] ) ){
+                                $add_source_id = false;
+                            }
+                        }
+
+                        if( $add_source_id ) {
+                            $args = array( 'source_id' => $_GET['source_id'], 'source_tax' => $_GET['source_tax'] );
+                            $link = add_query_arg( $args, $link );
+                        }
+                    }
+
+                    if( isset( $_GET['yith_shop_vendor'] ) ){
+                        $link = add_query_arg( array( 'yith_shop_vendor' => $_GET['yith_shop_vendor'] ), $link );
                     }
 
                     if (isset($_GET['product_cat'])) {
@@ -996,6 +1149,20 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                             implode(apply_filters('yith_wcan_categories_filter_operator', $categories_filter_operator, $display_type), $_chosen_categories),
                             $link
                         );
+                    }
+
+                    elseif( is_product_category() && $queried_object ){
+                        //Removed @JoseCostaRos
+                        $link = add_query_arg( array( 'product_cat' => $queried_object->slug ), $link );
+                    }
+
+                    if( is_product_taxonomy() && ! yit_is_filtered_uri() && $term->term_id != $queried_object->term_id ){
+                        $link = add_query_arg(
+                            array(
+                                'source_id'                 => $queried_object->term_id,
+                                'source_tax'                => $queried_object->taxonomy,
+                                $queried_object->taxonomy   => $queried_object->slug
+                            ), $link );
                     }
 
                     $check_for_current_widget = isset($_chosen_attributes[$taxonomy]) && is_array($_chosen_attributes[$taxonomy]['terms']) && $in_array_function($term->$filter_term_field, $_chosen_attributes[$taxonomy]['terms']);
@@ -1038,6 +1205,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                                 $class = "class='{$is_parent_class} {$level_class}'";
                             }
                         }
+
                         $link = add_query_arg($arg, implode(apply_filters('yith_wcan_list_filter_operator', ',', $display_type), $current_filter), $link);
                     }
 
@@ -1076,9 +1244,11 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                         $li_printed = true;
                     }
 
-                    $show_count = $count != 0 && apply_filters( "{$args['widget_id']}-show_product_count", true, $instance );
+                    $show_count = $count != 0 && ! empty( $instance['show_count'] ) && ! $instance['show_count'];
 
-                    if ( $to_print && apply_filters( 'yith_wcan_force_show_count', true || $show_count ) ) {
+                    $show_count = apply_filters( "{$this->id}-show_product_count", $show_count, $instance );
+
+                    if ( $to_print && apply_filters( 'yith_wcan_force_show_count', $show_count ) ) {
                         echo ' <small class="count">' . $count . '</small><div class="clear"></div>';
                     }
 

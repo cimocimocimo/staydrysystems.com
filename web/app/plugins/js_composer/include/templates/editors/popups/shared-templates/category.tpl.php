@@ -143,9 +143,15 @@ endif;
 				<button type="button" class="vc_general vc_ui-control-button" data-template-handler title="<?php _e( 'Add template', 'js_composer' ); ?>">
 					<i class="vc-composer-icon vc-c-icon-add"></i>
 				</button>
-				<button type="button" class="vc_general vc_ui-control-button" data-vc-ui-delete="template-title" title="<?php _e( 'Delete template', 'js_composer' ); ?>">
-					<i class="vc-composer-icon vc-c-icon-delete_empty"></i>
-				</button>
+				<?php
+				if ( vc_user_access()->part( 'templates' )->checkStateAny( true, null )->get() ) :
+					?>
+					<button type="button" class="vc_general vc_ui-control-button" data-vc-ui-delete="template-title" title="<?php _e( 'Delete template', 'js_composer' ); ?>">
+						<i class="vc-composer-icon vc-c-icon-delete_empty"></i>
+					</button>
+					<?php
+				endif;
+				?>
 				<button type="button" class="vc_general vc_ui-control-button" data-vc-preview-handler data-vc-container=".vc_ui-list-bar" data-vc-target="[data-template_id=&quot;<%- post_id %>&quot;]" title="<?php _e( 'Preview template', 'js_composer' ); ?>">
 					<i class="vc-composer-icon vc-c-icon-arrow_drop_down"></i>
 				</button>

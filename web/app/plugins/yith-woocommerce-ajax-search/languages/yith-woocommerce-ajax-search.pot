@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: YITH WooCommerce Ajax Search Free\n"
-"POT-Creation-Date: 2016-10-17 12:45+0200\n"
+"POT-Creation-Date: 2017-03-06 14:56+0100\n"
 "PO-Revision-Date: 2015-07-17 09:42+0100\n"
 "Last-Translator: \n"
 "Language-Team: Yithemes <plugins@yithemes.com>\n"

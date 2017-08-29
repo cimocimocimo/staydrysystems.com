@@ -18,7 +18,7 @@ class Vc_Vendor_YoastSeo implements Vc_Vendor_Interface {
 
 	function __construct() {
 		add_action( 'vc_backend_editor_render', array(
-			&$this,
+			$this,
 			'enqueueJs',
 		) );
 	}
@@ -30,7 +30,7 @@ class Vc_Vendor_YoastSeo implements Vc_Vendor_Interface {
 	public function load() {
 		if ( class_exists( 'WPSEO_Metabox' ) && ( 'admin_page' === vc_mode() || 'admin_frontend_editor' === vc_mode() ) ) {
 			add_filter( 'wpseo_pre_analysis_post_content', array(
-				&$this,
+				$this,
 				'filterResults',
 			) );
 		}

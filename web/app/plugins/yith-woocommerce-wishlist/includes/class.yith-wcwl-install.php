@@ -222,15 +222,19 @@ if ( !class_exists( 'YITH_WCWL_Install' ) ) {
 
             $option_value = get_option( 'yith-wcwl-page-id' );
 
-            if ( $option_value > 0 && get_post( $option_value ) )
-                return;
+            if ( $option_value > 0 && get_post( $option_value ) ) {
+	            return;
+            }
 
             $page_found = $wpdb->get_var( "SELECT `ID` FROM `{$wpdb->posts}` WHERE `post_name` = 'wishlist' LIMIT 1;" );
-            if ( $page_found ) :
-                if ( ! $option_value )
-                    update_option( 'yith-wcwl-page-id', $page_found );
-                return;
-            endif;
+
+            if ( $page_found ) {
+	            if ( ! $option_value ) {
+		            update_option( 'yith-wcwl-page-id', $page_found );
+	            }
+
+	            return;
+            }
 
             $page_data = array(
                 'post_status' 		=> 'publish',

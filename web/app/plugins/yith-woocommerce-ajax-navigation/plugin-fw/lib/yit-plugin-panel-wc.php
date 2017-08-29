@@ -64,6 +64,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
                 'image_width'
             );
 
+            $args = apply_filters( 'yit_plugin_fw_wc_panel_option_args', $args );
+
             if ( ! empty( $args ) ) {
                 $this->settings         = $args;
                 $this->_tabs_path_files = $this->get_tabs_path_files();

@@ -78,6 +78,17 @@
         input.change();
     });
 
+    //colorpicker
+    $('.plugin-option .panel-colorpicker').wpColorPicker({
+        onInit: function(){ },
+        change: function(event, ui){
+        },
+        clear: function(){
+            var input = $(this);
+            input.val(input.data('default-color'));
+            input.change();
+        }
+    });
 
     //slider
     $('.plugin-option .slider_container .ui-slider-horizontal').each(function () {

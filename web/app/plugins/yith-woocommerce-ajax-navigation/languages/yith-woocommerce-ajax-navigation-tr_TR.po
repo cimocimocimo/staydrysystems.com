@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH WooCommerce Ajax Product filter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-17 14:07+0100\n"
-"PO-Revision-Date: 2017-01-17 14:07+0100\n"
+"POT-Creation-Date: 2017-07-04 16:52+0200\n"
+"PO-Revision-Date: 2017-07-04 16:52+0200\n"
 "Last-Translator: Caner Öncel <caneroncel@gmail.com>\n"
 "Language-Team: Caner Öncel <caneroncel@gmail.com>\n"
 "Language: tr\n"
@@ -58,7 +58,7 @@ msgstr "Terim"
 
 # @ yit
 #: includes/functions.yith-wcan.php:57
-#: widgets/class.yith-wcan-navigation-widget.php:716
+#: widgets/class.yith-wcan-navigation-widget.php:843
 msgid "Color"
 msgstr "Renk"
 
@@ -143,6 +143,22 @@ msgstr ""
 
 #: settings/frontend-options.php:58
 msgid "Enter here the HTML tag for the scroll to top feature"
+msgstr ""
+
+#: settings/frontend-options.php:65
+msgid "Order by"
+msgstr ""
+
+#: settings/frontend-options.php:66
+msgid "Sort by number of products contained or alphabetically"
+msgstr ""
+
+#: settings/frontend-options.php:70
+msgid "Alphabetically"
+msgstr ""
+
+#: settings/frontend-options.php:71
+msgid "WooCommerce Default"
 msgstr ""
 
 #: templates/admin/premium.php:203 templates/admin/premium.php:441
@@ -344,72 +360,72 @@ msgctxt "Admin: Widget Title"
 msgid "YITH WooCommerce Ajax Product Filter"
 msgstr ""
 
-#: widgets/class.yith-wcan-navigation-widget.php:150
+#: widgets/class.yith-wcan-navigation-widget.php:151
 msgid "Filters:"
 msgstr ""
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:715
+#: widgets/class.yith-wcan-navigation-widget.php:842
 msgid "List"
 msgstr "Liste"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:717
+#: widgets/class.yith-wcan-navigation-widget.php:844
 msgid "Label"
 msgstr "Etiket"
 
-#: widgets/class.yith-wcan-navigation-widget.php:718
+#: widgets/class.yith-wcan-navigation-widget.php:845
 msgid "Dropdown"
 msgstr "Açılır Menü"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:725
-#: widgets/class.yith-wcan-reset-navigation-widget.php:102
+#: widgets/class.yith-wcan-navigation-widget.php:852
+#: widgets/class.yith-wcan-reset-navigation-widget.php:114
 msgid "Title"
 msgstr "Başlık"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:731
+#: widgets/class.yith-wcan-navigation-widget.php:858
 msgid "Type:"
 msgstr "Tür:"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:742
+#: widgets/class.yith-wcan-navigation-widget.php:869
 msgid "Query Type:"
 msgstr "Sorgu Tipi:"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:744
+#: widgets/class.yith-wcan-navigation-widget.php:871
 msgid "AND"
 msgstr "VE"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:745
+#: widgets/class.yith-wcan-navigation-widget.php:872
 msgid "OR"
 msgstr "VEYA"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:751
+#: widgets/class.yith-wcan-navigation-widget.php:878
 msgid "Attribute:"
 msgstr "Özellikler:"
 
-#: widgets/class.yith-wcan-navigation-widget.php:758
+#: widgets/class.yith-wcan-navigation-widget.php:885
 msgid "Display (default All):"
 msgstr "Görüntüleme (Varsayılan tümü):"
 
-#: widgets/class.yith-wcan-navigation-widget.php:760
+#: widgets/class.yith-wcan-navigation-widget.php:887
 msgid "All (no hierarchical)"
 msgstr "Tümü"
 
-#: widgets/class.yith-wcan-navigation-widget.php:761
+#: widgets/class.yith-wcan-navigation-widget.php:888
 msgid "All (hierarchical)"
 msgstr ""
 
-#: widgets/class.yith-wcan-navigation-widget.php:762
+#: widgets/class.yith-wcan-navigation-widget.php:889
 msgid "Only Parent"
 msgstr "Sadece Ebeveyn"
 
-#: widgets/class.yith-wcan-navigation-widget.php:769
+#: widgets/class.yith-wcan-navigation-widget.php:896
 msgid "CSS custom class"
 msgstr ""
 
@@ -421,11 +437,11 @@ msgstr ""
 msgid "YITH WooCommerce Ajax Reset Filter"
 msgstr ""
 
-#: widgets/class.yith-wcan-reset-navigation-widget.php:95
+#: widgets/class.yith-wcan-reset-navigation-widget.php:107
 msgid "Reset All Filters"
 msgstr "Tüm Filtreleri Sıfırla"
 
-#: widgets/class.yith-wcan-reset-navigation-widget.php:108
+#: widgets/class.yith-wcan-reset-navigation-widget.php:120
 msgid "Button Label"
 msgstr "Buton Metni"
 

@@ -7,6 +7,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Shortcode attributes
  * @var $atts
  * @var $content - shortcode content
+ * @var $el_class
+ * @var $el_id
  * @var $this WPBakeryShortCode_VC_Tta_Accordion|WPBakeryShortCode_VC_Tta_Tabs|WPBakeryShortCode_VC_Tta_Tour|WPBakeryShortCode_VC_Tta_Pageable
  */
 $el_class = $css = $css_animation = '';

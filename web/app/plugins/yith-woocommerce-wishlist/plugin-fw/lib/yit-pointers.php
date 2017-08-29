@@ -68,8 +68,8 @@ if ( ! class_exists( 'YIT_Pointers' ) ) {
                     'content'  => sprintf( '<h3> %s </h3> <p> %s </p> <p> %s <a href="http://yithemes.com/product-category/plugins/" target="_blank">Yithemes.com</a> %s
                                   <a href="https://profiles.wordpress.org/yithemes/" target="_blank">Wordpress.org</a></p>',
                                 __( 'Plugins Activated', 'yith-plugin-fw' ),
-                                __( 'From now on, you can find all plugin options in YIT Plugin menu.
-                                     For each plugin installed, customization settings will be available as a new entry in YIT Plugin menu.', 'yith-plugin-fw' ),
+                                __( 'From now on, you can find all plugin options in YITH Plugins menu.
+                                     Plugin customization settings will be available as a new entry in YITH Plugins menu.', 'yith-plugin-fw' ),
                                 __( 'Discover all our plugins available on:', 'yith-plugin-fw' ),
                                 __( 'and', 'yith-plugin-fw' )
                     ),
@@ -82,10 +82,10 @@ if ( ! class_exists( 'YIT_Pointers' ) ) {
                     'content'  => sprintf( '<h3> %s </h3> <p> %s </p> <p> %s <a href="http://yithemes.com/product-category/plugins/" target="_blank">Yithemes.com</a> %s
                                   <a href="https://profiles.wordpress.org/yithemes/" target="_blank">Wordpress.org</a></p>',
                                 __( 'Plugins Upgraded', 'yith-plugin-fw' ),
-                                __( 'From now on, you can find all options of your plugins in YIT Plugin menu.
-                                    Any time one of our plugins is updated, a new entry will be added to this menu.
+                                __( 'From now on, you can find the option panel of YITH plugins in YITH Plugins menu.
+                                    Every time one of our plugins is added, a new entry will be added to this menu.
                                     For example, after the update, plugin options (such as for YITH WooCommerce Wishlist, YITH WooCommerce Ajax Search, etc.)
-                                    will be moved from previous location to YIT Plugin tab.', 'yith-plugin-fw' ),
+                                    will be moved from previous location to YITH Plugins tab.', 'yith-plugin-fw' ),
                                 __( 'Discover all our plugins available on:', 'yith-plugin-fw' ),
                                 __( 'and', 'yith-plugin-fw' )
                     ),

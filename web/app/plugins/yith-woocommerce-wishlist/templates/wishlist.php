@@ -10,9 +10,6 @@
 if ( ! defined( 'YITH_WCWL' ) ) {
 	exit;
 } // Exit if accessed directly
-
-global $wpdb, $woocommerce;
-
 ?>
 <div id="yith-wcwl-messages"></div>
 

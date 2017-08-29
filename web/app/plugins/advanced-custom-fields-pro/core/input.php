@@ -245,7 +245,10 @@ class acf_input {
 			'ajax'			=> acf_get_form_data('ajax'),
 			'validation'	=> acf_get_form_data('validation'),
 			'wp_version'	=> $wp_version,
-			'acf_version'	=> acf_get_setting('version')
+			'acf_version'	=> acf_get_setting('version'),
+			'browser'		=> acf_get_browser(),
+			'locale'		=> get_locale(),
+			'rtl'			=> is_rtl()
 		);
 		
 		
@@ -262,25 +265,26 @@ class acf_input {
 		));
 		
 		
-		?>
-		<script type="text/javascript">
-			acf = acf || {};
-			acf.o = <?php echo json_encode($o); ?>;
-			acf.l10n = <?php echo json_encode($l10n); ?>;
-			<?php do_action('acf/input/admin_footer_js'); ?>
-		</script>
-		<?php
+?>
+<script type="text/javascript">
+var acf = acf || null;
+if( acf ) {
+	
+	acf.o = <?php echo json_encode($o); ?>;
+	acf.l10n = <?php echo json_encode($l10n); ?>;
+	<?php do_action('acf/input/admin_footer_js'); ?>
 
-		
-		// action
-		do_action('acf/input/admin_footer');
-		
-		
-		?>
-		<script type="text/javascript">
-			acf.do_action('prepare');
-		</script>
-		<?php
+}
+</script>
+<?php
+
+do_action('acf/input/admin_footer');
+	
+?>
+<script type="text/javascript">
+	if( acf ) acf.do_action('prepare');
+</script>
+<?php
 		
 	}
 	
@@ -407,7 +411,7 @@ function acf_set_form_data( $data = array() ) {
 function acf_enqueue_uploader() {
 	
 	// bail early if doing ajax
-	if( defined('DOING_AJAX') && DOING_AJAX ) return;
+	if( acf_is_ajax() ) return;
 	
 	
 	// bail ealry if already run
@@ -423,7 +427,7 @@ function acf_enqueue_uploader() {
 	
 	
 	// create dummy editor
-	?><div class="acf-hidden"><?php wp_editor( '', 'acf_content' ); ?></div><?php
+	?><div id="acf-hidden-wp-editor" class="acf-hidden"><?php wp_editor( '', 'acf_content' ); ?></div><?php
 	
 }
 
@@ -452,10 +456,26 @@ function acf_form_data( $args = array() ) {
 	$args = acf_set_form_data( $args );
 	
 	
+	// hidden inputs
+	$inputs = array(
+		'_acfnonce'		=> wp_create_nonce($args['nonce']),
+		'_acfchanged'	=> 0
+	);
+	
+	
+	// append custom
+	foreach( $args as $k => $v ) {
+		
+		if( substr($k, 0, 4) === '_acf' ) $inputs[ $k ] = $v;
+		
+	}
+	
+	
 	?>
 	<div id="acf-form-data" class="acf-hidden">
-		<input type="hidden" name="_acfnonce" value="<?php echo wp_create_nonce( $args['nonce'] ); ?>" />
-		<input type="hidden" name="_acfchanged" value="0" />
+		<?php foreach( $inputs as $k => $v ): ?>
+		<input type="hidden" name="<?php echo esc_attr($k); ?>" value="<?php echo esc_attr($v); ?>" />
+		<?php endforeach; ?>
 		<?php do_action('acf/input/form_data', $args); ?>
 	</div>
 	<?php

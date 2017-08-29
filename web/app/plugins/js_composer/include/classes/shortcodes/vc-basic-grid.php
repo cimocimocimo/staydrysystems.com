@@ -59,6 +59,7 @@ class WPBakeryShortCode_VC_Basic_Grid extends WPBakeryShortCode_Vc_Pageable {
 		// New button3:
 		'btn_title' => '',
 		'btn_style' => 'modern',
+		'btn_el_id' => '',
 		'btn_custom_background' => '#ededed',
 		'btn_custom_text' => '#666',
 		'btn_outline_custom_color' => '#666',
@@ -78,6 +79,8 @@ class WPBakeryShortCode_VC_Basic_Grid extends WPBakeryShortCode_Vc_Pageable {
 		'btn_i_icon_entypo' => 'entypo-icon entypo-icon-note',
 		'btn_i_icon_linecons' => 'vc_li vc_li-heart',
 		'btn_i_icon_pixelicons' => 'vc_pixel_icon vc_pixel_icon-alert',
+		'btn_custom_onclick' => '',
+		'btn_custom_onclick_code' => '',
 		// fix template
 		'page_id' => '',
 	);
@@ -95,13 +98,13 @@ class WPBakeryShortCode_VC_Basic_Grid extends WPBakeryShortCode_Vc_Pageable {
 
 		wp_register_script( 'vc_grid-js-imagesloaded', vc_asset_url( 'lib/bower/imagesloaded/imagesloaded.pkgd.min.js' ) );
 		wp_register_script( 'vc_grid', vc_asset_url( 'js/dist/vc_grid.min.js' ), array(
-				'jquery',
-				'underscore',
-				'vc_pageable_owl-carousel',
-				'waypoints',
-				//'isotope',
-				'vc_grid-js-imagesloaded',
-			), WPB_VC_VERSION, true );
+			'jquery',
+			'underscore',
+			'vc_pageable_owl-carousel',
+			'waypoints',
+			//'isotope',
+			'vc_grid-js-imagesloaded',
+		), WPB_VC_VERSION, true );
 	}
 
 	public function enqueueScripts() {
@@ -128,11 +131,13 @@ class WPBakeryShortCode_VC_Basic_Grid extends WPBakeryShortCode_Vc_Pageable {
 	 * @return string
 	 */
 	public function getHash( $atts, $content ) {
-		// _deprecated_function( 'WPBakeryShortCode_VC_Basic_Grid::getHash', '4.4.3 (will be removed in 4.10)', 'getId resave your grid' );
 		if ( vc_is_page_editable() || is_preview() ) {
+			_deprecated_function( 'WPBakeryShortCode_VC_Basic_Grid::getHash', '4.4.3 (will be removed in 4.10)', 'getId resave your grid' );
+
 			/* We are in Frontend editor
 			 * We need to send RAW shortcode data, so hash is just json_encode of atts and content
 			 */
+
 			return urlencode( json_encode( array(
 				'tag' => $this->shortcode,
 				'atts' => $atts,
@@ -190,7 +195,7 @@ class WPBakeryShortCode_VC_Basic_Grid extends WPBakeryShortCode_Vc_Pageable {
 	 * @return bool|array
 	 */
 	public function findPostShortcodeByHash( $page_id, $hash ) {
-		// _deprecated_function( 'WPBakeryShortCode_VC_Basic_Grid::findPostShortcodeByHash', '4.4.3 (will be removed in 4.10)', 'findPostShortcodeById resave your grid to renew' );
+		_deprecated_function( 'WPBakeryShortCode_VC_Basic_Grid::findPostShortcodeByHash', '4.4.3 (will be removed in 5.3)', 'findPostShortcodeById resave your grid to renew' );
 
 		if ( $hash ) {
 			if ( $this->currentUserCanManage( $page_id ) && preg_match( '/\"tag\"\:/', urldecode( $hash ) ) ) {

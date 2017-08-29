@@ -54,7 +54,16 @@ if ( !class_exists( 'YITH_WCAS' ) ) {
 		        }else {
 			        $this->obj = new YITH_WCAS_Frontend( $this->version );
 		        }
+	        }else{
+		        if ( class_exists( 'YITH_JetPack' ) ) {
+			        include_once( YJP_DIR . 'plugin-fw/yit-woocommerce-compatibility.php' );
+		        } else {
+			        global $plugin_fw_data;
+			        $plugin_fw_file = array_shift( $plugin_fw_data );
+			        require_once( plugin_dir_path( $plugin_fw_file ) . 'yit-woocommerce-compatibility.php' );
+		        }
 	        }
+
 
             // actions
             add_action( 'widgets_init', array( $this, 'registerWidgets' ) );
@@ -142,14 +151,7 @@ if ( !class_exists( 'YITH_WCAS' ) ) {
 			        'orderby'             => $ordering_args['orderby'],
 			        'order'               => $ordering_args['order'],
 			        'posts_per_page'      => apply_filters( 'yith_wcas_ajax_search_products_posts_per_page', get_option( 'yith_wcas_posts_per_page' ) ),
-			        'suppress_filters'    => false,
-			        'meta_query'          => array(
-				        array(
-					        'key'     => '_visibility',
-					        'value'   => array( 'search', 'visible' ),
-					        'compare' => 'IN'
-				        )
-			        )
+			        'suppress_filters'    => false
 		        );
 
 		        if ( isset( $_REQUEST['product_cat'] ) ) {
@@ -163,6 +165,25 @@ if ( !class_exists( 'YITH_WCAS' ) ) {
 			        );
 		        }
 
+		        if ( version_compare( WC()->version, '2.7.0', '<' ) ) {
+			        $args['meta_query'] = array(
+				        array(
+					        'key'     => '_visibility',
+					        'value'   => array( 'search', 'visible' ),
+					        'compare' => 'IN'
+				        ),
+			        );
+		        }else{
+			        $product_visibility_term_ids = wc_get_product_visibility_term_ids();
+			        $args['tax_query'][] = array(
+				        'taxonomy' => 'product_visibility',
+				        'field'    => 'term_taxonomy_id',
+				        'terms'    => $product_visibility_term_ids['exclude-from-search'],
+				        'operator' => 'NOT IN',
+			        );
+		        }
+
+
 		        $products = get_posts( $args );
 
 		        if ( ! empty( $products ) ) {
@@ -170,7 +191,7 @@ if ( !class_exists( 'YITH_WCAS' ) ) {
 				        $product = wc_get_product( $post );
 
 				        $suggestions[] = apply_filters( 'yith_wcas_suggestion', array(
-					        'id'    => $product->id,
+					        'id'    => $product->get_id(),
 					        'value' => strip_tags( $product->get_title() ),
 					        'url'   => $product->get_permalink()
 				        ), $product );

@@ -199,10 +199,16 @@ class Vc_Edit_Form_Fields implements Vc_Render {
 		require_once vc_path_dir( 'AUTOLOAD_DIR', 'class-vc-settings-presets.php' );
 		$list_vendor_presets = Vc_Settings_Preset::listVendorSettingsPresets( $this->tag );
 		$list_presets = Vc_Settings_Preset::listSettingsPresets( $this->tag );
-		// TODO: Add template access check
 		$show_settings = false;
-		$show_presets = vc_user_access()->part( 'presets' )->can()->get() || ! empty( $list_presets ) || ! empty( $list_vendor_presets );
-		if ( in_array( $this->tag, array( 'vc_row' ) ) && vc_user_access()->part( 'templates' )->can()->get() ) {
+
+		$saveAsTemplateElements = apply_filters( 'vc_popup_save_as_template_elements', array(
+			'vc_row',
+			'vc_section',
+		) );
+
+		$show_presets = ! in_array( $this->tag, $saveAsTemplateElements ) && vc_user_access()->part( 'presets' )->checkStateAny( true, null )->get();
+
+		if ( in_array( $this->tag, $saveAsTemplateElements ) && vc_user_access()->part( 'templates' )->checkStateAny( true, null )->get() ) {
 			$show_settings = true;
 		}
 

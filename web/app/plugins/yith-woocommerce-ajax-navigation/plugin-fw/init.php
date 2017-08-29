@@ -1,7 +1,7 @@
 <?php
 /**
  * Framework Name: YIT Plugin Framework
- * Version: 2.9.41
+ * Version: 2.9.68
  * Author: Yithemes
  * Text Domain: yith-plugin-fw
  * Domain Path: /languages/
@@ -54,3 +54,5 @@ if ( ! function_exists ( 'yit_maybe_plugin_fw_loader' ) ) {
         }
     }
 }
+
+

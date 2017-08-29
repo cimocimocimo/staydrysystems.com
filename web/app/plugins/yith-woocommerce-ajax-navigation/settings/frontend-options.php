@@ -61,6 +61,18 @@ $frontend = array(
                 'std'  => '.yit-wcan-container'
             ),
 
+            array(
+                'name'    => __( 'Order by', 'yith-woocommerce-ajax-navigation' ),
+                'desc'    => __( 'Sort by number of products contained or alphabetically', 'yith-woocommerce-ajax-navigation' ),
+                'id'      => 'yith_wcan_ajax_shop_terms_order',
+                'type'    => 'select',
+                'options' => array(
+                    'alphabetical'  => __( 'Alphabetically', 'yith-woocommerce-ajax-navigation' ),
+                    'menu_order'    => __( 'WooCommerce Default', 'yith-woocommerce-ajax-navigation' )
+                ),
+                'std'     => 'alphabetical'
+            ),
+
             array( 'type' => 'close' ),
         ),
     )

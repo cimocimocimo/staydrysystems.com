@@ -113,7 +113,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 
             if( ! isset( $admin_page_hooks['yit_plugin_panel'] ) ){
                 $position = apply_filters( 'yit_plugins_menu_item_position', '62.32' );
-                add_menu_page( 'yit_plugin_panel', __( 'YITH Plugins', 'yith-plugin-fw' ), 'manage_options', 'yit_plugin_panel', NULL, YIT_CORE_PLUGIN_URL . '/assets/images/yithemes-icon.png', $position );
+                //  YITH Plugins text must not be translated
+	            apply_filters('yit_plugin_panel_menu_page_capability', current_user_can( 'manage_options' )) && add_menu_page( 'yit_plugin_panel', 'YITH Plugins', 'manage_options', 'yit_plugin_panel', NULL, YIT_CORE_PLUGIN_URL . '/assets/images/yithemes-icon.png', $position );
             }
         }
 
@@ -151,7 +152,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
             wp_enqueue_script( 'jquery-ui-slider' );
             wp_enqueue_script( 'jquery-ui-dialog' );
             wp_enqueue_script( 'jquery-chosen', YIT_CORE_PLUGIN_URL . '/assets/js/chosen/chosen.jquery.js', array( 'jquery' ), '1.1.0', true );
-            wp_register_script( 'yit-plugin-panel', YIT_CORE_PLUGIN_URL . '/assets/js/yit-plugin-panel.js', array( 'jquery', 'jquery-chosen' ), $this->version, true );
+            wp_register_script( 'yit-plugin-panel', YIT_CORE_PLUGIN_URL . '/assets/js/yit-plugin-panel.js', array( 'jquery', 'jquery-chosen','wp-color-picker'), $this->version, true );
             wp_register_script( 'codemirror', YIT_CORE_PLUGIN_URL . '/assets/js/codemirror/codemirror.js', array( 'jquery' ), $this->version, true );
             wp_register_script( 'codemirror-javascript', YIT_CORE_PLUGIN_URL . '/assets/js/codemirror/javascript.js', array( 'jquery', 'codemirror' ), $this->version, true );
             wp_register_script( 'colorbox', YIT_CORE_PLUGIN_URL . '/assets/js/jquery.colorbox.js', array( 'jquery' ), '1.6.3', true );
@@ -167,7 +168,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
             wp_enqueue_style( 'yit-jquery-ui-style', '//code.jquery.com/ui/' . $jquery_version . '/themes/smoothness/jquery-ui.css', array(), $jquery_version );
             wp_register_style( 'colorbox', YIT_CORE_PLUGIN_URL . '/assets/css/colorbox.css', array(), $this->version );
             wp_register_style( 'yit-upgrade-to-pro', YIT_CORE_PLUGIN_URL . '/assets/css/yit-upgrade-to-pro.css', array( 'colorbox' ), $this->version );
-
+            
              if( ( 'admin.php' == $pagenow && strpos( get_current_screen()->id, 'yith-plugins_page' ) !== false ) || apply_filters( 'yit_plugin_panel_asset_loading', false ) ){
                  wp_enqueue_style( 'yit-plugin-style' );
                  wp_enqueue_script( 'yit-plugin-panel' );
@@ -323,7 +324,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
             }
             ?>
             <div id="icon-themes" class="icon32"><br /></div>
-            <h2 class="nav-tab-wrapper">
+            <h2 class="yith nav-tab-wrapper">
                 <?php echo $tabs ?>
             </h2>
             <?php

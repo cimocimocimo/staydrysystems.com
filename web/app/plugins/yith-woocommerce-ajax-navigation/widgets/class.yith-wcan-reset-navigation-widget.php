@@ -55,7 +55,17 @@ if ( ! class_exists( 'YITH_WCAN_Reset_Navigation_Widget' ) ) {
                 //clean the url
                 if( ! isset( $_GET['source_id'] ) ){
                     //$link = yit_curPageURL();
-                    $link = get_post_type_archive_link( 'product' );//yit_get_woocommerce_layered_nav_link();
+                    if( is_product_taxonomy() ){
+                        $queried_object = get_queried_object();
+                        $slug = $queried_object->slug;
+                        $taxonomy = $queried_object->taxonomy;
+                        $link = get_term_link( $slug, $taxonomy );
+                    }
+
+                    else {
+                        $link = get_post_type_archive_link( 'product' );//yit_get_woocommerce_layered_nav_link();
+                    }
+
                     foreach ( (array) $_chosen_attributes as $taxonomy => $data ) {
                         $taxonomy_filter = str_replace( 'pa_', '', $taxonomy );
                         $link            = remove_query_arg( 'filter_' . $taxonomy_filter, $link );
@@ -66,10 +76,12 @@ if ( ! class_exists( 'YITH_WCAN_Reset_Navigation_Widget' ) ) {
 
                 else{
                     //Start filter from Product category Page
-                    $term = get_term_by( 'id', $_GET['source_id'], 'product_cat' );
-                    $link = get_term_link( $term, $term->taxonomy  );
-                }
+                    $term = get_term_by( 'term_id', $_GET['source_id'], $_GET['source_tax'] );
 
+                    if( $term instanceof WP_Term ){
+                        $link = get_term_link( $term, $term->taxonomy  );
+                    }
+                }
 
                 $link = apply_filters( 'yith_woocommerce_reset_filter_link', $link );
 

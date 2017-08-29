@@ -90,7 +90,7 @@ class Vc_Vendor_Woocommerce implements Vc_Vendor_Interface {
 			'type' => 'post',
 			'child_of' => 0,
 			'parent' => '',
-			'orderby' => 'id',
+			'orderby' => 'parent',
 			'order' => 'ASC',
 			'hide_empty' => false,
 			'hierarchical' => 1,
@@ -898,7 +898,7 @@ class Vc_Vendor_Woocommerce implements Vc_Vendor_Interface {
 	 */
 	public function mapShortcodes() {
 		add_action( 'wp_ajax_vc_woocommerce_get_attribute_terms', array(
-			&$this,
+			$this,
 			'getAttributeTermsAjax',
 		) );
 		$tags = array(
@@ -932,109 +932,109 @@ class Vc_Vendor_Woocommerce implements Vc_Vendor_Interface {
 		//Filters For autocomplete param:
 		//For suggestion: vc_autocomplete_[shortcode_name]_[param_name]_callback
 		add_filter( 'vc_autocomplete_product_id_callback', array(
-			&$this,
+			$this,
 			'productIdAutocompleteSuggester',
 		), 10, 1 ); // Get suggestion(find). Must return an array
 		add_filter( 'vc_autocomplete_product_id_render', array(
-			&$this,
+			$this,
 			'productIdAutocompleteRender',
 		), 10, 1 ); // Render exact product. Must return an array (label,value)
 		//For param: ID default value filter
 		add_filter( 'vc_form_fields_render_field_product_id_param_value', array(
-			&$this,
+			$this,
 			'productIdDefaultValue',
 		), 10, 4 ); // Defines default value for param if not provided. Takes from other param value.
 
 		//Filters For autocomplete param:
 		//For suggestion: vc_autocomplete_[shortcode_name]_[param_name]_callback
 		add_filter( 'vc_autocomplete_products_ids_callback', array(
-			&$this,
+			$this,
 			'productIdAutocompleteSuggester',
 		), 10, 1 ); // Get suggestion(find). Must return an array
 		add_filter( 'vc_autocomplete_products_ids_render', array(
-			&$this,
+			$this,
 			'productIdAutocompleteRender',
 		), 10, 1 ); // Render exact product. Must return an array (label,value)
 		//For param: ID default value filter
 		add_filter( 'vc_form_fields_render_field_products_ids_param_value', array(
-			&$this,
+			$this,
 			'productsIdsDefaultValue',
 		), 10, 4 ); // Defines default value for param if not provided. Takes from other param value.
 
 		//Filters For autocomplete param: Exactly Same as "product" shortcode
 		//For suggestion: vc_autocomplete_[shortcode_name]_[param_name]_callback
 		add_filter( 'vc_autocomplete_add_to_cart_id_callback', array(
-			&$this,
+			$this,
 			'productIdAutocompleteSuggester',
 		), 10, 1 ); // Get suggestion(find). Must return an array
 		add_filter( 'vc_autocomplete_add_to_cart_id_render', array(
-			&$this,
+			$this,
 			'productIdAutocompleteRender',
 		), 10, 1 ); // Render exact product. Must return an array (label,value)
 		//For param: ID default value filter
 		add_filter( 'vc_form_fields_render_field_add_to_cart_id_param_value', array(
-			&$this,
+			$this,
 			'productIdDefaultValue',
 		), 10, 4 ); // Defines default value for param if not provided. Takes from other param value.
 
 		//Filters For autocomplete param: Exactly Same as "product" shortcode
 		//For suggestion: vc_autocomplete_[shortcode_name]_[param_name]_callback
 		add_filter( 'vc_autocomplete_add_to_cart_url_id_callback', array(
-			&$this,
+			$this,
 			'productIdAutocompleteSuggester',
 		), 10, 1 ); // Get suggestion(find). Must return an array
 		add_filter( 'vc_autocomplete_add_to_cart_url_id_render', array(
-			&$this,
+			$this,
 			'productIdAutocompleteRender',
 		), 10, 1 ); // Render exact product. Must return an array (label,value)
 		//For param: ID default value filter
 		add_filter( 'vc_form_fields_render_field_add_to_cart_url_id_param_value', array(
-			&$this,
+			$this,
 			'productIdDefaultValue',
 		), 10, 4 ); // Defines default value for param if not provided. Takes from other param value.
 
 		//Filters For autocomplete param: Exactly Same as "product" shortcode
 		//For suggestion: vc_autocomplete_[shortcode_name]_[param_name]_callback
 		add_filter( 'vc_autocomplete_product_page_id_callback', array(
-			&$this,
+			$this,
 			'productIdAutocompleteSuggester',
 		), 10, 1 ); // Get suggestion(find). Must return an array
 		add_filter( 'vc_autocomplete_product_page_id_render', array(
-			&$this,
+			$this,
 			'productIdAutocompleteRender',
 		), 10, 1 ); // Render exact product. Must return an array (label,value)
 		//For param: ID default value filter
 		add_filter( 'vc_form_fields_render_field_product_page_id_param_value', array(
-			&$this,
+			$this,
 			'productIdDefaultValue',
 		), 10, 4 ); // Defines default value for param if not provided. Takes from other param value.
 
 		//Filters For autocomplete param:
 		//For suggestion: vc_autocomplete_[shortcode_name]_[param_name]_callback
 		add_filter( 'vc_autocomplete_product_category_category_callback', array(
-			&$this,
+			$this,
 			'productCategoryCategoryAutocompleteSuggesterBySlug',
 		), 10, 1 ); // Get suggestion(find). Must return an array
 		add_filter( 'vc_autocomplete_product_category_category_render', array(
-			&$this,
+			$this,
 			'productCategoryCategoryRenderBySlugExact',
 		), 10, 1 ); // Render exact category by Slug. Must return an array (label,value)
 
 		//Filters For autocomplete param:
 		//For suggestion: vc_autocomplete_[shortcode_name]_[param_name]_callback
 		add_filter( 'vc_autocomplete_product_categories_ids_callback', array(
-			&$this,
+			$this,
 			'productCategoryCategoryAutocompleteSuggester',
 		), 10, 1 ); // Get suggestion(find). Must return an array
 		add_filter( 'vc_autocomplete_product_categories_ids_render', array(
-			&$this,
+			$this,
 			'productCategoryCategoryRenderByIdExact',
 		), 10, 1 ); // Render exact category by id. Must return an array (label,value)
 
 		//For param: "filter" param value
 		//vc_form_fields_render_field_{shortcode_name}_{param_name}_param
 		add_filter( 'vc_form_fields_render_field_product_attribute_filter_param', array(
-			&$this,
+			$this,
 			'productAttributeFilterParamValue',
 		), 10, 4 ); // Defines default value for param if not provided. Takes from other param value.
 	}
@@ -1125,7 +1125,7 @@ class Vc_Vendor_Woocommerce implements Vc_Vendor_Interface {
 	 * @param array $dropdown - passed by  reference
 	 */
 	public function getCategoryChilds( $parent_id, $pos, $array, $level, &$dropdown ) {
-		// _deprecated_function( 'Vc_Vendor_Woocommerce::getCategoryChilds', '4.5.3  (will be removed in 4.10)', 'Vc_Vendor_Woocommerce::getCategoryChildsFull' );
+		_deprecated_function( 'Vc_Vendor_Woocommerce::getCategoryChilds', '4.5.3  (will be removed in 5.3)', 'Vc_Vendor_Woocommerce::getCategoryChildsFull' );
 		for ( $i = $pos; $i < count( $array ); $i ++ ) {
 			if ( $array[ $i ]->category_parent == $parent_id ) {
 				$data = array(
@@ -1260,7 +1260,7 @@ class Vc_Vendor_Woocommerce implements Vc_Vendor_Interface {
 			if ( is_object( $product_object ) ) {
 				$product_sku = $product_object->get_sku();
 				$product_title = $product_object->get_title();
-				$product_id = $product_object->id;
+				$product_id = $product_object->get_id();
 
 				$product_sku_display = '';
 				if ( ! empty( $product_sku ) ) {
@@ -1323,7 +1323,7 @@ class Vc_Vendor_Woocommerce implements Vc_Vendor_Interface {
 
 			$product_sku = $product_object->get_sku();
 			$product_title = $product_object->get_title();
-			$product_id = $product_object->id;
+			$product_id = $product_object->get_id();
 
 			$product_sku_display = '';
 			if ( ! empty( $product_sku ) ) {

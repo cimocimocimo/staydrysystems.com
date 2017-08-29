@@ -77,7 +77,9 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 	                'position'    => null
                 );
 
-                $this->settings         = wp_parse_args( $args, $default_args );
+                $args = apply_filters( 'yit_plugin_fw_panel_option_args', wp_parse_args( $args, $default_args ) );
+
+                $this->settings         = $args;
                 $this->_tabs_path_files = $this->get_tabs_path_files();
 
                 if ( isset( $this->settings['create_menu_page'] ) && $this->settings['create_menu_page'] ) {
@@ -114,7 +116,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
             if( ! isset( $admin_page_hooks['yit_plugin_panel'] ) ){
                 $position = apply_filters( 'yit_plugins_menu_item_position', '62.32' );
                 //  YITH Plugins text must not be translated
-                current_user_can( 'manage_options' ) && add_menu_page( 'yit_plugin_panel', 'YITH Plugins', 'manage_options', 'yit_plugin_panel', NULL, YIT_CORE_PLUGIN_URL . '/assets/images/yithemes-icon.png', $position );
+	            apply_filters('yit_plugin_panel_menu_page_capability', current_user_can( 'manage_options' )) && add_menu_page( 'yit_plugin_panel', 'YITH Plugins', 'manage_options', 'yit_plugin_panel', NULL, YIT_CORE_PLUGIN_URL . '/assets/images/yithemes-icon.png', $position );
             }
         }
 
@@ -324,7 +326,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
             }
             ?>
             <div id="icon-themes" class="icon32"><br /></div>
-            <h2 class="nav-tab-wrapper">
+            <h2 class="yith nav-tab-wrapper">
                 <?php echo $tabs ?>
             </h2>
             <?php

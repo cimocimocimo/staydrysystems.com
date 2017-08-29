@@ -196,7 +196,7 @@ if ( ! class_exists( 'Vc_Automapper' ) ) {
 		 */
 		public function addAjaxActions() {
 			add_action( 'wp_ajax_vc_automapper', array(
-				&$this,
+				$this,
 				'goAction',
 			) );
 

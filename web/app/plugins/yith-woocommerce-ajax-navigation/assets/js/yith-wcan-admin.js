@@ -6,8 +6,8 @@
  * @version 1.3.2
  */
 jQuery(function ($) {
-    $.add_new_range = function () {
-        var range_filter = $('#widgets-right').find('.range-filter'),
+    $.add_new_range = function (t) {
+        var range_filter = t.parents('.widget-content').find('.range-filter'),
             input_field = range_filter.find('input:last-child'),
             field_name = range_filter.data('field_name'),
             position = parseInt(input_field.data('position')) + 1,
@@ -57,7 +57,7 @@ jQuery(function ($) {
             style.hide();
         }
 
-        if( data.value == 'list' || data.value == 'tags' || data.value == 'brands' ){
+        if( data.value == 'list' || data.value == 'tags' || data.value == 'brands' || data.value == 'categories' ){
             show_count.show();
         } else {
             show_count.hide();

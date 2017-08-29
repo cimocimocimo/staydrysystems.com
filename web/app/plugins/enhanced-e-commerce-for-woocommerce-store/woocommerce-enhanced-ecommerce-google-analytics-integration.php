@@ -21,7 +21,7 @@
   Description: Allows Enhanced E-commerce Google Analytics tracking code to be inserted into WooCommerce store pages.
   Author: Tatvic
   Author URI: http://www.tatvic.com
-  Version: 1.0.19
+  Version: 1.0.21
  */
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -56,6 +56,4 @@ function tvc_ee_plugin_action_links($links) {
     $links[] = '<a href="http://plugins.tatvic.com/downloads/EE-Woocommerce-Plugin-Documentation.pdf" target="_blank">Documentation</a>';
     return $links;
 }
-
-
 ?>

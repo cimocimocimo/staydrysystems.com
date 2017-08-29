@@ -1,3 +1,60 @@
+29.06.2017 - ver 5.2.
+   Added: RTL support
+   Added: HoverBox content element
+   Added: ZigZag separator content element
+   Added: Parallax effect added to columns
+   Added: video background added to columns
+   Update: element presets work as My Elements in Add Element window
+   Update: drag and drop control in Role Manager
+   Update: deprecated functions removed
+   Update: Arabic translation
+   Update: Russian translation
+   Update: Spanish translation
+   Fix: TinyMCE performance in Backend editor
+   Fix: remove obsolete function designOptions
+   Fix: Layer Slider compatibility issues
+   Fix: templates user access
+   Fix: shortcode saving in fe adds 0=""
+   Fix: duplicate icons when adding custom icon font
+   Fix: subscriber see Visual Composer welcome page
+   Fix: WPML vendor issue
+   Fix: page returns 0 when clicking add to cart from grid template
+   Fix: shortcode regexp for dash in shortcode name
+   Fix: preg_replace result, replacement and extra space
+   Fix: filesystem error when saving design options (css) in settings
+   Fix: woocommerce product id in grid api
+   Fix: tabs/tours/accordions role access
+
+11.04.2017 - ver 5.1.1.1.
+   Update: Performance improvements for elements
+   Fix: Element removing warnings
+
+04.04.2017 - ver 5.1.1
+   Added: extra security check for grid ajax calls to harden security
+
+09.03.2017 - ver 5.1
+   Added: Element Id for all elements
+   Added: Image size control for Grid Builder media elements
+   Update: Grid Builder Backend editor style user interface
+   Update: List of available Google Fonts
+   Fix: getJSON backward compatibility for jQuery
+   Fix: vcIcon font family
+   Fix: postDeactivate redirect url
+   Fix: Extra isset check in case if vc_remove_param
+   Fix: Not all child categories are displayed in the drop-down
+   Fix: Autocomplete param sorting
+   Fix: Shortcode mapper and shortcodes with dashes
+   Fix: Can not read property of 'IndexOf'
+   Fix: Custom CSS textarea height
+   Fix: Missing scrollbar for view preset
+   Fix: Fix vc_gitem_template_attribute_post_image_url warning for array_merge
+   Fix: Box-shadow and borders for twenty-seventeen
+   Fix: Media query for added css files
+   Fix: Increase gap in edit form for google fonts
+   Fix: Hiding all "Tabs" in tab module still displays active item
+   Fix: php 7.1 compatibility issues
+   Fix: Section save as template option
+
 17.11.2016 - ver 5.0.1
    Improved: Auto update process on hostings with wrong chmod on /tmp directory
    Fixed: CSS Animation "none" works differently on save

@@ -35,7 +35,7 @@ switch ( $type ) {
 }
 $data = array();
 $classes = array();
-$class_to_filter = 'vc_tweetmeme-element' . vc_shortcode_custom_css_class( $atts['css'], ' ' ) . $this->getCSSAnimation( $atts['css_animation'] );
+$class_to_filter = 'vc_tweetmeme-element' . vc_shortcode_custom_css_class( $atts['css'], ' ' ) . $this->getCSSAnimation( $atts['css_animation'] ) . $this->getExtraClass( $atts['el_class'] );
 $el_class = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, $class_to_filter, $this->getShortcode(), $atts );
 if ( ! empty( $atts['large_button'] ) ) {
 	$data['data-size'] = 'large';
@@ -131,7 +131,11 @@ $data_imploded = array();
 foreach ( $data as $k => $v ) {
 	$data_imploded[] = $k . '="' . esc_attr( $v ) . '"';
 }
-$wrapper = '<div class="' . esc_attr( $el_class ) . '">';
+$wrapper_attributes = array();
+if ( ! empty( $atts['el_id'] ) ) {
+	$wrapper_attributes[] = 'id="' . esc_attr( $atts['el_id'] ) . '"';
+}
+$wrapper = '<div ' . implode( ' ', $wrapper_attributes ) . ' class="' . esc_attr( $el_class ) . '">';
 $template = '<a href="' . esc_url( $url ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '" ' . implode( ' ', $data_imploded ) . '>' . $tweet_btn_text . '</a>';
 $template .= '<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?\'http\':\'https\';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+\'://platform.twitter.com/widgets.js\';fjs.parentNode.insertBefore(js,fjs);}}(document, \'script\', \'twitter-wjs\');</script>';
 $wrapper .= $template;

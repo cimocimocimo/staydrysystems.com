@@ -12,13 +12,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @var string $border_width
  * @var string $accent_color
  * @var string $el_class
+ * @var string $el_id
  * @var string $align
  * @var string $css
  * @var string $css_animation
  * Shortcode class
  * @var $this WPBakeryShortCode_VC_Separator
  */
-$el_width = $style = $color = $border_width = $accent_color = $el_class = $align = $css = $css_animation = '';
+$el_width = $style = $color = $border_width = $accent_color = $el_class = $el_id = $align = $css = $css_animation = '';
 $atts = vc_map_get_attributes( $this->getShortcode(), $atts );
 extract( $atts );
 

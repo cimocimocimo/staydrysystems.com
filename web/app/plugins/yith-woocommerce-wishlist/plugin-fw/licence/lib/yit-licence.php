@@ -48,7 +48,7 @@ if ( ! class_exists( 'YIT_Licence' ) ) {
          * @var string The yithemes api uri
          * @since 1.0
          */
-        protected $_api_uri = 'http://yithemes.com';
+        protected $_api_uri = 'https://yithemes.com';
 
         /**
          * @var string The yithemes api uri query args
@@ -95,8 +95,9 @@ if ( ! class_exists( 'YIT_Licence' ) ) {
             }
 
             /* Update Licence Information */
-            add_action( 'core_upgrade_preamble', array( $this, 'check_all' ) );
-            add_action( 'wp_maybe_auto_update',  array( $this, 'check_all' ) );
+            //@TODO: Removed for performance
+//            add_action( 'core_upgrade_preamble', array( $this, 'check_all' ) );
+//            add_action( 'wp_maybe_auto_update',  array( $this, 'check_all' ) );
 
         }
 
@@ -142,7 +143,7 @@ if ( ! class_exists( 'YIT_Licence' ) ) {
                 $home_url = str_replace( $scheme, '', $home_url );
             }
 
-            return $home_url;
+            return apply_filters('yit_licence_get_home_url', $home_url );
         }
 
         /**
@@ -672,7 +673,7 @@ if ( ! class_exists( 'YIT_Licence' ) ) {
                 '105'           => __( 'Invalid security key', 'yith-plugin-fw' ),
                 '106'           => __( 'License key has expired', 'yith-plugin-fw' ),
                 '107'           => __( 'License key has been banned', 'yith-plugin-fw' ),
-                '108'           => __( 'Current product is not included with your membership key', 'woocommerce-software-add-on' ),
+                '108'           => __( 'Current product is not included in your YITH Club Subscription key', 'yith-plugin-fw' ),
                 '200'           => sprintf( '<strong>%s</strong>! %s',__( 'Great', 'yith-plugin-fw' ), __( 'License successfully activated', 'yith-plugin-fw' ) ),
                 'deactivated'   => sprintf( '%s <strong>%s</strong>', __( 'License key deactivated for website', 'woocommerce-software-add-on' ), isset( $instance ) ? $instance : '' )
             );
@@ -691,7 +692,7 @@ if ( ! class_exists( 'YIT_Licence' ) ) {
          * @author   Andrea Grillo <andrea.grillo@yithemes.com>
          */
         public function display_product_name( $product_name ){
-            return str_replace( array( 'YITH', 'WooCommerce', 'Premium', 'Theme' ), '', $product_name );
+            return str_replace( array( 'for WooCommerce', 'YITH', 'WooCommerce', 'Premium', 'Theme', 'WordPress' ), '', $product_name );
         }
 
         public function get_number_of_membership_products(){

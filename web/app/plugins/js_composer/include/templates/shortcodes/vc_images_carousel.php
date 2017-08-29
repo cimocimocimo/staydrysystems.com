@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @var $img_size
  * @var $images
  * @var $el_class
+ * @var $el_id
  * @var $mode
  * @var $slides_per_view
  * @var $wrap
@@ -26,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @var $this WPBakeryShortCode_VC_images_carousel
  */
 $title = $onclick = $custom_links = $custom_links_target =
-$img_size = $images = $el_class = $mode = $slides_per_view =
+$img_size = $images = $el_class = $el_id = $mode = $slides_per_view =
 $wrap = $autoplay = $hide_pagination_control =
 $hide_prev_next_buttons = $speed = $partial_view = $css = $css_animation = '';
 
@@ -68,8 +69,12 @@ $css_class = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, $class_to_filter
 
 $carousel_id = 'vc_images-carousel-' . WPBakeryShortCode_VC_images_carousel::getCarouselIndex();
 $slider_width = $this->getSliderWidth( $img_size );
+$wrapper_attributes = array();
+if ( ! empty( $el_id ) ) {
+	$wrapper_attributes[] = 'id="' . esc_attr( $el_id ) . '"';
+}
 ?>
-<div class="<?php echo esc_attr( apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, $css_class, $this->settings['base'], $atts ) ); ?>">
+<div <?php echo implode( ' ', $wrapper_attributes ); ?> class="<?php echo esc_attr( apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, $css_class, $this->settings['base'], $atts ) ); ?>">
 	<div class="wpb_wrapper">
 		<?php echo wpb_widget_title( array( 'title' => $title, 'extraclass' => 'wpb_gallery_heading' ) ) ?>
 		<div id="<?php echo $carousel_id ?>" data-ride="vc_carousel" data-wrap="<?php echo 'yes' === $wrap ? 'true' : 'false' ?>" style="width: <?php echo $slider_width ?>;" data-interval="<?php echo 'yes' === $autoplay ? $speed : 0 ?>" data-auto-height="yes" data-mode="<?php echo $mode ?>" data-partial="<?php echo 'yes' === $partial_view ? 'true' : 'false' ?>" data-per-view="<?php echo $slides_per_view ?>" data-hide-on-end="<?php echo 'yes' === $autoplay ? 'false' : 'true' ?>" class="vc_slide vc_images_carousel">

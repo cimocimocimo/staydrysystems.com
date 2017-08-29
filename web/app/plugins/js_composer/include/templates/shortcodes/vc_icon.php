@@ -19,13 +19,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @var $size
  * @var $align
  * @var $el_class
+ * @var $el_id
  * @var $link
  * @var $css_animation
  * @var $css
  * Shortcode class
  * @var $this WPBakeryShortCode_VC_Icon
  */
-$type = $icon_fontawesome = $icon_openiconic = $icon_typicons = $icon_entypo = $icon_linecons = $color = $custom_color = $background_style = $background_color = $custom_background_color = $size = $align = $el_class = $link = $css_animation = $css = $rel = '';
+$type = $icon_fontawesome = $icon_openiconic = $icon_typicons = $icon_entypo = $icon_linecons = $color = $custom_color = $background_style = $background_color = $custom_background_color = $size = $align = $el_class = $el_id = $link = $css_animation = $css = $rel = '';
 
 $atts = vc_map_get_attributes( $this->getShortcode(), $atts );
 extract( $atts );
@@ -63,8 +64,12 @@ $rel = '';
 if ( ! empty( $url['rel'] ) ) {
 	$rel = ' rel="' . esc_attr( $url['rel'] ) . '"';
 }
+$wrapper_attributes = array();
+if ( ! empty( $el_id ) ) {
+	$wrapper_attributes[] = 'id="' . esc_attr( $el_id ) . '"';
+}
 ?>
-<div
+<div <?php echo implode( ' ', $wrapper_attributes ); ?>
 	class="vc_icon_element vc_icon_element-outer<?php echo strlen( $css_class ) > 0 ? ' ' . trim( esc_attr( $css_class ) ) : ''; ?> vc_icon_element-align-<?php echo esc_attr( $align );
 	if ( $has_style ) {
 		echo ' vc_icon_element-have-style';
