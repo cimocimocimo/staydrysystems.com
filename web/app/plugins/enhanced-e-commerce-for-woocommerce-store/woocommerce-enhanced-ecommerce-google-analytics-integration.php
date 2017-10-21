@@ -1,6 +1,6 @@
 <?php
 
-/*  Copyright 2014 Tatvic
+/*  Copyright 2017 Tatvic
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License, version 2, as
@@ -21,7 +21,7 @@
   Description: Allows Enhanced E-commerce Google Analytics tracking code to be inserted into WooCommerce store pages.
   Author: Tatvic
   Author URI: http://www.tatvic.com
-  Version: 1.0.21
+  Version: 1.2.0
  */
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -54,6 +54,7 @@ function tvc_ee_plugin_action_links($links) {
     $links[] = '<a href="' . get_admin_url(null, $setting_url) . '">Settings</a>';
     $links[] = '<a href="https://wordpress.org/plugins/enhanced-e-commerce-for-woocommerce-store/faq/" target="_blank">FAQ</a>';
     $links[] = '<a href="http://plugins.tatvic.com/downloads/EE-Woocommerce-Plugin-Documentation.pdf" target="_blank">Documentation</a>';
+    $links[] = '<b><a href="https://codecanyon.net/item/actionable-google-analytics-for-woocommerce/9899552?ref=tatvic" target="_blank">Upgrade to Premium</a></b>';
     return $links;
 }
 ?>

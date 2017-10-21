@@ -41,6 +41,8 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
 
 
         function widget( $args, $instance ) {
+	        global $wc_product_attributes;
+
             $_chosen_attributes = YITH_WCAN()->get_layered_nav_chosen_attributes();
             $queried_object     = get_queried_object();
 
@@ -148,7 +150,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                     echo "</ul>";
                 }
                 elseif ( $display_type == 'select' ) {
-                    $dropdown_label = __( 'Filters:', 'yith-woocommerce-ajax-navigation' );
+                    $dropdown_label = apply_filters( 'yith_wcan_dropdown_label', __( 'Filters:', 'yith-woocommerce-ajax-navigation' ), $this );
                     ?>
 
                     <a class="yit-wcan-select-open" href="#"><?php echo apply_filters( 'yith_wcan_dropdown_default_label', $dropdown_label ) ?></a>
@@ -337,10 +339,8 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
 
                         }
                         else {
-
                             $class = ( $terms_type_list == 'hierarchical' && yit_term_is_child( $term ) ) ? "class='{$is_child_class}'" : '';
                             $link  = add_query_arg( $arg, implode( ',', $current_filter ), $link );
-
                         }
 
                         // Search Arg
@@ -596,7 +596,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
 
                     foreach ( $terms as $term ) {
 
-                        // Get count based on current view - uses transients
+	                    // Get count based on current view - uses transients
 //                        $transient_name = 'wc_ln_count_' . md5( sanitize_key( $taxonomy ) . sanitize_key( $term->term_id ) );
 
                         //if ( false === ( $_products_in_term = get_transient( $transient_name ) ) ) {
@@ -793,13 +793,23 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
 
                         $term_id = yit_wcan_localize_terms( $term->term_id, $taxonomy );
 
-                        if ( ! empty( $instance['labels'][$term_id] ) ) {
+                        $label = '';
+
+                        if( ! empty( $instance['labels'][$term_id] ) ){
+                            $label = $instance['labels'][ $term_id ];
+                        }
+
+                        elseif( function_exists( 'ywccl_get_term_meta' ) && ! empty( $wc_product_attributes[ $term->taxonomy ]->attribute_type ) && 'label' == $wc_product_attributes[ $term->taxonomy ]->attribute_type ) {
+	                        $label = ywccl_get_term_meta( $term->term_id, $term->taxonomy . '_yith_wccl_value' );
+                        }
+
+                        if ( $label ) {
 
                             echo '<li ' . $class . '>';
 
                             echo ( $count > 0 || $option_is_set ) ? '<a title="' . $term->name . '" href="' . $link . '">' : '<span>';
 
-                            echo $instance['labels'][$term_id];
+                            echo $label;
 
                             echo ( $count > 0 || $option_is_set ) ? '</a>' : '</span>';
                         }
@@ -1238,7 +1248,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                     }
 
                     else {
-                        $to_print = apply_filters( 'yith_wcan_show_no_products_attributes', ! $filter_by_tags_hierarchical && $query_type != 'and' );
+                        $to_print = apply_filters( 'yith_wcan_show_no_products_attributes', ( ! $filter_by_tags_hierarchical && $query_type != 'and' ), $count, $term );
 
                         $to_print && printf( '<li %s><span>%s</span>', $class, $term->name );
                         $li_printed = true;

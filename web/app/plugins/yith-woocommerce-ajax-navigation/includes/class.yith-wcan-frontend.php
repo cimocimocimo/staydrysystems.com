@@ -47,7 +47,7 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 
             $theme_support = apply_filters( 'yith_wcan_theme_use_wp_the_query_object', array(
                     'porto'
-                ) 
+                )
             );
 
             $current_theme = strtolower( wp_get_theme()->Template );

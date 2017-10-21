@@ -94,9 +94,6 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
                 /* WooCommerce 2.4 Support */
                 add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
             }
-
-            /* add YIT Plugin sidebar */
-            $this->sidebar = YIT_Plugin_Panel_Sidebar::instance( $this );
         }
 
 
@@ -251,10 +248,9 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
             $yit_options       = $this->get_main_array_options();
             $current_tab       = $this->get_current_tab();
             $custom_tab_action = $this->is_custom_tab( $yit_options, $current_tab );
-            $hide_sidebar      = $this->hide_sidebar( $yit_options, $current_tab );
 
             if ( $custom_tab_action ) {
-                $this->print_custom_tab( $custom_tab_action, $hide_sidebar );
+                $this->print_custom_tab( $custom_tab_action);
                 return;
             }
             else {

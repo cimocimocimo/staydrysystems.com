@@ -247,7 +247,7 @@ function WooComposer_Loop_style03($atts,$element){
 			
 				$product = new WC_Product( $product_id );
 			
-				$attachment_ids = $product->get_gallery_attachment_ids();
+				$attachment_ids = $product->get_gallery_image_ids();
 				$price = $product->get_price_html();
 				$rating = $product->get_rating_html();
 				$attributes = $product->get_attributes();

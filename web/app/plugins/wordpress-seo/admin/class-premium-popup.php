@@ -64,7 +64,7 @@ class WPSEO_Premium_Popup {
 		}
 
 		$assets_uri = trailingslashit( plugin_dir_url( WPSEO_FILE ) );
-		$premium_uri = WPSEO_Shortlinker::get( 'https://yoa.st/contact-support' );
+		$premium_uri = WPSEO_Shortlinker::get( 'https://yoa.st/add-keywords-popup' );
 
 		/* translators: %s expands to Yoast SEO Premium */
 		$cta_text = sprintf( __( 'Get %s now!', 'wordpress-seo' ), 'Yoast SEO Premium' );
@@ -79,7 +79,7 @@ class WPSEO_Premium_Popup {
 	<img class="alignright wpseo-premium-popup-icon" src="{$assets_uri}images/Yoast_SEO_Icon.svg" width="150" height="150" alt="Yoast SEO"/>
 	<{$this->heading_level} id="wpseo-contact-support-popup-title" class="wpseo-premium-popup-title">{$this->title}</{$this->heading_level}>
 	{$this->content}
-	<a id="wpseo-{$this->identifier}-popup-button" class="button button-primary" href="{$premium_uri}">{$cta_text}</a><br/>
+	<a id="wpseo-{$this->identifier}-popup-button" class="button button-primary" href="{$premium_uri}" target="_blank" rel="noreferrer noopener">{$cta_text}</a><br/>
 	<small>{$micro_copy}</small>
 </div>
 EO_POPUP;

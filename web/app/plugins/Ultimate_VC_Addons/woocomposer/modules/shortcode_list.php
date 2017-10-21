@@ -337,7 +337,7 @@ if(!class_exists("WooComposer_ViewList")){
 					$product_title = get_the_title();
 					
 					$product = new WC_Product( $product_id );
-					$attachment_ids = $product->get_gallery_attachment_ids();
+					$attachment_ids = $product->get_gallery_image_ids();
 					$price = $product->get_price_html();
 					$rating = $product->get_rating_html();
 					$product_var = new WC_Product_Variable( $product_id );

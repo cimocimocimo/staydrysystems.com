@@ -14,6 +14,9 @@
  */
 class advanced_sidebar_menu_page extends WP_Widget {
 
+    //@todo set the rest to constants
+    const DISPLAY_PARENT = 'include_parent';
+
 	private $defaults = array(
 		'title'                    => false,
 		'include_parent'           => false,
@@ -62,14 +65,14 @@ class advanced_sidebar_menu_page extends WP_Widget {
 				name="<?php echo $this->get_field_name( 'title' ); ?>" class="widefat" type="text" value="<?php echo $instance[ 'title' ]; ?>"/>
 		</p>
 
-		<p> <?php _e( 'Include Parent Page', 'advanced-sidebar-menu' ); ?>:
-			<input id="<?php echo $this->get_field_id( 'include_parent' ); ?>"
-				name="<?php echo $this->get_field_name( 'include_parent' ); ?>" type="checkbox" value="checked"
-				<?php echo $instance[ 'include_parent' ]; ?>/>
+		<p> <?php _e( 'Display parent page', 'advanced-sidebar-menu' ); ?>:
+			<input id="<?php echo $this->get_field_id( self::DISPLAY_PARENT ); ?>"
+				name="<?php echo $this->get_field_name( self::DISPLAY_PARENT ); ?>" type="checkbox" value="checked"
+				<?php echo $instance[ self::DISPLAY_PARENT ]; ?>/>
 		</p>
 
 
-		<p> <?php _e( 'Include Parent Even With No Children', 'advanced-sidebar-menu' ); ?>:
+		<p> <?php _e( 'Display menu when there is only the parent page', 'advanced-sidebar-menu' ); ?>:
 			<input id="<?php echo $this->get_field_id( 'include_childless_parent' ); ?>"
 				name="<?php echo $this->get_field_name( 'include_childless_parent' ); ?>" type="checkbox" value="checked"
 				<?php echo $instance[ 'include_childless_parent' ]; ?>/>
@@ -155,18 +158,19 @@ class advanced_sidebar_menu_page extends WP_Widget {
 	}
 
 
+
 	/**
 	 * The Widgets Output
-     *
-     *
+	 *
+	 *
 	 * @param array $args
 	 * @param array $instance
 	 *
 	 * @return void
 	 */
-	function widget( $args, $instance ){
+	public function widget( $args, $instance ){
 		$instance = wp_parse_args( $instance, $this->defaults );
-	    $post = get_post();
+		$post = get_post();
 		$asm = Advanced_Sidebar_Menu_Menu::factory( $instance, $args );
 
 		do_action( 'advanced_sidebar_menu_widget_pre_render', $asm, $this );
@@ -174,23 +178,23 @@ class advanced_sidebar_menu_page extends WP_Widget {
 		$asm->exclude  = apply_filters( 'advanced_sidebar_menu_excluded_pages', explode( ',', $instance[ 'exclude' ] ), $post, $asm->args, $asm->instance, $asm );
 
 		$filter_args = array(
+			0 => $asm->post_type,
 			1 => $asm->args,
 			2 => $asm->instance,
 			3 => $asm,
-            4 => $this,
+			4 => $this,
 		);
 
-		$filter_args[ 0 ] = 'page';
 		$asm->post_type   = $post_type = apply_filters_ref_array( 'advanced_sidebar_menu_post_type', $filter_args );
 
-		if( 'page' == $asm->post_type ){
+		if( 'page' === $asm->post_type ){
 			add_filter( 'page_css_class', array( $asm, 'add_has_children_class' ), 2, 2 );
 
 		} else {
 			add_filter( 'page_css_class', array( $asm, 'custom_post_type_css' ), 2, 4 );
 		}
 
-		$proper_single    = !( is_page() || ( is_single() && $asm->post_type == get_post_type() ) );
+		$proper_single    = !( is_page() || ( is_single() && $asm->post_type === get_post_type() ) );
 		$filter_args[ 0 ] = $proper_single;
 		if( apply_filters_ref_array( 'advanced_sidebar_menu_proper_single', $filter_args ) ){
 			return;
@@ -205,7 +209,7 @@ class advanced_sidebar_menu_page extends WP_Widget {
 
 		$filter_args[ 0 ] = $asm->top_id;
 		$asm->top_id = apply_filters_ref_array( 'advanced_sidebar_menu_top_parent', $filter_args );
-		if( get_post_type( $asm->top_id ) != $asm->post_type ){
+		if( get_post_type( $asm->top_id ) !== $asm->post_type ){
 			return;
 		}
 
@@ -220,24 +224,24 @@ class advanced_sidebar_menu_page extends WP_Widget {
 		$child_pages = $this->get_child_pages( $asm, $filter_args );
 
 		#---- if there are no children do not display the parent unless it is check to do so
-		if( ( !empty( $child_pages ) ) || $asm->checked( 'include_childless_parent' ) && ( !in_array( $asm->top_id, $asm->exclude ) ) ){
+		if( ( !empty( $child_pages ) ) || ($asm->checked( 'include_childless_parent' ) && ( !in_array( $asm->top_id, $asm->exclude, false ) ) ) ){
 
 			if( $asm->checked( 'css' ) ){
 				echo '<style type="text/css">';
-					include( Advanced_Sidebar_Menu::get_instance()->get_template_part( 'sidebar-menu.css' ) );
+				include( Advanced_Sidebar_Menu::get_instance()->get_template_part( 'sidebar-menu.css' ) );
 				echo '</style>';
 			}
 
 			echo $args[ 'before_widget' ];
-				$output = require( Advanced_Sidebar_Menu::get_instance()->get_template_part( 'page_list.php' ) );
+			$output = require( Advanced_Sidebar_Menu::get_instance()->get_template_part( 'page_list.php' ) );
 
-			    //backward compatibility for old views that didn't returns
-			    if( empty( $output ) && isset( $content ) ){
-				    $output = $content;
-			    }
+			//backward compatibility for old views that didn't returns
+			if( empty( $output ) && isset( $content ) ){
+				$output = $content;
+			}
 
-				$filter_args[ 0 ] = $output;
-				echo apply_filters_ref_array( 'advanced_sidebar_menu_page_widget_output', $filter_args );
+			$filter_args[ 0 ] = $output;
+			echo apply_filters_ref_array( 'advanced_sidebar_menu_page_widget_output', $filter_args );
 			echo $args[ 'after_widget' ];
 
 		}

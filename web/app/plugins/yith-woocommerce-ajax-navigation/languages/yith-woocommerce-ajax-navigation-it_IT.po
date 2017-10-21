@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH WooCommerce Ajax Product Filter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-04 16:52+0200\n"
-"PO-Revision-Date: 2017-07-04 16:52+0200\n"
+"POT-Creation-Date: 2017-09-26 12:43+0200\n"
+"PO-Revision-Date: 2017-09-26 12:43+0200\n"
 "Last-Translator: Your Inspiration Themes <plugins@yithemes.com>\n"
 "Language-Team: \n"
 "Language: it_IT\n"
@@ -58,7 +58,7 @@ msgstr "Proprietà"
 
 # @ yit
 #: includes/functions.yith-wcan.php:57
-#: widgets/class.yith-wcan-navigation-widget.php:843
+#: widgets/class.yith-wcan-navigation-widget.php:841
 msgid "Color"
 msgstr "Colore"
 
@@ -77,7 +77,7 @@ msgstr "Colore 2"
 msgid "Labels"
 msgstr "Etichetta"
 
-#: init.php:46
+#: init.php:49
 msgid ""
 "YITH WooCommerce Ajax Product Filter is enabled but not effective. It "
 "requires WooCommerce in order to work."
@@ -85,7 +85,7 @@ msgstr ""
 "YITH WooCommerce Ajax Product Filter è attivo, ma non operativo. Richiede "
 "WooCommerce  affinché possa funzionare correttamente."
 
-#: init.php:55
+#: init.php:58
 msgid ""
 "You can't activate the free version of YITH WooCommerce Ajax Product Filter "
 "while you are using the premium one."
@@ -146,8 +146,8 @@ msgid "Enter here the CSS class or id for the results count container"
 msgstr "Inserisci qui la classe CSS o l'ID dei risultati del conteggio"
 
 #: settings/frontend-options.php:57
-msgid "Scroll top anchor"
-msgstr "Tag html per la funzione Scroll Top"
+msgid "Scroll top anchor (only for mobiles)"
+msgstr ""
 
 #: settings/frontend-options.php:58
 msgid "Enter here the HTML tag for the scroll to top feature"
@@ -373,67 +373,67 @@ msgid "Filters:"
 msgstr "Filtri:"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:842
+#: widgets/class.yith-wcan-navigation-widget.php:840
 msgid "List"
 msgstr "Lista"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:844
+#: widgets/class.yith-wcan-navigation-widget.php:842
 msgid "Label"
 msgstr "Etichetta"
 
-#: widgets/class.yith-wcan-navigation-widget.php:845
+#: widgets/class.yith-wcan-navigation-widget.php:843
 msgid "Dropdown"
 msgstr "Menu a tendina"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:852
+#: widgets/class.yith-wcan-navigation-widget.php:850
 #: widgets/class.yith-wcan-reset-navigation-widget.php:114
 msgid "Title"
 msgstr "Titolo"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:858
+#: widgets/class.yith-wcan-navigation-widget.php:856
 msgid "Type:"
 msgstr "Tipo:"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:869
+#: widgets/class.yith-wcan-navigation-widget.php:867
 msgid "Query Type:"
 msgstr "Tipo Query:"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:871
+#: widgets/class.yith-wcan-navigation-widget.php:869
 msgid "AND"
 msgstr "E"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:872
+#: widgets/class.yith-wcan-navigation-widget.php:870
 msgid "OR"
 msgstr "O"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:878
+#: widgets/class.yith-wcan-navigation-widget.php:876
 msgid "Attribute:"
 msgstr "Attributo:"
 
-#: widgets/class.yith-wcan-navigation-widget.php:885
+#: widgets/class.yith-wcan-navigation-widget.php:883
 msgid "Display (default All):"
 msgstr "Visualizza (default Tutti)"
 
-#: widgets/class.yith-wcan-navigation-widget.php:887
+#: widgets/class.yith-wcan-navigation-widget.php:885
 msgid "All (no hierarchical)"
 msgstr "Tutti (non gerarchico)"
 
-#: widgets/class.yith-wcan-navigation-widget.php:888
+#: widgets/class.yith-wcan-navigation-widget.php:886
 msgid "All (hierarchical)"
 msgstr "Tutti (gerarchico)"
 
-#: widgets/class.yith-wcan-navigation-widget.php:889
+#: widgets/class.yith-wcan-navigation-widget.php:887
 msgid "Only Parent"
 msgstr "Solo Principali"
 
-#: widgets/class.yith-wcan-navigation-widget.php:896
+#: widgets/class.yith-wcan-navigation-widget.php:894
 msgid "CSS custom class"
 msgstr "Classe CSS custom"
 
@@ -453,6 +453,9 @@ msgstr "Resetta tutti i filtri"
 #: widgets/class.yith-wcan-reset-navigation-widget.php:120
 msgid "Button Label"
 msgstr "Etichetta Pulsante"
+
+#~ msgid "Scroll top anchor"
+#~ msgstr "Tag html per la funzione Scroll Top"
 
 #~ msgid "Settings"
 #~ msgstr "Impostazioni"

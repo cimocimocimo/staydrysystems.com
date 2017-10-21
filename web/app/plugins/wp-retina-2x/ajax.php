@@ -584,8 +584,7 @@ class Meow_WR2X_Ajax {
 				));
 				die();
 			}
-			require('wr2x_vt_resize.php');
-			wr2x_vt_resize( $tmpfname, $meta['width'] * 2, $meta['height'] * 2, null, $retinafile );
+			$this->core->resize( $tmpfname, $meta['width'] * 2, $meta['height'] * 2, null, $retinafile );
 			chmod( $retinafile, 0644 );
 			unlink( $tmpfname );
 

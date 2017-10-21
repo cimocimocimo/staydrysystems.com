@@ -43,6 +43,9 @@ class WPSEO_Taxonomy_Metabox {
 	 */
 	public function display() {
 
+		$asset_manager = new WPSEO_Admin_Asset_Manager();
+		$asset_manager->enqueue_script( 'help-center' );
+
 		$content_sections = $this->get_content_sections();
 
 		$product_title = 'Yoast SEO';
@@ -55,10 +58,11 @@ class WPSEO_Taxonomy_Metabox {
 		echo '<div class="inside">';
 
 		$helpcenter_tab = new WPSEO_Option_Tab( 'tax-metabox', 'Meta box',
-			array( 'video_url' => 'https://yoa.st/metabox-taxonomy-screencast' ) );
+			array( 'video_url' => WPSEO_Shortlinker::get( 'https://yoa.st/metabox-taxonomy-screencast' ) ) );
 
 		$helpcenter = new WPSEO_Help_Center( 'tax-metabox', $helpcenter_tab );
-		$helpcenter->output_help_center();
+		$helpcenter->localize_data();
+		$helpcenter->mount();
 
 		echo '<div id="taxonomy_overall"></div>';
 
@@ -169,6 +173,7 @@ class WPSEO_Taxonomy_Metabox {
 	private function get_social_meta_section() {
 		$options = WPSEO_Options::get_option( 'wpseo_social' );
 		$taxonomy_social_fields = new WPSEO_Taxonomy_Social_Fields( $this->term );
+		$social_admin = new WPSEO_Social_Admin;
 
 		$tabs = array();
 		$single = true;
@@ -182,7 +187,7 @@ class WPSEO_Taxonomy_Metabox {
 
 			$tabs[] = new WPSEO_Metabox_Form_Tab(
 				'facebook',
-				$this->taxonomy_tab_content->html( $facebook_meta_fields ),
+				$social_admin->get_premium_notice( 'opengraph' ) . $this->taxonomy_tab_content->html( $facebook_meta_fields ),
 				'<span class="screen-reader-text">' . __( 'Facebook / Open Graph metadata', 'wordpress-seo' ) . '</span><span class="dashicons dashicons-facebook-alt"></span>',
 				array(
 					'link_aria_label' => __( 'Facebook / Open Graph metadata', 'wordpress-seo' ),
@@ -197,7 +202,7 @@ class WPSEO_Taxonomy_Metabox {
 
 			$tabs[] = new WPSEO_Metabox_Form_Tab(
 				'twitter',
-				$this->taxonomy_tab_content->html( $twitter_meta_fields ),
+				$social_admin->get_premium_notice( 'twitter' ) . $this->taxonomy_tab_content->html( $twitter_meta_fields ),
 				'<span class="screen-reader-text">' . __( 'Twitter metadata', 'wordpress-seo' ) . '</span><span class="dashicons dashicons-twitter"></span>',
 				array(
 					'link_aria_label' => __( 'Twitter metadata', 'wordpress-seo' ),
@@ -236,9 +241,9 @@ class WPSEO_Taxonomy_Metabox {
 	 * @return WPSEO_Metabox_Section
 	 */
 	private function get_buy_premium_section() {
-		$content = sprintf( "<div class='wpseo-metabox-premium-description'>
+		$content = sprintf( "<div class='wpseo-premium-description'>
 			%s
-			<ul class='wpseo-metabox-premium-advantages'>
+			<ul class='wpseo-premium-advantages-list'>
 				<li>
 					<strong>%s</strong> - %s
 				</li>

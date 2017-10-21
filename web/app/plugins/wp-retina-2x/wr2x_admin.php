@@ -24,7 +24,7 @@ class Meow_WR2X_Admin extends MeowApps_Admin {
 		}
 		if ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'photon' ) ) {
 			echo "<div class='error' style='margin-top: 20px;'><p>";
-			_e( "JetPack's <b>Photon</b> module is not compatible with WP Retina 2x. A common alternative is to use <a href='http://tracking.maxcdn.com/c/97349/3982/378'>MaxCDN</a> (very popular) instead, or CloudFlare.", 'wp-retina-2x' );
+			_e( "JetPack's <b>Photon</b> module breaks features built in WP Retina 2x, as the plugin sends. A common and better alternative to Photon is to use <a href='http://tracking.maxcdn.com/c/97349/3982/378'>MaxCDN</a> (very popular), CloudFlare or Fastly.", 'wp-retina-2x' );
 			echo "</p></div>";
     }
 	}

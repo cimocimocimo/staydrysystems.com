@@ -276,12 +276,16 @@ class Meow_WR2X_Core {
 
   function get_max_filesize() {
   	if ( defined ('HHVM_VERSION' ) ) {
-  		return ini_get( 'upload_max_filesize' ) ? (int)$this->parse_ini_size( ini_get( 'upload_max_filesize' ) ) :
+			$post_max_size = ini_get( 'post_max_size' ) ? (int)$this->parse_ini_size( ini_get( 'post_max_size' ) ) : (int)ini_get( 'hhvm.server.max_post_size' );
+  		$upload_max_filesize = ini_get( 'upload_max_filesize' ) ? (int)$this->parse_ini_size( ini_get( 'upload_max_filesize' ) ) :
   			(int)ini_get( 'hhvm.server.upload.upload_max_file_size' );
   	}
   	else {
-  		return (int)$this->parse_ini_size( ini_get( 'upload_max_filesize' ) );
+			$post_max_size = (int)$this->parse_ini_size( ini_get( 'post_max_size' ) );
+			$upload_max_filesize = (int)$this->parse_ini_size( ini_get( 'upload_max_filesize' ) );
   	}
+		$max = min( $post_max_size, $upload_max_filesize );
+		return $max > 0 ? $max : 66600000;
   }
 
   /**
@@ -859,7 +863,7 @@ class Meow_WR2X_Core {
   function log( $data, $isExtra = false ) {
   	if ( !$this->is_debug() )
   		return;
-  	$fh = fopen( trailingslashit( WP_PLUGIN_DIR ) . 'wp-retina-2x/wp-retina-2x.log', 'a' );
+  	$fh = fopen( trailingslashit( dirname(__FILE__) ) . 'wp-retina-2x.log', 'a' );
   	$date = date( "Y-m-d H:i:s" );
   	fwrite( $fh, "$date: {$data}\n" );
   	fclose( $fh );
@@ -1050,8 +1054,12 @@ class Meow_WR2X_Core {
   					$meta['sizes'][$name]['height'] * 2, $crop, $retina_file, $customCrop );
   			}
   			if ( !file_exists( $retina_file ) ) {
-  				$this->log( "[ERROR] Retina for {$name} could not be created. Full-Size is " . $meta['width'] . "x" . $meta['height'] . " but Retina requires a file of at least " . $meta['sizes'][$name]['width'] * 2 . "x" . $meta['sizes'][$name]['height'] * 2 . "." );
-  				$issue = true;
+					$is_ok = apply_filters( "wr2x_last_chance_generate", false, $id, $retina_file,
+						$meta['sizes'][$name]['width'] * 2, $meta['sizes'][$name]['height'] * 2 );
+					if ( !$is_ok ) {
+	  				$this->log( "[ERROR] Retina for {$name} could not be created. Full-Size is " . $meta['width'] . "x" . $meta['height'] . " but Retina requires a file of at least " . $meta['sizes'][$name]['width'] * 2 . "x" . $meta['sizes'][$name]['height'] * 2 . "." );
+	  				$issue = true;
+					}
   			}
   			else {
   				do_action( 'wr2x_retina_file_added', $id, $retina_file, $name );

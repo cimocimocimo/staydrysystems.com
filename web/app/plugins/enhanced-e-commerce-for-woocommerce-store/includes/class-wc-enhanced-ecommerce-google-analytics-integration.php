@@ -18,7 +18,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
      * @return void
      */
     //set plugin version
-    public $tvc_eeVer = '1.0.21';
+    public $tvc_eeVer = '1.2.0';
     public function __construct() {
         
          //Set Global Variables
@@ -28,7 +28,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         //define plugin ID       
         $this->id = "enhanced_ecommerce_google_analytics";
         $this->method_title = __("Enhanced Ecommerce Google Analytics", "enhanced-e-commerce-for-woocommerce-store");
-        $this->method_description = __("Enhanced Ecommerce is a new feature of Universal Analytics that generates detailed statistics about the users journey from product page to thank you page on your e-store. <br/><a href='http://www.tatvic.com/blog/enhanced-ecommerce/' target='_blank'>Know more about Enhanced Ecommerce.</a><br/><br/><b>Quick Tip:</b> We recently launched an Advanced Google Analytics Plugin for WooCommerce! The plugin offers tracking of 9 Reports of Enhanced Ecommerce, User ID Tracking, 15+ Custom Dimenensions & Metrics, Content Grouping & much more. <a href='https://codecanyon.net/item/actionable-google-analytics-for-woocommerce/9899552' target='_blank'>Learn More</a>", "woocommerce");
+        $this->method_description = __("Enhanced Ecommerce is a new feature of Universal Analytics that generates detailed statistics about the users journey from product page to thank you page on your e-store. <br/><a href='http://www.tatvic.com/blog/enhanced-ecommerce/' target='_blank'>Know more about Enhanced Ecommerce.</a><br/><br/><b>Quick Tip:</b> We recently launched an Advanced Google Analytics Plugin for WooCommerce! The plugin offers tracking of 9 Reports of Enhanced Ecommerce, User ID Tracking, 15+ Custom Dimenensions & Metrics, Content Grouping & much more. <a href='https://codecanyon.net/item/actionable-google-analytics-for-woocommerce/9899552?ref=tatvic' target='_blank'>Learn More</a>", "woocommerce");
 
         //session for product position count
         //session_start removed bcoz it gives warning
@@ -39,7 +39,8 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         //load all the settings
         $this->init_settings();
 
-            // Define user set variables -- Always use short names    
+            // Define user set variables -- Always use short names   
+             $this->tvc_aga = $this->get_option("tvc_aga"); 
         $this->ga_id = $this->get_option("ga_id");
         $this->ga_Dname = $this->get_option("ga_Dname");
         $this->ga_LC = get_woocommerce_currency(); //Local Currency yuppi! Got from Back end 
@@ -155,9 +156,10 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                     }                 }
                    });
                 
-            //Pugin Promotion
-            jQuery("form#mainform").after("<a href=https://codecanyon.net/item/actionable-google-analytics-for-woocommerce/9899552 target=_blank><img src='.plugins_url( '/woo_plugin_promotion.png' , __FILE__ ).' title=Actionable Google Analytics Plugin by Tatvic alt=Actionable Google Analytics Plugin by Tatvic></a>");
-            </script>';
+               //Pugin Promotion
+                jQuery("h1.screen-reader-text").before("<a href=https://codecanyon.net/item/actionable-google-analytics-for-woocommerce/9899552?ref=tatvic target=_blank><img src='.plugins_url( '/aga_woo_1000_200.png' , __FILE__ ).' title=Actionable Google Analytics Plugin by Tatvic alt=Actionable Google Analytics Plugin by Tatvic></a>");
+                jQuery("form#mainform").after("<a href=https://www.tatvic.com/contact/?utm_source=woocommerce_ee_plugin&utm_medium=wordpress_admin&utm_campaign=plugin_promotion target=_blank><img src='.plugins_url( '/owox_banner_700_150.png' , __FILE__ ).' title=Owox Banner Ad alt=Owox Banner Ad></a>");
+                </script>';
         }
     }
 
@@ -231,12 +233,9 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                         ' . $ga_display_feature_code . '
                       
                         ga("send", "pageview");';
-
-        //include this on all pages except order confirmation page.
-        if (!is_order_received_page()) {
+ 
             echo "<script>" . $code . "</script>";
         }
-    }
 
     /**
      * Initialise Settings Form Fields
@@ -316,6 +315,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
      * @return void
      */
     function ecommerce_tracking_code($order_id) {
+        
         global $woocommerce;
         if ($this->disable_tracking($this->ga_eeT) || current_user_can("manage_options") || get_post_meta($order_id, "_tracked", true) == 1)
             return;
@@ -323,7 +323,6 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         $tracking_id = $this->ga_id;
         if (!$tracking_id)
             return;
-
         // Doing eCommerce tracking so unhook standard tracking from the footer
         remove_action("wp_footer", array($this, "ee_settings"));
 
@@ -356,30 +355,14 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
             $ga_display_feature_code = "";
         }
 
-        //add Pageview on order page if user checked Add Standard UA code
-        if ($this->ga_ST) {
-            $ga_pageview = 'ga("send", "pageview");';
-        } else {
-            $ga_pageview = "";
-        }
-
-        $code = '(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,"script","//www.google-analytics.com/analytics.js","ga");
-                        
-            ga("create", "' . esc_js($tracking_id) . '", "' . $set_domain_name . '");
-                        ' . $ga_display_feature_code . '
-            ga("require", "ec", "ec.js");
-                        ' . $ga_pageview . '
-                        ';
         // Order items
         if ($order->get_items()) {
             foreach ($order->get_items() as $item) {
                 $_product = $order->get_product_from_item($item);
-
+                $tvc_prnm = get_the_title($item['product_id']);
                 if (isset($_product->variation_data)) {
-                  $categories=esc_js(woocommerce_get_formatted_variation($_product->variation_data, true));
+                  $categories=esc_js(wc_get_formatted_variation($_product->get_variation_attributes(), true));
+                  
                 } else {
                     $out = array();
                     if(version_compare($woocommerce->version, "2.7", "<")){
@@ -387,7 +370,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                     }else{
                          $categories = get_the_terms($_product->get_id(), "product_cat");
                     }
-                   
+
                     if ($categories) {
                         foreach ($categories as $category) {
                             $out[] = $category->name;
@@ -395,7 +378,6 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                     }
                     $categories=esc_js(join(",", $out));
                 }
-
                 //orderpage Prod json
                 if(version_compare($woocommerce->version, "2.7", "<")){
                     $orderpage_prod_Array[get_permalink($_product->id)]=array(
@@ -410,7 +392,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                      $orderpage_prod_Array[get_permalink($_product->get_id())]=array(
                         "tvc_id" => esc_html($_product->get_id()),
                         "tvc_i" => esc_js($_product->get_sku() ? $_product->get_sku() : $_product->get_id()),
-                        "tvc_n" => esc_js($item["name"]),
+                        "tvc_n" => $tvc_prnm,
                         "tvc_p" => esc_js($order->get_item_total($item)),
                         "tvc_c" => $categories,
                         "tvc_q"=>esc_js($item["qty"])
@@ -442,6 +424,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
            $this->wc_version_compare("tvc_td=" . json_encode($orderpage_trans_Array) . ";");
 
          $code.='
+                 ga("require", "ec", "ec.js");
                 //set local currencies
             ga("set", "&cu", tvc_lc);  
             for(var t_item in tvc_oc){
@@ -526,6 +509,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
      */
     public function product_detail_view() {
 
+        
         if ($this->disable_tracking($this->ga_eeT)) {
             return;
         }
@@ -567,7 +551,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
             $prodpage_detail_json = array();
         }
         //prod page detail view json
-        $this->wc_version_compare("tvc_po=" . json_encode($prodpage_detail_json) . ";");
+       $this->wc_version_compare("tvc_po=" . json_encode($prodpage_detail_json) . ";");
         $code = '
         ga("require", "ec", "ec.js");    
         ga("ec:addProduct", {
@@ -734,7 +718,6 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                         
                 );
             }
-               
         }
         //category page, search page and shop page json
         else if (is_product_category() || is_search() || is_shop()) {
@@ -821,15 +804,14 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         $this->wc_version_compare("tvc_pgc=" . json_encode($catpage_json) . ";");
         $this->wc_version_compare("catpage_json_ATC_link=" . json_encode($catpage_json_ATC_link) . ";");
         
-        
         $hmpg_impressions_jQ = '
                   ga("require", "ec", "ec.js");
                   ga("set", "&cu", tvc_lc);
-        function t_products_impre_clicks(t_json_name,t_action,t_list){
+        function t_products_impre_clicks(t_json_name,t_action){
                    t_send_threshold=0;
                    t_prod_pos=0;
                    
-                    t_json_length=Object.keys(t_json_name).length
+                    t_json_length=Object.keys(t_json_name).length;
                         
                     for(var t_item in t_json_name) {
             t_send_threshold++;
@@ -839,7 +821,6 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                             "id": t_json_name[t_item].tvc_i,
                             "name": t_json_name[t_item].tvc_n,
                             "category": t_json_name[t_item].tvc_c,
-                            "list":t_list,
                             "price": t_json_name[t_item].tvc_p,
                             "position": t_json_name[t_item].tvc_po,
                         });
@@ -860,7 +841,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         }
                 
         //function for comparing urls in json object
-        function prod_exists_in_JSON(t_url,t_json_name,t_list,t_action){
+        function prod_exists_in_JSON(t_url,t_json_name,t_action){
                                     if(t_json_name.hasOwnProperty(t_url)){
                                         t_call_fired=true;
                     ga("ec:addProduct", {              
@@ -870,7 +851,6 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                                             "price": t_json_name[t_url].tvc_p,
                                             "position": t_json_name[t_url].tvc_po,
                     });
-                    ga("ec:setAction", "click", {"list": t_list});
                     ga("send", "event", "Enhanced-Ecommerce","click", "product_click_"+t_action, {"nonInteraction": 1});  
                                    }else{
                                    t_call_fired=false;
@@ -903,17 +883,17 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         if(is_home() || is_front_page()){
        $hmpg_impressions_jQ .='
                 if(tvc_fp.length !== 0){
-                    t_products_impre_clicks(tvc_fp,"fp","Featured Products");       
+                    t_products_impre_clicks(tvc_fp,"fp");       
                 }
                 if(tvc_rcp.length !== 0){
-                    t_products_impre_clicks(tvc_rcp,"rp","Recent Products");    
+                    t_products_impre_clicks(tvc_rcp,"rp");    
                 }
                 jQuery("a:not([href*=add-to-cart],.product_type_variable, .product_type_grouped)").on("click",function(){
             t_url=jQuery(this).attr("href");
                         //home page call for click
-                        t_call_fired=prod_exists_in_JSON(t_url,tvc_fp,"Featured Products","fp");
+                        t_call_fired=prod_exists_in_JSON(t_url,tvc_fp,"fp");
                         if(!t_call_fired){
-                            prod_exists_in_JSON(t_url,tvc_rcp,"Recent Products","rp");
+                            prod_exists_in_JSON(t_url,tvc_rcp,"rp");
                         }    
                 });
                 //ATC click
@@ -935,13 +915,13 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
             $hmpg_impressions_jQ .='
                 //search page json
                 if(tvc_pgc.length !== 0){
-                    t_products_impre_clicks(tvc_pgc,"srch","Search Results");   
+                    t_products_impre_clicks(tvc_pgc,"srch");   
                 }
                 //search page prod click
                 jQuery("a:not(.product_type_variable, .product_type_grouped)").on("click",function(){
                     t_url=jQuery(this).attr("href");
                      //cat page prod call for click
-                     prod_exists_in_JSON(t_url,catpage_json,"Search Results","srch");
+                     prod_exists_in_JSON(t_url,tvc_pgc,"srch");
                      });
                 
             '; 
@@ -949,13 +929,13 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                 //product page releted products
                 $hmpg_impressions_jQ .='
                 if(tvc_rdp.length !== 0){
-                    t_products_impre_clicks(tvc_rdp,"rdp","Related Products");  
+                    t_products_impre_clicks(tvc_rdp,"rdp");  
                 }          
                 //product click - image and product name
                 jQuery("a:not(.product_type_variable, .product_type_grouped)").on("click",function(){
                     t_url=jQuery(this).attr("href");
                      //prod page related call for click
-                     prod_exists_in_JSON(t_url,tvc_rdp,"Related Products","rdp");
+                     prod_exists_in_JSON(t_url,tvc_rdp,"rdp");
                 });  
                 //Prod ATC link click in related product section
                 jQuery("a[href*=add-to-cart]").on("click",function(){
@@ -972,13 +952,13 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
             $hmpg_impressions_jQ .='
                 //category page json
                 if(tvc_pgc.length !== 0){
-                    t_products_impre_clicks(tvc_pgc,"cp","Category Page");  
+                    t_products_impre_clicks(tvc_pgc,"cp");  
                 }
                //Prod category ATC link click in related product section
                 jQuery("a:not(.product_type_variable, .product_type_grouped)").on("click",function(){
                      t_url=jQuery(this).attr("href");
                      //cat page prod call for click
-                     prod_exists_in_JSON(t_url,tvc_pgc,"Category Page","cp");
+                     prod_exists_in_JSON(t_url,tvc_pgc,"cp");
                      });
                
         ';
@@ -986,13 +966,13 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
             $hmpg_impressions_jQ .='
                 //shop page json
                 if(tvc_pgc.length !== 0){
-                    t_products_impre_clicks(tvc_pgc,"sp","Shop Page");  
+                    t_products_impre_clicks(tvc_pgc,"sp");  
                 }
                 //shop page prod click
                 jQuery("a:not(.product_type_variable, .product_type_grouped)").on("click",function(){
                     t_url=jQuery(this).attr("href");
                      //cat page prod call for click
-                     prod_exists_in_JSON(t_url,tvc_pgc,"Shop Page","sp");
+                     prod_exists_in_JSON(t_url,tvc_pgc,"sp");
                      });
                 
                      

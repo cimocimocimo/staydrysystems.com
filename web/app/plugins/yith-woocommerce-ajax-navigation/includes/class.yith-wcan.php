@@ -202,7 +202,7 @@ if ( ! class_exists( 'YITH_WCAN' ) ) {
         }
 
         public function init() {
-            if ( is_admin() ) {
+	        if ( is_admin() && ! is_ajax() ) {
                 $this->admin = new YITH_WCAN_Admin( $this->version );
             }
             else {
