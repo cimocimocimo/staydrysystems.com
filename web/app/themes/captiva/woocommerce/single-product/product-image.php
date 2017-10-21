@@ -11,7 +11,7 @@ if ( !defined( 'ABSPATH' ) )
 
 global $post, $woocommerce, $product;
 
-$cap_attach_ids = $product->get_gallery_attachment_ids();
+$cap_attach_ids = $product->get_gallery_image_ids();
 ?>
 
 <div class="images cap-prod-gallery">

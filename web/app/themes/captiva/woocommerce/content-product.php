@@ -11,7 +11,7 @@
 global $product, $woocommerce_loop, $captiva_options;
 $cap_product_flip = '';
 $cap_product_flip = $captiva_options['cap_product_thumb_flip'];
-$cap_attachment_ids = $product->get_gallery_attachment_ids();
+$cap_attachment_ids = $product->get_gallery_image_ids();
 
 // Store loop count we're currently on
 if ( empty( $woocommerce_loop['loop'] ) )
@@ -72,7 +72,7 @@ $grid_count = $captiva_options['product_grid_count'];
 <div class="cap-product-meta-wrap">
     <div class="cap-product-info">
         <a href="<?php the_permalink(); ?>">
-            <?php $product_cats = strip_tags( $product->get_categories( '|', '', '' ) ); ?>
+<?php $product_cats = strip_tags( wc_get_product_category_list( '|', '', '' ) ); ?>
             <?php if ( $captiva_options['cap_hide_categories'] == 'no' ) { ?>
                 <span class="category"><?php list($firstpart) = explode( '|', $product_cats );
             echo $firstpart;
@@ -92,5 +92,5 @@ $grid_count = $captiva_options['product_grid_count'];
 <?php the_excerpt(); ?>
     </div>
 </div>
-<?php woocommerce_get_template( 'loop/sale-flash.php' ); ?>
+<?php wc_get_template( 'loop/sale-flash.php' ); ?>
 </li>

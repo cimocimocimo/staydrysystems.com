@@ -10,7 +10,7 @@
  */
 global $product, $woocommerce_loop;
 
-$attachment_ids = $product->get_gallery_attachment_ids();
+$attachment_ids = $product->get_gallery_image_ids();
 ?>         
 
 <li class="up-sell-product col-lg-12 col-md-12 col-sm-12">

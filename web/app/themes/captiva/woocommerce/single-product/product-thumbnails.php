@@ -11,7 +11,7 @@ if ( !defined( 'ABSPATH' ) )
 
 global $post, $product, $woocommerce;
 
-$attachment_ids = $product->get_gallery_attachment_ids();
+$attachment_ids = $product->get_gallery_image_ids();
 
 if ( $attachment_ids ) {
     ?>
