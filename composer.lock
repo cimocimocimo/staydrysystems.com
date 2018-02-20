@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "composer/installers",
-            "version": "v1.4.0",
+            "version": "v1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "9ce17fb70e9a38dd8acff0636a29f5cf4d575c1b"
+                "reference": "049797d727261bf27f2690430d935067710049c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/9ce17fb70e9a38dd8acff0636a29f5cf4d575c1b",
-                "reference": "9ce17fb70e9a38dd8acff0636a29f5cf4d575c1b",
+                "url": "https://api.github.com/repos/composer/installers/zipball/049797d727261bf27f2690430d935067710049c2",
+                "reference": "049797d727261bf27f2690430d935067710049c2",
                 "shasum": ""
             },
             "require": {
@@ -29,7 +29,7 @@
             },
             "require-dev": {
                 "composer/composer": "1.0.*@dev",
-                "phpunit/phpunit": "4.1.*"
+                "phpunit/phpunit": "^4.8.36"
             },
             "type": "composer-plugin",
             "extra": {
@@ -100,15 +100,18 @@
                 "lavalite",
                 "lithium",
                 "magento",
+                "majima",
                 "mako",
                 "mediawiki",
                 "modulework",
+                "modx",
                 "moodle",
                 "osclass",
                 "phpbb",
                 "piwik",
                 "ppi",
                 "puppet",
+                "pxcms",
                 "reindex",
                 "roundcube",
                 "shopware",
@@ -121,24 +124,24 @@
                 "zend",
                 "zikula"
             ],
-            "time": "2017-08-09T07:53:48+00:00"
+            "time": "2017-12-29T09:13:20+00:00"
         },
         {
             "name": "johnpbloch/wordpress",
-            "version": "4.8.2",
+            "version": "4.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnpbloch/wordpress.git",
-                "reference": "d500aae1793990e4874cf794b6cf88ce60a38918"
+                "reference": "34627d0b992bbe9ed909c73b27307297fb21f2a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnpbloch/wordpress/zipball/d500aae1793990e4874cf794b6cf88ce60a38918",
-                "reference": "d500aae1793990e4874cf794b6cf88ce60a38918",
+                "url": "https://api.github.com/repos/johnpbloch/wordpress/zipball/34627d0b992bbe9ed909c73b27307297fb21f2a4",
+                "reference": "34627d0b992bbe9ed909c73b27307297fb21f2a4",
                 "shasum": ""
             },
             "require": {
-                "johnpbloch/wordpress-core": "4.8.2",
+                "johnpbloch/wordpress-core": "4.9.2",
                 "johnpbloch/wordpress-core-installer": "^1.0",
                 "php": ">=5.3.2"
             },
@@ -160,27 +163,27 @@
                 "cms",
                 "wordpress"
             ],
-            "time": "2017-09-19T22:27:16+00:00"
+            "time": "2018-01-16T23:12:18+00:00"
         },
         {
             "name": "johnpbloch/wordpress-core",
-            "version": "4.8.2",
+            "version": "4.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnpbloch/wordpress-core.git",
-                "reference": "706faa0d7b6b57a25d4acd18331dd71dfa6b01cf"
+                "reference": "59292fac30315323ce99e1a1d362015581e5d8e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnpbloch/wordpress-core/zipball/706faa0d7b6b57a25d4acd18331dd71dfa6b01cf",
-                "reference": "706faa0d7b6b57a25d4acd18331dd71dfa6b01cf",
+                "url": "https://api.github.com/repos/johnpbloch/wordpress-core/zipball/59292fac30315323ce99e1a1d362015581e5d8e6",
+                "reference": "59292fac30315323ce99e1a1d362015581e5d8e6",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
             },
             "provide": {
-                "wordpress/core-implementation": "4.8.2"
+                "wordpress/core-implementation": "4.9.2"
             },
             "type": "wordpress-core",
             "notification-url": "https://packagist.org/downloads/",
@@ -200,20 +203,20 @@
                 "cms",
                 "wordpress"
             ],
-            "time": "2017-09-19T22:27:11+00:00"
+            "time": "2018-01-16T23:12:12+00:00"
         },
         {
             "name": "johnpbloch/wordpress-core-installer",
-            "version": "1.0.0",
+            "version": "1.0.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnpbloch/wordpress-core-installer.git",
-                "reference": "e9e767f2d9f994f358c34b41def2c410ad8717f2"
+                "reference": "7941acd71725710a789daabe0557429da63e7ac6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnpbloch/wordpress-core-installer/zipball/e9e767f2d9f994f358c34b41def2c410ad8717f2",
-                "reference": "e9e767f2d9f994f358c34b41def2c410ad8717f2",
+                "url": "https://api.github.com/repos/johnpbloch/wordpress-core-installer/zipball/7941acd71725710a789daabe0557429da63e7ac6",
+                "reference": "7941acd71725710a789daabe0557429da63e7ac6",
                 "shasum": ""
             },
             "require": {
@@ -249,7 +252,7 @@
             "keywords": [
                 "wordpress"
             ],
-            "time": "2017-05-31T18:42:33+00:00"
+            "time": "2018-01-29T14:49:29+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -303,15 +306,15 @@
         },
         {
             "name": "wpackagist-plugin/akismet",
-            "version": "4.0",
+            "version": "4.0.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/akismet/",
-                "reference": "tags/4.0"
+                "reference": "tags/4.0.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/akismet.4.0.zip",
+                "url": "https://downloads.wordpress.org/plugin/akismet.4.0.2.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -323,15 +326,15 @@
         },
         {
             "name": "wpackagist-plugin/contact-form-7",
-            "version": "4.9",
+            "version": "4.9.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/contact-form-7/",
-                "reference": "tags/4.9"
+                "reference": "tags/4.9.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/contact-form-7.4.9.zip",
+                "url": "https://downloads.wordpress.org/plugin/contact-form-7.4.9.2.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -343,15 +346,15 @@
         },
         {
             "name": "wpackagist-plugin/duracelltomi-google-tag-manager",
-            "version": "1.7.1",
+            "version": "1.7.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/duracelltomi-google-tag-manager/",
-                "reference": "tags/1.7.1"
+                "reference": "tags/1.7.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/duracelltomi-google-tag-manager.1.7.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/duracelltomi-google-tag-manager.1.7.2.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -363,15 +366,15 @@
         },
         {
             "name": "wpackagist-plugin/maintenance",
-            "version": "3.5.1",
+            "version": "3.6",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/maintenance/",
-                "reference": "tags/3.5.1"
+                "reference": "tags/3.6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/maintenance.3.5.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/maintenance.3.6.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -383,15 +386,15 @@
         },
         {
             "name": "wpackagist-plugin/w3-total-cache",
-            "version": "0.9.5.4",
+            "version": "0.9.6",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/w3-total-cache/",
-                "reference": "tags/0.9.5.4"
+                "reference": "tags/0.9.6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/w3-total-cache.0.9.5.4.zip",
+                "url": "https://downloads.wordpress.org/plugin/w3-total-cache.0.9.6.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -403,15 +406,15 @@
         },
         {
             "name": "wpackagist-plugin/wp-mail-smtp",
-            "version": "0.10.1",
+            "version": "1.2.4",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wp-mail-smtp/",
-                "reference": "tags/0.10.1"
+                "reference": "tags/1.2.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-mail-smtp.0.10.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/wp-mail-smtp.1.2.4.zip",
                 "reference": null,
                 "shasum": null
             },

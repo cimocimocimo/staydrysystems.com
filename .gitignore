@@ -53,3 +53,4 @@ node_modules
 bin
 .vagrant
 
+/.ac-php-conf.json

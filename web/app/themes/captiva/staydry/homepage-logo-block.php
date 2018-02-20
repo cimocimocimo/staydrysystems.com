@@ -12,14 +12,14 @@ add_action('homepage_before_footer', function(){
             <div class="wpb_wrapper">
               <div class="featured-products-row">
                 <div class="wrapper">
-                  <h2>Featured Products</h2>
+                  <h2>StayDry Products</h2>
                   <a class="product clearfix" title="Deluxe Shower Curtain Kit" href="/shop/deluxe-shower-curtain-kit/">
                     <div class="image">
-                      <img width="150" height="150" src="/app/uploads/2014/07/Deluxe-Shower-150x150.png" alt="Deluxe-Shower">
+                      <img width="150" height="150" src="/app/uploads/2014/12/fabric-kit-detail-150x150.jpg" alt="Deluxe-Shower">
                     </div>
                     <div class="text">
-                      <h3>Deluxe Shower Curtain Kit</h3>
-                      <p>The complete Shower Door in a Bag!</p>
+                      <h3>Shower Curtain Kit</h3>
+                      <p>Stops water escaping from your shower</p>
                     </div>
                   </a>
                   <a class="product clearfix" title="Shower Curtain Sealer" href="/shop/shower-curtain-sealer/">
@@ -28,7 +28,7 @@ add_action('homepage_before_footer', function(){
                     </div>
                     <div class="text">
                       <h3>Shower Curtain Sealer</h3>
-                      <p>Seals your shower curtain to the wall</p>
+                      <p>Seals your existing shower curtain to the wall</p>
                     </div>
                   </a>
                   <a class="product clearfix" title="Commercial Shower Curtain Kit (with mesh)" href="/commercial-shower-curtains/">
@@ -37,7 +37,7 @@ add_action('homepage_before_footer', function(){
                     </div>
                     <div class="text">
                       <h3>Commercial Shower Curtains</h3>
-                      <p>For Hospitals and Insitutions</p>
+                      <p>For Hospitals, Senior Housing and Universities</p>
                     </div>
                   </a>
                   <a class="product clearfix" title="Extra Long Shower Rings" href="/shop/extra-long-shower-rings/">
@@ -46,7 +46,7 @@ add_action('homepage_before_footer', function(){
                     </div>
                     <div class="text">
                       <h3>Extra-Long Shower Rings</h3>
-                      <p>The perfect height without moving your shower rod</p>
+                      <p>lengthens your curtain. “Now in two styles”</p>
                     </div>
                   </a>
                   <a class="product clearfix" title="Collapsible Shower Water Dam" href="/shop/collapsible-shower-water-dam/">
@@ -58,12 +58,12 @@ add_action('homepage_before_footer', function(){
                       <p>Stops water from spilling out of accesable roll-in shower stalls</p>
                     </div>
                   </a>
-                  <a class="product clearfix" title="Clearance Items" href="/clearance-items/">
+                  <a class="product clearfix" title="Clearance &amp; Replacement Items" href="/clearance-items/">
                     <div class="image">
                       <img width="150" height="150" src="/app/uploads/2014/07/enviro-off-angle-processed-cropped-2-230x270-150x150.jpg" alt="enviro-off-angle-processed-cropped-2-230x270">
                     </div>
                     <div class="text">
-                      <h3>Clearance Items!</h3>
+                      <h3>Clearance Items &amp; Replacement Components!</h3>
                       <p>Clearance items are available in limited quantities.</p>
                     </div>
                   </a>
@@ -81,10 +81,10 @@ add_action('homepage_before_footer', function(){
       <h2>Some of Our Satisfied Customers</h2>
       <div class="logo-row clearfix">
         <div class="customer-logo">
-          <img src="<?php echo get_template_directory_uri(); ?>/staydry/images/VIHA.jpg" style="width: 188.4559599879023px; height: 100.76624799353144px; margin-top: 44px;">
+          <img src="<?php echo get_template_directory_uri(); ?>/staydry/images/VIHA.png" style="width: 188.4559599879023px; height: 100.76624799353144px; margin-top: 34px;">
         </div>
         <div class="customer-logo">
-          <img src="<?php echo get_template_directory_uri(); ?>/staydry/images/super-8-motel.png" style="width: 111.51267256295124px; height: 170.29454647210386px; margin-top: 10px;">
+          <img src="<?php echo get_template_directory_uri(); ?>/staydry/images/hyatt-hotels-1.png" style="width: 282.76827038556166px; height: auto;">
         </div>
         <div class="customer-logo">
           <img src="<?php echo get_template_directory_uri(); ?>/staydry/images/mount-sinai-hospital-logo.png">
@@ -94,6 +94,9 @@ add_action('homepage_before_footer', function(){
         </div>
         <div class="customer-logo">
           <img src="<?php echo get_template_directory_uri(); ?>/staydry/images/mcmaster-university.jpg" style="width: 185.33633972734384px; height: 102.46236667853155px; margin-top: 44px;">
+        </div>
+        <div class="customer-logo">
+          <img src="<?php echo get_template_directory_uri(); ?>/staydry/images/anytime-fitness.png" style="width: 275.6084178685404px;">
         </div>
         <div class="clear"></div>
       </div>
