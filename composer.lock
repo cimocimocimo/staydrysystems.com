@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b90d27c0698e3a69fb9f9d6186cebddd",
+    "content-hash": "ada62551c414f446435590878ca9e6ea",
     "packages": [
         {
             "name": "composer/installers",
@@ -383,6 +383,26 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/maintenance/"
+        },
+        {
+            "name": "wpackagist-plugin/redirection",
+            "version": "3.2.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/redirection/",
+                "reference": "tags/3.2.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/redirection.3.2.1.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/redirection/"
         },
         {
             "name": "wpackagist-plugin/w3-total-cache",
