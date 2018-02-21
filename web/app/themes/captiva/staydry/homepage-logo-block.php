@@ -58,7 +58,7 @@ add_action('homepage_before_footer', function(){
                       <p>Stops water from spilling out of accesable roll-in shower stalls</p>
                     </div>
                   </a>
-                  <a class="product clearfix" title="Clearance &amp; Replacement Items" href="/clearance-items/">
+                  <a class="product clearfix" title="Clearance &amp; Replacement Items" href="/product-category/clearance-replacement/">
                     <div class="image">
                       <img width="150" height="150" src="/app/uploads/2014/07/enviro-off-angle-processed-cropped-2-230x270-150x150.jpg" alt="enviro-off-angle-processed-cropped-2-230x270">
                     </div>
