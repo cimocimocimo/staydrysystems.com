@@ -49,7 +49,7 @@ if ( ! class_exists( 'YITH_WCWL_Init' ) ) {
 		 * @var string
 		 * @since 1.0.0
 		 */
-		public $version = '2.1.2';
+		public $version = '2.2.1';
 
 		/**
 		 * Plugin database version
@@ -209,6 +209,7 @@ if ( ! class_exists( 'YITH_WCWL_Init' ) ) {
 						YITH_WCWL()->details['wishlist_id']     = $details['wishlist_id'];
 						YITH_WCWL()->details['quantity']        = $details['quantity'];
 						YITH_WCWL()->details['user_id']         = get_current_user_id();
+						YITH_WCWL()->details['dateadded']       = isset( $details['dateadded'] ) ? $details['dateadded'] : false;
 
 						$ret_val = YITH_WCWL()->add();
 					}

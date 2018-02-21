@@ -54,7 +54,7 @@ $frontend = array(
             ),
 
             array(
-                'name' => __( 'Scroll top anchor (only for mobiles)', 'yith-woocommerce-ajax-navigation' ),
+                'name' => __( 'Scroll top anchor', 'yith-woocommerce-ajax-navigation' ),
                 'desc' => __( 'Enter here the HTML tag for the scroll to top feature', 'yith-woocommerce-ajax-navigation' ) . ' (Default: <strong>.yit-wcan-container</strong>)',
                 'id'   => 'yith_wcan_ajax_scroll_top_class',
                 'type' => 'text',

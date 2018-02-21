@@ -3,8 +3,8 @@
 Contributors: yithemes
 Tags: woocommerce ajax product filter download, woocommerce, widget, ajax, ajax filtered nav, ajax navigation, ajax filtered navigation, woocommerce layered navigation, woocommerce layered nav, product filter, product filters, ajax product filter, woocommerce ajax product filter, woocommerce filters, sidebar filter, sidebar ajax filter, ajax price filter, price filter, product sorting, woocommerce filter, taxonomy filter, attribute filter, attributes filter, woocommerce product sort, ajax sort, woocommerce ajax product filter, advanced product filters, ajax product filters, filters, woocommerce ajax product filters, woocommerce product filters, woocommerce product filters, category filter, attribute filters, woocommerce products filter, woocommerce price filter, yit, yith, yithemes
 Requires at least: 4.0
-Tested up to: 4.8.2
-Stable tag: 3.4.6
+Tested up to: 4.9.2
+Stable tag: 3.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,7 +21,7 @@ All this can be done in a quick and very intuitive way that will certainly help 
 
 
 Working demos for YITH WooCommerce Ajax Product Filter are available here:
-**[LIVE DEMO 1](http://live.yithemes.com/globe/shop/?layout-shop=sidebar-right)** - **[LIVE DEMO 2](http://preview.yithemes.com/bazar/shop/)**
+**[LIVE DEMO](https://plugins.yithemes.com/yith-woocommerce-ajax-product-filter/)**
 
 Full documentation for YITH WooCommerce Ajax Product Filter is available [here](http://yithemes.com/docs-plugins/yith-woocommerce-ajax-product-filter/).
 
@@ -158,6 +158,17 @@ If you want to see a demonstration version of the premium plugin, you can see it
 10. Admin: YIT Plugins -> Ajax Product Filter -> Custom Style
 
 == Changelog ==
+
+= 3.5.0 - Released: 01 Feb, 2018 =
+
+* New: 100% German translation (Thanks to Thomas)
+* New: Support for WooCommerce 3.3.0
+* Fix: Undefined index "dropdown-type" in shop page
+* Fix: Reset filter doesn't works if the user filter by categories and use only one filter
+* Fix: Show only parent term with attrbute filter doesn't works
+* Fix: $count doesn't exists with OR query type set
+* Dev: yith_wcan_can_be_displayed hook
+* Dev: yith_wcan_list_type_empty_filter_class hook
 
 = 3.4.6 - Released: 12 Oct, 2017 =
 

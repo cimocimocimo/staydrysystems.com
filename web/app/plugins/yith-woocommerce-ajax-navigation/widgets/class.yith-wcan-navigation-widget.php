@@ -114,7 +114,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
 
                 if ( in_array( $display_type, apply_filters( 'yith_wcan_display_type_list', array( 'list' ) ) ) ) {
 
-                                     $ancestors = yith_wcan_wp_get_terms(
+                     $ancestors = yith_wcan_wp_get_terms(
                         array(
                             'taxonomy'      => $taxonomy,
                             'parent'        => 0,
@@ -134,7 +134,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                         }
 
                         foreach( $ancestors as $ancestor ){
-                            $tree[ $ancestor->term_id ] = yit_reorder_hierachical_categories( $ancestor->term_id, $taxonomy );
+                            $tree[ $ancestor->term_id ] = 'parent' == $instance['display'] ? array() : yit_reorder_hierachical_categories( $ancestor->term_id, $taxonomy );
                         }
                     }
 
@@ -144,13 +144,13 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                     
                     // List display
                     echo "<ul class='yith-wcan-list yith-wcan {$instance['extra_class']}'>";
-                    
+
                     $this->get_list_html( $tree, $taxonomy, $query_type, $display_type, $instance, $terms_type_list, $current_term, $args, $is_child_class, $is_parent_class, $is_chosen_class, 0, $filter_term_field );
 
                     echo "</ul>";
                 }
                 elseif ( $display_type == 'select' ) {
-                    $dropdown_label = apply_filters( 'yith_wcan_dropdown_label', __( 'Filters:', 'yith-woocommerce-ajax-navigation' ), $this );
+                    $dropdown_label = apply_filters( 'yith_wcan_dropdown_label', __( 'Filters:', 'yith-woocommerce-ajax-navigation' ), $this, $instance );
                     ?>
 
                     <a class="yit-wcan-select-open" href="#"><?php echo apply_filters( 'yith_wcan_dropdown_default_label', $dropdown_label ) ?></a>
@@ -574,8 +574,22 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                         $link = esc_url( urldecode( apply_filters( 'woocommerce_layered_nav_link', $link ) ) );
                         $term_id = yit_wcan_localize_terms( $term->term_id, $taxonomy );
 
-                        if ( ! empty( $instance['colors'][$term_id] ) ) {
-                            $li_style = apply_filters( "{$this->id}-li_style", 'background-color:' . $instance['colors'][$term_id] . ';', $instance );
+	                    $color = '';
+
+	                    if( ! empty( $instance['colors'][$term_id] ) ){
+		                    $color = $instance['colors'][$term_id];
+	                    }
+
+	                    elseif( function_exists( 'ywccl_get_term_meta' ) && ! empty( $wc_product_attributes[ $term->taxonomy ]->attribute_type ) && 'colorpicker' == $wc_product_attributes[ $term->taxonomy ]->attribute_type ) {
+		                    $colors = ywccl_get_term_meta( $term->term_id, $term->taxonomy . '_yith_wccl_value' );
+		                    if( ! empty( $colors ) ){
+		                        $colors = explode( ',', $colors );
+		                        $color = $colors[0];
+                            }
+	                    }
+
+                        if ( $color ) {
+                            $li_style = apply_filters( "{$this->id}-li_style", 'background-color:' . $color . ';', $instance );
 
                             echo '<li ' . $class . '>';
 
@@ -1249,6 +1263,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
 
                     else {
                         $to_print = apply_filters( 'yith_wcan_show_no_products_attributes', ( ! $filter_by_tags_hierarchical && $query_type != 'and' ), $count, $term );
+                        $class = apply_filters( 'yith_wcan_list_type_empty_filter_class', $class );
 
                         $to_print && printf( '<li %s><span>%s</span>', $class, $term->name );
                         $li_printed = true;

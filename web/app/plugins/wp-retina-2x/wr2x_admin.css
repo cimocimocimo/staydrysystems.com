@@ -9,13 +9,13 @@
 }
 
 .wr2x-hover-drop .wr2x-title {
-	background: url('./img/replace.png');
+	background: url('replace.png');
 	background-position: 5px 4px;
 	background-repeat: no-repeat;
 }
 
 .wr2x-loading-file .wr2x-title {
-	background: url('./img/loading.gif');
+	background: url('loading.gif');
 	background-position: 5px 1px;
 	background-repeat: no-repeat;
 }
@@ -127,7 +127,7 @@
 
 .wr2x-loading-file .wr2x-dragdrop {
 	background-color: rgb(243, 243, 243);
-	background-image: url('./img/loading.gif');
+	background-image: url('loading.gif');
 	background-size: 48px 48px;
 	background-position-y: 4px;
 	background-repeat: no-repeat;

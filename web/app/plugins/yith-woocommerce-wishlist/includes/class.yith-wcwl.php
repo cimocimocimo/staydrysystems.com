@@ -158,7 +158,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
             $wishlist_id = ( isset( $this->details['wishlist_id'] ) && strcmp( $this->details['wishlist_id'], 0 ) != 0 ) ? $this->details['wishlist_id'] : false;
             $quantity = ( isset( $this->details['quantity'] ) ) ? ( int ) $this->details['quantity'] : 1;
             $user_id = ( ! empty( $this->details['user_id'] ) ) ? $this->details['user_id'] : false;
-            $wishlist_name = ( ! empty( $this->details['wishlist_name'] ) ) ? $this->details['wishlist_name'] : '';
+            $dateadded = ( ! empty( $this->details['$dateadded'] ) ) ? $this->details['$dateadded'] : '';
 
             do_action( 'yith_wcwl_adding_to_wishlist', $prod_id, $wishlist_id, $user_id );
 
@@ -167,7 +167,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
             $wishlist_id = apply_filters( 'yith_wcwl_adding_to_wishlist_wishlist_id', $wishlist_id );
             $quantity = apply_filters( 'yith_wcwl_adding_to_wishlist_quantity', $quantity );
             $user_id = apply_filters( 'yith_wcwl_adding_to_wishlist_user_id', $user_id );
-            $wishlist_name = apply_filters( 'yith_wcwl_adding_to_wishlist_wishlist_name', $wishlist_name );
+	        $dateadded = apply_filters( 'yith_wcwl_adding_to_wishlist_dateadded', $dateadded );
 
             if( defined('ICL_SITEPRESS_VERSION') ) {
                 $prod_id = yit_wpml_object_id( $prod_id, 'product', true, $sitepress->get_default_language() );
@@ -197,7 +197,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
                     'prod_id' => $prod_id,
                     'user_id' => $user_id,
                     'quantity' => $quantity,
-                    'dateadded' => date( 'Y-m-d H:i:s' )
+                    'dateadded' => ! empty( $dateadded ) ? $dateadded : date( 'Y-m-d H:i:s' )
                 );
 
                 if( ! empty( $wishlist_id ) && strcmp( $wishlist_id, 'new' ) != 0 ){
@@ -245,7 +245,8 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
                 $cookie = array(
                     'prod_id' => $prod_id,
                     'quantity' => $quantity,
-                    'wishlist_id' => $wishlist_id
+                    'wishlist_id' => $wishlist_id,
+	                'dateadded' => ! empty( $dateadded ) ? $dateadded : date( 'Y-m-d H:i:s' )
                 );
 
                 $wishlist = yith_getcookie( 'yith_wcwl_products' );
@@ -289,6 +290,8 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
             $wishlist_id = ( isset( $this->details['wishlist_id'] ) && is_numeric( $this->details['wishlist_id'] ) ) ? $this->details['wishlist_id'] : false;
             $user_id = ( ! empty( $this->details['user_id'] ) ) ? $this->details['user_id'] : false;
 
+            do_action( 'yith_wcwl_removing_from_wishlist', $prod_id, $wishlist_id, $user_id );
+
             if( defined('ICL_SITEPRESS_VERSION') ) {
                 $prod_id = yit_wpml_object_id( $prod_id, 'product', true, $sitepress->get_default_language() );
             }
@@ -326,11 +329,11 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
                         delete_transient( 'yith_wcwl_user_total_count_' . $user_id );
                     }
 
-                    return true;
+                    $result = true;
                 }
                 else {
                     $this->errors[] = __( 'An error occurred while removing products from the wishlist', 'yith-woocommerce-wishlist' );
-                    return false;
+                    $result = false;
                 }
             }
             else {
@@ -344,8 +347,14 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 
                 yith_setcookie( 'yith_wcwl_products', $wishlist );
 
-                return true;
+                $result = true;
             }
+
+            if( $result ){
+	            do_action( 'yith_wcwl_removed_from_wishlist', $prod_id, $wishlist_id, $user_id );
+            }
+
+	        return $result;
         }
 
 	    /**
@@ -447,7 +456,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
                     LEFT JOIN {$wpdb->yith_wcwl_wishlists} AS l ON l.`ID` = i.`wishlist_id`
                     INNER JOIN {$wpdb->posts} AS p ON p.ID = i.prod_id 
                     WHERE 1 AND p.post_type = %s AND p.post_status = %s";
-			    $sql .= $hidden_products ? " AND p.ID NOT IN ( " . implode( ', ', $hidden_products ) . " )" : "";
+			    $sql .= $hidden_products ? " AND p.ID NOT IN ( " . implode( ', ', array_filter( $hidden_products, 'esc_sql' ) ) . " )" : "";
 
 			    $sql_args = array(
 				    'product',
@@ -520,7 +529,9 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 			    $sql .= " GROUP BY i.prod_id, l.ID";
 
 			    if( ! empty( $limit ) && isset( $offset ) ){
-				    $sql .= " LIMIT " . $offset . ", " . $limit;
+				    $sql .= " LIMIT %d, %d";
+				    $sql_args[] = $offset;
+				    $sql_args[] = $limit;
 			    }
 
 			    $wishlist = $wpdb->get_results( $wpdb->prepare( $sql, $sql_args ), ARRAY_A );
@@ -531,7 +542,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 
 			    $query = "SELECT ID FROM {$wpdb->posts} AS p
                           WHERE post_type = %s AND post_status = %s";
-			    $query .= ! empty( $hidden_products ) ? ( " AND p.ID NOT IN ( " . implode( ', ', $hidden_products ). " )" ) : "";
+			    $query .= ! empty( $hidden_products ) ? ( " AND p.ID NOT IN ( " . implode( ', ', array_filter( $hidden_products, 'esc_sql' ) ). " )" ) : "";
 
 			    $query_args = array(
 				    'product',
@@ -559,7 +570,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 			    }
 		    }
 
-		    return $wishlist;
+		    return apply_filters( 'yith_wcwl_get_products', $wishlist, $args );
 	    }
 
         /**
@@ -581,7 +592,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
                     $count = get_transient( 'yith_wcwl_user_default_count_' . get_current_user_id() );
                 }
 
-                if( true || false === $count ){
+                if( false === $count ){
 	                $hidden_products = yith_wcwl_get_hidden_products();
 
                     $sql  = "SELECT i.`prod_id` AS `cnt`
@@ -589,7 +600,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
                         LEFT JOIN `{$wpdb->yith_wcwl_wishlists}` AS l ON l.ID = i.wishlist_id
                         INNER JOIN `{$wpdb->posts}` AS p ON i.`prod_id` = p.`ID`
                         WHERE p.`post_type` = %s AND p.`post_status` = %s";
-	                $sql .= $hidden_products ? " AND p.ID NOT IN ( " . implode( ', ', $hidden_products ) . " )" : "";
+	                $sql .= $hidden_products ? " AND p.ID NOT IN ( " . implode( ', ', array_filter( $hidden_products, 'esc_sql' ) ) . " )" : "";
                     $args = array(
                         'product',
                         'publish'
@@ -621,7 +632,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 
 	            $query = "SELECT ID FROM {$wpdb->posts} AS p
                           WHERE post_type = %s AND post_status = %s";
-	            $query .= ! empty( $hidden_products ) ? ( " AND p.ID NOT IN ( " . implode( ', ', $hidden_products ). " )" ) : "";
+	            $query .= ! empty( $hidden_products ) ? ( " AND p.ID NOT IN ( " . implode( ', ', array_filter( $hidden_products, 'esc_sql' ) ). " )" ) : "";
 	            $query_args = array(
 		            'product',
 		            'publish'
@@ -664,7 +675,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
                             FROM {$wpdb->posts} AS p
                             WHERE p.`post_type` = %s AND p.`post_status` = %s";
 
-	                $sql .= ! empty( $hidden_products ) ? ( " AND p.ID NOT IN ( " . implode( ', ', $hidden_products ). " )" ) : "";
+	                $sql .= ! empty( $hidden_products ) ? ( " AND p.ID NOT IN ( " . implode( ', ', array_filter( $hidden_products, 'esc_sql' ) ). " )" ) : "";
 
                     $sql .= ")";
 
@@ -682,7 +693,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 
 	            $query = "SELECT ID FROM {$wpdb->posts} AS p
                           WHERE post_type = %s AND post_status = %s";
-	            $query .= ! empty( $hidden_products ) ? ( " AND p.ID NOT IN ( " . implode( ', ', $hidden_products ). " )" ) : "";
+	            $query .= ! empty( $hidden_products ) ? ( " AND p.ID NOT IN ( " . implode( ', ', array_filter( $hidden_products, 'esc_sql' ) ). " )" ) : "";
 
 	            $query_args = array(
 		            'product',
@@ -877,9 +888,9 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
                 $sql .= " AND ( umn.`meta_key` LIKE %s AND ums.`meta_key` LIKE %s AND ( u.`user_email` LIKE %s OR umn.`meta_value` LIKE %s OR ums.`meta_value` LIKE %s ) )";
                 $sql_args[] = 'first_name';
                 $sql_args[] = 'last_name';
-                $sql_args[] = "%" . $user_search . "%";
-                $sql_args[] = "%" . $user_search . "%";
-                $sql_args[] = "%" . $user_search . "%";
+                $sql_args[] = "%" . esc_sql( $user_search ) . "%";
+                $sql_args[] = "%" . esc_sql( $user_search ) . "%";
+                $sql_args[] = "%" . esc_sql( $user_search ) . "%";
             }
 
             if( ! empty( $is_default ) ){
@@ -904,7 +915,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 
             if( ! empty( $wishlist_name ) ){
                 $sql .= " AND l.`wishlist_name` LIKE %s";
-                $sql_args[] = "%" . $wishlist_name . "%";
+                $sql_args[] = "%" . esc_sql( $wishlist_name ) . "%";
             }
 
             if( ! empty( $wishlist_visibility ) && $wishlist_visibility != 'all' ){
@@ -938,11 +949,13 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 	        }
 
 	        if( ! empty( $orderby ) && isset( $order ) ) {
-		        $sql .= " ORDER BY " . $orderby . " " . $order;
+		        $sql .= " ORDER BY " . esc_sql( $orderby ) . " " . esc_sql( $order );
 	        }
 
             if( ! empty( $limit ) && isset( $offset ) ){
-                $sql .= " LIMIT " . $offset . ", " . $limit;
+                $sql .= " LIMIT %d, %d";
+	            $sql_args[] = $offset;
+	            $sql_args[] = $limit;
             }
 
             if( ! empty( $sql_args ) ){
@@ -1096,10 +1109,10 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 			    $sql .= " AND ( umn.`meta_key` LIKE %s AND ums.`meta_key` LIKE %s AND ( u.`user_email` LIKE %s OR u.`user_login` LIKE %s OR umn.`meta_value` LIKE %s OR ums.`meta_value` LIKE %s ) )";
 			    $sql_args[] = 'first_name';
 			    $sql_args[] = 'last_name';
-			    $sql_args[] = "%" . $search . "%";
-			    $sql_args[] = "%" . $search . "%";
-			    $sql_args[] = "%" . $search . "%";
-			    $sql_args[] = "%" . $search . "%";
+			    $sql_args[] = "%" . esc_sql( $search ) . "%";
+			    $sql_args[] = "%" . esc_sql( $search ) . "%";
+			    $sql_args[] = "%" . esc_sql( $search ) . "%";
+			    $sql_args[] = "%" . esc_sql( $search ) . "%";
 		    }
 
 		    if( ! empty( $limit ) && isset( $offset ) ){
@@ -1143,6 +1156,10 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 
             if ( empty( $wishlist_page_slug ) ){
                 return;
+            }
+
+            if( defined( 'POLYLANG_VERSION' ) ){
+            	return;
             }
 
             $regex_paged = '(([^/]+/)*' . $wishlist_page_slug . ')(/(.*))?/page/([0-9]{1,})/?$';
@@ -1204,7 +1221,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
                 return $wishlist_permalink;
             }
 
-            if( get_option( 'permalink_structure' ) && ! defined( 'ICL_PLUGIN_PATH' ) ) {
+            if( get_option( 'permalink_structure' ) && ! defined( 'ICL_PLUGIN_PATH' ) && ! defined( 'POLYLANG_VERSION' ) ) {
 	            $wishlist_permalink = trailingslashit( $wishlist_permalink );
 	            $base_url = trailingslashit( $wishlist_permalink . $action );
             }

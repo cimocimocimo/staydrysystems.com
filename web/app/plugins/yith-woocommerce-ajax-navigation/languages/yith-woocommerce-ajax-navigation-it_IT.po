@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH WooCommerce Ajax Product Filter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-26 12:43+0200\n"
-"PO-Revision-Date: 2017-09-26 12:43+0200\n"
+"POT-Creation-Date: 2018-02-01 14:37+0100\n"
+"PO-Revision-Date: 2018-02-01 14:37+0100\n"
 "Last-Translator: Your Inspiration Themes <plugins@yithemes.com>\n"
 "Language-Team: \n"
 "Language: it_IT\n"
@@ -58,7 +58,7 @@ msgstr "Proprietà"
 
 # @ yit
 #: includes/functions.yith-wcan.php:57
-#: widgets/class.yith-wcan-navigation-widget.php:841
+#: widgets/class.yith-wcan-navigation-widget.php:867
 msgid "Color"
 msgstr "Colore"
 
@@ -146,8 +146,8 @@ msgid "Enter here the CSS class or id for the results count container"
 msgstr "Inserisci qui la classe CSS o l'ID dei risultati del conteggio"
 
 #: settings/frontend-options.php:57
-msgid "Scroll top anchor (only for mobiles)"
-msgstr ""
+msgid "Scroll top anchor"
+msgstr "Tag html per la funzione Scroll Top"
 
 #: settings/frontend-options.php:58
 msgid "Enter here the HTML tag for the scroll to top feature"
@@ -368,72 +368,72 @@ msgctxt "Admin: Widget Title"
 msgid "YITH WooCommerce Ajax Product Filter"
 msgstr "YITH WooCommerce Filtro Prodotti Ajax"
 
-#: widgets/class.yith-wcan-navigation-widget.php:151
+#: widgets/class.yith-wcan-navigation-widget.php:153
 msgid "Filters:"
 msgstr "Filtri:"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:840
+#: widgets/class.yith-wcan-navigation-widget.php:866
 msgid "List"
 msgstr "Lista"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:842
+#: widgets/class.yith-wcan-navigation-widget.php:868
 msgid "Label"
 msgstr "Etichetta"
 
-#: widgets/class.yith-wcan-navigation-widget.php:843
+#: widgets/class.yith-wcan-navigation-widget.php:869
 msgid "Dropdown"
 msgstr "Menu a tendina"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:850
-#: widgets/class.yith-wcan-reset-navigation-widget.php:114
+#: widgets/class.yith-wcan-navigation-widget.php:876
+#: widgets/class.yith-wcan-reset-navigation-widget.php:104
 msgid "Title"
 msgstr "Titolo"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:856
+#: widgets/class.yith-wcan-navigation-widget.php:882
 msgid "Type:"
 msgstr "Tipo:"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:867
+#: widgets/class.yith-wcan-navigation-widget.php:893
 msgid "Query Type:"
 msgstr "Tipo Query:"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:869
+#: widgets/class.yith-wcan-navigation-widget.php:895
 msgid "AND"
 msgstr "E"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:870
+#: widgets/class.yith-wcan-navigation-widget.php:896
 msgid "OR"
 msgstr "O"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:876
+#: widgets/class.yith-wcan-navigation-widget.php:902
 msgid "Attribute:"
 msgstr "Attributo:"
 
-#: widgets/class.yith-wcan-navigation-widget.php:883
+#: widgets/class.yith-wcan-navigation-widget.php:909
 msgid "Display (default All):"
 msgstr "Visualizza (default Tutti)"
 
-#: widgets/class.yith-wcan-navigation-widget.php:885
+#: widgets/class.yith-wcan-navigation-widget.php:911
 msgid "All (no hierarchical)"
 msgstr "Tutti (non gerarchico)"
 
-#: widgets/class.yith-wcan-navigation-widget.php:886
+#: widgets/class.yith-wcan-navigation-widget.php:912
 msgid "All (hierarchical)"
 msgstr "Tutti (gerarchico)"
 
-#: widgets/class.yith-wcan-navigation-widget.php:887
+#: widgets/class.yith-wcan-navigation-widget.php:913
 msgid "Only Parent"
 msgstr "Solo Principali"
 
-#: widgets/class.yith-wcan-navigation-widget.php:894
+#: widgets/class.yith-wcan-navigation-widget.php:920
 msgid "CSS custom class"
 msgstr "Classe CSS custom"
 
@@ -446,16 +446,13 @@ msgstr ""
 msgid "YITH WooCommerce Ajax Reset Filter"
 msgstr "YITH WooCommerce Filtro Ajax Reset"
 
-#: widgets/class.yith-wcan-reset-navigation-widget.php:107
+#: widgets/class.yith-wcan-reset-navigation-widget.php:97
 msgid "Reset All Filters"
 msgstr "Resetta tutti i filtri"
 
-#: widgets/class.yith-wcan-reset-navigation-widget.php:120
+#: widgets/class.yith-wcan-reset-navigation-widget.php:110
 msgid "Button Label"
 msgstr "Etichetta Pulsante"
-
-#~ msgid "Scroll top anchor"
-#~ msgstr "Tag html per la funzione Scroll Top"
 
 #~ msgid "Settings"
 #~ msgstr "Impostazioni"

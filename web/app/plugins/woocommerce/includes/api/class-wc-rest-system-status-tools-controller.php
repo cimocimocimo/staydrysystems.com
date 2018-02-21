@@ -4,15 +4,11 @@
  *
  * Handles requests to the /system_status/tools/* endpoints.
  *
- * @author   WooThemes
- * @category API
  * @package  WooCommerce/API
  * @since    3.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 /**
  * @package WooCommerce/API
@@ -174,21 +170,22 @@ class WC_REST_System_Status_Tools_Controller extends WC_REST_Controller {
 					__( 'This option will delete ALL of your tax rates, use with caution. This action cannot be reversed.', 'woocommerce' )
 				),
 			),
-			'delete_webhook_logs' => array(
-				'name'    => __( 'Delete WebHook logs', 'woocommerce' ),
-				'button'  => __( 'Delete logs', 'woocommerce' ),
-				'desc'    => sprintf(
-					'<strong class="red">%1$s</strong> %2$s',
-					__( 'Note:', 'woocommerce' ),
-					__( 'This tool removes WebHook logs. This will not delete the WebHooks themselves.', 'woocommerce' )
-				),
-			),
 			'reset_tracking' => array(
 				'name'    => __( 'Reset usage tracking', 'woocommerce' ),
 				'button'  => __( 'Reset', 'woocommerce' ),
 				'desc'    => __( 'This will reset your usage tracking settings, causing it to show the opt-in banner again and not sending any data.', 'woocommerce' ),
 			),
+			'regenerate_thumbnails'      => array(
+				'name'   => __( 'Regenerate shop thumbnails', 'woocommerce' ),
+				'button' => __( 'Regenerate', 'woocommerce' ),
+				'desc'   => __( 'This will regenerate all shop thumbnails to match your theme and/or image settings.', 'woocommerce' ),
+			)
 		);
+
+		// Jetpack does the image resizing heavy lifting so you don't have to.
+		if ( ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'photon' ) ) || ! apply_filters( 'woocommerce_background_image_regeneration', true ) ) {
+			unset( $tools['regenerate_thumbnails'] );
+		}
 
 		return apply_filters( 'woocommerce_debug_tools', $tools );
 	}
@@ -406,15 +403,15 @@ class WC_REST_System_Status_Tools_Controller extends WC_REST_Controller {
 				 * that don't have address indexes yet.
 				 */
 				$sql = "INSERT INTO {$wpdb->postmeta}( post_id, meta_key, meta_value )
-					SELECT post_id, '%1\$s', GROUP_CONCAT( meta_value SEPARATOR ' ' )
+					SELECT post_id, '%s', GROUP_CONCAT( meta_value SEPARATOR ' ' )
 					FROM {$wpdb->postmeta}
-					WHERE meta_key IN ( '%2\$s', '%3\$s' )
+					WHERE meta_key IN ( '%s', '%s' )
 					AND post_id IN ( SELECT DISTINCT post_id FROM {$wpdb->postmeta}
-						WHERE post_id NOT IN ( SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='%1\$s' )
-						AND post_id IN ( SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='%3\$s' ) )
+						WHERE post_id NOT IN ( SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='%s' )
+						AND post_id IN ( SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='%s' ) )
 					GROUP BY post_id";
-				$rows = $wpdb->query( $wpdb->prepare( $sql, '_billing_address_index', '_billing_first_name', '_billing_last_name' ) );
-				$rows += $wpdb->query( $wpdb->prepare( $sql, '_shipping_address_index', '_shipping_first_name', '_shipping_last_name' ) );
+				$rows = $wpdb->query( $wpdb->prepare( $sql, '_billing_address_index', '_billing_first_name', '_billing_last_name', '_billing_address_index', '_billing_last_name' ) );
+				$rows += $wpdb->query( $wpdb->prepare( $sql, '_shipping_address_index', '_shipping_first_name', '_shipping_last_name', '_shipping_address_index', '_shipping_last_name') );
 
 				$message = sprintf( __( '%d indexes added', 'woocommerce' ), $rows );
 			break;
@@ -447,18 +444,18 @@ class WC_REST_System_Status_Tools_Controller extends WC_REST_Controller {
 				WC_Cache_Helper::incr_cache_prefix( 'taxes' );
 				$message = __( 'Tax rates successfully deleted', 'woocommerce' );
 			break;
-			case 'delete_webhook_logs' :
-
-				$result = absint( $wpdb->query( "DELETE FROM {$wpdb->comments} WHERE comment_type='webhook_delivery';" ) );
-				$wpdb->query( "DELETE commentmeta FROM {$wpdb->commentmeta} commentmeta LEFT JOIN {$wpdb->comments} comments ON comments.comment_ID = commentmeta.comment_id WHERE comments.comment_ID IS NULL;" );
-				$message = sprintf( __( '%d logs deleted', 'woocommerce' ), $result );
-			break;
 			case 'reset_tracking' :
 				delete_option( 'woocommerce_allow_tracking' );
 				WC_Admin_Notices::add_notice( 'tracking' );
 				$message = __( 'Usage tracking settings successfully reset.', 'woocommerce' );
-			break;
-			default :
+				break;
+
+			case 'regenerate_thumbnails':
+				WC_Regenerate_Images::queue_image_regeneration();
+				$message = __( 'Thumbnail regeneration has been scheduled to run in the background.', 'woocommerce' );
+				break;
+
+			default:
 				$tools = $this->get_tools();
 				if ( isset( $tools[ $tool ]['callback'] ) ) {
 					$callback = $tools[ $tool ]['callback'];

@@ -171,7 +171,7 @@ abstract class WC_Abstract_Legacy_Product extends WC_Data {
 	 * @deprecated 3.0.0
 	 * @return array
 	 */
-	public function get_gallery_image_ids() {
+	public function get_gallery_attachment_ids() {
 		wc_deprecated_function( 'WC_Product::get_gallery_attachment_ids', '3.0', 'WC_Product::get_gallery_image_ids' );
 		return $this->get_gallery_image_ids();
 	}

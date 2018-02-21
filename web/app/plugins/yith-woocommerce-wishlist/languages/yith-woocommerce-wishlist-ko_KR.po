@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: YITH WooCommerce Wishlist\n"
-"POT-Creation-Date: 2017-05-11 15:57+0200\n"
-"PO-Revision-Date: 2017-05-11 15:57+0200\n"
+"POT-Creation-Date: 2017-10-24 17:33+0200\n"
+"PO-Revision-Date: 2017-10-24 17:33+0200\n"
 "Last-Translator: Valentyn Zubenko <valentyn.zubenko@gmail.com>\n"
 "Language-Team: Your Inspiration Themes <plugins@yithemes.com>\n"
 "Language: uk_UA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.1\n"
+"X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;_n:1,2;__ngettext:1,2;"
 "__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;"
 "_nx_noop:4c,1,2\n"
@@ -20,8 +20,8 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: ../plugin-fw\n"
 
 #: ../includes/class.yith-wcwl-admin-init.php:159
-#: ../includes/class.yith-wcwl-admin-init.php:1288
-#: ../includes/class.yith-wcwl-admin-init.php:1289
+#: ../includes/class.yith-wcwl-admin-init.php:1483
+#: ../includes/class.yith-wcwl-admin-init.php:1484
 #: ../includes/class.yith-wcwl-install.php:244
 msgid "Wishlist"
 msgstr "위시리스"
@@ -61,29 +61,29 @@ msgstr "경고: 이 플러그인은 우커머스 2.2버전 이상을 요구합�
 msgid "Plugin Documentation"
 msgstr "플러그인 설명서"
 
-#: ../includes/class.yith-wcwl-admin-init.php:828
+#: ../includes/class.yith-wcwl-admin-init.php:1023
 msgid "Upgrade to the PREMIUM VERSION"
 msgstr "프리미엄 버전으로 업그레이드"
 
-#: ../includes/class.yith-wcwl-admin-init.php:831
+#: ../includes/class.yith-wcwl-admin-init.php:1026
 msgid "YITH WooCommerce Wishlist"
 msgstr "YITH WooCommerce Wishlist"
 
-#: ../includes/class.yith-wcwl-admin-init.php:832
+#: ../includes/class.yith-wcwl-admin-init.php:1027
 msgid "Discover the Advanced Features"
 msgstr "강화된 기능 보기 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:833
+#: ../includes/class.yith-wcwl-admin-init.php:1028
 msgid ""
 "Upgrade to the PREMIUM VERSION of YITH WOOCOMMERCE WISHLIST to benefit from "
 "all features!"
 msgstr ""
 
-#: ../includes/class.yith-wcwl-admin-init.php:839
+#: ../includes/class.yith-wcwl-admin-init.php:1034
 msgid "Get Support and Pro Features"
 msgstr "지원받기와  프로기능"
 
-#: ../includes/class.yith-wcwl-admin-init.php:840
+#: ../includes/class.yith-wcwl-admin-init.php:1035
 msgid ""
 "By purchasing the premium version of the plugin, you will take advantage of "
 "the advanced features of the product and you will get one year of free "
@@ -92,15 +92,15 @@ msgstr ""
 "프리미엄버전 구매시 강화된 기능의 사용,  일년동안 무료 업그레이드 서비스와 자"
 "사 프랫폼을 이용한 24h/24 서포트가 제공됩니다."
 
-#: ../includes/class.yith-wcwl-admin-init.php:850
+#: ../includes/class.yith-wcwl-admin-init.php:1045
 msgid "General Settings"
 msgstr "일반 설정 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:857
+#: ../includes/class.yith-wcwl-admin-init.php:1052
 msgid "Enable YITH Wishlist"
 msgstr "YITH Wishlist 사용"
 
-#: ../includes/class.yith-wcwl-admin-init.php:858
+#: ../includes/class.yith-wcwl-admin-init.php:1053
 #, php-format
 msgid ""
 "Enable all plugin features. <strong>Be sure to select at least one option in "
@@ -108,30 +108,30 @@ msgid ""
 "plugin <a href=\"%s\" target=\"_blank\">documentation</a>."
 msgstr ""
 
-#: ../includes/class.yith-wcwl-admin-init.php:864
+#: ../includes/class.yith-wcwl-admin-init.php:1059
 msgid "Default wishlist title"
 msgstr "기본 위시리스트 제목"
 
-#: ../includes/class.yith-wcwl-admin-init.php:866
-#: ../includes/class.yith-wcwl-admin-init.php:867
-#: ../includes/class.yith-wcwl-admin-init.php:1103
+#: ../includes/class.yith-wcwl-admin-init.php:1061
+#: ../includes/class.yith-wcwl-admin-init.php:1062
+#: ../includes/class.yith-wcwl-admin-init.php:1298
 #, php-format
 msgid "My wishlist on %s"
 msgstr "나의 위시리스트 목록 @ %s"
 
-#: ../includes/class.yith-wcwl-admin-init.php:872
+#: ../includes/class.yith-wcwl-admin-init.php:1067
 msgid "Wishlist Page"
 msgstr "위시리스트 페이지 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:873
+#: ../includes/class.yith-wcwl-admin-init.php:1068
 msgid "Page contents: [yith_wcwl_wishlist]"
 msgstr "페이지 콘텐츠: [yith_wcwl_wishlist] "
 
-#: ../includes/class.yith-wcwl-admin-init.php:882
+#: ../includes/class.yith-wcwl-admin-init.php:1077
 msgid "Position"
 msgstr "위치"
 
-#: ../includes/class.yith-wcwl-admin-init.php:883
+#: ../includes/class.yith-wcwl-admin-init.php:1078
 msgid ""
 "You can add the button in variable products only after the \"Add to Cart\" "
 "button or using the shortcode [yith_wcwl_add_to_wishlist]."
@@ -139,27 +139,27 @@ msgstr ""
 "다양한 상품의 \"장바구니 담기\" 버튼 뒤에나 숏코드 "
 "[yith_wcwl_add_to_wishlist]로 추가 할수 있음."
 
-#: ../includes/class.yith-wcwl-admin-init.php:889
+#: ../includes/class.yith-wcwl-admin-init.php:1084
 msgid "After \"Add to cart\""
 msgstr "장바구니 담기 뒤에"
 
-#: ../includes/class.yith-wcwl-admin-init.php:890
+#: ../includes/class.yith-wcwl-admin-init.php:1085
 msgid "After thumbnails"
 msgstr "썸네일 뒤에"
 
-#: ../includes/class.yith-wcwl-admin-init.php:891
+#: ../includes/class.yith-wcwl-admin-init.php:1086
 msgid "After summary"
 msgstr "써머리 뒤에"
 
-#: ../includes/class.yith-wcwl-admin-init.php:892
+#: ../includes/class.yith-wcwl-admin-init.php:1087
 msgid "Use shortcode"
 msgstr "숏코드를 사용 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:897
+#: ../includes/class.yith-wcwl-admin-init.php:1092
 msgid "Redirect to cart"
 msgstr "장바구니로 다시돌리기"
 
-#: ../includes/class.yith-wcwl-admin-init.php:898
+#: ../includes/class.yith-wcwl-admin-init.php:1093
 msgid ""
 "Redirect to cart page if \"Add to cart\" button is clicked in the wishlist "
 "page."
@@ -167,228 +167,228 @@ msgstr ""
 "위시리스트 페이지의 '장바구니 담기' 버튼이 눌리면 장바구니 페이지로 다시돌리"
 "기"
 
-#: ../includes/class.yith-wcwl-admin-init.php:904
+#: ../includes/class.yith-wcwl-admin-init.php:1099
 msgid "Remove if added to the cart"
 msgstr "장바구니에 담고나면 제거"
 
-#: ../includes/class.yith-wcwl-admin-init.php:905
+#: ../includes/class.yith-wcwl-admin-init.php:1100
 msgid "Remove the product from the wishlist if it has been added to the cart."
 msgstr "장바구니에 담았다면 물품을 위시리스트에서 제거 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:911
+#: ../includes/class.yith-wcwl-admin-init.php:1106
 msgid "\"Add to Wishlist\" text"
 msgstr "\"위시리스트 추가\" 텍스트"
 
-#: ../includes/class.yith-wcwl-admin-init.php:913
+#: ../includes/class.yith-wcwl-admin-init.php:1108
 msgid "Add to Wishlist"
 msgstr "위시르스트 추가"
 
-#: ../includes/class.yith-wcwl-admin-init.php:918
+#: ../includes/class.yith-wcwl-admin-init.php:1113
 msgid "\"Browse wishlist\" text"
 msgstr "\"위시리스트 둘러보기\" 텍스트"
 
-#: ../includes/class.yith-wcwl-admin-init.php:920
-#: ../includes/class.yith-wcwl-ui.php:81 ../includes/class.yith-wcwl-ui.php:82
+#: ../includes/class.yith-wcwl-admin-init.php:1115
+#: ../includes/class.yith-wcwl-ui.php:82 ../includes/class.yith-wcwl-ui.php:83
 msgid "Browse Wishlist"
 msgstr "위시리스트 둘러보기 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:925
+#: ../includes/class.yith-wcwl-admin-init.php:1120
 msgid "\"Product already in wishlist\" text"
 msgstr "\"위시리스트에 이미 있습니다\" 텍스트"
 
-#: ../includes/class.yith-wcwl-admin-init.php:927
-#: ../includes/class.yith-wcwl-ui.php:82
+#: ../includes/class.yith-wcwl-admin-init.php:1122
+#: ../includes/class.yith-wcwl-ui.php:83
 msgid "The product is already in the wishlist!"
 msgstr "이 상품은 이미 위시리스트에 있습니다."
 
-#: ../includes/class.yith-wcwl-admin-init.php:932
+#: ../includes/class.yith-wcwl-admin-init.php:1127
 msgid "\"Product added\" text"
 msgstr "\"상품 추가\" 텍스트 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:934
-#: ../includes/class.yith-wcwl-ui.php:81
+#: ../includes/class.yith-wcwl-admin-init.php:1129
+#: ../includes/class.yith-wcwl-ui.php:82
 msgid "Product added!"
 msgstr "상품이 추가됨!"
 
-#: ../includes/class.yith-wcwl-admin-init.php:939
+#: ../includes/class.yith-wcwl-admin-init.php:1134
 msgid "\"Add to Cart\" text"
 msgstr "\"장바구니 담기\" 텍스트 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:941
+#: ../includes/class.yith-wcwl-admin-init.php:1136
 msgid "Add to Cart"
 msgstr "장바구니 담기 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:946
+#: ../includes/class.yith-wcwl-admin-init.php:1141
 msgid "Show Unit price"
 msgstr "개별가격 보이기"
 
-#: ../includes/class.yith-wcwl-admin-init.php:947
+#: ../includes/class.yith-wcwl-admin-init.php:1142
 msgid "Show unit price for each product in wishlist"
 msgstr "관심상품내 개별상품의 개별가격 보이기"
 
-#: ../includes/class.yith-wcwl-admin-init.php:954
+#: ../includes/class.yith-wcwl-admin-init.php:1149
 msgid "Show \"Add to Cart\" button"
 msgstr "\"장바구니 담기\" 버튼 보이기"
 
-#: ../includes/class.yith-wcwl-admin-init.php:955
+#: ../includes/class.yith-wcwl-admin-init.php:1150
 msgid "Show \"Add to Cart\" button for each product in wishlist"
 msgstr "관심상품내 개별상품에 \"장바구니 담기\" 버튼 보이기 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:962
+#: ../includes/class.yith-wcwl-admin-init.php:1157
 msgid "Show Stock status"
 msgstr "재고상황 보기 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:963
+#: ../includes/class.yith-wcwl-admin-init.php:1158
 msgid ""
 "Show \"In stock\" or \"Out of stock\" label for each product in wishlist"
 msgstr "위시리스트내 개별상품에 \"재고있음\" 또는 \"재고없음\" 레이블 보이기"
 
-#: ../includes/class.yith-wcwl-admin-init.php:970
+#: ../includes/class.yith-wcwl-admin-init.php:1165
 msgid "Show Date of addition"
 msgstr "추가한 날짜 보이기 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:971
+#: ../includes/class.yith-wcwl-admin-init.php:1166
 msgid "Show the date when users have added a product to the wishlist"
 msgstr "위시리스트에 사용자가 상품 추가한 날짜 보이기"
 
-#: ../includes/class.yith-wcwl-admin-init.php:978
+#: ../includes/class.yith-wcwl-admin-init.php:1173
 msgid "Add second remove button"
 msgstr "두번째 제거 버튼 추가"
 
-#: ../includes/class.yith-wcwl-admin-init.php:979
+#: ../includes/class.yith-wcwl-admin-init.php:1174
 msgid "Add a second remove button in the last column, with extended label"
 msgstr "확장 레이블에 두번째 제거버튼을 마지막 열에 추가"
 
-#: ../includes/class.yith-wcwl-admin-init.php:994
+#: ../includes/class.yith-wcwl-admin-init.php:1189
 msgid "Styles"
 msgstr "스타일 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:1001
+#: ../includes/class.yith-wcwl-admin-init.php:1196
 msgid "Use buttons"
 msgstr "버튼 사용 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:1002
+#: ../includes/class.yith-wcwl-admin-init.php:1197
 msgid "Use buttons instead of simple anchors."
 msgstr "연결구문 대신 버튼 사용 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:1008
+#: ../includes/class.yith-wcwl-admin-init.php:1203
 msgid "Custom CSS"
 msgstr "커스텀 CSS"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1015
+#: ../includes/class.yith-wcwl-admin-init.php:1210
 msgid "Use theme style"
 msgstr "테마 스타일 사용 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:1016
+#: ../includes/class.yith-wcwl-admin-init.php:1211
 msgid "Use the theme style."
 msgstr "지금 테마 스타일 사용"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1022
+#: ../includes/class.yith-wcwl-admin-init.php:1217
 msgid "Rounded buttons"
 msgstr "굴곡진 모서리 버튼"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1023
+#: ../includes/class.yith-wcwl-admin-init.php:1218
 msgid "Make button corners rounded"
 msgstr "버튼 모서리를 굴곡지게 만들기"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1029
+#: ../includes/class.yith-wcwl-admin-init.php:1224
 msgid "\"Add to Wishlist\" icon"
 msgstr "\"위시리스트 추가\" 아이콘 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:1030
+#: ../includes/class.yith-wcwl-admin-init.php:1225
 msgid "Add an icon to the \"Add to Wishlist\" button"
 msgstr "\"위시리스트 추가\"버튼에 아이콘 추가하기 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:1040
+#: ../includes/class.yith-wcwl-admin-init.php:1235
 msgid "\"Add to Cart\" icon"
 msgstr "\"장바구니 담기\" 아이콘 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:1041
+#: ../includes/class.yith-wcwl-admin-init.php:1236
 msgid "Add an icon to the \"Add to Cart\" button"
 msgstr "\"장바구니 담기\"버튼에 아이콘 추가하기"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1059
+#: ../includes/class.yith-wcwl-admin-init.php:1254
 msgid "Social Networks & Share"
 msgstr "소셜 네트워크와 공유 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:1066
+#: ../includes/class.yith-wcwl-admin-init.php:1261
 msgid "Share on Facebook"
 msgstr "페이스북에 공유"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1067
+#: ../includes/class.yith-wcwl-admin-init.php:1262
 msgid "Show \"Share on Facebook\" button"
 msgstr "\"페이스북에 공유\"버튼 보이기 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:1073
+#: ../includes/class.yith-wcwl-admin-init.php:1268
 msgid "Tweet on Twitter"
 msgstr "트위터에 트윗하기"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1074
+#: ../includes/class.yith-wcwl-admin-init.php:1269
 msgid "Show \"Tweet on Twitter\" button"
 msgstr "\"트위터에 트윗하기\"버튼 보이기"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1080
+#: ../includes/class.yith-wcwl-admin-init.php:1275
 msgid "Pin on Pinterest"
 msgstr "핀레스트에 핀하기"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1081
+#: ../includes/class.yith-wcwl-admin-init.php:1276
 msgid "Show \"Pin on Pinterest\" button"
 msgstr "\"핀레스트에 핀하기\"버튼 보이기 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:1087
+#: ../includes/class.yith-wcwl-admin-init.php:1282
 msgid "Share on Google+"
 msgstr "구글플러스에 공유"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1088
+#: ../includes/class.yith-wcwl-admin-init.php:1283
 msgid "Show \"Share on Google+\" button"
 msgstr "\"구글플러스에 공유\"버튼 보이기 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:1094
+#: ../includes/class.yith-wcwl-admin-init.php:1289
 msgid "Share by Email"
 msgstr "이메일로 공유"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1095
+#: ../includes/class.yith-wcwl-admin-init.php:1290
 msgid "Show \"Share by Email\" button"
 msgstr "\"이메일로 공유\"버튼 보이기"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1101
+#: ../includes/class.yith-wcwl-admin-init.php:1296
 msgid "Social title"
 msgstr "소셜 타이틀"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1108
+#: ../includes/class.yith-wcwl-admin-init.php:1303
 msgid "Social text"
 msgstr "소셜 텍스트 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:1109
+#: ../includes/class.yith-wcwl-admin-init.php:1304
 msgid ""
 "It will be used by Twitter and Pinterest. Use <strong>%wishlist_url%</"
 "strong> where you want to show the URL of your wishlist."
 msgstr ""
 
-#: ../includes/class.yith-wcwl-admin-init.php:1116
+#: ../includes/class.yith-wcwl-admin-init.php:1311
 msgid "Social image URL"
 msgstr "소셜 이미지 URL"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1117
+#: ../includes/class.yith-wcwl-admin-init.php:1312
 msgid "It will be used by Pinterest."
 msgstr ""
 
-#: ../includes/class.yith-wcwl-admin-init.php:1131
+#: ../includes/class.yith-wcwl-admin-init.php:1326
 #, php-format
 msgid ""
 "If you want to take advantage of this feature, you could consider to "
 "purchase the %s."
 msgstr "이기능의 장점을 사용하시려면 %s 의 구매를 생각해 보십시요."
 
-#: ../includes/class.yith-wcwl-admin-init.php:1136
+#: ../includes/class.yith-wcwl-admin-init.php:1331
 msgid "YITH WooCommerce Frequently Bought Together Integration"
 msgstr "YITH WooCommerce 와  함께 자주 구매되는 연결"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1143
+#: ../includes/class.yith-wcwl-admin-init.php:1338
 msgid "Enable slider in wishlist"
 msgstr "위시리스트내 슬라이더 사용 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:1144
+#: ../includes/class.yith-wcwl-admin-init.php:1339
 #, php-format
 msgid ""
 "Choose to enable product slider in wishlist page with linked products (<a "
@@ -397,84 +397,84 @@ msgstr ""
 "위시리스트 페이지에 연결된 상품내 상품 슬라이더 기능 선택 (<a href=\"%s\" "
 "class=\"thickbox\">Example</a>). %s"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1180
+#: ../includes/class.yith-wcwl-admin-init.php:1375
 msgid "\"Add to wishlist\" button"
 msgstr "\"위시리스트 추가\"버튼"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1183
-#: ../includes/class.yith-wcwl-admin-init.php:1201
-#: ../includes/class.yith-wcwl-admin-init.php:1219
-#: ../includes/class.yith-wcwl-admin-init.php:1237
-#: ../includes/class.yith-wcwl-admin-init.php:1255
+#: ../includes/class.yith-wcwl-admin-init.php:1378
+#: ../includes/class.yith-wcwl-admin-init.php:1396
+#: ../includes/class.yith-wcwl-admin-init.php:1414
+#: ../includes/class.yith-wcwl-admin-init.php:1432
+#: ../includes/class.yith-wcwl-admin-init.php:1450
 msgid "Background"
 msgstr "백그라운드 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:1184
-#: ../includes/class.yith-wcwl-admin-init.php:1202
-#: ../includes/class.yith-wcwl-admin-init.php:1220
-#: ../includes/class.yith-wcwl-admin-init.php:1238
-#: ../includes/class.yith-wcwl-admin-init.php:1256
+#: ../includes/class.yith-wcwl-admin-init.php:1379
+#: ../includes/class.yith-wcwl-admin-init.php:1397
+#: ../includes/class.yith-wcwl-admin-init.php:1415
+#: ../includes/class.yith-wcwl-admin-init.php:1433
+#: ../includes/class.yith-wcwl-admin-init.php:1451
 msgid "Text"
 msgstr "텍스트 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:1185
-#: ../includes/class.yith-wcwl-admin-init.php:1203
-#: ../includes/class.yith-wcwl-admin-init.php:1221
-#: ../includes/class.yith-wcwl-admin-init.php:1239
-#: ../includes/class.yith-wcwl-admin-init.php:1257
+#: ../includes/class.yith-wcwl-admin-init.php:1380
+#: ../includes/class.yith-wcwl-admin-init.php:1398
+#: ../includes/class.yith-wcwl-admin-init.php:1416
+#: ../includes/class.yith-wcwl-admin-init.php:1434
+#: ../includes/class.yith-wcwl-admin-init.php:1452
 msgid "Border"
 msgstr "경계 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:1192
-#: ../includes/class.yith-wcwl-admin-init.php:1210
-#: ../includes/class.yith-wcwl-admin-init.php:1228
-#: ../includes/class.yith-wcwl-admin-init.php:1246
+#: ../includes/class.yith-wcwl-admin-init.php:1387
+#: ../includes/class.yith-wcwl-admin-init.php:1405
+#: ../includes/class.yith-wcwl-admin-init.php:1423
+#: ../includes/class.yith-wcwl-admin-init.php:1441
 msgid "Background (hover)"
 msgstr "백그라운드(안쪽)"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1193
-#: ../includes/class.yith-wcwl-admin-init.php:1211
-#: ../includes/class.yith-wcwl-admin-init.php:1229
-#: ../includes/class.yith-wcwl-admin-init.php:1247
+#: ../includes/class.yith-wcwl-admin-init.php:1388
+#: ../includes/class.yith-wcwl-admin-init.php:1406
+#: ../includes/class.yith-wcwl-admin-init.php:1424
+#: ../includes/class.yith-wcwl-admin-init.php:1442
 msgid "Text (hover)"
 msgstr "텍스트 (안쪽)"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1194
-#: ../includes/class.yith-wcwl-admin-init.php:1212
-#: ../includes/class.yith-wcwl-admin-init.php:1230
-#: ../includes/class.yith-wcwl-admin-init.php:1248
+#: ../includes/class.yith-wcwl-admin-init.php:1389
+#: ../includes/class.yith-wcwl-admin-init.php:1407
+#: ../includes/class.yith-wcwl-admin-init.php:1425
+#: ../includes/class.yith-wcwl-admin-init.php:1443
 msgid "Border (hover)"
 msgstr "경계 (안쪽)"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1198
+#: ../includes/class.yith-wcwl-admin-init.php:1393
 msgid "\"Add to Cart\" button"
 msgstr "\"장바구니 담기\" 버튼 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:1216
+#: ../includes/class.yith-wcwl-admin-init.php:1411
 msgid "\"Style 1\" button"
 msgstr "\"스타일 1\" 버튼 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:1234
+#: ../includes/class.yith-wcwl-admin-init.php:1429
 msgid "\"Style 2\" button"
 msgstr "\"스타일 2\" 버튼 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:1252
+#: ../includes/class.yith-wcwl-admin-init.php:1447
 msgid "Wishlist table"
 msgstr "위시리스트 테이블 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:1261
+#: ../includes/class.yith-wcwl-admin-init.php:1456
 msgid "Headers"
 msgstr "헤더 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:1264
+#: ../includes/class.yith-wcwl-admin-init.php:1459
 msgid "Background color"
 msgstr "백그라운드 색깔 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:1354
+#: ../includes/class.yith-wcwl-admin-init.php:1549
 msgid "Wishlist Activated"
 msgstr "위시리스트 사용됨"
 
-#: ../includes/class.yith-wcwl-admin-init.php:1355
+#: ../includes/class.yith-wcwl-admin-init.php:1550
 #, php-format
 msgid ""
 "In the YIT Plugin tab you can find the Wishlist options. With this menu, you "
@@ -486,11 +486,11 @@ msgstr ""
 "인의 세팅을 할수 있읍니다. 프리미엄버전의 많은 새로운 옵션 <a href=\"%s"
 "\">discover it now</a> 이 사용가능합니다."
 
-#: ../includes/class.yith-wcwl-admin-init.php:1366
+#: ../includes/class.yith-wcwl-admin-init.php:1561
 msgid "Wishlist Updated"
 msgstr "위시리스트 업데이트됨 "
 
-#: ../includes/class.yith-wcwl-admin-init.php:1367
+#: ../includes/class.yith-wcwl-admin-init.php:1562
 #, php-format
 msgid ""
 "From now on, you can find all the options of Wishlist under YIT Plugin -> "
@@ -504,14 +504,14 @@ msgstr ""
 "인이 업데이트되면 새로운 소식이 이 메뉴에 추가 되며, 위시리스트가 새로운 옵션"
 "이 업데이트되면  <a href=\"%s\">프리미엄버전 살펴보기.</a> 표시됨."
 
-#: ../includes/class.yith-wcwl-init.php:366
+#: ../includes/class.yith-wcwl-init.php:374
 msgid ""
 "We are sorry, but this feature is available only if cookies are enabled on "
 "your browser."
 msgstr ""
 "죄송합니다. 이 기능은 브라우져에서 쿠기가 활성화되어 있으면 가능합니다."
 
-#: ../includes/class.yith-wcwl-init.php:367
+#: ../includes/class.yith-wcwl-init.php:375
 msgid "Product correctly added to cart"
 msgstr "상품이 잘 장바구니에 담겼습니다."
 
@@ -521,24 +521,24 @@ msgid "wishlist"
 msgstr "위시리스트"
 
 #: ../includes/class.yith-wcwl-shortcode.php:259
-#: ../includes/class.yith-wcwl-ui.php:163
+#: ../includes/class.yith-wcwl-ui.php:164
 msgid "Share on:"
 msgstr "공유: "
 
-#: ../includes/class.yith-wcwl-ui.php:117
-#: ../includes/class.yith-wcwl-ui.php:199
+#: ../includes/class.yith-wcwl-ui.php:118
+#: ../includes/class.yith-wcwl-ui.php:200
 msgid "Select options"
 msgstr "옵션 선택 "
 
-#: ../includes/class.yith-wcwl-ui.php:167 ../templates/share.php:20
+#: ../includes/class.yith-wcwl-ui.php:168 ../templates/share.php:20
 msgid "Facebook"
 msgstr "페이스북 "
 
-#: ../includes/class.yith-wcwl-ui.php:170 ../templates/share.php:26
+#: ../includes/class.yith-wcwl-ui.php:171 ../templates/share.php:26
 msgid "Twitter"
 msgstr "트위터 "
 
-#: ../includes/class.yith-wcwl-ui.php:179
+#: ../includes/class.yith-wcwl-ui.php:180
 msgid "email"
 msgstr "이메일 "
 
@@ -546,39 +546,39 @@ msgstr "이메일 "
 msgid "An error occurred while adding products to the wishlist."
 msgstr "위시리스트에 추가중에 에러가 발생함."
 
-#: ../includes/class.yith-wcwl.php:268
+#: ../includes/class.yith-wcwl.php:269
 msgid "An error occurred while adding products to wishlist."
 msgstr "위시리스트에 추가중에 에러가 발생함."
 
-#: ../includes/class.yith-wcwl.php:285
+#: ../includes/class.yith-wcwl.php:286
 msgid "The \"Remove\" option now does not require any parameter"
 msgstr "\"제거\" 옵션은 파라메타가 필요없음."
 
-#: ../includes/class.yith-wcwl.php:332
+#: ../includes/class.yith-wcwl.php:335
 msgid "An error occurred while removing products from the wishlist"
 msgstr "위시리스트에서 제거중에 에러가 발생함. "
 
-#: ../includes/class.yith-wcwl.php:774
+#: ../includes/class.yith-wcwl.php:783
 msgid "You need to log in before creating a new wishlist"
 msgstr "새로운 위시리스트를 만들기 전에 로그인 하십시요"
 
-#: ../includes/class.yith-wcwl.php:1565
+#: ../includes/class.yith-wcwl.php:1578
 msgid "Product successfully removed."
 msgstr "상품이 성공적으로 제거 되었습니다."
 
-#: ../includes/class.yith-wcwl.php:1569
+#: ../includes/class.yith-wcwl.php:1582
 msgid "Error. Unable to remove the product from the wishlist."
 msgstr "에러, 위시리스트에서 상품제거 불가능 "
 
-#: ../includes/class.yith-wcwl.php:1573 ../templates/wishlist-view.php:239
+#: ../includes/class.yith-wcwl.php:1586 ../templates/wishlist-view.php:241
 msgid "No products were added to the wishlist"
 msgstr "위시리스트에 추가할 상품이 없음 "
 
-#: ../includes/class.yith-wcwl.php:1615
+#: ../includes/class.yith-wcwl.php:1628
 msgid "An error as occurred."
 msgstr "에러가 발생됨 "
 
-#: ../init.php:128
+#: ../init.php:130
 msgid ""
 "YITH WooCommerce Wishlist is enabled but not effective. It requires "
 "WooCommerce in order to work."
@@ -586,7 +586,7 @@ msgstr ""
 "YITH WooCommerce Wishlist가 활성화 되었으나 사용 불가능. 사용하기 위해서는 우"
 "커머스가 필요합니다."
 
-#: ../init.php:138
+#: ../init.php:140
 msgid ""
 "You can't activate the free version of YITH WooCommerce Wishlist while you "
 "are using the premium one."
@@ -896,10 +896,6 @@ msgid "Google+"
 msgstr "구글플러스 "
 
 #: ../templates/share.php:44
-msgid "I wanted you to see this site"
-msgstr "참조 싸이트"
-
-#: ../templates/share.php:44
 msgid "Email"
 msgstr "이메일 "
 
@@ -927,58 +923,61 @@ msgstr "단가 "
 msgid "Stock Status"
 msgstr "재고여부 "
 
-#: ../templates/wishlist-view.php:152 ../templates/wishlist-view.php:229
+#: ../templates/wishlist-view.php:152 ../templates/wishlist-view.php:231
 msgid "Remove this product"
 msgstr "이 상품 제거 "
 
-#: ../templates/wishlist-view.php:170
+#: ../templates/wishlist-view.php:172
 msgid "Free!"
 msgstr "프리!"
 
-#: ../templates/wishlist-view.php:176
+#: ../templates/wishlist-view.php:178
 msgid "Out of Stock"
 msgstr "재고 없음 "
 
-#: ../templates/wishlist-view.php:176
+#: ../templates/wishlist-view.php:178
 msgid "In Stock"
 msgstr "재고 있음 "
 
-#: ../templates/wishlist-view.php:185
+#: ../templates/wishlist-view.php:187
 #, php-format
 msgid "Added on : %s"
 msgstr "추가됨 : %s"
 
-#: ../templates/wishlist-view.php:197
+#: ../templates/wishlist-view.php:199
 msgid "Move"
 msgstr "이동 "
 
-#: ../templates/wishlist-view.php:209
+#: ../templates/wishlist-view.php:211
 msgid "Shared"
 msgstr "공유됨 "
 
-#: ../templates/wishlist-view.php:212
+#: ../templates/wishlist-view.php:214
 msgid "Private"
 msgstr "개인 "
 
-#: ../templates/wishlist-view.php:215
+#: ../templates/wishlist-view.php:217
 msgid "Public"
 msgstr "공용 "
 
-#: ../templates/wishlist-view.php:229
+#: ../templates/wishlist-view.php:231
 msgid "Remove"
 msgstr "제거 "
 
-#: ../templates/wishlist-view.php:256
+#: ../templates/wishlist-view.php:258
 msgid "Add the selected products to the cart"
 msgstr "선택된 상품들 장바구니에 담기 "
 
-#: ../templates/wishlist-view.php:264 ../templates/wishlist-view.php:310
+#: ../templates/wishlist-view.php:266 ../templates/wishlist-view.php:312
 msgid "Ask for an estimate"
 msgstr "견적가 요청 "
 
-#: ../templates/wishlist-view.php:300
+#: ../templates/wishlist-view.php:302
 msgid "Your email"
 msgstr ""
+
+#~ msgid "I wanted you to see this site"
+#~ msgstr "참조 싸이트"
 
 #~ msgid ""
 #~ "Upgrade to the PREMIUM VERSION\n"

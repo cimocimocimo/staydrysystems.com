@@ -20,7 +20,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 
     <!-- TITLE -->
     <?php
-    do_action( 'yith_wcwl_before_wishlist_title' );
+    do_action( 'yith_wcwl_before_wishlist_title', $wishlist_meta );
 
     if( ! empty( $page_title ) ) :
     ?>
@@ -49,7 +49,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
     <?php
     endif;
 
-     do_action( 'yith_wcwl_before_wishlist' ); ?>
+     do_action( 'yith_wcwl_before_wishlist', $wishlist_meta ); ?>
 
     <!-- WISHLIST TABLE -->
 	<table class="shop_table cart wishlist_table" data-pagination="<?php echo esc_attr( $pagination )?>" data-per-page="<?php echo esc_attr( $per_page )?>" data-page="<?php echo esc_attr( $current_page )?>" data-id="<?php echo $wishlist_id ?>" data-token="<?php echo $wishlist_token ?>">
@@ -167,7 +167,10 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 
                         <?php if( $show_price ) : ?>
                             <td class="product-price">
-                                <?php echo $product->get_price() ? $product->get_price_html() : apply_filters( 'yith_free_text', __( 'Free!', 'yith-woocommerce-wishlist' ) ); ?>
+                                <?php
+                                $base_product = $product->is_type( 'variable' ) ? $product->get_variation_regular_price( 'max' ) : $product->get_price();
+                                echo $base_product ? $product->get_price_html() : apply_filters( 'yith_free_text', __( 'Free!', 'yith-woocommerce-wishlist' ) ); 
+                                ?>
                             </td>
                         <?php endif ?>
 
@@ -267,13 +270,13 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 	            <?php endif; ?>
 
 		        <?php
-		        do_action( 'yith_wcwl_before_wishlist_share' );
+		        do_action( 'yith_wcwl_before_wishlist_share', $wishlist_meta );
 
 		        if ( is_user_logged_in() && $is_user_owner && ! $is_private && $share_enabled ){
 			        yith_wcwl_get_template( 'share.php', $share_atts );
 		        }
 
-		        do_action( 'yith_wcwl_after_wishlist_share' );
+		        do_action( 'yith_wcwl_after_wishlist_share', $wishlist_meta );
 		        ?>
 	        </td>
         </tr>
@@ -287,7 +290,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
         <input type="hidden" value="<?php echo $wishlist_token ?>" name="wishlist_id" id="wishlist_id">
     <?php endif; ?>
 
-    <?php do_action( 'yith_wcwl_after_wishlist' ); ?>
+    <?php do_action( 'yith_wcwl_after_wishlist', $wishlist_meta ); ?>
 
 </form>
 

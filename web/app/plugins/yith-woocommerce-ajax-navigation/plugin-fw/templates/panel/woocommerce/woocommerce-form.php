@@ -2,7 +2,7 @@
 $panel_content_class = apply_filters( 'yit_admin_panel_content_class', 'yit-admin-panel-content-wrap' );
 ?>
 
-<div id="<?php echo $this->settings[ 'page' ] ?>_<?php echo $this->get_current_tab() ?>" class="yit-admin-panel-container">
+<div id="<?php echo $this->settings[ 'page' ] ?>_<?php echo $this->get_current_tab() ?>" class="yith-plugin-fw  yit-admin-panel-container">
     <?php do_action( 'yit_framework_before_print_wc_panel_content', $current_tab ); ?>
     <div class="<?php echo $panel_content_class; ?>">
         <form id="plugin-fw-wc" method="post">

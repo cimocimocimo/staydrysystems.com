@@ -116,6 +116,8 @@ function yith_wcan_attributes_table( $type, $attribute, $id, $name, $values = ar
  * @return bool
  */
 function yith_wcan_can_be_displayed() {
+	$return = false;
+
     if (
         ( is_active_widget( false, false, 'yith-woo-ajax-navigation', true ) ||
         is_active_widget( false, false, 'yith-woo-ajax-navigation-sort-by', true ) ||
@@ -123,11 +125,10 @@ function yith_wcan_can_be_displayed() {
         is_active_widget( false, false, 'yith-woo-ajax-navigation-list-price-filter', true ) ) &&
         ( is_shop() || defined( 'SHOP_IS_ON_FRONT' ) || is_product_taxonomy() || is_product_category() )
     ) {
-        return true;
+        $return = true;
     }
-    else {
-        return false;
-    }
+
+    return apply_filters( 'yith_wcan_can_be_displayed', $return );
 }
 
 
@@ -467,7 +468,7 @@ if ( ! function_exists( 'yit_get_filter_args' ) ) {
             $filter_value['source_tax'] = $_GET['source_tax'];
         }
 
-        elseif( is_product_taxonomy() && $queried_object && ! isset( $filter_value['source_id'] ) && ! isset( $filter_value['source_tax'] )){
+        elseif( ! is_shop() && is_product_taxonomy() && $queried_object && ! isset( $filter_value['source_id'] ) && ! isset( $filter_value['source_tax'] )){
             $filter_value['source_id']   = $queried_object->slug;
             $filter_value['source_tax']  = $queried_object->taxonomy;
         }
@@ -521,13 +522,7 @@ if ( ! function_exists( 'yit_get_woocommerce_layered_nav_link' ) ) {
         $taxonomy = $source_tax = ! empty( $_GET['source_tax'] ) ? $_GET['source_tax'] : '';
 
         if ( defined( 'SHOP_IS_ON_FRONT' ) || ( is_shop() && ! is_product_category() ) ) {
-//            $taxonomy           = get_query_var( 'taxonomy' );
-//            $brands_taxonomy    = yit_get_brands_taxonomy();
             $return             = get_post_type_archive_link( 'product' );
-
-//            if( ! empty( $brands_taxonomy ) && $brands_taxonomy == $taxonomy ){
-//                $return = add_query_arg( array( $taxonomy => get_query_var( 'term' ) ), $return );
-//            }
             return apply_filters( 'yith_wcan_untrailingslashit', true ) && is_string( $return ) ? untrailingslashit( $return ) : $return;
         }
 
@@ -537,17 +532,6 @@ if ( ! function_exists( 'yit_get_woocommerce_layered_nav_link' ) ) {
         }
 
         else {
-            if( empty( $taxonomy ) || empty( $term ) ){
-                $queried_object     = get_queried_object();
-                $taxonomy           = $queried_object instanceof WP_Term ? $queried_object->taxonomy : get_query_var( 'taxonomy' );
-                $term               = $queried_object instanceof WP_Term ? $queried_object : get_query_var( 'term' );
-            }
-
-//            if( yith_wcan_is_product_attribute() || is_numeric( $term ) ){
-//                $term = intval( $term );
-//            }
-//
-//            $return = get_term_link( $term, $taxonomy );
             $return = get_post_type_archive_link( 'product' );
 
             return apply_filters( 'yith_wcan_untrailingslashit', true ) && is_string( $return ) ? untrailingslashit( $return ) : $return;

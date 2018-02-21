@@ -304,10 +304,14 @@ jQuery(function ($) {
         $(element).parent().find('div.yith-wcan-select-wrapper').css("z-index", "1").animate({
 
             visibility: "visible",
-            opacity   : 1
-
-
-        }, 300);
+            opacity   : 1,
+        }, {
+            duration: 300,
+            start: function(){
+                var t = $(this);
+                t.css( 'display', 'block' );
+            }
+        });
 
         $(element).parent().find('a.yit-wcan-select-open').addClass('active');
     }
@@ -317,9 +321,12 @@ jQuery(function ($) {
         $(element).parent().find('div.yith-wcan-select-wrapper').css("z-index", "-1").animate({
 
             visibility: "hidden",
-            opacity   : 0
+            opacity   : 0,
 
-        }, 300);
+        }, 300, function(){
+            var t = $(this);
+            t.css( 'display', 'none' );
+        });
 
         $(element).parent().find('a.yit-wcan-select-open').removeClass('active');
     }
@@ -327,11 +334,13 @@ jQuery(function ($) {
     var yit_hidden_filters_wrapper = function () {
 
         $('div.yith-wcan-select-wrapper').css("z-index", "-1").animate({
-
             visibility: "hidden",
             opacity   : 0
 
-        }, 0);
+        }, 0, function(){
+            var t = $(this);
+            t.css( 'display', 'none' );
+        });
 
         $('a.yit-wcan-select-open').removeClass('active');
     }

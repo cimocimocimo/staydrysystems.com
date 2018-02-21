@@ -1,18 +1,20 @@
 <?php
 /**
-* Plugin Name: YITH WooCommerce Wishlist
-* Plugin URI: http://yithemes.com/themes/plugins/yith-woocommerce-wishlist/
-* Description: YITH WooCommerce Wishlist allows you to add Wishlist functionality to your e-commerce.
-* Version: 2.1.2
-* Author: YITHEMES
-* Author URI: http://yithemes.com/
-* Text Domain: yith-woocommerce-wishlist
-* Domain Path: /languages/
-* 
-* @author YITHEMES
-* @package YITH WooCommerce Wishlist
-* @version 2.0.0
-*/
+ * Plugin Name: YITH WooCommerce Wishlist
+ * Plugin URI: http://yithemes.com/themes/plugins/yith-woocommerce-wishlist/
+ * Description: YITH WooCommerce Wishlist allows you to add Wishlist functionality to your e-commerce.
+ * Version: 2.2.1
+ * Author: YITHEMES
+ * Author URI: http://yithemes.com/
+ * Text Domain: yith-woocommerce-wishlist
+ * Domain Path: /languages/
+ * WC requires at least: 2.5.0
+ * WC tested up to: 3.3.0
+ *
+ * @author YITHEMES
+ * @package YITH WooCommerce Wishlist
+ * @version 2.0.0
+ */
 
 /*  Copyright 2013  Your Inspiration Themes  (email : plugins@yithemes.com)
 

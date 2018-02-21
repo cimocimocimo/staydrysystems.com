@@ -58,6 +58,10 @@ h2.nav-tab-wrapper{
     display: none;
 }
 
+#popular-filter .wp-list-table td.column-actions a{
+    margin-bottom: 5px;
+}
+
 .woocommerce_page_wishlist #TB_window img#TB_Image{
     border: none;
 }

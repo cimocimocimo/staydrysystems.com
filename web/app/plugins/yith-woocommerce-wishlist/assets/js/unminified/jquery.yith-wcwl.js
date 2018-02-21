@@ -144,6 +144,10 @@ jQuery( document ).ready( function( $ ){
 
     } ).trigger('yith_wcwl_init');
 
+    $(document).on( 'yith_infs_added_elem', function(){
+        init_wishlist_pretty_photo();
+    } );
+
     /**
      * Adds selectbox where needed
      */
@@ -289,7 +293,7 @@ jQuery( document ).ready( function( $ ){
                     el_wrap.find( '.yith-wcwl-wishlistaddedbrowse' ).hide().removeClass('show').addClass('hide');
                 }
 
-                $('body').trigger('added_to_wishlist');
+                $('body').trigger('added_to_wishlist', [ el, el_wrap ] );
             }
 
         });
@@ -342,7 +346,7 @@ jQuery( document ).ready( function( $ ){
 
             init_handling_after_ajax();
 
-            $('body').trigger('removed_from_wishlist');
+            $('body').trigger('removed_from_wishlist', [ el, row ] );
         } );
     }
 
@@ -452,7 +456,7 @@ jQuery( document ).ready( function( $ ){
 
             init_handling_after_ajax();
 
-            $('body').trigger('moved_to_another_wishlist');
+            $('body').trigger('moved_to_another_wishlist', [ el, item ] );
         } );
     }
 

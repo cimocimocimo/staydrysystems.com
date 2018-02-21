@@ -22,7 +22,6 @@ $tabs->add_tab( new WPSEO_Option_Tab( 'home', __( 'Homepage', 'wordpress-seo' ),
 $tabs->add_tab( new WPSEO_Option_Tab( 'post-types', __( 'Post Types', 'wordpress-seo' ), array( 'video_url' => WPSEO_Shortlinker::get( 'https://yoa.st/screencast-metas-post-types' ) ) ) );
 $tabs->add_tab( new WPSEO_Option_Tab( 'taxonomies', __( 'Taxonomies', 'wordpress-seo' ), array( 'video_url' => WPSEO_Shortlinker::get( 'https://yoa.st/screencast-metas-taxonomies' ) ) ) );
 $tabs->add_tab( new WPSEO_Option_Tab( 'archives', __( 'Archives', 'wordpress-seo' ), array( 'video_url' => WPSEO_Shortlinker::get( 'https://yoa.st/screencast-metas-archives' ) ) ) );
-$tabs->add_tab( new WPSEO_Option_Tab( 'other', __( 'Other', 'wordpress-seo' ), array( 'video_url' => WPSEO_Shortlinker::get( 'https://yoa.st/screencast-metas-other' ) ) ) );
 $tabs->display( $yform, $options );
 
 $yform->admin_footer();
@@ -39,7 +38,7 @@ function yoast_add_meta_options_help_center_tabs( $tabs ) {
 	$tabs[] = new WPSEO_Help_Center_Item(
 		'template-variables',
 		__( 'Template explanation', 'wordpress-seo' ),
-		array( 'content' => add_template_variables_helpcenter() )
+		array( 'content' => wpseo_add_template_variables_helpcenter() )
 	);
 
 	return $tabs;
@@ -50,7 +49,7 @@ function yoast_add_meta_options_help_center_tabs( $tabs ) {
  *
  * @return string The content for the template variables tab.
  */
-function add_template_variables_helpcenter() {
+function wpseo_add_template_variables_helpcenter() {
 	$explanation = sprintf(
 		/* translators: %1$s expands to Yoast SEO. */
 		__( 'The title &amp; metas settings for %1$s are made up of variables that are replaced by specific values from the page when the page is displayed. The table below contains a list of the available variables.', 'wordpress-seo' ),

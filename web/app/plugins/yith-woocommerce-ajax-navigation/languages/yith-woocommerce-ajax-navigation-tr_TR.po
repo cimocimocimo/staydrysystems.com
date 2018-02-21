@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH WooCommerce Ajax Product filter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-26 12:43+0200\n"
-"PO-Revision-Date: 2017-09-26 12:43+0200\n"
+"POT-Creation-Date: 2018-02-01 14:36+0100\n"
+"PO-Revision-Date: 2018-02-01 14:36+0100\n"
 "Last-Translator: Caner Öncel <caneroncel@gmail.com>\n"
 "Language-Team: Caner Öncel <caneroncel@gmail.com>\n"
 "Language: tr\n"
@@ -58,7 +58,7 @@ msgstr "Terim"
 
 # @ yit
 #: includes/functions.yith-wcan.php:57
-#: widgets/class.yith-wcan-navigation-widget.php:841
+#: widgets/class.yith-wcan-navigation-widget.php:867
 msgid "Color"
 msgstr "Renk"
 
@@ -138,7 +138,7 @@ msgid "Enter here the CSS class or id for the results count container"
 msgstr ""
 
 #: settings/frontend-options.php:57
-msgid "Scroll top anchor (only for mobiles)"
+msgid "Scroll top anchor"
 msgstr ""
 
 #: settings/frontend-options.php:58
@@ -360,72 +360,72 @@ msgctxt "Admin: Widget Title"
 msgid "YITH WooCommerce Ajax Product Filter"
 msgstr ""
 
-#: widgets/class.yith-wcan-navigation-widget.php:151
+#: widgets/class.yith-wcan-navigation-widget.php:153
 msgid "Filters:"
 msgstr ""
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:840
+#: widgets/class.yith-wcan-navigation-widget.php:866
 msgid "List"
 msgstr "Liste"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:842
+#: widgets/class.yith-wcan-navigation-widget.php:868
 msgid "Label"
 msgstr "Etiket"
 
-#: widgets/class.yith-wcan-navigation-widget.php:843
+#: widgets/class.yith-wcan-navigation-widget.php:869
 msgid "Dropdown"
 msgstr "Açılır Menü"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:850
-#: widgets/class.yith-wcan-reset-navigation-widget.php:114
+#: widgets/class.yith-wcan-navigation-widget.php:876
+#: widgets/class.yith-wcan-reset-navigation-widget.php:104
 msgid "Title"
 msgstr "Başlık"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:856
+#: widgets/class.yith-wcan-navigation-widget.php:882
 msgid "Type:"
 msgstr "Tür:"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:867
+#: widgets/class.yith-wcan-navigation-widget.php:893
 msgid "Query Type:"
 msgstr "Sorgu Tipi:"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:869
+#: widgets/class.yith-wcan-navigation-widget.php:895
 msgid "AND"
 msgstr "VE"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:870
+#: widgets/class.yith-wcan-navigation-widget.php:896
 msgid "OR"
 msgstr "VEYA"
 
 # @ yit
-#: widgets/class.yith-wcan-navigation-widget.php:876
+#: widgets/class.yith-wcan-navigation-widget.php:902
 msgid "Attribute:"
 msgstr "Özellikler:"
 
-#: widgets/class.yith-wcan-navigation-widget.php:883
+#: widgets/class.yith-wcan-navigation-widget.php:909
 msgid "Display (default All):"
 msgstr "Görüntüleme (Varsayılan tümü):"
 
-#: widgets/class.yith-wcan-navigation-widget.php:885
+#: widgets/class.yith-wcan-navigation-widget.php:911
 msgid "All (no hierarchical)"
 msgstr "Tümü"
 
-#: widgets/class.yith-wcan-navigation-widget.php:886
+#: widgets/class.yith-wcan-navigation-widget.php:912
 msgid "All (hierarchical)"
 msgstr ""
 
-#: widgets/class.yith-wcan-navigation-widget.php:887
+#: widgets/class.yith-wcan-navigation-widget.php:913
 msgid "Only Parent"
 msgstr "Sadece Ebeveyn"
 
-#: widgets/class.yith-wcan-navigation-widget.php:894
+#: widgets/class.yith-wcan-navigation-widget.php:920
 msgid "CSS custom class"
 msgstr ""
 
@@ -437,11 +437,11 @@ msgstr ""
 msgid "YITH WooCommerce Ajax Reset Filter"
 msgstr ""
 
-#: widgets/class.yith-wcan-reset-navigation-widget.php:107
+#: widgets/class.yith-wcan-reset-navigation-widget.php:97
 msgid "Reset All Filters"
 msgstr "Tüm Filtreleri Sıfırla"
 
-#: widgets/class.yith-wcan-reset-navigation-widget.php:120
+#: widgets/class.yith-wcan-reset-navigation-widget.php:110
 msgid "Button Label"
 msgstr "Buton Metni"
 

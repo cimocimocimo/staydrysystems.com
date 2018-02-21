@@ -18,7 +18,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
      * @return void
      */
     //set plugin version
-    public $tvc_eeVer = '1.2.0';
+    public $tvc_eeVer = '1.2.2';
     public function __construct() {
         
          //Set Global Variables
@@ -28,7 +28,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         //define plugin ID       
         $this->id = "enhanced_ecommerce_google_analytics";
         $this->method_title = __("Enhanced Ecommerce Google Analytics", "enhanced-e-commerce-for-woocommerce-store");
-        $this->method_description = __("Enhanced Ecommerce is a new feature of Universal Analytics that generates detailed statistics about the users journey from product page to thank you page on your e-store. <br/><a href='http://www.tatvic.com/blog/enhanced-ecommerce/' target='_blank'>Know more about Enhanced Ecommerce.</a><br/><br/><b>Quick Tip:</b> We recently launched an Advanced Google Analytics Plugin for WooCommerce! The plugin offers tracking of 9 Reports of Enhanced Ecommerce, User ID Tracking, 15+ Custom Dimenensions & Metrics, Content Grouping & much more. <a href='https://codecanyon.net/item/actionable-google-analytics-for-woocommerce/9899552?ref=tatvic' target='_blank'>Learn More</a>", "woocommerce");
+        $this->method_description = __("Enhanced Ecommerce is a new feature of Universal Analytics that generates detailed statistics about the users journey from product page to thank you page on your e-store. <br/><a href='http://www.tatvic.com/blog/enhanced-ecommerce/' target='_blank'>Know more about Enhanced Ecommerce.</a><br/><br/><b>Quick Tip:</b> We also have an Advanced Google Analytics Plugin for WooCommerce! The plugin offers tracking of 9 Reports of Enhanced Ecommerce, User ID Tracking, Add Google Optimize Snippet, 15+ Custom Dimenensions & Metrics, Content Grouping & much more. <a href='https://codecanyon.net/item/actionable-google-analytics-for-woocommerce/9899552?ref=tatvic' target='_blank'>Learn More</a>", "woocommerce");
 
         //session for product position count
         //session_start removed bcoz it gives warning
@@ -157,8 +157,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                    });
                 
                //Pugin Promotion
-                jQuery("h1.screen-reader-text").before("<a href=https://codecanyon.net/item/actionable-google-analytics-for-woocommerce/9899552?ref=tatvic target=_blank><img src='.plugins_url( '/aga_woo_1000_200.png' , __FILE__ ).' title=Actionable Google Analytics Plugin by Tatvic alt=Actionable Google Analytics Plugin by Tatvic></a>");
-                jQuery("form#mainform").after("<a href=https://www.tatvic.com/contact/?utm_source=woocommerce_ee_plugin&utm_medium=wordpress_admin&utm_campaign=plugin_promotion target=_blank><img src='.plugins_url( '/owox_banner_700_150.png' , __FILE__ ).' title=Owox Banner Ad alt=Owox Banner Ad></a>");
+                jQuery("form#mainform").after("<a href=https://codecanyon.net/item/actionable-google-analytics-for-woocommerce/9899552?ref=tatvic target=_blank><img src='.plugins_url( '/aga_premium.png' , __FILE__ ).' title=Actionable Google Analytics Plugin by Tatvic alt=Actionable Google Analytics Plugin by Tatvic></a>");
                 </script>';
         }
     }
@@ -423,7 +422,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
                  //make json for trans data on order page
            $this->wc_version_compare("tvc_td=" . json_encode($orderpage_trans_Array) . ";");
 
-         $code.='
+         $code ='
                  ga("require", "ec", "ec.js");
                 //set local currencies
             ga("set", "&cu", tvc_lc);  
@@ -483,7 +482,7 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
         $code = '
               ga("require", "ec", "ec.js");
             ga("set", "&cu", tvc_lc);
-            jQuery("button[class*=single_add_to_cart_button]").click(function() {
+            jQuery("[class*=single_add_to_cart_button]").click(function() {
                             
                               // Enhanced E-commerce Add to cart clicks 
                               ga("ec:addProduct", {
@@ -1020,9 +1019,11 @@ class WC_Enhanced_Ecommerce_Google_Analytics extends WC_Integration {
             } else {
                      $prod_meta = wc_get_product($item["product_id"]);
             }
-
-            $cart_remove_link=html_entity_decode($woocommerce->cart->get_remove_url($key));
-                       
+            if (version_compare($woocommerce->version, "3.3", "<")) {
+                    $cart_remove_link=html_entity_decode($woocommerce->cart->get_remove_url($key)); 
+            } else {
+                    $cart_remove_link=html_entity_decode(wc_get_cart_remove_url($key)); 
+            }     
             $category = get_the_terms($item["product_id"], "product_cat");
             $categories = "";
             if ($category) {

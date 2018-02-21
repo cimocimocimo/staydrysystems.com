@@ -77,7 +77,8 @@ class WPSEO_Upgrade {
 		}
 
 		if ( version_compare( $this->options['version'], '5.0', '>=' )
-			 && version_compare( $this->options['version'], '5.1', '<' ) ) {
+			&& version_compare( $this->options['version'], '5.1', '<' )
+		) {
 			$this->upgrade_50_51();
 		}
 
@@ -87,6 +88,14 @@ class WPSEO_Upgrade {
 
 		if ( version_compare( $this->options['version'], '5.6', '<' ) ) {
 			$this->upgrade_56();
+		}
+
+		if ( version_compare( $this->options['version'], '6.1', '<' ) ) {
+			$this->upgrade_61();
+		}
+
+		if ( version_compare( $this->options['version'], '6.3', '<' ) ) {
+			$this->upgrade_63();
 		}
 
 		// Since 3.7.
@@ -136,9 +145,12 @@ class WPSEO_Upgrade {
 		if ( ! empty( $taxonomies ) ) {
 			foreach ( $taxonomies as $taxonomy => $tax_metas ) {
 				foreach ( $tax_metas as $term_id => $tax_meta ) {
-					if ( function_exists( 'wp_get_split_term' ) && $new_term_id = wp_get_split_term( $term_id, $taxonomy ) ) {
-						$taxonomies[ $taxonomy ][ $new_term_id ] = $taxonomies[ $taxonomy ][ $term_id ];
-						unset( $taxonomies[ $taxonomy ][ $term_id ] );
+					if ( function_exists( 'wp_get_split_term' ) ) {
+						$new_term_id = wp_get_split_term( $term_id, $taxonomy );
+						if ( $new_term_id !== false ) {
+							$taxonomies[ $taxonomy ][ $new_term_id ] = $taxonomies[ $taxonomy ][ $term_id ];
+							unset( $taxonomies[ $taxonomy ][ $term_id ] );
+						}
 					}
 				}
 			}
@@ -269,7 +281,7 @@ class WPSEO_Upgrade {
 	 */
 	private function upgrade_44() {
 		$option_titles = WPSEO_Options::get_option( 'wpseo_titles' );
-		$option_wpseo = WPSEO_Options::get_option( 'wpseo' );
+		$option_wpseo  = WPSEO_Options::get_option( 'wpseo' );
 
 		if ( isset( $option_titles['content-analysis-active'] ) && isset( $option_titles['keyword-analysis-active'] ) ) {
 			$option_wpseo['content_analysis_active'] = $option_titles['content-analysis-active'];
@@ -318,9 +330,12 @@ class WPSEO_Upgrade {
 			$wpdb->prepare('
 				SELECT user_id, meta_value
 				FROM ' . $wpdb->usermeta . '
-				WHERE meta_key = %s AND meta_value LIKE "%%wpseo-dismiss-about%%"
-				', $meta_key ),
-				ARRAY_A
+				WHERE meta_key = %s AND meta_value LIKE %s
+				',
+				$meta_key,
+				'%wpseo-dismiss-about%'
+			),
+			ARRAY_A
 		);
 
 		if ( empty( $usermetas ) ) {
@@ -411,5 +426,42 @@ class WPSEO_Upgrade {
 		$wpdb->query( 'UPDATE ' . $count_storage->get_table_name() . ' SET incoming_link_count = 0 WHERE incoming_link_count IS NULL' );
 	}
 
+	/**
+	 * Updates the links for the link count when there is a difference between the site and home url. We've used the
+	 * site url instead of the home url.
+	 *
+	 * @return void
+	 */
+	private function upgrade_61() {
+		// When the home url is the same as the site url, just do nothing.
+		if ( home_url() === site_url() ) {
+			return;
+		}
 
+		global $wpdb;
+
+		$link_storage = new WPSEO_Link_Storage();
+		$wpdb->query( 'DELETE FROM ' . $link_storage->get_table_name() );
+
+		$meta_storage = new WPSEO_Meta_Storage();
+		$wpdb->query( 'DELETE FROM ' . $meta_storage->get_table_name() );
+	}
+
+	/**
+	 * Removes some no longer used options for noindexing subpages and for meta keywords and its associated templates.
+	 *
+	 * @return void
+	 */
+	private function upgrade_63() {
+		$option_titles = WPSEO_Options::get_option( 'wpseo_titles' );
+		unset( $option_titles['noindex-subpages-wpseo'], $option_titles['usemetakeywords'] );
+
+		// Remove all the meta keyword template options we've stored.
+		foreach ( array_keys( $option_titles ) as $key ) {
+			if ( strpos( $key, 'metakey' ) === 0 ) {
+				unset( $option_titles[ $key ] );
+			}
+		}
+		update_option( 'wpseo_titles', $option_titles );
+	}
 }

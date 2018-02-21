@@ -18,13 +18,15 @@ class Meow_WR2X_Admin extends MeowApps_Admin {
 	}
 
 	function admin_notices() {
-		if ( delete_transient( 'wr2x_flush_rules' ) ) {
-			global $wp_rewrite;
-			Meow_WR2X_Admin::generate_rewrite_rules( $wp_rewrite, true );
+		if ( current_user_can( 'activate_plugins' ) ) {
+			if ( delete_transient( 'wr2x_flush_rules' ) ) {
+				global $wp_rewrite;
+				Meow_WR2X_Admin::generate_rewrite_rules( $wp_rewrite, true );
+			}
 		}
 		if ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'photon' ) ) {
 			echo "<div class='error' style='margin-top: 20px;'><p>";
-			_e( "JetPack's <b>Photon</b> module breaks features built in WP Retina 2x, as the plugin sends. A common and better alternative to Photon is to use <a href='http://tracking.maxcdn.com/c/97349/3982/378'>MaxCDN</a> (very popular), CloudFlare or Fastly.", 'wp-retina-2x' );
+			_e( "JetPack's <b>Photon</b> module breaks features built in WP Retina 2x (as Photos moves the files away). A common and better alternative to Photon is to use <a href='http://tracking.maxcdn.com/c/97349/3982/378'>MaxCDN</a> (very popular), CloudFlare or Fastly.", 'wp-retina-2x' );
 			echo "</p></div>";
     }
 	}
@@ -207,7 +209,7 @@ class Meow_WR2X_Admin extends MeowApps_Admin {
 				<div class="meow-box meow-col meow-span_2_of_2">
 					<h3>How to use</h3>
 					<div class="inside">
-						<?php echo _e( 'This plugin works out of the box, the default settings are the best for most installs. However, you should have a look at the <a target="_blank" href="https://meowapps.com/wp-retina-2x/tutorial/">tutorial</a>.', 'meow-gallery' ) ?>
+						<?php echo _e( 'This plugin works out of the box, the default settings are the best for most installs. However, you should have a look at the <a target="_blank" href="https://meowapps.com/wp-retina-2x/tutorial/">tutorial</a>.', 'wp-retina-2x' ) ?>
 					</div>
 				</div>
 			</div>

@@ -2,8 +2,8 @@
 Contributors: TigrouMeow
 Tags: retina, images, image, responsive, lazysizes, lazy, attachment, media, files, iphone, ipad, high-dpi
 Requires at least: 3.5
-Tested up to: 4.8
-Stable tag: 5.1.4
+Tested up to: 4.9
+Stable tag: 5.2.3
 
 Make your website look beautiful and crisp on modern displays by creating and displaying retina images. WP 4.4+ is also supported and enhanced.
 
@@ -32,6 +32,17 @@ More information and tutorial available one http://meowapps.com/wp-retina-2x/.
 3. Check if it works! - if it doesn't, read the FAQ, the tutorial, and check the forums.
 
 == Changelog ==
+
+= 5.2.3 =
+* Fix: Sanitization to avoid cross-site scripting.
+* Fix: Additional security fixes.
+
+= 5.2.0 =
+* Fix: When metadata is broken, displays a message.
+* Fix: A few icons weren't displayed nicely.
+* Fix: When metadata is broken, displays a message.
+* Update: From Lazysizes 3.0 to 4.0.1.
+* Add: Option for forcing SSL Verify.
 
 = 5.1.4 =
 * Add: wr2x_retina_extension, wr2x_delete_attachment, wr2x_get_pathinfo_from_image_src, wr2x_picture_rewrite in the API.

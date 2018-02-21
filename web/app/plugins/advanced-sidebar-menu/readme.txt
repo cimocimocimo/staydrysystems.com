@@ -4,55 +4,84 @@ Contributors: Mat Lipe
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal%40matlipe%2ecom&lc=US&item_name=Advanced%20Sidebar%20Menu&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
 Tags: menus, sidebar menu, hierarchy, category menu, pages menu
 Requires at least: 4.6.0
-Tested up to: 4.8.1
-Stable tag: 6.3.2
+Tested up to: 4.9.2
+Requires PHP: 5.2.4
+Stable tag: 7.1.1
 
 == Description ==
 
-Uses the parent/child relationship of your pages or categories to generate menus based on the current section of your site. Simply assign a page or category to a parent and this will do the rest for you.
+Uses the parent/child relationship of your pages or categories to generate menus based on the current section of your site. Assign a page or category to a parent and this will do the rest for you.
 
-Keeps the menu clean and usable. Only related items display so you don't have to worry about keeping a custom menu up to date or displaying links to items that don't belong.
+Keeps the menu clean and usable. Only related items display so you don't have to worry about keeping a custom menu up to date or displaying links to items that don't belong. 
 
+<strong>Check out <a href="https://matlipe.com/product/advanced-sidebar-menu-pro/">Advanced Sidebar Menu Pro</a> for more features including priority support, the ability to customize the look and feel, custom link text, excluding of pages, category ordering, accordions, custom post types, custom taxonomies, and so much more!</strong>
 
-<h3>Want more options and better support?</h3>
-	
-<strong><big><a href="https://matlipe.com/product/advanced-sidebar-menu-pro/">Go Pro!</a></big></strong>
+<blockquote><a href="https://matlipe.com/product/advanced-sidebar-menu-pro/" target="_blank">Pro version 3.0.0</a> just dropped with lots of great new stuff!</blockquote>
 
+<h4>Features</h4>
+* Page and Category widgets
+* Option to display or not display the highest level parent page or category
+* Option to display the menu when there is only the highest level parent
+* Ability to order pages by (date, title, page order)
+* Exclude pages or categories by entering a comma separated list of ids
+* Option to always display child pages or categories
+* Option to select the levels of pages or categories to display when always display child is used
+* Option to display or not display categories on single posts
+* Ability to display each single post's category in a new widget or in same list
 
-<h4>Included page options:</h4>
-<ol>
-   <li>Add a title to the widget</li>
-   <li>Include the highest level parent page</li>
-   <li>Include the highest level parent page even with no Children</li>
-   <li>Order Pages By (date, title, page order)</li>
-   <li>Use built in styling (very plain styling, for more advanced styling <a href="https://matlipe.com/product/advanced-sidebar-menu-pro/">Go Pro!</a>)</li>
-   <li>Exclude pages</li>
-   <li>Always display child Pages</li>
-   <li>Number of levels of child pages to display</li>
-</ol>  
+<h4>Page Widget Options</h4>
+* Add a title to the widget
+* Display highest level parent page
+* Display menu when there is only the parent page
+* Order pages by (date, title, page order)
+* Use built in styling (very plain styling, for more advanced styling <a href="https://matlipe.com/product/advanced-sidebar-menu-pro/" target="_blank">Go Pro!</a>)
+* Exclude pages
+* Always display child Pages
+* Number of levels of child pages to display when always display child pages is checked
 
-<h4>Included category options:</h4>
-<ol>
-   <li>Add a title to the widget</li>
-   <li>Include Parent Category</li>
-   <li>Include Parent Even with no Children</li>
-  <li>Use built in styling (very plain styling, for more advanced styling <a href="https://matlipe.com/product/advanced-sidebar-menu-pro/">Go Pro!</a>)</li>
-  <li>Display Categories on Single Posts</li>
-   <li>To display each Single Posts Category in a new widget or in same list</li>
-   <li>Exclude Categories</li>
-  <li>Always display child categories</li>
-   <li>Levels of Categories to display</li>
-</ol>    
+<h4>Category Widget Options</h4>
+* Add a title to the widget
+* Display highest level parent category
+* Display menu when there is only the parent category
+* Use built in styling (very plain styling, for more advanced styling <a href="https://matlipe.com/product/advanced-sidebar-menu-pro/" target="_blank">Go Pro!</a>)
+* Display categories on single posts
+* Display each single post's category in a new widget or in same list
+* Exclude categories
+* Always display child categories
+* Levels of Categories to display when always display child categories is checked
 
-Templates may be overridden for customization of outputs and/or css.
+<h4>Pro Features</h4>
+* Priority support
+* Ability to customize each page link’s text
+* Option to display the current page's parents and grandparents only
+* Number of levels of pages to show when always displayed child pages is not checked
+* Click and drag styling for both the page and category widgets
+* Styling options for links including color, background color, size, and font weight
+* Styling options for different levels of links
+* Styling options for the current page or category
+* Styling options for the parent of the current page or category
+* Block styling options including borders and border colors
+* Bullet style selection from 7 styles or select none to have no bullets
+* Accordion menu support for pages
+* Accordion menu support for categories
+* Accordion icon selection from 4 styles of icons
+* Accordion icon color selection
+* Accordion option to keep all sections closed until clicked
+* Accordion option to include highest level parent in accordion
+* Ability to exclude a page from all menus using a simple checkbox
+* Link ordering for the category widget
+* Ability to select and display custom post types **NEW**
+* Ability to select and display custom taxonomies **NEW**
 
-Many built in filters for altering the way the widgets function.
+<h4>Currently ships with the following languages</h4>
+* English (US)
+* German (de_DE)
    
-Developer docs may be found here
-<a href="https://matlipe.com/advanced-sidebar-menu/developer-docs/">https://matlipe.com/advanced-sidebar-menu/developer-docs/</a>
+<h4>Developers</h4>
+Developer docs may be found <a target="_blank" href="https://matlipe.com/advanced-sidebar-menu/developer-docs/">here</a>.
 
-To contribute send pull requests:
-<a href="https://github.com/lipemat/advanced-sidebar-menu">GitHub Repo</a>
+<h4>Contribute</h4>
+Send pull requests via the <a target="_blank" href="https://github.com/lipemat/advanced-sidebar-menu">GitHub Repo</a>
 
 
 == Installation ==
@@ -68,18 +97,16 @@ Manual Installation
 
 == Screenshots ==
 
-1. Screenshot of the Page widget and options
-2. Screenshot of the Categories widget and options
+1. Page widget options
+2. Category widget options
+3. Example of a page menu using the 2017 theme and default styles
+3. Example of a category menu ordered by title using the 2017 theme and default styles
 
 
 == Frequently Asked Questions ==
 
 Developer docs may be found here:
-<a href="https://matlipe.com/advanced-sidebar-menu/developer-docs/">https://matlipe.com/advanced-sidebar-menu/developer-docs/</a>
-
-= What text domain do I use for translation and where is the .pot file? =
-
-The .pot file may be found in the plugins' languages folder. Use the 'advanced-sidebar-menu' text domain.
+<a href="https://matlipe.com/advanced-sidebar-menu/developer-docs/" target="_blank">https://matlipe.com/advanced-sidebar-menu/developer-docs/</a>
 
 
 = How do I change the styling of the current page? =
@@ -97,29 +124,43 @@ For Instance This would remove the dot and  change the color
 }
 </code>
 
+To style your menu without using any code <a href="https://matlipe.com/product/advanced-sidebar-menu-pro/" target="_blank">Go Pro!</a>
 
 = How do you get the categories to display on single post pages? =
 
-There is a checkbox in the widget options as of version 3.2 that will display the same structure for the categories the post is in.
+There is a checkbox in the widget options that will display the same structure for the categories the post is in.
 
 = How do you edit the output or built in css? =
 
 Create a folder in your child theme named "advanced-sidebar-menu" copy any of the files from the "views" folder into
-the folder you just created. You may edit the files at will to change the output or css.
-You must have the option checked to use the built in CSS (in the widget) to be able to edit the css file in this way.
+the folder you just created. You may edit the files to change the output or css. You must have the option checked to use the built in CSS (in the widget) to be able to edit the css file in this way.
 
 
 = Does the menu change for each page you are on? =
 
-Yes. Based on whatever page you are on, the menu will change automatically to display the current parents and children.
+Yes. Based on whatever page, post, or category you are on, the menu will change automatically to display the current parents and children.
 
-= How does this work with styling the page? =
-
-This will automatically generate class names for each level for menu system.
-You can add classes to your theme's style.css file to style it accordingly. 
-You may want to use something like margins to set the levels apart.
 
 == Changelog ==
+= 7.1.0 =
+* Support Pro Version 3.0.0
+* Add German translations
+* Begin converting code formatting to strict WordPress standards
+
+= 7.0.0 =
+* Restructure the codebase to a more modern PSR4 structure
+* Improve cache handling
+* Improve verbiage in admin
+* Implement new actions and filters
+* Rebuild templates for improved stability and future changes
+* Improve performance
+* Kill conflicting backward compatibility with version 5
+* Open up more extendability possibilities
+
+= 6.4.0 =
+* Code improvements
+* Performance improvements via shared child retrieval
+
 = 6.3.0
 * Improve category class handling for pro version accordion support
 
@@ -170,70 +211,13 @@ You may want to use something like margins to set the levels apart.
 * Added Legacy Mode for backwards compatibility
 
 
-= 3.4.0 =
-* Added filter support for custom post types
-
-= 3.3.1 =
-* Added unlimited number of levels displayed once on the grandchild level of pages
-
-= 3.3.0 =
-* Added the ability to have a widget title
-* Redesigned the entire structure to prepare for future changes
-
-
-= 3.2.5 =
-* Bugfixes
-
-= 3.2.3 = 
-* Fix a bug that caused multiple category list to display of more than one category the single post was in shared the same parent
-
-= 3.2.1 =
-* Fix a possible bug that may display a * Notice * error if there is nothing to display and the  error reporting is set to strict when using the categories widget.
-
-= 3.2.0 =
-* Added ability to have categories show on single post pages
-* Improved the code structure
-
-
-= 3.0.2 =
-*Bugfixes
-
-
-= 3.0 =
-* Added a categories menu widget with the same functionality as the pages widget
-* Added the ability to edit "views" files through your child theme to edit output and css
-* Cleanedup the output
-
-
 == Upgrade Notice ==
+= 7.0.0 =
+The templates have been improved drastically. While the old version 6 templates will work for now they have been deprecated and will one day stop working. If you are using custom templates please being converting them to the new structure.
+
 = 6.0.0 =
 If you are using the Pro version of this plugin be sure to update to Pro version 1.4.4 to keep all functionality intact with this version.
 
 = 5.0.0 =
 If you used a custom page_list.php template previously you may want to redo it on this version to take advantage of the new structure.
-
-= 3.3.0 =
-If you customized the output previously you may want to redo it on this version to take advantage of the new structure.
-IF you are are using the page_list.php view you will most likely get an error message to remove a couple lines.
-These lines are no longer needed for the structure in this version.
-
-= 3.2.3 = 
-This will add the ability to display the categories on single post pages.
-If you are using the category_list.php view you will most likely get an error message to remove a couple lines.
-These lines are no longer needed for the structure in this new version.
-
-= 3.0 =
-This Version will add a widget for displaying categories as well, 
-better functionality, a cleaner output, and the ability to customize the output/css
-through your child theme.
-
-= 2.0 =
-This Version will give you better control over the menu and styling ability.
-Added new options and more stable code.
-
-= 1.2 =
-This Version will allow you to order the pages in the menu using the page order section of the editor.
-
-= 1.1 =
-This version will allow simliar css styling.
 

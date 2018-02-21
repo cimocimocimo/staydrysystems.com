@@ -290,6 +290,6 @@ if( !function_exists( 'yith_wcwl_get_hidden_products' ) ){
         }
 
         $hidden_products = $wpdb->get_col( $wpdb->prepare( $query, $query_args ) );
-        return $hidden_products;
+        return apply_filters( 'yith_wcwl_hidden_products', $hidden_products );
     }
 }

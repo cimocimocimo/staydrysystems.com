@@ -3,23 +3,22 @@
 Contributors: yithemes
 Tags: wishlist, woocommerce, products, yit, e-commerce, shop, ecommerce wishlist, yith, woocommerce wishlist, shop wishlist
 Requires at least: 4.0
-Tested up to: 4.7.4
-Stable tag: 2.1.2
+Tested up to: 4.9.2
+Stable tag: 2.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 YITH WooCommerce Wishlist add all Wishlist features to your website. Needs WooCommerce to work.
-WooCommerce 3.0.x compatible.
+WooCommerce 3.2.x compatible.
 
 
 == Description ==
 
-What can really make the difference in conversions and amount of sales is, without a doubt, the freedom to share your own wishlist, even on social networks. 
-This increases indirect sales. Can you imagine the sales volume that can be generated during holidays or birthdays, when relatives and friends will be looking at your clients' wishlists in search for a gift to buy?
+What can really make the difference in conversions and amount of sales is without a doubt the freedom to share your own wishlist, even on social networks, increasing indirect sales: can you imagine the sales volume you can generate during holidays or birthdays, when relatives and friends will be looking for the wishlist of your clients to buy a gift?
 
-Offer your visitors the chance to add the products of your WooCommerce store to a wishlist page. With YITH WooCommerce Wishlist you can add a link on each product detail page. 
-Clicking on this will add the product to a Wishlist page, that is automatically created by the plugin for you. 
-Users will then be able to manage their Wishlist by moving products gathered here to the cart or by simply removing them.
+Offer to your visitors a chance to add the products of your woocommerce store to a wishlist page. With YITH WooCommerce Wishlist you can add a link in each product detail page,
+in order to add the products to the wishlist page. The plugin will create you the specific page and the products will be added in this page and
+afterwards add them to the cart or remove them.
 
 Working demo are available:
 
@@ -37,6 +36,7 @@ This plugin is 100% compatible with [WPML](http://wpml.org/?aid=24889&affiliate_
 * Chinese - TAIWAN
 * Croatian - CROATIA
 * Danish - DENMARK
+* Dutch - NETHERLANDS
 * English - UNITED KINGDOM (Default)
 * French - FRANCE
 * German - GERMANY
@@ -108,6 +108,23 @@ you should ask theme developers to update custom templates and replace the old t
 4. The Wishlist settings page
 
 == Changelog ==
+
+= 2.2.1 - Released: Jan, 31 - 2018 =
+
+* New: tested with WooCommerce 3.3.0
+* Fix: issue with Add to Wishlist shortcode when global $product not defined
+
+= 2.2.0 - Released: Jan, 11 - 2018 =
+
+* New: WooCommerce 3.2.6 compatibility
+* New: plugin-fw 3.0
+* New: added js compatibility to Infinite Scrolling
+* Tweak: improved wishlist-view template checks and params
+* Tweak: wishlist now registers (and shows) "date added" param for unauthenticated users too
+* Tweak: added check over product object, to avoid Fatal when printing Add to Wishlist shortcode
+* Fix: fixed security vulnerability, causing possible SQL Injections (huge thanks to John C. and Sucuri Vulnerability Research team)
+* Dev: added yith_wcwl_removing_from_wishlist / yith_wcwl_removed_from_wishlist hooks
+* Dev: added params to main triggers in wishlist js code
 
 = 2.1.2 - Released: May, 11 - 2017 =
 
@@ -435,9 +452,7 @@ Full documentation is available [here](http://yithemes.com/docs-plugins/yith-woo
 
 == Upgrade notice ==
 
-= 2.1.2 - Released: May, 11 - 2017 =
+= 2.2.1 - Released: Jan, 31 - 2018 =
 
-* Tweak: updated FontAwesome to 4.7.0
-* Fix: possible warning when empty rewrite rules
-* Fix: problem with custom CSS inclusion, when not located in child theme
-* Fix: using current_product instead of global product when retrieving product type (prevents a Fatal error when placing Add to Wishlist outside the loop)
+* New: tested with WooCommerce 3.3.0
+* Fix: issue with Add to Wishlist shortcode when global $product not defined
