@@ -19,7 +19,8 @@
 }
 
 /* Colors Type */
-ul.yith-wcan-color.yith-wcan.yith-wcan-group {
+ul.yith-wcan-color.yith-wcan.yith-wcan-group,
+ul.yith-wcan-list {
     list-style: none;
     margin-left: 0;
 }
@@ -164,7 +165,8 @@ ul.yith-wcan-color.yith-wcan.yith-wcan-group {
     color: #838383;
 }
 
-.woocommerce-page .widget_layered_nav .yith-wcan-select-wrapper ul li.chosen a, .woocommerce-page .widget_layered_nav .yith-wcan-select-wrapper ul li.chosen a {
+.woocommerce-page .widget_layered_nav .yith-wcan-select-wrapper ul li.chosen a,
+.woocommerce-page .widget_layered_nav .yith-wcan-select-wrapper ul li.chosen a {
     background: transparent url(../images/cross.png) bottom 6px left no-repeat;
     border: none;
 }
@@ -214,7 +216,8 @@ ul.yith-wcan-color.yith-wcan.yith-wcan-group {
 .yith-wcan-sort-by ul.orderby li.orderby-wrapper a.active:before,
 a.yith-wcan-onsale-button.active:before,
 a.yith-wcan-instock-button.active:before,
-a.yith-wcan-price-link.active:before {
+a.yith-wcan-price-link.active:before,
+ul.yith-wcan-list li.chosen a:before{
     font-family: WooCommerce;
     speak: none;
     font-variant: normal;

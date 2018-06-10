@@ -3,8 +3,8 @@
 Contributors: yithemes
 Tags: woocommerce search by sku, woocommerce search results, woocommerce search shortcode, woocommerce search page, woocommerce search form, woocommerce search filter, woocommerce search products, woocommerce search content, woocommerce search autocomplete, woocommerce advanced search, woocommerce search category, woocommerce search product attributes, woocommerce search by tag, woocommerce search by brand, woocommerce predictive, woocommerce live search, woocommerce single product search, woocommerce site search, woocommerce search tex, tajax, search, woocommerce, products, themes, yit, e-commerce, shop, yith, ajax search, instant search, premium, yithemes, autocomplete, autosuggest, better search, category search, custom search, highlight terms, Live Search, Predictive Search, product search, relevant search, search highlight, search product, suggest, typeahead, WooCommerce Plugin, woocommerce product search, woocommerce search, wordpress ecommerce
 Requires at least: 4.0.0
-Tested up to: 4.9.2
-Stable tag: 1.5.5
+Tested up to: 4.9.6
+Stable tag: 1.5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,7 +34,7 @@ It works just like Google Suggest, but this tool will be available on your WooCo
  * Set minimum number of characters for WooCommerce search
  * Set maximum number of WooCommerce results
 
-If you want to boost your YITH WooCommerce Ajax Search, you can also visit YIThemes page and explore the [live demo](http://plugins.yithemes.com/yith-woocommerce-ajax-search/) of the premium version, which includes all the following features to improve at the best your WooCommerce site search.
+If you want to boost your YITH WooCommerce Ajax Search, you can also visit YIThemes page and explore the [live demo](https://plugins.yithemes.com/yith-woocommerce-ajax-search/) of the premium version, which includes all the following features to improve at the best your WooCommerce site search.
 
 = Premium features of YITH WooCommerce Ajax Search: =
 
@@ -55,7 +55,7 @@ If you want to boost your YITH WooCommerce Ajax Search, you can also visit YIThe
 * Customize WooCommerce search loader .gif image
 
 
-For a more detailed list of options and features of YITH WooCommerce Ajax Search, please read the [official documentation](http://yithemes.com/docs-plugins/yith-woocommerce-ajax-search/ "YITH Woocommerce Ajax Search official documentation").
+For a more detailed list of options and features of YITH WooCommerce Ajax Search, please read the [official documentation](https://docs.yithemes.com/yith-woocommerce-ajax-search/ "YITH Woocommerce Ajax Search official documentation").
 
 YITH WooCommerce Ajax Search is available in combination with many other plugins in [**YITH Essential Kit for WooCommerce #1**](https://wordpress.org/plugins/yith-essential-kit-for-woocommerce-1/), a bundle of indispensable tools to make your WooCommerce site look more professional and be more user-friendly. Learn more about all of WooCommerce plugins included and boost your WooCommerce site with a simple click!
 
@@ -107,7 +107,7 @@ You can get more features with the premium version of YITH WooCommerce Ajax Sear
 
 = How can I try the full-featured plugin? =
 
-If you want to see a demonstration version of the premium plugin, you can see that in [this page](http://plugins.yithemes.com/yith-woocommerce-ajax-search/). Browse it and try all options available so that you can see how your plugin looks like.
+If you want to see a demonstration version of the premium plugin, you can see that in [this page](https://plugins.yithemes.com/yith-woocommerce-ajax-search/). Browse it and try all options available so that you can see how your plugin looks like.
 
 = What are the main changes in plugin translation? =
 Recently YITH WooCommerce Ajax Search has been selected to be included in the "translate.wordpress.org" translate programme.
@@ -138,6 +138,12 @@ If you have created your own language pack for YITH WooCommerce Ajax Search, or 
 2. YITH WooCommerce Ajax Search in operation displaying WooCommerce search results
 
 == Changelog ==
+
+= 1.5.6 - Released: May 15, 2018 =
+New: Support to WordPress 4.9.6 RC2
+New: Support to WooCommerce 3.4.0 RC1
+Update: Plugin Core 3.0.15
+
 = 1.5.5 - Released: Jan 31, 2018 =
 New: Support to WooCommerce 3.3.x
 Update: Plugin Core 3.0.11

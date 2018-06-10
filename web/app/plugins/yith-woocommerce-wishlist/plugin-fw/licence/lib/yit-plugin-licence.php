@@ -105,7 +105,7 @@ if ( !class_exists( 'YIT_Plugin_Licence' ) ) {
                         <div class="notice notice-error">
                             <p><strong>Warning!</strong> You didn't set license key for the following products:
                                 <?php echo $product_list ?>
-                                which means you're missing out on updates and support. <a href='<?php echo $activation_url ?>'>Enter your license key</a></p>
+                                which means you're missing out on updates and support. <a href='<?php echo $activation_url ?>'>Enter your license key</a>, please.</p>
                         </div>
                         <?php
                     }

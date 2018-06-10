@@ -16,12 +16,43 @@ if ( ! defined( 'YITH_WCAN' ) ) {
  * Return a dropdown with Woocommerce attributes
  */
 function yith_wcan_dropdown_attributes( $selected, $echo = true ) {
-    $attributes = YITH_WCAN_Helper::attribute_taxonomies();
-    $options    = "";
+	$_woocommerce = function_exists( 'wc' ) ? wc() : null;
+	$options    = "";
+	$attributes = array();
 
-    foreach ( $attributes as $attribute ) {
-        $options .= "<option name='{$attribute}'" . selected( $attribute, $selected, false ) . ">{$attribute}</option>";
-    }
+	if ( ! empty( $_woocommerce ) ) {
+
+		if ( function_exists( 'wc_get_attribute_taxonomies' ) ) {
+			$attribute_taxonomies = wc_get_attribute_taxonomies();
+		}
+		else {
+			$attribute_taxonomies = $_woocommerce->get_attribute_taxonomies();
+		}
+
+		if ( empty( $attribute_taxonomies ) ) {
+			return array();
+		}
+
+		foreach ( $attribute_taxonomies as $attribute ) {
+
+			/* FIX TO WOOCOMMERCE 2.1 */
+			if ( function_exists( 'wc_attribute_taxonomy_name' ) ) {
+				$taxonomy = wc_attribute_taxonomy_name( $attribute->attribute_name );
+			}
+			else {
+				$taxonomy = $_woocommerce->attribute_taxonomy_name( $attribute->attribute_name );
+			}
+
+
+			if ( taxonomy_exists( $taxonomy ) ) {
+				$attributes[] = $attribute->attribute_name;
+			}
+		}
+
+	    foreach ( $attributes as $attribute ) {
+	        $options .= "<option name='{$attribute}'" . selected( $attribute, $selected, false ) . ">{$attribute}</option>";
+	    }
+	}
 
     if ( $echo ) {
         echo $options;
@@ -778,3 +809,4 @@ if( ! function_exists( 'yith_wcan_brands_enabled' ) ){
         return apply_filters( 'yith_wcan_brands_enabled', defined( 'YITH_WCBR' ) && YITH_WCBR );
     }
 }
+

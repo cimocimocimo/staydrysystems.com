@@ -502,12 +502,12 @@ class Meow_WR2X_Ajax {
 		$this->core->delete_attachment( $attachmentId, false );
 
 		// Regenerate the Thumbnails
-		$file = get_attached_file( $attachmentId );
-		$meta = wp_generate_attachment_metadata( $attachmentId, $file );
-		wp_update_attachment_metadata( $attachmentId, $meta );
+		//$file = get_attached_file( $attachmentId );
+		//$meta = wp_generate_attachment_metadata( $attachmentId, $file );
+		//wp_update_attachment_metadata( $attachmentId, $meta );
 
 		// Regenerate Retina
-		//$meta = wp_get_attachment_metadata( $attachmentId );
+		$meta = wp_get_attachment_metadata( $attachmentId );
 		$this->core->generate_images( $meta );
 
 		// RESULTS FOR RETINA DASHBOARD

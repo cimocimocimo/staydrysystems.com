@@ -103,6 +103,7 @@ if ( !class_exists( 'YIT_Upgrade' ) ) {
                     $xml        = str_replace( '%plugin_slug%', $plugin_slug, $this->_xml );
                     $remote_xml = wp_remote_get( $xml );
 
+                    $error = false;
                     if ( !is_wp_error( $remote_xml ) && isset( $remote_xml[ 'response' ][ 'code' ] ) && '200' == $remote_xml[ 'response' ][ 'code' ] ) {
                         $plugin_remote_info = @simplexml_load_string( $remote_xml[ 'body' ] );
                         if ( $plugin_remote_info ) {
@@ -111,9 +112,18 @@ if ( !class_exists( 'YIT_Upgrade' ) ) {
                             YIT_Plugin_Licence()->check( $plugin_slug, false );
                             set_transient( $transient, $info, DAY_IN_SECONDS );
                         } else {
+                            $error = true;
                             error_log( sprintf( 'SimpleXML error in %s:%s [plugin slug: %s]',
                                                 __FILE__, __FUNCTION__, $plugin_slug ) );
                         }
+                    } else {
+                        $error = true;
+                    }
+
+                    if ( $error ) {
+                        // If error, set empty value in the transient to prevent multiple requests
+                        $info = array( 'Latest' => '', 'changelog' => '' );
+                        set_transient( $transient, $info, HOUR_IN_SECONDS );
                     }
                 }
 

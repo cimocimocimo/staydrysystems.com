@@ -604,8 +604,11 @@ if ( !class_exists( 'YIT_Plugin_Panel' ) ) {
                 return $this->_main_array_options;
             }
 
+            $options_path = $this->settings[ 'options-path' ];
+
             foreach ( $this->settings[ 'admin-tabs' ] as $item => $v ) {
-                $path = $this->settings[ 'options-path' ] . '/' . $item . '-options.php';
+                $path = $options_path . '/' . $item . '-options.php';
+                $path = apply_filters( 'yith_plugin_panel_item_options_path', $path, $options_path, $item, $this );
                 if ( file_exists( $path ) ) {
                     $this->_main_array_options = array_merge( $this->_main_array_options, include $path );
                 }

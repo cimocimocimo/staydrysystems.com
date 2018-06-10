@@ -14,17 +14,17 @@ class Meow_WR2X_Core {
     add_filter( 'retina_validate_src', array( $this, 'validate_src' ) );
     add_filter( 'wp_calculate_image_srcset', array( $this, 'calculate_image_srcset' ), 1000, 3 );
     add_action( 'init', array( $this, 'init' ) );
-		include( 'api.php' );
+		include( __DIR__ . '/api.php' );
 
     if ( is_admin() ) {
-    	include( 'ajax.php' );
+    	include( __DIR__ . '/ajax.php' );
       new Meow_WR2X_Ajax( $this );
     	if ( !get_option( "wr2x_hide_retina_dashboard" ) ) {
-        include( 'dashboard.php' );
+        include( __DIR__ . '/dashboard.php' );
         new Meow_WR2X_Dashboard( $this );
       }
     	if ( !get_option( "wr2x_hide_retina_column" ) ) {
-        include( 'media-library.php' );
+        include( __DIR__ . '/media-library.php' );
         new Meow_WR2X_MediaLibrary( $this );
 			}
       //if ( !get_option( "wr2x_hide_retina_column" ) )
@@ -101,7 +101,7 @@ class Meow_WR2X_Core {
   	if ( !isset( $buffer ) || trim( $buffer ) === '' )
   		return $buffer;
   	if ( !function_exists( "str_get_html" ) )
-  		include( 'inc/simple_html_dom.php' );
+  		include( __DIR__ . '/inc/simple_html_dom.php' );
 
   	$lazysize = get_option( "wr2x_picturefill_lazysizes" ) && $this->admin->is_registered();
   	$killsrc = !get_option( "wr2x_picturefill_keep_src" );

@@ -62,6 +62,40 @@ if ( !class_exists( 'YIT_Upgrade' ) ) {
                 $this->_package_url = defined( 'YIT_LICENCE_DEBUG_LOCALHOST' ) ? YIT_LICENCE_DEBUG_LOCALHOST : 'http://dev.yithemes.com';
                 add_filter( 'block_local_requests', '__return_false' );
             }
+
+            add_action( 'install_plugins_pre_plugin-information', array( $this, 'show_changelog_for_premium_plugins' ) );
+            add_action( 'wp_ajax_yith_plugin_fw_get_premium_changelog', array( $this, 'show_changelog_for_premium_plugins' ) );
+        }
+
+        /**
+         * show changelog for premium plugins
+         *
+         * @since 3.0.14
+         */
+        public function show_changelog_for_premium_plugins() {
+            if ( isset( $_GET[ 'plugin' ] ) && isset( $_GET[ 'section' ] ) && 'changelog' === $_GET[ 'section' ] ) {
+                $plugin_init = $_GET[ 'plugin' ];
+                if ( isset( $this->_plugins[ $plugin_init ] ) ) {
+                    // this is YITH Premium Plugin
+                    if ( !empty( $this->_plugins[ $plugin_init ][ 'info' ][ 'changelog' ] ) ) {
+                        $plugin_name = $this->_plugins[ $plugin_init ][ 'info' ][ 'Name' ];
+                        $changelog   = $this->_plugins[ $plugin_init ][ 'info' ][ 'changelog' ];
+                        $template    = YIT_CORE_PLUGIN_TEMPLATE_PATH . '/upgrade/changelog.php';
+                        if ( file_exists( $template ) ) {
+                            include( $template );
+                        }
+                        die();
+                    }
+                    $error    = __( 'An unexpected error occurred, please try again later. Thanks!', 'yith-plugin-fw' );
+                    $template = YIT_CORE_PLUGIN_TEMPLATE_PATH . '/upgrade/error.php';
+                    if ( file_exists( $template ) ) {
+                        include( $template );
+                    } else {
+                        echo "<p>$error</p>";
+                    }
+                    die();
+                }
+            }
         }
 
         /**
@@ -89,36 +123,49 @@ if ( !class_exists( 'YIT_Upgrade' ) ) {
                 'slug' => $plugin_slug,
             );
 
+            $transient = 'yith_register_' . md5( $plugin_slug );
+            if ( apply_filters( 'yith_register_delete_transient', false ) ) {
+                delete_transient( $transient );
+            }
+            $info = get_transient( $transient );
+            if ( false === $info || apply_filters( 'yith_register_delete_transient', false ) ) {
+                $xml        = str_replace( '%plugin_slug%', $plugin_slug, $this->_xml );
+                $remote_xml = wp_remote_get( $xml );
+
+                $error = false;
+                if ( !is_wp_error( $remote_xml ) && isset( $remote_xml[ 'response' ][ 'code' ] ) && '200' == $remote_xml[ 'response' ][ 'code' ] ) {
+                    $plugin_remote_info = @simplexml_load_string( $remote_xml[ 'body' ] );
+                    if ( $plugin_remote_info ) {
+                        $info[ 'Latest' ]    = (string) $plugin_remote_info->latest;
+                        $info[ 'changelog' ] = (string) $plugin_remote_info->changelog;
+                        if ( is_multisite() && current_user_can( 'update_plugins' ) ) {
+                            YIT_Plugin_Licence()->check( $plugin_slug, false );
+                        }
+                        set_transient( $transient, $info, DAY_IN_SECONDS );
+                    } else {
+                        $error = true;
+                        error_log( sprintf( 'SimpleXML error in %s:%s [plugin slug: %s]',
+                                            __FILE__, __FUNCTION__, $plugin_slug ) );
+                    }
+                } else {
+                    $error = true;
+                }
+
+                if ( $error ) {
+                    // If error, set empty value in the transient to prevent multiple requests
+                    $info = array( 'Latest' => '', 'changelog' => '' );
+                    set_transient( $transient, $info, HOUR_IN_SECONDS );
+                }
+            }
+
+            $this->_plugins[ $plugin_init ][ 'info' ][ 'Latest' ]    = $info[ 'Latest' ];
+            $this->_plugins[ $plugin_init ][ 'info' ][ 'changelog' ] = $info[ 'changelog' ];
+
             /* === HOOKS === */
             if ( !is_multisite() || is_plugin_active_for_network( $plugin_init ) ) {
                 add_action( 'load-plugins.php', array( $this, 'remove_wp_plugin_update_row' ), 25 );
                 add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'check_update' ) );
             } else if ( is_multisite() && current_user_can( 'update_plugins' ) ) {
-                $transient = 'yith_register_' . md5( $plugin_slug );
-                if ( apply_filters( 'yith_register_delete_transient', false ) ) {
-                    delete_transient( $transient );
-                }
-                $info = get_transient( $transient );
-                if ( false === $info || apply_filters( 'yith_register_delete_transient', false ) ) {
-                    $xml        = str_replace( '%plugin_slug%', $plugin_slug, $this->_xml );
-                    $remote_xml = wp_remote_get( $xml );
-
-                    if ( !is_wp_error( $remote_xml ) && isset( $remote_xml[ 'response' ][ 'code' ] ) && '200' == $remote_xml[ 'response' ][ 'code' ] ) {
-                        $plugin_remote_info = @simplexml_load_string( $remote_xml[ 'body' ] );
-                        if ( $plugin_remote_info ) {
-                            $info[ 'Latest' ]    = (string) $plugin_remote_info->latest;
-                            $info[ 'changelog' ] = (string) $plugin_remote_info->changelog;
-                            YIT_Plugin_Licence()->check( $plugin_slug, false );
-                            set_transient( $transient, $info, DAY_IN_SECONDS );
-                        } else {
-                            error_log( sprintf( 'SimpleXML error in %s:%s [plugin slug: %s]',
-                                                __FILE__, __FUNCTION__, $plugin_slug ) );
-                        }
-                    }
-                }
-
-                $this->_plugins[ $plugin_init ][ 'info' ][ 'Latest' ]    = $info[ 'Latest' ];
-                $this->_plugins[ $plugin_init ][ 'info' ][ 'changelog' ] = $info[ 'changelog' ];
                 add_action( 'admin_enqueue_scripts', array( $this, 'multisite_updater_script' ) );
             }
         }
@@ -132,7 +179,6 @@ if ( !class_exists( 'YIT_Upgrade' ) ) {
          * @author   Andrea Grillo <andrea.grillo@yithemes.com>
          */
         public function multisite_updater_script() {
-
             $update_url = $changelogs = $details_url = array();
             $strings    = array(
                 'new_version' => __( 'There is a new version of %plugin_name% available.', 'yith-plugin-fw' ),
@@ -145,10 +191,7 @@ if ( !class_exists( 'YIT_Upgrade' ) ) {
 
             foreach ( $this->_plugins as $init => $info ) {
                 $update_url[ $init ]  = wp_nonce_url( self_admin_url( 'update.php?action=upgrade-plugin-multisite&plugin=' ) . $init, 'upgrade-plugin-multisite_' . $init );
-                $changelog_id         = str_replace( array( '/', '.php', '.' ), array( '-', '', '-' ), $init );
-                $details_url[ $init ] = '#TB_inline' . esc_url( add_query_arg( array( 'width' => 722, 'height' => 914, 'inlineId' => $changelog_id ), '' ) );
-                $plugin_changelog     = isset( $this->_plugins[ $init ][ 'info' ][ 'changelog' ] ) ? $this->_plugins[ $init ][ 'info' ][ 'changelog' ] : '';
-                $changelogs[ $init ]  = $this->in_theme_update_message( $this->_plugins[ $init ], $plugin_changelog, $changelog_id, false );
+                $details_url[ $init ]  = admin_url( 'admin-ajax.php?action=yith_plugin_fw_get_premium_changelog&tab=plugin-information&plugin=' . $init . '&section=changelog&TB_iframe=true&width=640&height=662' );
             }
 
             $localize_script_args = array(
@@ -158,7 +201,6 @@ if ( !class_exists( 'YIT_Upgrade' ) ) {
                 'update_url'             => $update_url,
                 'details_url'            => $details_url,
                 'strings'                => $strings,
-                'changelogs'             => $changelogs
             );
             $suffix               = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
             yit_enqueue_script( 'yit-multisite-updater', YIT_CORE_PLUGIN_URL . '/assets/js/multisite-updater' . $suffix . '.js', array( 'jquery' ), false, true );
@@ -432,7 +474,7 @@ if ( !class_exists( 'YIT_Upgrade' ) ) {
             $r = $current->response[ $init ];
 
             $changelog_id = str_replace( array( '/', '.php', '.' ), array( '-', '', '-' ), $init );
-            $details_url  = '#TB_inline' . esc_url( add_query_arg( array( 'width' => 722, 'height' => 914, 'inlineId' => $changelog_id ), '' ) );
+            $details_url  = self_admin_url( 'plugin-install.php?tab=plugin-information&plugin=' . $init . '&section=changelog&TB_iframe=true&width=640&height=662' );
 
             /**
              * @see wp_plugin_update_rows() in wp-single\wp-admin\includes\update.php
@@ -493,14 +535,12 @@ if ( !class_exists( 'YIT_Upgrade' ) ) {
             foreach ( $this->_plugins as $init => $plugin ) {
                 remove_action( "after_plugin_row_{$init}", 'wp_plugin_update_row', 10 );
                 add_action( "after_plugin_row_{$init}", array( $this, 'plugin_update_row' ) );
-                add_action( "in_theme_update_message-{$init}", array( $this, 'in_theme_update_message' ), 10, 3 );
+                //add_action( "in_theme_update_message-{$init}", array( $this, 'in_theme_update_message' ), 10, 3 );
             }
         }
 
         public function in_theme_update_message( $plugin, $changelog, $changelog_id, $echo = true ) {
-
-            $res
-                = "<div id='{$changelog_id}' class='yit-plugin-changelog-wrapper'>
+            $res = "<div id='{$changelog_id}' class='yit-plugin-changelog-wrapper'>
                     <div class='yit-plugin-changelog'>
                         <h2 class='yit-plugin-changelog-title'>{$plugin['info']['Name']} - Changelog</h2>
                         <p>{$changelog}</p>

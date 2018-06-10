@@ -25,7 +25,10 @@ class Ga_Sharethis {
 		$parsed_url = parse_url( get_option( 'siteurl' ) );
 		if ( Ga_Helper::should_create_sharethis_property() ) {
 			$domain				 = $parsed_url['host'] . ( !empty( $parsed_url['path'] ) ? $parsed_url['path'] : '' );
-			$query_params		 = array( 'domain' => $domain );
+			$query_params		 = array(
+				'domain' => $domain,
+				'is_wordpress' => true,
+				);
 			$response			 = $api_client->call( 'ga_api_create_sharethis_property', array(
 				$query_params
 			) );

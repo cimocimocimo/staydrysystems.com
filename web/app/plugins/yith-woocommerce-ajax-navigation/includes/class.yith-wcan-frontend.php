@@ -73,6 +73,8 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 
             add_filter( 'woocommerce_layered_nav_link', 'yit_plus_character_hack', 99 );
 
+            add_filter( 'woocommerce_is_filtered', 'yit_is_filtered_uri', 20 );
+
             // YITH WCAN Loaded
             do_action( 'yith_wcan_loaded' );
         }

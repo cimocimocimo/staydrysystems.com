@@ -139,7 +139,6 @@ if ( !class_exists( 'YIT_Plugin_SubPanel' ) ) {
                 return;
             }
             ?>
-            <?php $this->print_video_box(); ?>
             <?php
             $panel_content_class = apply_filters( 'yit_admin_panel_content_class', 'yit-admin-panel-content-wrap' );
             ?>

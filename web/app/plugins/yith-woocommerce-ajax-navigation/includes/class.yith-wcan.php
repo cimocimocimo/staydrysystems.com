@@ -190,7 +190,6 @@ if ( ! class_exists( 'YITH_WCAN' ) ) {
                     'includes/functions.yith-wcan.php',
                     'includes/class.yith-wcan-admin.php',
                     'includes/class.yith-wcan-frontend.php',
-                    'includes/class.yith-wcan-helper.php',
                     'widgets/class.yith-wcan-navigation-widget.php',
                     'widgets/class.yith-wcan-reset-navigation-widget.php',
                 )

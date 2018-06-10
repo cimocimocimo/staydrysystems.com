@@ -49,7 +49,7 @@ if ( ! class_exists( 'YITH_WCWL_Init' ) ) {
 		 * @var string
 		 * @since 1.0.0
 		 */
-		public $version = '2.2.1';
+		public $version = '2.2.2';
 
 		/**
 		 * Plugin database version
@@ -57,7 +57,7 @@ if ( ! class_exists( 'YITH_WCWL_Init' ) ) {
 		 * @var string
 		 * @since 1.0.0
 		 */
-		public $db_version = '2.0.0';
+		public $db_version = '2.2.0';
 
 		/**
 		 * Positions of the button "Add to Wishlist"
@@ -239,10 +239,20 @@ if ( ! class_exists( 'YITH_WCWL_Init' ) ) {
 			$position = empty( $position ) ? 'add-to-cart' : $position;
 
 			if ( $position != 'shortcode' ) {
-				add_action( $this->_positions[$position]['hook'], create_function( '', 'echo do_shortcode( "[yith_wcwl_add_to_wishlist]" );' ), $this->_positions[$position]['priority'] );
+				add_action( $this->_positions[$position]['hook'], array( $this, 'print_button' ), $this->_positions[$position]['priority'] );
 			}
 
 			// Free the memory. Like it needs a lot of memory... but this is rock!
+		}
+
+		/**
+		 * Print "Add to Wishlist" shortcode
+		 *
+		 * @return void
+		 * @since 2.2.2
+		 */
+		public function print_button() {
+			echo do_shortcode( "[yith_wcwl_add_to_wishlist]" );
 		}
 
 		/**
@@ -365,7 +375,7 @@ if ( ! class_exists( 'YITH_WCWL_Init' ) ) {
 			$yith_wcwl_l10n = array(
 				'ajax_url' => admin_url( 'admin-ajax.php', 'relative' ),
 				'redirect_to_cart' => get_option( 'yith_wcwl_redirect_cart' ),
-				'multi_wishlist' => get_option( 'yith_wcwl_multi_wishlist_enable' ) == 'yes' ? true : false,
+				'multi_wishlist' => defined( 'YITH_WCWL_PREMIUM' ) && get_option( 'yith_wcwl_multi_wishlist_enable' ) == 'yes' ? true : false,
 				'hide_add_button' => apply_filters( 'yith_wcwl_hide_add_button', true ),
 				'is_user_logged_in' => is_user_logged_in(),
 				'ajax_loader_url' => YITH_WCWL_URL . 'assets/images/ajax-loader.gif',

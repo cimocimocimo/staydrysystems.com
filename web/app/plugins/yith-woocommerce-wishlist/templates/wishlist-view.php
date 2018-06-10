@@ -135,7 +135,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 	            $added_items[] = $item['prod_id'];
 	            $product = wc_get_product( $item['prod_id'] );
 	            $availability = $product->get_availability();
-	            $stock_status = $availability['class'];
+	            $stock_status = isset( $availability['class'] ) ? $availability['class'] : false;
 
                 if( $product && $product->exists() ) :
 	                ?>
@@ -189,7 +189,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 	                        endif;
 	                        ?>
 
-	                        <!-- Add to cart button -->
+                            <!-- Add to cart button -->
                             <?php if( $show_add_to_cart && isset( $stock_status ) && $stock_status != 'out-of-stock' ): ?>
                                 <?php woocommerce_template_loop_add_to_cart(); ?>
                             <?php endif ?>

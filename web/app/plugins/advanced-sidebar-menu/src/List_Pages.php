@@ -171,8 +171,9 @@ class Advanced_Sidebar_Menu_List_Pages {
 				$args['include'] = $this->menu->get_top_parent_id();
 				break;
 			case 'display-all':
-				$args['child_of'] = $this->menu->get_top_parent_id();
-				$args['depth']    = $this->menu->get_levels_to_display();
+				$args['child_of']    = $this->menu->get_top_parent_id();
+				$args['depth']       = $this->menu->get_levels_to_display();
+				$args['sort_column'] = $this->menu->get_order_by();
 				break;
 		}
 
@@ -215,7 +216,7 @@ class Advanced_Sidebar_Menu_List_Pages {
 			'exclude'          => '',
 			'echo'             => 0,
 			'order'            => 'ASC',
-			'orderby'          => 'menu_order, post_title',
+			'orderby'          => 'menu_order, title',
 			'walker'           => new Advanced_Sidebar_Menu_Page_Walker(),
 			'link_before'      => '',
 			'link_after'       => '',
@@ -258,7 +259,9 @@ class Advanced_Sidebar_Menu_List_Pages {
 		if ( ! $this->args['echo'] ) {
 			return $this->output;
 		}
+		// phpcs:disable WordPress.XSS.EscapeOutput.OutputNotEscaped
 		echo $this->output;
+		// phpcs:enable
 	}
 
 
@@ -316,10 +319,11 @@ class Advanced_Sidebar_Menu_List_Pages {
 		$cache       = Advanced_Sidebar_Menu_Cache::instance();
 		$child_pages = $cache->get_child_pages( $this );
 		if ( false === $child_pages ) {
-			$args                = $this->args;
-			$args['post_parent'] = $parent_page_id;
-			$args['fields']      = 'ids';
-			$child_pages         = get_posts( $args );
+			$args                     = $this->args;
+			$args['post_parent']      = $parent_page_id;
+			$args['fields']           = 'ids';
+			$args['suppress_filters'] = false;
+			$child_pages              = get_posts( $args );
 
 			$cache->add_child_pages( $this, $child_pages );
 		}
@@ -329,8 +333,7 @@ class Advanced_Sidebar_Menu_List_Pages {
 		//we only filter the first level with this filter for backward pro compatibility
 		if ( $is_first_level ) {
 			if ( has_filter( 'advanced_sidebar_menu_child_pages' ) ) {
-				//@todo uncomment deprecated hook notice once pro 3.0.0 is released
-				//_deprecated_hook( 'advanced_sidebar_menu_child_pages', '7.1.0', 'advanced-sidebar-menu/list-pages/first-level-child-pages' );
+				_deprecated_hook( 'advanced_sidebar_menu_child_pages', '7.1.0', 'advanced-sidebar-menu/list-pages/first-level-child-pages' );
 				$child_pages = apply_filters( 'advanced_sidebar_menu_child_pages', $child_pages, $this->current_page, $this->menu->instance, $this->menu->args, $this->menu );
 			}
 

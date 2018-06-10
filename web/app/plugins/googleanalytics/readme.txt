@@ -1,9 +1,9 @@
 === Google Analytics ===
-Contributors: ShareThis
+Contributors: sharethis, scottstorebloom
 Tags: analytics, dashboard, google, google analytics, google analytics plugin, javascript, marketing, pageviews, statistics, stats, tracking, visits, web stats, widget, analytics dashboard, google analytics dashboard, google analytics widget, google analytics dashboard
 Requires at least: 3.8
-Tested up to: 4.7.3
-Stable tag: 2.1.3
+Tested up to: 4.9.5
+Stable tag: 2.1.4
 
 Use Google Analytics on your Wordpress site without touching any code, and view visitor reports right in your Wordpress admin dashboard!
 
@@ -33,7 +33,7 @@ If you don't have a Google Analytics account, you can sign up for free here: htt
 By downloading and installing this plugin you are agreeing to the <a href="http://www.sharethis.com/privacy/" target="_blank">Privacy Policy</a> and <a href="http://www.sharethis.com/publisher-terms-of-use/" target="_blank">Terms of Service</a>.
 
 = Support =
-If you have any questions please let us know directly at support@googleanalytics.zendesk.com or create a new topic within our support portal here: <a href=”https://googleanalytics.zendesk.com/hc/en-us/community/posts/new> https://googleanalytics.zendesk.com/hc/en-us/community/posts/new</a>
+If you have any questions please let us know directly at support@sharethis.com or create a new WP support ticket here.
 
 == Installation ==
 
@@ -44,6 +44,9 @@ If you have any questions please let us know directly at support@googleanalytics
 5. When any of your content takes off you will see the URLs inside the Trending Content section
 
 == Frequently Asked Questions ==
+= Why do I need an SSL certificate to use this plugin? =
+Since the plugin accesses your Google Analytics account your login information is transerfered from our plugin to google.  This needs to be secure so SSL is required to keep your information safe.
+
 = Do I need to touch any code to add Google Analytics? =
 Nope, just sign in with google, choose your website, and our plugin will automatically add Google analytics code to all pages.
 
@@ -57,7 +60,7 @@ This is likely caused by AdBlocker that is blocking anything related to "google 
 It learns about your traffic patterns to spot "spikes" of visitors and then sends an alert. If your website doesn't have good amount of visitors you might not see any Trending Content Alerts because the algorithm needs more data to see "trends".
 
 = I have other questions, where I can get support or provide feedback? =
-If you have any questions please let us know directly at support@googleanalytics.zendesk.com or create a new topic within our support portal here: <a href=”https://googleanalytics.zendesk.com/hc/en-us/community/posts/new> https://googleanalytics.zendesk.com/hc/en-us/community/posts/new</a>
+If you have any questions please let us know directly at support@sharethis.com or create a new ticket within our WP support portal.
 We are always happy to help.
 
 == Screenshots ==
@@ -70,6 +73,12 @@ We are always happy to help.
 6. Trending Content shows a list of alerts, article URLs, pageviews and time notified
 
 == Changelog ==
+
+= 2.1.4 =
+* Updated SSL cert reference.
+* Fixed Trending Content connection issue.
+* Updated copy for better user understanding.
+* Removed auto sending function from debug / added copy function.
 
 = 2.1.2 =
 * Fixed authentication error issue experienced by some users.

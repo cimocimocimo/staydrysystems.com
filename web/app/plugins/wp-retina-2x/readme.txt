@@ -3,7 +3,7 @@ Contributors: TigrouMeow
 Tags: retina, images, image, responsive, lazysizes, lazy, attachment, media, files, iphone, ipad, high-dpi
 Requires at least: 3.5
 Tested up to: 4.9
-Stable tag: 5.2.3
+Stable tag: 5.2.6
 
 Make your website look beautiful and crisp on modern displays by creating and displaying retina images. WP 4.4+ is also supported and enhanced.
 
@@ -23,7 +23,7 @@ This plugin does two things: it creates the image files required by the High-DPI
 
 **CSS & Background Images**. The plugin cannot inject CSS to handles the images added through CSS, that's both too dangerous and potentially very incorrect. However, in its Pro version and with PictureFill, you get an option to replace the inline CSS background image by their retina equivalent.
 
-More information and tutorial available one http://meowapps.com/wp-retina-2x/.
+More information and tutorial available one https://meowapps.com/wp-retina-2x/.
 
 = Quickstart =
 
@@ -32,6 +32,11 @@ More information and tutorial available one http://meowapps.com/wp-retina-2x/.
 3. Check if it works! - if it doesn't, read the FAQ, the tutorial, and check the forums.
 
 == Changelog ==
+
+= 5.2.6 =
+* Fix: Avoid re-generating non-retina thumbnails when Generate is used.
+* Fix: Use ___DIR___ to include plugin's files.
+* Fix: Better explanation.
 
 = 5.2.3 =
 * Fix: Sanitization to avoid cross-site scripting.
@@ -58,7 +63,7 @@ More information and tutorial available one http://meowapps.com/wp-retina-2x/.
 * Fix: Disabled sizes weren't really disabled in the UI.
 * Fix: Notices about Ignore appearing in other screens.
 * Add: Handles incompatibility with JetPack's Photon.
-* Info: If you are using Lightroom, please have a look at my plugin for synchronizing your Lightroom to WordPress: http://meowapps.com/wplr-sync/. And if youi love my Retina plugin, please write a little review here: https://wordpress.org/support/plugin/wp-retina-2x/reviews/?rate=5#new-post. Thank you :)
+* Info: If you are using Lightroom, please have a look at my plugin for synchronizing your Lightroom to WordPress: https://meowapps.com/wplr-sync/. And if youi love my Retina plugin, please write a little review here: https://wordpress.org/support/plugin/wp-retina-2x/reviews/?rate=5#new-post. Thank you :)
 
 = 4.7.7 =
 * Add: The Generate button (and the bulk Generate) will now also Re-Generate the thumbnails as well (like the Renerate Thumbnails plugin). If you are interested in a option to disable this behavior, please say so in the WP forums.
@@ -104,7 +109,7 @@ More information and tutorial available one http://meowapps.com/wp-retina-2x/.
 * Update: Ignore Responsive Images support if the media ID is not existent (in case of broken HTML).
 
 = 4.4.0 =
-* Info: Please read my blog post about WP 4.4 + Retina on http://meowapps.com/wordpress-4-4-retina/.
+* Info: Please read my blog post about WP 4.4 + Retina on https://meowapps.com/wordpress-4-4-retina/.
 * Add: New "Responsive Images" method.
 * Add: Lot more information is available in the Retina settings, to help the newbies :)
 * Update: Headers are compliant to WP 4.4.
@@ -156,7 +161,7 @@ More information and tutorial available one http://meowapps.com/wp-retina-2x/.
 * Add: (PRO) New pop-up screen with detailed information.
 * Add: (PRO) Added Retina for Full-Size with upload feature. Please note that Full-Size Retina also works with the normal version but you will have to manually resize and upload them.
 * Add: (PRO) Option to avoid removing img's src when using PictureFill.
-* Info: The serial for the Pro version can be bought at http://meowapps.com/wp-retina-2x. Thanks for all your support, the plugin is going to be 3 years old this year! :)
+* Info: The serial for the Pro version can be bought at https://meowapps.com/wp-retina-2x. Thanks for all your support, the plugin is going to be 3 years old this year! :)
 
 = 2.6.0 =
 * Add: Support Manual Image Crop, resize the @2x as the user manually cropped them (that's cool!).
@@ -217,11 +222,11 @@ Quick and easy installation:
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. Check the settings of WP Retina 2x in the WordPress administration screen.
 4. Check the Retina Dashboard.
-6. Read the tutorial about the plugin: <a href='http://meowapps.com/wp-retina-2x/tutorial/'>WP Retina 2x Tutorial</a>.
+6. Read the tutorial about the plugin: <a href='https://meowapps.com/wp-retina-2x/tutorial/'>WP Retina 2x Tutorial</a>.
 
 == Frequently Asked Questions ==
 
-Users, you will find the FAQ here: http://meowapps.com/wp-retina-2x/faq/.
+Users, you will find the FAQ here: https://meowapps.com/wp-retina-2x/faq/.
 
 Developers, WP Retina 2x has a little API. Here are a few filters and actions you might want to use.
 

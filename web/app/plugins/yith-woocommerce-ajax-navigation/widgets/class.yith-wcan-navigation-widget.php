@@ -134,7 +134,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                         }
 
                         foreach( $ancestors as $ancestor ){
-                            $tree[ $ancestor->term_id ] = 'parent' == $instance['display'] ? array() : yit_reorder_hierachical_categories( $ancestor->term_id, $taxonomy );
+                            $tree[ $ancestor->term_id ] = 'parent' == $terms_type_list ? array() : yit_reorder_hierachical_categories( $ancestor->term_id, $taxonomy );
                         }
                     }
 
@@ -153,7 +153,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                     $dropdown_label = apply_filters( 'yith_wcan_dropdown_label', __( 'Filters:', 'yith-woocommerce-ajax-navigation' ), $this, $instance );
                     ?>
 
-                    <a class="yit-wcan-select-open" href="#"><?php echo apply_filters( 'yith_wcan_dropdown_default_label', $dropdown_label ) ?></a>
+                    <a class="yit-wcan-select-open" href="#"><?php echo apply_filters( 'yith_wcan_dropdown_default_label', $dropdown_label, $this ) ?></a>
 
                     <?php
                     // Select display

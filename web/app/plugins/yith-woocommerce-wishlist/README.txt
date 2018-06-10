@@ -3,13 +3,13 @@
 Contributors: yithemes
 Tags: wishlist, woocommerce, products, yit, e-commerce, shop, ecommerce wishlist, yith, woocommerce wishlist, shop wishlist
 Requires at least: 4.0
-Tested up to: 4.9.2
-Stable tag: 2.2.1
+Tested up to: 4.9.6
+Stable tag: 2.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 YITH WooCommerce Wishlist add all Wishlist features to your website. Needs WooCommerce to work.
-WooCommerce 3.2.x compatible.
+WooCommerce 3.4.x compatible.
 
 
 == Description ==
@@ -108,6 +108,18 @@ you should ask theme developers to update custom templates and replace the old t
 4. The Wishlist settings page
 
 == Changelog ==
+
+= 2.2.2 - Released: May, 28 - 2018 =
+
+* New: WooCommerce 3.4 compatibility
+* New: WordPress 4.9.6 compatibility
+* New: updated plugin framework
+* New: GDPR compliance
+* Tweak: replaced create_function with a proper class method, to improve compatibility with PHP 7.2 and avoid warnings
+* Fix: js error when switching from Premium version to Free
+* Fix: preventing add_rewrite_rule when WPML is active, to avoid possible Internal Server Error (thanks to Adri & Bruno)
+* Fix: icon replacement not working on variable Add to Cart
+* Fix: preventing warning "Illegal string offset" when get_availability() returns empty string instead of array
 
 = 2.2.1 - Released: Jan, 31 - 2018 =
 
@@ -452,7 +464,14 @@ Full documentation is available [here](http://yithemes.com/docs-plugins/yith-woo
 
 == Upgrade notice ==
 
-= 2.2.1 - Released: Jan, 31 - 2018 =
+= 2.2.2 - Released: May, 28 - 2018 =
 
-* New: tested with WooCommerce 3.3.0
-* Fix: issue with Add to Wishlist shortcode when global $product not defined
+* New: WooCommerce 3.4 compatibility
+* New: WordPress 4.9.6 compatibility
+* New: updated plugin framework
+* New: GDPR compliance
+* Tweak: replaced create_function with a proper class method, to improve compatibility with PHP 7.2 and avoid warnings
+* Fix: js error when switching from Premium version to Free
+* Fix: preventing add_rewrite_rule when WPML is active, to avoid possible Internal Server Error (thanks to Adri & Bruno)
+* Fix: icon replacement not working on variable Add to Cart
+* Fix: preventing warning "Illegal string offset" when get_availability() returns empty string instead of array

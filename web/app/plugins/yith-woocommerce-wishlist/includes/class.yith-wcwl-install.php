@@ -162,7 +162,7 @@ if ( !class_exists( 'YITH_WCWL_Install' ) ) {
         private function _add_wishlists_table() {
             global $wpdb;
 
-            if( ! $this->is_installed() ){
+            if( ! $this->is_installed() || version_compare( get_option( 'yith_wcwl_db_version' ), '2.2.0', '<' )  ){
                 $sql = "CREATE TABLE {$this->_table_wishlists} (
                             ID INT( 11 ) NOT NULL AUTO_INCREMENT,
                             user_id INT( 11 ) NOT NULL,
@@ -171,6 +171,7 @@ if ( !class_exists( 'YITH_WCWL_Install' ) ) {
                             wishlist_token VARCHAR( 64 ) NOT NULL UNIQUE,
                             wishlist_privacy TINYINT( 1 ) NOT NULL DEFAULT 0,
                             is_default TINYINT( 1 ) NOT NULL DEFAULT 0,
+                            dateadded timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ,
                             PRIMARY KEY  ( ID ),
                             KEY ( wishlist_slug )
                         ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
@@ -192,7 +193,7 @@ if ( !class_exists( 'YITH_WCWL_Install' ) ) {
         private function _add_items_table() {
             global $wpdb;
 
-            if( ! $this->is_installed() || get_option( 'yith_wcwl_db_version' ) != '2.0.0' ) {
+            if( ! $this->is_installed() || version_compare( get_option( 'yith_wcwl_db_version' ), '2.0.0', '<' ) ) {
                 $sql = "CREATE TABLE {$this->_table_items} (
                             ID int( 11 ) NOT NULL AUTO_INCREMENT,
                             prod_id int( 11 ) NOT NULL,

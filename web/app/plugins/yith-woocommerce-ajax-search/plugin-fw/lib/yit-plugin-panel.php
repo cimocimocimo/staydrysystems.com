@@ -274,6 +274,11 @@ if ( !class_exists( 'YIT_Plugin_Panel' ) ) {
                             if ( isset( $option[ 'type' ] ) && in_array( $option[ 'type' ], array( 'checkbox', 'onoff' ) ) ) {
                                 $value = yith_plugin_fw_is_true( $value ) ? 'yes' : 'no';
                             }
+
+                            if ( !empty( $option[ 'yith-sanitize-callback' ] ) && is_callable( $option[ 'yith-sanitize-callback' ] ) ) {
+                                $value = call_user_func( $option[ 'yith-sanitize-callback' ], $value );
+                            }
+
                             $valid_input[ $option[ 'id' ] ] = $value;
                         }
                     }
@@ -363,7 +368,6 @@ if ( !class_exists( 'YIT_Plugin_Panel' ) ) {
                 return;
             }
             ?>
-            <?php $this->print_video_box(); ?>
             <?php
             $panel_content_class = apply_filters( 'yit_admin_panel_content_class', 'yit-admin-panel-content-wrap' );
             ?>
@@ -605,8 +609,11 @@ if ( !class_exists( 'YIT_Plugin_Panel' ) ) {
                 return $this->_main_array_options;
             }
 
+            $options_path = $this->settings[ 'options-path' ];
+
             foreach ( $this->settings[ 'admin-tabs' ] as $item => $v ) {
-                $path = $this->settings[ 'options-path' ] . '/' . $item . '-options.php';
+                $path = $options_path . '/' . $item . '-options.php';
+                $path = apply_filters( 'yith_plugin_panel_item_options_path', $path, $options_path, $item, $this );
                 if ( file_exists( $path ) ) {
                     $this->_main_array_options = array_merge( $this->_main_array_options, include $path );
                 }
@@ -854,36 +861,24 @@ if ( !class_exists( 'YIT_Plugin_Panel' ) ) {
         /**
          * Show a box panel with specific content in two columns as a new woocommerce type
          *
+         * @deprecated 3.0.12 Do nothing! Method left to prevent Fatal Error if called directly
+         *
          * @param array $args
          *
          * @return   void
-         * @since    1.0
-         * @author   Emanuela Castorina      <emanuela.castorina@yithemes.com>
          */
         public static function add_videobox( $args = array() ) {
-            if ( !empty( $args ) ) {
-                extract( $args );
-                require_once( YIT_CORE_PLUGIN_TEMPLATE_PATH . '/panel/videobox.php' );
-            }
+
         }
 
         /**
          * Fire the action to print the custom tab
          *
+         * @deprecated 3.0.12 Do nothing! Method left to prevent Fatal Error if called directly
          * @return void
-         * @since    1.0
-         * @author   Antonino Scarfì <antonino.scarfi@yithemes.com>
          */
         public function print_video_box() {
-            $file = $this->settings[ 'options-path' ] . '/video-box.php';
 
-            if ( !file_exists( $file ) ) {
-                return;
-            }
-
-            $args = include_once( $file );
-
-            $this->add_videobox( $args );
         }
 
         /**

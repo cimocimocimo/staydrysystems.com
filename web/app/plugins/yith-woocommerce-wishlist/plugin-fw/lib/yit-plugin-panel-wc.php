@@ -93,7 +93,6 @@ if ( !class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
             if ( !static::$_actions_initialized ) {
                 /* Add VideoBox and InfoBox */
                 add_action( 'woocommerce_admin_field_boxinfo', array( __CLASS__, 'add_infobox' ), 10, 1 );
-                add_action( 'woocommerce_admin_field_videobox', array( __CLASS__, 'add_videobox' ), 10, 1 );
 
                 /* Add YITH Fields */
                 add_action( 'woocommerce_admin_field_yith-field', array( __CLASS__, 'add_yith_field' ), 10, 1 );
@@ -521,8 +520,12 @@ if ( !class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
                     $value = yith_plugin_fw_is_true( $raw_value ) ? 'yes' : 'no';
                 }
 
-                if ( isset( $option[ 'yith-type' ] ) && in_array( $option[ 'yith-type' ], array( 'textarea-editor', 'textarea-codemirror' ) ) ) {
+                if ( isset( $option[ 'yith-type' ] ) && in_array( $option[ 'yith-type' ], array( 'textarea', 'textarea-editor', 'textarea-codemirror' ) ) ) {
                     $value = $raw_value;
+                }
+
+                if ( !empty( $option[ 'yith-sanitize-callback' ] ) && is_callable( $option[ 'yith-sanitize-callback' ] ) ) {
+                    $value = call_user_func( $option[ 'yith-sanitize-callback' ], $value );
                 }
             }
 

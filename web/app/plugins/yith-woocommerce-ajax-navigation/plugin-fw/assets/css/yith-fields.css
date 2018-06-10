@@ -55,7 +55,7 @@
 }
 
 .woocommerce .yith-plugin-fw table.form-table input[type=text].colorpick,
-.yith-plugin-fw input[type=text].colorpick{
+.yith-plugin-fw input[type=text].colorpick {
     width     : 6em;
     max-width : none;
     height    : auto;
@@ -66,7 +66,7 @@
 .yith-plugin-fw .select2-container .select2-search--inline .select2-search__field,
 .woocommerce .yith-plugin-fw input.select2-search__field,
 .woocommerce .yith-plugin-fw table.form-table input.select2-search__field {
-    padding   : 3px;
+    padding : 3px;
 }
 
 .yith-plugin-fw textarea {
@@ -228,6 +228,15 @@ ul.yit-icons-manager-list li.active {
 /* ------- Preview ------- */
 .yith-plugin-fw-preview-field {
     max-height : 200px;
+}
+
+/* ------- Radio ------- */
+.yith-plugin-fw-radio input[type=radio] {
+    margin : 0 3px 0 0;
+}
+
+.yith-plugin-fw-radio__row {
+    margin-bottom : 8px;
 }
 
 /* ------- Sidebar Layout ------- */

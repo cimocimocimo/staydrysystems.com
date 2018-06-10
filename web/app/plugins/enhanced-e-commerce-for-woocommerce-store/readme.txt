@@ -7,8 +7,8 @@ Author URI: http://www.tatvic.com/
 Author: Tatvic
 Requires at least: 3.6
 Tested up to: 4.9
-Stable tag: 1.2.2
-Version: 1.2.2
+Stable tag: 2.0.3
+Version: 2.0.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -32,6 +32,8 @@ Provides integration between Enhanced Ecommerce feature of Google Analytics and 
 8. Captures Product Impressions, Add to Cart & Product Clicks events on Recent Product Section on Homepage
 9. Captures Product Impressions, Add to Cart & Product Clicks events on Related Product Section on Productpage 
 10. Set your local currency
+11. Google Analytics Opt Out
+12. IP Anonymization
 
 
 = Installation Instructions  =
@@ -50,7 +52,7 @@ Provides integration between Enhanced Ecommerce feature of Google Analytics and 
 * All the product sections on product page will be fired as Related Product and will be available in product list performance report.
 
 = Need an Advanced Google Analytics Plugin? =
-We have recently launched an Advanced Google Analytics Plugin for WooCommerce which includes tracking of 9 Reports of Enhanced Ecommerce, User ID Tracking, Product Refund, I.P. Anonymization, 15+ Custom Dimenensions & Metrics, Form Field Tracking, Content Grouping & much more. <a href="https://codecanyon.net/item/actionable-google-analytics-for-woocommerce/9899552?ref=tatvic" target="_blank">Learn More</a>
+We have an Advanced Google Analytics Plugin for WooCommerce which includes tracking of 9 Reports of Enhanced Ecommerce, User ID Tracking, Product Refund, I.P. Anonymization, 15+ Custom Dimenensions & Metrics, Form Field Tracking, Content Grouping, Google Optimize & much more. <a href="https://codecanyon.net/item/actionable-google-analytics-for-woocommerce/9899552?ref=tatvic" target="_blank">Learn More</a>
 
 == Note : ==
 == Our plugin does not support the below features out of the box ==
@@ -71,7 +73,6 @@ We have recently launched an Advanced Google Analytics Plugin for WooCommerce wh
 2. Next, you need to activate your plugin from the Settings page by clicking the checkbox – “Add Enhanced Ecommerce Tracking Code". You can access the same from: WooCommerce > Settings > Integration > Enhanced Ecommerce Google Analytics.
 3. To Track Guest Users, Check the box – Add Code to Track the Login Steps of Guest Users. If you have a Guest Check out & if it’s Unchecked, then it might cause an uneven funnel reporting in Google Analytics.
 
-
 == Frequently Asked Questions ==
 = Where can I find the setting for this plugin? =
 
@@ -84,6 +85,10 @@ Starting the WooCommerce 2.1 release there are no conflicts. However for earlier
 = Do I Need to add any custom code for it? =
 
 As our plugin automatically tracks all the Enhanced Ecommerce data ( including product name, price, etc dynamically) for your store, you don't need to add any custom/manual code to trackEcommerce events on your store from your end.
+
+= Does this plugin match with GDPR compliance? =
+
+Yes, our plugin is under GDPR complaince. For more information, read the <a href="https://www.tatvic.com/privacy-policy/?ref=plugin_policy&utm_source=plugin_backend&utm_medium=woocommerce_free_plugin&utm_campaign=GDPR_complaince_ecomm_plugins" target="_blank">privacy policy</a> of our plugin.
 
 = Why are my PayPal transaction data not getting recorded in GA? =
 
@@ -99,13 +104,25 @@ Following are one or more reasons:
 
 * If you have just installed our plugin, then please wait for at-least 24 hours before you 	start seeing any data in your GA. If you still face this issue after 24 hours, please reach out to us via <a href="https://wordpress.org/support/plugin/enhanced-e-commerce-for-woocommerce-store" target="_blank">support thread</a>.
 
-= Since I have Implemented GA Script (UA tag) Via GTM, I didn't enable Add Universal Analytics Tracking Code option, but seems that it is not working. =
+= Since I have Implemented GA Script (UA tag) Via GTM, I didn't enable Add Global site Tracking Code option, but seems that it is not working. =
 
 When you have the UA script/tag implemented via your GTM, it may happen sometimes that the script might take/make any delay in loading on your store, due to which our plugin may not work well on your store.
 
 Reason :
 
-* Our Plugin's script works/fetches the data based on the GA's default tracker ('ga' in the case of Universal Analytics script used in our plugin). While you implement the UA tracking script from your GTM, the script in your store may not be able to initialize the tracker, which in turn will hinder the plugin from populating insights in your Analytics account.
+* Our Plugin's script works/fetches the data based on the GTAG's default tracker ('gtag' in the case of Universal Analytics script used in our plugin). While you implement the UA tracking script from your GTM, the script in your store may not be able to initialize the tracker, which in turn will hinder the plugin from populating insights in your Analytics account.
+
+= Does your plugin supports new Global Site Tag (gtag.js)? =
+
+Yes our plugin supports new Global Site Tag (gtag.js).
+
+= Since I have Implemented Old GA Script (UA Script) Manually in my store, I didn't enable Add Global site Tracking Code option gtag.js, but seems that it is not working. =
+
+When you have the Old UA script implemented Manually in your store, it is not working with our plugin.
+
+Reason :
+
+* Our Plugin's script works/fetches the data based on the GTAG's default tracker ('gtag' in the case of Universal Analytics script used in our plugin). While you implement the Old UA tracking script manually, the script in your store may not be able to initialize the tracker, which in turn will hinder the plugin from populating insights in your Analytics account.
 
 = Where I can see my all Enhanced Ecommerce Reports (Eg. Sales Report,Product Performance Report)? =
 
@@ -128,7 +145,7 @@ Possible reasons for not getting the accurate Transactions (in sales performance
 
 * The user has left the page before the transaction has had a chance to send to Google Analytics.
 
-Additionally, GA is a trend analysis tool, and as such cannot be expected to be 100% accurate. However, if the variance is greater than 10%, we request you to contact us!
+Additionally, GA is a trend analysis tool, and as such cannot be expected to be 100% accurate. However, if the variance is greater than 12%, we request you to contact us!
 
 = My Ecommerce transaction data are not getting recorded in GA =
 
@@ -137,6 +154,7 @@ Please check if you have auto return configured in your payment gateway settings
 Hence, this may result into missing transaction data in your GA. You can resolve this issue by configuring auto return in your payment gateway settings.
 
 = Does this plugin help me create/configure goals/funnels in my GA account? =
+
 Configuring goals are out of the scope of our plugin. Our plugin is designed to track checkout funnels only.
 
 = Does your Plugin support Product Refund? =
@@ -149,7 +167,11 @@ Our plugin does not support Multilingual Wordpress site.
 
 = Does your plugin supports Child/Custom Theme? =
 
-The free version of our plugin is not fully compatible with the child/custom theme. Request you to go through the <a href="https://codecanyon.net/item/actionable-google-analytics-for-woocommerce/9899552?ref=tatvic" target="_blank">premium version</a> of our plugin which is fully compatible with the child/custom theme. For more information kindly contact us at analytics2(at)tatvic(dot)com.
+The free version of our plugin is not fully compatible with the child/custom theme. Request you to go through the <a href="https://codecanyon.net/item/actionable-google-analytics-for-woocommerce/9899552?ref=tatvic" target="_blank">premium version</a> of our plugin which is fully compatible with the child/custom theme. We are not providing any kind of support for Child/Custom Theme in the Free version of our plugin. For more information kindly contact us at analytics2(at)tatvic(dot)com.
+
+= Have you Provided Full support for the free version plugin? =
+
+We have a limited support policy for the free version of our plugin. Kindly go through the <a href="https://codecanyon.net/item/actionable-google-analytics-for-woocommerce/9899552?ref=tatvic" target="_blank">premium version</a> of our plugin to get full support for the product or you can also contact us at analytics2(at)tatvic(dot)com.
 
 = How to verify if you have implemented the Plugin well? =
 
@@ -262,3 +284,19 @@ Important Note: When you update the plugin, please save your settings again.
  = 1.2.2 - 31/01/2018 =
  * Compatibility with Woocommerce 3.3
  * Minor Bug Fixes & Optimization.
+
+ = 2.0.0 - 07/03/2018 =
+ * New Implementation with Global Site Tag (gtag.js)
+ * gtag.js supported
+ * Minor Bug Fixes & Optimization.
+
+ = 2.0.1 - 24/04/2018 =
+ * Minor Bug Fixes & Optimization.
+
+ = 2.0.2 - 23/05/2018 =
+ * IP Anonymization Feature
+ * Google Analytics Opt Out
+ * Update the Privacy Policy under GDPR Compliance
+
+ = 2.0.3 - 04/06/2018 =
+ * Minor Bug Fixes

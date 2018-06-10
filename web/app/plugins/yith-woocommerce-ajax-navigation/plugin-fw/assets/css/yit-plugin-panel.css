@@ -46,8 +46,8 @@
 }
 
 #plugin-fw-wc h3, #yith-plugin-fw-panel h3 {
-    padding       : 0px 10px 10px;
-    border-bottom : 1px solid #eee;
+    padding : 0 0 0 10px;
+    margin  : 0;
 }
 
 /* === Plugins Upgrader === */

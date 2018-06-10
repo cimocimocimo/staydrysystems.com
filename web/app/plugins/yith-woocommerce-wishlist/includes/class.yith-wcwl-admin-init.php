@@ -177,7 +177,7 @@ if ( ! class_exists( 'YITH_WCWL_Admin_Init' ) ) {
 		public function install() {
 			$stored_db_version = get_option( 'yith_wcwl_db_version' );
 
-			if( $stored_db_version == '1.0.0' ){
+			if( version_compare( $stored_db_version,  '1.0.0', '<=' ) ){
 				add_action( 'init', array( YITH_WCWL_Install(), 'update' ) );
 				add_action( 'init', 'flush_rewrite_rules' );
 				YITH_WCWL_Install()->default_options( $this->options );
@@ -186,6 +186,13 @@ if ( ! class_exists( 'YITH_WCWL_Admin_Init' ) ) {
 				do_action( 'yith_wcwl_installed' );
 				do_action( 'yith_wcwl_updated' );
 			}
+			elseif( version_compare( $stored_db_version, '2.0.0', '<=' ) ){
+			    add_action( 'init', array( YITH_WCWL_Install(), 'update' ) );
+
+				// Plugin installed
+				do_action( 'yith_wcwl_installed' );
+				do_action( 'yith_wcwl_updated' );
+            }
 			elseif ( YITH_WCWL_Init()->db_version != $stored_db_version || ! YITH_WCWL_Install()->is_installed() ) {
 				add_action( 'init', array( YITH_WCWL_Install(), 'init' ) );
 				add_action( 'init', 'flush_rewrite_rules' );

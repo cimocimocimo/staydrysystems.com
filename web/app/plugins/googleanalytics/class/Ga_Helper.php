@@ -555,7 +555,8 @@ class Ga_Helper {
 	}
 
 	public static function should_load_trending_alerts() {
-		return ( self::is_plugin_version_with_trending_content() && self::are_features_enabled() && self::are_sharethis_properties_verified() );
+		//return ( self::is_plugin_version_with_trending_content() && self::are_features_enabled() && self::are_sharethis_properties_verified() );
+	return true;
 	}
 
 	public static function get_tooltip() {

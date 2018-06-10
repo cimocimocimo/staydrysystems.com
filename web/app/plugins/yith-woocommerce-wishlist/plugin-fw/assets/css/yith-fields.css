@@ -7,6 +7,11 @@
     clear      : both;
 }
 
+.yith-plugin-fw span.description.inline {
+    display : inline-block;
+    margin  : 0 0 0 5px;
+}
+
 .yith-disabled {
     opacity        : 0.3;
     pointer-events : none;
@@ -32,8 +37,11 @@
 
 .yith-plugin-fw input[type=email],
 .yith-plugin-fw input[type=number],
-.yith-plugin-fw input[type=text]:not(.select2-search__field):not(.wp-color-picker),
+.yith-plugin-fw input[type=text]:not(.select2-search__field),
 .yith-plugin-fw select,
+.woocommerce .yith-plugin-fw table.form-table input[type=email],
+.woocommerce .yith-plugin-fw table.form-table input[type=number],
+.woocommerce .yith-plugin-fw table.form-table input[type=text]:not(.select2-search__field),
 .woocommerce .yith-plugin-fw table.form-table select {
     width     : 400px;
     max-width : 100%;
@@ -41,26 +49,35 @@
     padding   : 5px;
 }
 
-.woocommerce .yith-plugin-fw table.form-table input[type=text].colorpick,
-.yith-plugin-fw input[type=text].colorpick {
-    width : 6em;
+.woocommerce .yith-plugin-fw table.form-table input[type=text].wp-color-picker,
+.woocommerce .yith-plugin-fw table.form-table input[type=text].yith-plugin-fw-colorpicker,
+.yith-plugin-fw input[type=text].wp-color-picker,
+.yith-plugin-fw input[type=text].yith-plugin-fw-colorpicker {
+    width     : 6em;
+    max-width : none;
+    height    : auto;
+    padding   : 3px 5px;
 }
 
-.woocommerce .yith-plugin-fw input[type=text].select2-search__field {
-    margin  : 10px 0 0 2px;
-    padding : 0;
+.woocommerce .yith-plugin-fw table.form-table input[type=text].colorpick,
+.yith-plugin-fw input[type=text].colorpick {
+    width     : 6em;
+    max-width : none;
+    height    : auto;
+    padding   : 6px;
+}
+
+.yith-plugin-fw input.select2-search__field,
+.yith-plugin-fw .select2-container .select2-search--inline .select2-search__field,
+.woocommerce .yith-plugin-fw input.select2-search__field,
+.woocommerce .yith-plugin-fw table.form-table input.select2-search__field {
+    padding : 3px;
 }
 
 .yith-plugin-fw textarea {
     width     : 400px;
     max-width : 100%;
     padding   : 5px;
-}
-
-.yith-plugin-fw input[type=email],
-.yith-plugin-fw input[type=number],
-.yith-plugin-fw input[type=text]:not(.select2-search__field) {
-    padding : 5px 10px;
 }
 
 /* ------------- ICONS ------------- */
@@ -175,6 +192,10 @@ ul.yit-icons-manager-list li.active {
 }
 
 /* ------- OnOff ------- */
+.yith-plugin-fw-onoff-container {
+    display : inline-block;
+}
+
 .yith-plugin-fw-onoff-container input {
     display : none;
 }
@@ -216,6 +237,15 @@ ul.yit-icons-manager-list li.active {
 /* ------- Preview ------- */
 .yith-plugin-fw-preview-field {
     max-height : 200px;
+}
+
+/* ------- Radio ------- */
+.yith-plugin-fw-radio input[type=radio] {
+    margin : 0 3px 0 0;
+}
+
+.yith-plugin-fw-radio__row {
+    margin-bottom : 8px;
 }
 
 /* ------- Sidebar Layout ------- */
@@ -324,7 +354,7 @@ ul.yit-icons-manager-list li.active {
 }
 
 .yith-plugin-fw-textarea-editor-field-wrapper textarea.wp-editor-area,
-.woocommerce table.form-table .yith-plugin-fw-textarea-editor-field-wrapper textarea.wp-editor-area{
+.woocommerce table.form-table .yith-plugin-fw-textarea-editor-field-wrapper textarea.wp-editor-area {
     width : 100%;
 }
 

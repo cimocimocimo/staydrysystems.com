@@ -46,72 +46,8 @@
 }
 
 #plugin-fw-wc h3, #yith-plugin-fw-panel h3 {
-    padding       : 0px 10px 10px;
-    border-bottom : 1px solid #eee;
-}
-
-/* === VIDEO BOX === */
-.yith-videobox-wrapper {
-    padding-top : 20px;
-}
-
-.yith-videobox-wrapper h3 {
-    padding       : 0px 10px 10px;
-    border-bottom : 1px solid #eee;
-}
-
-.yith-videobox-wrapper .postbox {
-    display : inline-block;
-}
-
-.yith-videobox-wrapper .yith_videobox .column {
-    width          : 45%;
-    float          : left;
-    padding-right  : 2.5%;
-    border-right   : 1px solid #ebebeb;
-    padding-bottom : 2em;
-}
-
-.yith-videobox-wrapper .yith_videobox .column.two {
-    margin-right  : 0;
-    padding-right : 0;
-    padding-left  : 2.5%;
-    border        : 0;
-    max-width     : 49%;
-}
-
-.yith-videobox-wrapper .yith_videobox h2 {
-    font-size     : 16px;
-    margin-bottom : 20px;
-}
-
-.yith-videobox-wrapper .yith-video-link {
-    width     : 100%;
-    max-width : 200px;
-    float     : left;
-    margin    : 0 1.5em 1.5em 0;
-}
-
-.yith-videobox-wrapper .yith-video-link {
-    width     : 100%;
-    max-width : 200px;
-    float     : left;
-    margin    : 0 1.5em 1.5em 0;
-}
-
-.yith-videobox-wrapper .yith-image-frame img {
-    max-width : 100%;
-    height    : auto;
-}
-
-.yith-videobox-wrapper .yith-video-link img {
-    max-width : 100%;
-    height    : auto;
-}
-
-.yith-videobox-wrapper .yith-video-iframe {
-    display : none;
-
+    padding : 0 0 0 10px;
+    margin  : 0;
 }
 
 /* === Plugins Upgrader === */

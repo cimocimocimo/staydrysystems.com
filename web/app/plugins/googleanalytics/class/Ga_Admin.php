@@ -297,7 +297,7 @@ class Ga_Admin {
 		if ( !empty( $_GET[ 'err' ] ) ) {
 			switch ( $_GET[ 'err' ] ) {
 				case 1:
-					$data[ 'error_message' ] = Ga_Helper::ga_oauth_notice( 'There was a problem with Google Oauth2 authentication process.' );
+					$data[ 'error_message' ] = Ga_Helper::ga_oauth_notice( 'There was a problem with Google Oauth2 authentication process. Please verify your site has a valid SSL Certificate in place and is using the HTTPS protocol.' );
 					break;
 				case 2:
 					$data[ 'error_message' ] = Ga_Helper::ga_wp_notice( 'Authentication code is incorrect.', 'error', true );

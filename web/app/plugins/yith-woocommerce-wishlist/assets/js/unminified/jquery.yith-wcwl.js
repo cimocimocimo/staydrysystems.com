@@ -242,7 +242,7 @@ jQuery( document ).ready( function( $ ){
 
                 if( yith_wcwl_l10n.multi_wishlist && yith_wcwl_l10n.is_user_logged_in ) {
                     var wishlist_select = $( 'select.wishlist-select' );
-                    if( typeof $.prettyPhoto != 'undefined' && typeof $.prettyPhoto.close != 'undefined' ) {
+                    if( yith_wcwl_l10n.multi_wishlist && typeof $.prettyPhoto != 'undefined' && typeof $.prettyPhoto.close != 'undefined' ) {
                         $.prettyPhoto.close();
                     }
 
@@ -518,7 +518,7 @@ jQuery( document ).ready( function( $ ){
     function add_wishlist_popup() {
         if( $('.yith-wcwl-add-to-wishlist').length != 0 && $( '#yith-wcwl-popup-message' ).length == 0 ) {
             var message_div = $( '<div>' )
-                .attr( 'id', 'yith-wcwl-message' ),
+                    .attr( 'id', 'yith-wcwl-message' ),
                 popup_div = $( '<div>' )
                     .attr( 'id', 'yith-wcwl-popup-message' )
                     .html( message_div )

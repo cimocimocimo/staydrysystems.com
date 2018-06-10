@@ -202,7 +202,7 @@ class Meow_WR2X_Dashboard {
 		?>
 
 		<p>
-			<?php printf( __( 'The full-size images should have a resolution of <b>%d×%d</b> at least for the plugin to be able generate the <b>%d retina images</b> required by your website.', 'wp-retina-2x' ), $max_width, $max_height, count( $active_sizes ) ); ?>
+			<?php printf( __( 'Based on your <i>image sizes</i> settings, the full-size images should be uploaded at a resolution of at least <b>%d×%d</b> for the plugin to be able generate the <b>%d retina images</b>. Please note that it vares depending on your needs for each image (you will need to discuss this with your developer).', 'wp-retina-2x' ), $max_width, $max_height, count( $active_sizes ) ); ?>
 			<?php if ( $full_size_needed ) printf( __(  "You <b>also need</b> to upload a retina image for the Full-Size image (might be <b>%d×%d</b>).", 'wp-retina-2x' ), $max_width * 2, $max_height * 2 ); ?>
 			<?php _e("You can upload or replace the images by drag & drop.", 'wp-retina-2x' ); ?>
 			<?php printf( __( "Your PHP configuration allows uploads of <b>%dMB</b> maximum.", 'wp-retina-2x'), $upload_max_size / 1000000 ); ?>

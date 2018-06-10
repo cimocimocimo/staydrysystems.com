@@ -92,6 +92,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 
             // load plugin-fw
             add_action( 'plugins_loaded', array( $this, 'plugin_fw_loader' ), 15 );
+            add_action( 'plugins_loaded', array( $this, 'privacy_loader' ), 20 );
 
             // add rewrite rule
             add_action( 'init', array( $this, 'add_rewrite_rules' ), 0 );
@@ -142,6 +143,21 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
                     require_once( $plugin_fw_file );
                 }
             }
+        }
+
+        /* === PRIVACY LOADER === */
+
+        /**
+         * Loads privacy class
+         *
+         * @return void
+         * @since 2.0.0
+         */
+        public function privacy_loader() {
+        	if( class_exists( 'YITH_Privacy_Plugin_Abstract' ) ) {
+		        require_once( YITH_WCWL_INC . 'class.yith-wcwl-privacy.php' );
+		        new YITH_WCWL_Privacy();
+	        }
         }
 
         /* === ITEMS METHODS === */
@@ -451,7 +467,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		    if( ! empty( $user_id ) || ! empty( $wishlist_token ) || ! empty( $wishlist_id ) ) {
 			    $hidden_products = yith_wcwl_get_hidden_products();
 
-			    $sql = "SELECT *
+			    $sql = "SELECT *, i.dateadded AS dateadded
                     FROM `{$wpdb->yith_wcwl_items}` AS i
                     LEFT JOIN {$wpdb->yith_wcwl_wishlists} AS l ON l.`ID` = i.`wishlist_id`
                     INNER JOIN {$wpdb->posts} AS p ON p.ID = i.prod_id 
@@ -1158,7 +1174,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
                 return;
             }
 
-            if( defined( 'POLYLANG_VERSION' ) ){
+            if( defined( 'POLYLANG_VERSION' ) || defined( 'ICL_PLUGIN_PATH' ) ){
             	return;
             }
 

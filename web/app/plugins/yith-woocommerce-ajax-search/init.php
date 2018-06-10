@@ -3,13 +3,13 @@
 * Plugin Name: YITH WooCommerce Ajax Search
 * Plugin URI: http://yithemes.com/
 * Description: YITH WooCommerce Ajax Search allows your users to search products in real time.
-* Version: 1.5.5
+* Version: 1.5.6
 * Author: YITHEMES
 * Author URI: http://yithemes.com/
 * Text Domain: yith-woocommerce-ajax-search
 * Domain Path: /languages/
 * WC requires at least: 3.0.0
-* WC tested up to: 3.3.0
+* WC tested up to: 3.4.0
 */
 
 
@@ -67,7 +67,7 @@ register_activation_hook( __FILE__, 'yith_plugin_registration_hook' );
 if ( defined( 'YITH_WCAS_VERSION' ) ){
     return;
 }else{
-    define( 'YITH_WCAS_VERSION', '1.5.5' );
+    define( 'YITH_WCAS_VERSION', '1.5.6' );
 }
 
 if ( ! defined( 'YITH_WCAS_FREE_INIT' ) ) {

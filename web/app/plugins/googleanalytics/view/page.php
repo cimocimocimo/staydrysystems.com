@@ -144,13 +144,16 @@
                 </tr>
                 <tr valign="top">
                   <td colspan="2">
-                    <p>If you experience an issue with this plugin, we are here to help! You can visit our <a href="https://googleanalytics.zendesk.com/hc/en-us">support portal</a> to find answers to the most frequently asked questions and to submit a support request. We aim to respond to everyone within one business day.</p>
-              			<p>If your issue is difficult to debug, click the button below to automatically send us your error logs and debugging info.</p>
+              			<p>If you are still experiencing an issue, we are here to help! We recommend clickingthe "Send Debugging Info" button below and pasting the information within an email to support@sharethis.com.</p>
                     <p>
                         <button id="ga_debug_button" class="button button-secondary" onclick="ga_debug.open_modal( event )" >Send Debugging Info</button>
 	                    <?php if ( ! empty( $data['ga_accounts_selector'] ) ): ?>
 			                <?php echo $data[ 'auth_button' ] ?>
-	                    <?php endif; ?>
+		                    <br>
+		                    <small class="notice">
+		                        *If you reset your google password you MUST re-authenticate to continue viewing your analytics dashboard.
+	                        </small>
+	                     <?php endif; ?>
                     </p>
                   </td>
                 </tr>

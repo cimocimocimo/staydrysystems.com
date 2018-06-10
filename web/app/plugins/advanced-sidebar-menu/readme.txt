@@ -4,9 +4,9 @@ Contributors: Mat Lipe
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal%40matlipe%2ecom&lc=US&item_name=Advanced%20Sidebar%20Menu&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
 Tags: menus, sidebar menu, hierarchy, category menu, pages menu
 Requires at least: 4.6.0
-Tested up to: 4.9.2
+Tested up to: 4.9.6
 Requires PHP: 5.2.4
-Stable tag: 7.1.1
+Stable tag: 7.2.5
 
 == Description ==
 
@@ -16,18 +16,18 @@ Keeps the menu clean and usable. Only related items display so you don't have to
 
 <strong>Check out <a href="https://matlipe.com/product/advanced-sidebar-menu-pro/">Advanced Sidebar Menu Pro</a> for more features including priority support, the ability to customize the look and feel, custom link text, excluding of pages, category ordering, accordions, custom post types, custom taxonomies, and so much more!</strong>
 
-<blockquote><a href="https://matlipe.com/product/advanced-sidebar-menu-pro/" target="_blank">Pro version 3.0.0</a> just dropped with lots of great new stuff!</blockquote>
+<blockquote><a href="https://matlipe.com/product/advanced-sidebar-menu-pro/" target="_blank">Pro version 3.3.0</a> just dropped with support for custom navigation menus from Appearance -> Menus!</blockquote>
 
 <h4>Features</h4>
-* Page and Category widgets
-* Option to display or not display the highest level parent page or category
-* Option to display the menu when there is only the highest level parent
-* Ability to order pages by (date, title, page order)
-* Exclude pages or categories by entering a comma separated list of ids
-* Option to always display child pages or categories
-* Option to select the levels of pages or categories to display when always display child is used
-* Option to display or not display categories on single posts
-* Ability to display each single post's category in a new widget or in same list
+* Page and Category widgets.
+* Option to display or not display the highest level parent page or category.
+* Option to display the menu when there is only the highest level parent.
+* Ability to order pages by (date, title, page order).
+* Exclude pages or categories by entering a comma separated list of ids.
+* Option to always display child pages or categories.
+* Option to select the levels of pages or categories to display when always display child is used.
+* Option to display or not display categories on single posts.
+* Ability to display each single post's category in a new widget or in same list.
 
 <h4>Page Widget Options</h4>
 * Add a title to the widget
@@ -51,27 +51,35 @@ Keeps the menu clean and usable. Only related items display so you don't have to
 * Levels of Categories to display when always display child categories is checked
 
 <h4>Pro Features</h4>
-* Priority support
-* Ability to customize each page link’s text
-* Option to display the current page's parents and grandparents only
-* Number of levels of pages to show when always displayed child pages is not checked
-* Click and drag styling for both the page and category widgets
-* Styling options for links including color, background color, size, and font weight
-* Styling options for different levels of links
-* Styling options for the current page or category
-* Styling options for the parent of the current page or category
-* Block styling options including borders and border colors
-* Bullet style selection from 7 styles or select none to have no bullets
-* Accordion menu support for pages
-* Accordion menu support for categories
-* Accordion icon selection from 4 styles of icons
-* Accordion icon color selection
-* Accordion option to keep all sections closed until clicked
-* Accordion option to include highest level parent in accordion
-* Ability to exclude a page from all menus using a simple checkbox
-* Link ordering for the category widget
-* Ability to select and display custom post types **NEW**
-* Ability to select and display custom taxonomies **NEW**
+* Priority support.
+* Ability to customize each page's link text.
+* Number of levels of pages to show when always displayed child pages is not checked.
+* Click and drag styling for both the page and category widgets.
+* Styling options for links including color, background color, size, and font weight.
+* Styling options for different levels of links.
+* Styling options for the current page or category.
+* Styling options for the parent of the current page or category.
+* Block styling options including borders and border colors.
+* Bullet style selection from 7 styles or select none to have no bullets.
+* Accordion menu support for pages, categories, and navigation menus. 
+* Accordion icon selection from 4 styles of icons.
+* Accordion icon color selection.
+* Accordion option to keep all sections closed until clicked.
+* Accordion option to include highest level parent in accordion.
+* Ability to exclude a page from all menus using a simple checkbox.
+* Link ordering for the category widget.
+* Ability to select and display custom post types. 
+* Ability to select and display custom taxonomies.
+* Option to display the current page's parents and grandparents only.
+* Option to display child page siblings when on a child page.
+* Option to display child page siblings when on a child page with no grandchild pages. 
+* Ability to display the widgets everywhere the sidebar display.
+* Ability to select the parent page/category when using the display widget everywhere option. **NEW**
+* Ability to display assigned posts under categories. **NEW**
+* Ability to display assigned custom post types under categories. **NEW**
+* Ability to limit the number of posts to display under categories or custom post types. **NEW**
+* Support for custom navigation menus from Appearance -> Menus **NEW**
+* Access to members only support area.
 
 <h4>Currently ships with the following languages</h4>
 * English (US)
@@ -142,6 +150,9 @@ Yes. Based on whatever page, post, or category you are on, the menu will change 
 
 
 == Changelog ==
+= 7.2.0 =
+* New improved widget structure
+
 = 7.1.0 =
 * Support Pro Version 3.0.0
 * Add German translations
@@ -212,6 +223,12 @@ Yes. Based on whatever page, post, or category you are on, the menu will change 
 
 
 == Upgrade Notice ==
+= 7.2.2 =
+Update to support PRO version 3.2.0
+
+= 7.1.2 =
+Update to support PRO version 3.1.0
+
 = 7.0.0 =
 The templates have been improved drastically. While the old version 6 templates will work for now they have been deprecated and will one day stop working. If you are using custom templates please being converting them to the new structure.
 

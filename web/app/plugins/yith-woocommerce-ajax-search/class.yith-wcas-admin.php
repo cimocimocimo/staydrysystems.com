@@ -47,7 +47,7 @@ if( !class_exists( 'YITH_WCAS_Admin' ) ) {
         /**
          * @var string Premium version landing link
          */
-        protected $_premium_landing = 'http://yithemes.com/themes/plugins/yith-woocommerce-ajax-search/';
+        protected $_premium_landing = 'https://yithemes.com/themes/plugins/yith-woocommerce-ajax-search/';
 
         /**
          * @var string Ajax Search panel page
@@ -61,7 +61,7 @@ if( !class_exists( 'YITH_WCAS_Admin' ) ) {
          * @access public
          * @since 1.0.0
          */
-        public $doc_url    = 'http://yithemes.com/docs-plugins/yith-woocommerce-ajax-search/';
+        public $doc_url    = 'https://docs.yithemes.com/yith-woocommerce-ajax-search/';
 
     	/**
 		 * Constructor

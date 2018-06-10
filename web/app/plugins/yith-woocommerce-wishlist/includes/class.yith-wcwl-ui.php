@@ -212,10 +212,10 @@ if( ! class_exists( 'YITH_WCWL_UI' ) ) {
                 $button_html = str_replace( $match[1], $match[1] . ' add_to_cart button alt', $button_html );
             }
 
-            preg_match( '/<a .*?>(.*)<\/a>/', $button_html, $match );
+            preg_match( '/<a.*?>(.*)<\/a>/', $button_html, $match );
 
             if( ! empty( $match ) && isset( $match[1] ) ){
-                $button_html = str_replace( $match[1], $icon . ' ' . $label, $button_html );
+                $button_html = str_replace( '>' . $match[1] . '<', '>' . $icon . ' ' . $label . '<', $button_html );
             }
 
             return $button_html;

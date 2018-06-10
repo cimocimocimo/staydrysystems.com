@@ -66,7 +66,7 @@ if ( ! class_exists( 'YITH_WCAN_Reset_Navigation_Widget' ) ) {
 
                 else{
                     //Start filter from Product category Page
-                    $term = get_term_by( YITH_WCAN()->filter_term_field, $_GET['source_id'], $_GET['source_tax'] );
+                    $term = get_term_by( 'term_id', $_GET['source_id'], $_GET['source_tax'] );
 
                     if( $term instanceof WP_Term ){
                         $link = get_term_link( $term, $term->taxonomy  );

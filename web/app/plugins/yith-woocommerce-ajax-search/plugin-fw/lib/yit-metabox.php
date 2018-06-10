@@ -520,7 +520,11 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
                         if ( in_array( $field[ 'type' ], array( 'onoff', 'checkbox' ) ) ) {
                             update_post_meta( $post_id, $field[ 'id' ], '1' );
                         } else {
-                            add_post_meta( $post_id, $field[ 'id' ], $_POST[ 'yit_metaboxes' ][ $field[ 'id' ] ], true ) || update_post_meta( $post_id, $field[ 'id' ], $_POST[ 'yit_metaboxes' ][ $field[ 'id' ] ] );
+                            $value = $_POST[ 'yit_metaboxes' ][ $field[ 'id' ] ];
+                            if ( !empty( $field[ 'yith-sanitize-callback' ] ) && is_callable( $field[ 'yith-sanitize-callback' ] ) ) {
+                                $value = call_user_func( $field[ 'yith-sanitize-callback' ], $value );
+                            }
+                            add_post_meta( $post_id, $field[ 'id' ], $value, true ) || update_post_meta( $post_id, $field[ 'id' ], $value );
                         }
                     } elseif ( in_array( $field[ 'type' ], array( 'onoff', 'checkbox' ) ) ) {
                         update_post_meta( $post_id, $field[ 'id' ], '0' );

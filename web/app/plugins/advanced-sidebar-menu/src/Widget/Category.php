@@ -10,7 +10,7 @@
  *
  *
  */
-class Advanced_Sidebar_Menu_Widget_Category extends WP_Widget {
+class Advanced_Sidebar_Menu_Widget_Category extends Advanced_Sidebar_Menu__Widget__Widget {
 	const TITLE = Advanced_Sidebar_Menu_Menus_Abstract::TITLE;
 	const INCLUDE_PARENT = Advanced_Sidebar_Menu_Menus_Abstract::INCLUDE_PARENT;
 	const INCLUDE_CHILDLESS_PARENT = Advanced_Sidebar_Menu_Menus_Abstract::INCLUDE_CHILDLESS_PARENT;
@@ -35,157 +35,225 @@ class Advanced_Sidebar_Menu_Widget_Category extends WP_Widget {
 		self::LEVELS                   => 1,
 	);
 
+	protected static $hooked = false;
+
 
 	public function __construct() {
-		$widget_ops = array(
+		$widget_ops  = array(
 			'classname'   => 'advanced-sidebar-menu advanced-sidebar-category',
 			'description' => __( 'Creates a menu of all the categories using the child/parent relationship', 'advanced-sidebar-menu' ),
 		);
-		$control_ops = array( 'width' => 290 );
+		$control_ops = array( 'width' => 620 );
 
 		parent::__construct( 'advanced_sidebar_menu_category', __( 'Advanced Sidebar Categories Menu', 'advanced-sidebar-menu' ), $widget_ops, $control_ops );
+
+		if ( ! self::$hooked ) {
+			self::$hooked = true;
+			$this->hook();
+		}
+	}
+
+
+	protected function hook() {
+		add_action( 'advanced-sidebar-menu/widget/category/left-column', array( $this, 'box_display' ), 5, 1 );
+		add_action( 'advanced-sidebar-menu/widget/category/left-column', array( $this, 'box_styles' ), 10, 1 );
+		add_action( 'advanced-sidebar-menu/widget/category/left-column', array( $this, 'box_singles' ), 15, 1 );
+		add_action( 'advanced-sidebar-menu/widget/category/left-column', array( $this, 'box_exclude' ), 20, 1 );
+
+	}
+
+
+	public function box_display( array $instance ) {
+		?>
+		<div class="advanced-sidebar-menu-column-box">
+			<p>
+				<?php $this->checkbox( self::INCLUDE_PARENT ); ?>
+				<label>
+					<?php esc_html_e( 'Display highest level parent category', 'advanced-sidebar-menu' ); ?>
+				</label>
+			</p>
+			<p>
+				<?php $this->checkbox( self::INCLUDE_CHILDLESS_PARENT ); ?>
+				<label>
+					<?php esc_html_e( 'Display menu when there is only the parent category', 'advanced-sidebar-menu' ); ?>
+				</label>
+			</p>
+			<p>
+				<?php $this->checkbox( self::DISPLAY_ALL, self::LEVELS ); ?>
+				<label>
+					<?php esc_html_e( 'Always display child categories', 'advanced-sidebar-menu' ); ?>
+				</label>
+			</p>
+			<div <?php $this->hide_element( self::DISPLAY_ALL, self::LEVELS ); ?>>
+				<p>
+					<label>
+						<?php esc_html_e( 'Levels to display', 'advanced-sidebar-menu' ); ?>:</label>
+					<select
+						name="<?php echo esc_attr( $this->get_field_name( self::LEVELS ) ); ?>">
+						<?php
+						for ( $i = 1; $i < 6; $i ++ ) {
+							?>
+							<option
+								value="<?php echo esc_attr( $i ); ?>" <?php selected( $i, (int) $instance[ self::LEVELS ] ); ?>>
+								<?php echo esc_html( $i ); ?>
+							</option>
+
+							<?php
+						}
+						?>
+					</select>
+				</p>
+			</div>
+
+			<?php do_action( 'advanced-sidebar-menu/widget/category/display-box', $instance, $this ); ?>
+
+		</div>
+		<?php
+	}
+
+
+	public function box_styles( array $instance ) {
+		?>
+		<div class="advanced-sidebar-menu-column-box">
+			<p>
+				<?php $this->checkbox( self::USE_PLUGIN_STYLES ); ?>
+				<label>
+					<?php esc_html_e( "Use this plugin's default styling", 'advanced-sidebar-menu' ); ?>
+				</label>
+			</p>
+
+			<?php do_action( 'advanced-sidebar-menu/widget/category/styles-box', $instance, $this ); ?>
+		</div>
+		<?php
+	}
+
+
+	public function box_singles( array $instance ) {
+		?>
+		<div class="advanced-sidebar-menu-column-box">
+			<p>
+
+				<?php $this->checkbox( self::DISPLAY_ON_SINGLE, self::EACH_CATEGORY_DISPLAY ); ?>
+				<label>
+					<?php esc_html_e( 'Display categories on single posts', 'advanced-sidebar-menu' ); ?>
+				</label>
+			</p>
+
+			<div <?php $this->hide_element( self::DISPLAY_ON_SINGLE, self::EACH_CATEGORY_DISPLAY ); ?>>
+				<p>
+					<label><?php esc_html_e( "Display each single post's category", 'advanced-sidebar-menu' ); ?>
+						:</label>
+					<select
+						name="<?php echo esc_attr( $this->get_field_name( self::EACH_CATEGORY_DISPLAY ) ); ?>">
+						<option
+							value="widget" <?php selected( 'widget', $instance[ self::EACH_CATEGORY_DISPLAY ] ); ?>>
+							<?php esc_html_e( 'In a new widget', 'advanced-sidebar-menu' ); ?>
+						</option>
+						<option value="list" <?php selected( 'list', $instance[ self::EACH_CATEGORY_DISPLAY ] ); ?>>
+							<?php esc_html_e( 'In another list in the same widget', 'advanced-sidebar-menu' ); ?>
+						</option>
+					</select>
+				</p>
+			</div>
+
+			<?php do_action( 'advanced-sidebar-menu/widget/category/singles-box', $instance, $this ); ?>
+
+		</div>
+		<?php
+	}
+
+
+	public function box_exclude( array $instance ) {
+		?>
+		<div class="advanced-sidebar-menu-column-box">
+			<p>
+				<label>
+					<?php esc_html_e( 'Categories to exclude (ids), comma separated', 'advanced-sidebar-menu' ); ?>:
+				</label>
+				<input
+					id="<?php echo esc_attr( $this->get_field_id( self::EXCLUDE ) ); ?>"
+					name="<?php echo esc_attr( $this->get_field_name( self::EXCLUDE ) ); ?>"
+					type="text"
+					class="widefat"
+					value="<?php echo esc_attr( $instance[ self::EXCLUDE ] ); ?>"/>
+			</p>
+
+			<?php
+			do_action( 'advanced-sidebar-menu/widget/category/exclude-box', $instance, $this );
+			?>
+		</div>
+		<?php
 	}
 
 
 	/**
-	 * Creates a form for the Widget Options
+	 * Form
 	 *
-	 * @since   1.7.14
+	 * @since 7.2.1
 	 *
 	 * @param array $instance
 	 *
-	 * @actions do_action('advanced_sidebar_menu_category_widget_form', $instance );
 	 * @return void
 	 */
 	public function form( $instance ) {
-
-		$instance = wp_parse_args( $instance, self::$defaults );
-
+		$instance = $this->set_instance( $instance, self::$defaults );
+		do_action( 'advanced-sidebar-menu/widget/category/before-form', $instance, $this );
 		?>
-        <p> <?php _e( 'Title', 'advanced-sidebar-menu' ); ?>
-            <br>
-            <input id="<?php echo $this->get_field_name( self::TITLE ); ?>"
-                    name="<?php echo $this->get_field_name( self::TITLE ); ?>" class="widefat" type="text" value="<?php echo $instance[ self::TITLE ]; ?>"/>
-        </p>
+		<p>
+			<label>
+				<?php esc_html_e( 'Title', 'advanced-sidebar-menu' ); ?>:
+			</label>
 
+			<input
+				id="<?php echo esc_attr( $this->get_field_id( self::TITLE ) ); ?>"
+				name="<?php echo esc_attr( $this->get_field_name( self::TITLE ) ); ?>"
+				class="widefat"
+				type="text"
+				value="<?php echo esc_attr( $instance[ self::TITLE ] ); ?>"/>
+		</p>
 
-        <p> <?php _e( 'Display highest level parent category', 'advanced-sidebar-menu' ); ?>
-            <input id="<?php echo $this->get_field_name( self::INCLUDE_PARENT ); ?>"
-                    name="<?php echo $this->get_field_name( self::INCLUDE_PARENT ); ?>" type="checkbox" value="checked"
-				<?php echo $instance[ self::INCLUDE_PARENT ]; ?>/>
-        </p>
+		<div class="advanced-sidebar-menu-column">
+			<?php do_action( 'advanced-sidebar-menu/widget/category/left-column', $instance, $this );
 
-
-        <p> <?php _e( 'Display menu when there is only the parent category', 'advanced-sidebar-menu' ); ?>
-            <input id="<?php echo $this->get_field_name( self::INCLUDE_CHILDLESS_PARENT ); ?>"
-                    name="<?php echo $this->get_field_name( self::INCLUDE_CHILDLESS_PARENT ); ?>" type="checkbox" value="checked"
-				<?php echo $instance[ self::INCLUDE_CHILDLESS_PARENT ]; ?>/>
-        </p>
-
-        <p> <?php _e( 'Use this plugins styling', 'advanced-sidebar-menu' ); ?>
-            <input id="<?php echo $this->get_field_name( self::USE_PLUGIN_STYLES ); ?>"
-                    name="<?php echo $this->get_field_name( self::USE_PLUGIN_STYLES ); ?>" type="checkbox" value="checked"
-				<?php echo $instance[ self::USE_PLUGIN_STYLES ]; ?>/>
-        </p>
-
-        <p> <?php _e( 'Display categories on single posts', 'advanced-sidebar-menu' ); ?>
-            <input id="<?php echo $this->get_field_name( self::DISPLAY_ON_SINGLE ); ?>"
-                    name="<?php echo $this->get_field_name( self::DISPLAY_ON_SINGLE ); ?>" type="checkbox" value="checked"
-                    onclick="javascript:asm_reveal_element( 'new-widget-<?php echo $this->get_field_name( self::EACH_CATEGORY_DISPLAY ); ?>' )"
-				<?php echo $instance[ self::DISPLAY_ON_SINGLE ]; ?>/>
-        </p>
-
-        <span id="new-widget-<?php echo $this->get_field_name( self::EACH_CATEGORY_DISPLAY ); ?>" style="<?php
-		if( $instance[ self::DISPLAY_ON_SINGLE ] === 'checked' ){
-			echo 'display:block';
-		} else {
-			echo 'display:none';
-		} ?>">
-                 <p><?php _e( "Display each single post's category", 'advanced-sidebar-menu' ); ?>
-                     <select id="<?php echo $this->get_field_name( self::EACH_CATEGORY_DISPLAY ); ?>"
-                             name="<?php echo $this->get_field_name( self::EACH_CATEGORY_DISPLAY ); ?>">
-		                 <?php
-		                 if( $instance[ self::EACH_CATEGORY_DISPLAY ] === 'widget' ){
-		                     ?>
-			                 <option value="widget" selected>
-                                    <?php _e( 'In a new widget', 'advanced-sidebar-menu' ); ?>
-                             </option>
-			                 <option value="list">
-                                 <?php _e( 'In another list in the same widget', 'advanced-sidebar-menu' ); ?>
-                             </option>
-                             <?php
-		                 } else {
-		                     ?>
-                             <option value="widget">
-                                    <?php _e( 'In a new widget', 'advanced-sidebar-menu' ); ?>
-                             </option>
-                             <option value="list" selected>
-                                 <?php _e( 'In another list in the same widget', 'advanced-sidebar-menu' ); ?>
-                             </option>
-                             <?php
-		                 }
-
-		                 ?></select>
-                 </p>
-            </span>
-
-
-        <p>
-            <?php _e( 'Categories to exclude (ids), comma separated', 'advanced-sidebar-menu' ); ?>:
-            <input id="<?php echo $this->get_field_name( self::EXCLUDE ); ?>"
-                    name="<?php echo $this->get_field_name( self::EXCLUDE ); ?>" type="text" class="widefat" value="<?php echo $instance[ self::EXCLUDE ]; ?>"/>
-        </p>
-
-        <p> <?php _e( 'Always display child categories', 'advanced-sidebar-menu' ); ?>
-            <input id="<?php echo $this->get_field_name( self::DISPLAY_ALL ); ?>"
-                    name="<?php echo $this->get_field_name( self::DISPLAY_ALL ); ?>" type="checkbox" value="checked"
-                    onclick="javascript:asm_reveal_element( 'levels-<?php echo $this->get_field_name( self::LEVELS ); ?>' )"
-				<?php echo $instance[ self::DISPLAY_ALL ]; ?>/>
-        </p>
-
-        <span id="levels-<?php echo $this->get_field_name( self::LEVELS ); ?>" style="<?php
-		if( $instance[ self::DISPLAY_ALL ] === 'checked' ){
-			echo 'display:block';
-		} else {
-			echo 'display:none';
-		} ?>">
-        <p>
-            <?php _e( 'Levels to display', 'advanced-sidebar-menu' ); ?>
-            <select id="<?php echo $this->get_field_name( self::LEVELS ); ?>"
-                    name="<?php echo $this->get_field_name( self::LEVELS ); ?>">
-		<?php
-		for( $i = 1; $i < 6; $i ++ ){
-			if( $i === (int) $instance[ 'levels' ] ){
-				echo '<option value="' . $i . '" selected>' . $i . '</option>';
-			} else {
-				echo '<option value="' . $i . '">' . $i . '</option>';
+			if ( has_action( 'advanced_sidebar_menu_category_widget_form' ) ) {
+				?>
+				<div class="advanced-sidebar-menu-column-box">
+					<?php
+					do_action( 'advanced_sidebar_menu_category_widget_form', $instance, $this ); ?>
+				</div>
+				<?php
 			}
-		}
-		?>
-            </select>
-        </p>
-    </span>
+
+			?>
+		</div>
+
+		<div class="advanced-sidebar-menu-column advanced-sidebar-menu-column-right">
+			<?php
+			do_action( 'advanced-sidebar-menu/widget/category/right-column', $instance, $this );
+			//@deprecated action
+			do_action( 'advanced_sidebar_menu_after_widget_form', $instance, $this );
+			?>
+		</div>
+		<div class="advanced-sidebar-menu-full-width"><!-- clear --></div>
+
 		<?php
-
-		do_action( 'advanced_sidebar_menu_category_widget_form', $instance, $this );
-
-		do_action( 'advanced_sidebar_menu_after_widget_form', $instance, $this );
+		do_action( 'advanced-sidebar-menu/widget/category/after-form', $instance, $this );
 
 	}
 
 
 	/**
-	 * Updates the widget data
+	 * Update
 	 *
-	 * @filter - $newInstance = apply_filters('advanced_sidebar_menu_category_widget_update', $newInstance,
-	 *         $oldInstance );
-	 * @since  5.19.13
+	 * @param array $new_instance
+	 * @param array $old_instance
+	 *
+	 * @return array|mixed
 	 */
-	public function update( $newInstance, $oldInstance ) {
-		$newInstance[ 'exclude' ] = strip_tags( $newInstance[ 'exclude' ] );
-		$newInstance = apply_filters( 'advanced_sidebar_menu_category_widget_update', $newInstance, $oldInstance );
+	public function update( $new_instance, $old_instance ) {
+		$new_instance['exclude'] = strip_tags( $new_instance['exclude'] );
 
-		return $newInstance;
+		return apply_filters( 'advanced_sidebar_menu_category_widget_update', $new_instance, $old_instance );
 	}
 
 
@@ -202,8 +270,8 @@ class Advanced_Sidebar_Menu_Widget_Category extends WP_Widget {
 	 * @return void
 	 */
 	public function widget( $args, $instance ) {
-		$instance = wp_parse_args( $instance, self::$defaults );
-		$asm = Advanced_Sidebar_Menu_Menus_Category::factory( $instance, $args );
+		$instance = $this->set_instance( $instance, self::$defaults );
+		$asm      = Advanced_Sidebar_Menu_Menus_Category::factory( $instance, $args );
 
 		do_action( 'advanced_sidebar_menu_widget_pre_render', $asm, $this );
 

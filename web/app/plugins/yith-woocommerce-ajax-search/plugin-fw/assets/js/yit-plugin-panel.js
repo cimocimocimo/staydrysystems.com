@@ -125,37 +125,6 @@
                                     } ).disableSelection();
     } );
 
-    $( document ).ready( function () {
-
-        $( '.yith-video-link' ).click( function ( event ) {
-            event.preventDefault();
-            var target = $( this ).data( 'video-id' );
-
-            $( '.' + target ).dialog( {
-                                          dialogClass  : 'wp-dialog yit-dialog yit-video-dialog',
-                                          modal        : true,
-                                          closeOnEscape: true,
-                                          width        : 'auto',
-                                          resizable    : false,
-                                          draggable    : false,
-                                          create       : function ( event, ui ) {
-                                              $( this ).css( "maxWidth", "853px" );
-                                          },
-                                          open         : function ( event, ui ) {
-
-                                              $( '.ui-widget-overlay' ).bind( 'click', function () {
-                                                  $( this ).siblings( '.ui-dialog' ).find( '.ui-dialog-content' ).dialog( 'close' );
-                                              } );
-
-                                          }
-
-                                      } );
-
-            $( '.ui-dialog :button' ).blur();
-
-        } );
-    } );
-
     //google analytics generation
     $( document ).ready( function () {
         $( '.google-analytic-generate' ).click( function () {
