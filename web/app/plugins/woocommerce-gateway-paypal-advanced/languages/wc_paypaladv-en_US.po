@@ -1,0 +1,283 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Woocommerce PayPal Advanced Payment Gateway\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-05-01 05:09+0530\n"
+"PO-Revision-Date: 2013-05-01 05:09+0530\n"
+"Last-Translator: wajid <king4u_7@yahoo.com>\n"
+"Language-Team: 1 <kiran@limecuda.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: India\n"
+"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-SearchPath-1: ../templates\n"
+"X-Poedit-SearchPath-2: ../js\n"
+
+#: ../class-wc-paypal-advanced.php:21
+#: ../class-wc-paypal-advanced.php:517
+#: ../class-wc-paypal-advanced.php:553
+msgid "PayPal Advanced"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:87
+#, php-format
+msgid "Paypal Advanced error: Please enter your PayPal Advanced Account Login ID <a href=\"%s\">here</a>"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:93
+#, php-format
+msgid "Paypal Advanced error: Please enter your PayPal Advanced Account Reseller ID <a href=\"%s\">here</a>"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:99
+#, php-format
+msgid "Paypal Advanced error: Please enter your PayPal Advanced Account Password <a href=\"%s\">here</a>"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:150
+msgid "Payment failed via PayPal Advanced because of."
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:153
+#, php-format
+msgid "Status has been changed to failed for order #%s"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:160
+#: ../class-wc-paypal-advanced.php:490
+#: ../class-wc-paypal-advanced.php:710
+msgid "Error:"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:163
+#, php-format
+msgid "Error Occurred while processing #%s : %s, status: %s"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:192
+#, php-format
+msgid "PayPal Advanced payment completed (Order ID: %s). But needs to Inquiry transaction to have confirmation that it is actually paid."
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:222
+#: ../class-wc-paypal-advanced.php:469
+msgid "There was a problem connecting to the payment gateway."
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:225
+#: ../class-wc-paypal-advanced.php:472
+msgid "Empty response."
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:241
+#, php-format
+msgid "Received result of Inquiry Transaction for the  (Order ID: %s) and is successful"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:250
+#, php-format
+msgid "Redirecting to Thank You Page for order #%s"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:286
+#, php-format
+msgid "Requesting for the Secured Token for the order #%s"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:358
+#, php-format
+msgid "Order %s"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:365
+#: ../class-wc-paypal-advanced.php:408
+msgid "Shipping via"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:454
+#, php-format
+msgid "Requesting for the Secured Token for the order #%s with following URL and Paramaters: %s"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:483
+msgid "There was an error processing your order - "
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:518
+msgid "PayPal Payments Advanced uses an iframe to seamlessly integrate PayPal hosted pages into the checkout process."
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:524
+msgid "Gateway Disabled"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:524
+msgid "PayPal does not support your store currency."
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:544
+msgid "Enable/Disable"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:546
+msgid "Enable PayPal Advanced"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:550
+msgid "Title"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:552
+msgid "This controls the title which the user sees during checkout."
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:556
+msgid "Description"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:558
+msgid "This controls the description which the user sees during checkout."
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:559
+msgid "PayPal Advanced dsecription"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:562
+msgid "Vendor ID"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:568
+msgid "Reseller ID"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:570
+msgid "Enter your PayPal Advanced reseller ID. If you purchased the account directly from PayPal, use PayPal."
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:575
+msgid "User (or Vendor ID if no disignated user is set up for the account)"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:577
+msgid "Enter your PayPal Advanced user account for this site."
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:582
+msgid "Password"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:584
+msgid "Enter your PayPal Advanced account password."
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:588
+msgid "PayPal sandbox"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:590
+msgid "Enable PayPal sandbox"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:592
+#, php-format
+msgid "PayPal sandbox can be used to test payments. Sign up for a developer account <a href=\"%s\">here</a>"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:595
+#: ../class-wc-paypal-advanced.php:597
+msgid "Transaction Type"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:603
+#: ../class-wc-paypal-advanced.php:605
+msgid "Layout"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:607
+msgid "Select the Layout you chose in PayPal Manager  (they must match)"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:611
+msgid "Invoice Prefix"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:613
+msgid "Please enter a prefix for your invoice numbers. If you use your PayPal account for multiple stores ensure this prefix is unique as PayPal will not allow orders with the same invoice number.Please use hyphen(-) as suffix."
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:618
+msgid "Page Collapse Border Color"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:620
+msgid "Sets the color of the border around the embedded template C."
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:626
+msgid "Page Collapse Text Color"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:628
+msgid "Sets the color of the words \"Pay with PayPal\" and \"Pay with credit or debit card\"."
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:634
+msgid "Page Button Background Color"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:636
+msgid "Sets the background color of the Pay Now / Submit button."
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:642
+msgid "Page Button Text Color"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:644
+msgid "Sets the color of the text on the Pay Now / Submit button."
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:650
+msgid "Label Text Color"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:652
+msgid "Sets the color of the text for \"card number\", \"expiration date\", ..etc."
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:658
+msgid "Debug Log"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:660
+msgid "Enable logging"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:662
+msgid "Log PayPal events, such as Secured Token requests, inside <code>woocommerce/logs/paypal_advanced.txt</code>"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:699
+#, php-format
+msgid "Secured Token generated successfully for the order #%s"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:737
+#, php-format
+msgid "Browser Info: %s"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:745
+#, php-format
+msgid "Show payment form(IFRAME) for the order #%s as it is configured to use Layout C"
+msgstr ""
+
+#: ../class-wc-paypal-advanced.php:758
+msgid "Show payment form redirecting to "
+msgstr ""
+
