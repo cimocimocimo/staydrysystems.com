@@ -99,7 +99,7 @@ function show_free_shipping() {
     }
 
     if ( $product->get_shipping_class() == 'free-shipping' ) {
-        echo 'Free Shipping';
+        echo '<span class="product-free-shipping-label">Free Shipping</span>';
     }
 }
 
