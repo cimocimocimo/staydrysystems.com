@@ -18,6 +18,7 @@ web/app/uploads/*
 !web/app/plugins/googleanalytics
 !web/app/plugins/js_composer
 !web/app/plugins/woocommerce
+!web/app/plugins/woocommerce-enable-free-shipping-per-product.php
 !web/app/plugins/woocommerce-incremental-product-quantities
 !web/app/plugins/woocommerce-gateway-paypal-advanced
 !web/app/plugins/woocommerce-shipping-per-product

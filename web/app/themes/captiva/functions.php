@@ -491,3 +491,14 @@ function add_price_per_unit_meta_to_price( $price ) {
 include get_template_directory() . '/staydry/custom-fields.php';
 include get_template_directory() . '/staydry/homepage-logo-block.php';
 
+function addPriceSuffix($format, $currency_pos) {
+	switch ( $currency_pos ) {
+    case 'left' :
+        $currency = get_woocommerce_currency();
+        $format = '%1$s%2$s&nbsp;' . $currency;
+		break;
+	}
+
+	return $format;
+}
+add_action('woocommerce_price_format', 'addPriceSuffix', 1, 2);
