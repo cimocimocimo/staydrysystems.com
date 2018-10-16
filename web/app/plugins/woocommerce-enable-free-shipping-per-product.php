@@ -90,5 +90,20 @@ class WC_Enable_Free_Shipping {
 
 add_action( 'init', array( 'WC_Enable_Free_Shipping', 'get_instance' ), 0 );
 
+function show_free_shipping() {
+
+    global $product;
+
+    if ( !is_product() ) {
+        return;
+    }
+
+    if ( $product->get_shipping_class() == 'free-shipping' ) {
+        echo 'Free Shipping';
+    }
+}
+
+add_action('woocommerce_single_product_summary', 'show_free_shipping', 15);
+
 endif;
 
