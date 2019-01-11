@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ada62551c414f446435590878ca9e6ea",
+    "content-hash": "d253952cc2faefe55eeff16ab4a9fb31",
     "packages": [
         {
             "name": "composer/installers",
@@ -423,6 +423,26 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/w3-total-cache/"
+        },
+        {
+            "name": "wpackagist-plugin/woocommerce-google-adwords-conversion-tracking-tag",
+            "version": "1.4.13",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/woocommerce-google-adwords-conversion-tracking-tag/",
+                "reference": "tags/1.4.13"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/woocommerce-google-adwords-conversion-tracking-tag.1.4.13.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/woocommerce-google-adwords-conversion-tracking-tag/"
         },
         {
             "name": "wpackagist-plugin/wp-mail-smtp",
