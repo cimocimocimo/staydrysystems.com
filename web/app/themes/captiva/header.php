@@ -96,6 +96,8 @@ if (!empty($_SESSION['cap_header_top'])){
         } else { ?><?php echo get_template_directory_uri(); ?>/apple-touch-icon-precomposed.png<?php }?>"/>
         <!--[if lte IE 9]><script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script><![endif]-->
        <?php wp_head(); ?>
+
+         <meta name="google-site-verification" content="lA_jyDPhw1E1Yv8rFUot3rMw-H2o0GJ-oN-PmN5QAlI" />
     </head>
     <body id="skrollr-body" <?php body_class(); ?>>
     <?php
