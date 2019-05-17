@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "50a5f20a94edfc3ae21e0cd40ceecb3a",
+    "content-hash": "ec7a23c58aa0fa0496e66a049cd1ae44",
     "packages": [
         {
             "name": "composer/installers",
@@ -465,6 +465,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/wp-ultimate-csv-importer/"
+        },
+        {
+            "name": "wpackagist-plugin/wp-ultimate-exporter",
+            "version": "1.4.3",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/wp-ultimate-exporter/",
+                "reference": "tags/1.4.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/wp-ultimate-exporter.1.4.3.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/wp-ultimate-exporter/"
         }
     ],
     "packages-dev": [],
