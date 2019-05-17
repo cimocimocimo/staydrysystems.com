@@ -98,6 +98,7 @@ if (!empty($_SESSION['cap_header_top'])){
        <?php wp_head(); ?>
 
          <meta name="google-site-verification" content="lA_jyDPhw1E1Yv8rFUot3rMw-H2o0GJ-oN-PmN5QAlI" />
+
     </head>
     <body id="skrollr-body" <?php body_class(); ?>>
     <?php

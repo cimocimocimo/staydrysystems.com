@@ -39,12 +39,13 @@
     "johnpbloch/wordpress": "^4.8",
     "wpackagist-plugin/akismet": ">=3.1",
     "wpackagist-plugin/contact-form-7": ">=4.4",
-    "wpackagist-plugin/Maintenance": ">=2.7",
+    "wpackagist-plugin/maintenance": ">=2.7",
     "wpackagist-plugin/w3-total-cache": ">=0.9",
     "wpackagist-plugin/wp-mail-smtp": ">=0.9",
     "wpackagist-plugin/duracelltomi-google-tag-manager": ">=1.5",
     "wpackagist-plugin/redirection": "^3.2",
-    "wpackagist-plugin/woocommerce-google-adwords-conversion-tracking-tag": "^1.4"
+    "wpackagist-plugin/woocommerce-google-adwords-conversion-tracking-tag": "^1.4",
+    "wpackagist-plugin/wp-ultimate-csv-importer": "^5.6"
   },
   "extra": {
     "installer-paths": {
