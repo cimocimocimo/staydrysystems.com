@@ -1,0 +1,80 @@
+// Before Header  /////////////////////////////////////////////////////////////
+
+.before-header {
+  background-color: #169fda;
+  padding-top: ms(-1);
+  padding-bottom: ms(-1);
+
+  .col-full {
+    @include clearfix;
+  }
+}
+
+.payment-acceptance-logos {
+  float: left;
+
+  > img {
+    display: inline-block;
+    vertical-align: middle;
+    padding-right: ms(-2);
+    height: ms(0);
+  }
+}
+
+.topbar-phone-number {
+  float: left;
+  // border-left: solid 1px $white;
+  padding-left: ms(-2);
+
+  a {
+    color: $white;
+    font-size: ms(0);
+    line-height: 1;
+  }
+
+  .top-line {
+    display: none;
+  }
+
+  @include susy-media ($desktop) {
+    .top-line {
+      display: inline;
+    }
+  }
+}
+
+@include susy-media ($handheld) {
+  .before-header {
+    padding-top: ms(0);
+    padding-bottom: ms(0);
+  }
+
+  .payment-acceptance-logos {
+    > img {
+      padding-right: ms(-1);
+      height: ms(1);
+    }
+  }
+
+  .topbar-phone-number {
+    padding-left: ms(-1);
+
+    a {
+      font-size: ms(1);
+    }
+  }
+}
+
+.cap-menu-default {
+  border: 1px solid #eeeeee;
+}
+
+.site-branding {
+  @include susy-media (max-width 359px) {
+    width: 170px;
+
+    img {
+      width: 100%;
+    }
+  }
+}

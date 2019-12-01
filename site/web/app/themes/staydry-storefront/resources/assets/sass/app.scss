@@ -1,0 +1,33 @@
+// Vendor
+@import 'bourbon';
+@import '~susy/sass/susy';
+@import '~modularscale-sass/stylesheets/modularscale';
+
+$use-all: true;
+@import '~animate-sass/animate';
+
+// Variables & Mixins
+// =================================================
+@import 'variables';
+@import 'mixins';
+
+@import 'header';
+@import 'heros';
+@import 'sections';
+@import 'pages';
+
+.product-description-video {
+  width: 100%;
+  height: 0;
+  padding-top: 56.25%;
+  position: relative;
+  margin: 16px 0;
+
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}

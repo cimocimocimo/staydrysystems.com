@@ -1,0 +1,369 @@
+/* Storefront override to allow better spacing for the hero on mobile */
+.page-template-template-homepage:not( .has-post-thumbnail ) {
+  .site-main {
+    padding-top: 0 !important;
+  }
+}
+
+/*TODO: remove in production */
+.animation-controls {
+  opacity: 0.65;
+  position: fixed;
+  z-index: 10000;
+  top: 10px;
+  right: 10px;
+
+  button {
+    width: 70px;
+    display: block;
+    margin-bottom: 2px;
+    font-size: 10px;
+    text-transform: uppercase;
+    padding: 4px 8px;
+  }
+}
+
+.homepage-hero {
+  @include clearfix;
+
+  // position the homepage hero over the header so the drop-shadow shows over
+  // the header.
+  position: relative;
+  z-index: 1000;
+
+  margin-left: ms(2);
+  margin-right: ms(2);
+  margin-bottom: ms(4);
+  padding-bottom: ms(-1);
+
+  @include susy-media ($handheld $container-width) {
+    margin-left: ms(5);
+    margin-right: ms(5);
+    padding: 0;
+  }
+
+  @include susy-media($desktop) {
+    @include container($container-width);
+    padding: 0 ms(5);
+    box-sizing: content-box;
+  }
+
+  &__headline-desktop {
+    display: none;
+  }
+
+  &__headline-desktop,
+  &__headline-handheld,
+  &__subheading {
+    h2,
+    h3 {
+      text-align: center;
+    }
+  }
+
+  &__subheading h3 {
+    display: block;
+  }
+
+  &__panels {
+    @include clearfix;
+
+    position: relative;
+    margin-bottom: ms(2);
+  }
+
+  &__stage-desktop,
+  &__stage-mobile {
+    @include  clearfix;
+  }
+
+  &__stage-desktop {
+    display: none;
+  }
+
+  &__stage-mobile {
+    display: block;
+  }
+
+  @include susy-media ($desktop) {
+    &__panels {
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    &__stage-desktop {
+      display: block;
+    }
+
+    &__stage-mobile {
+      display: none;
+    }
+  }
+}
+
+.panel {
+  &__problem,
+  &__solution {
+    opacity: 0;
+    transform: scale(0.5);
+    width: 80%;
+    box-shadow: 0 5px 15px rgba($black,0.9);
+  }
+
+  &__problem {
+    float: left;
+    position: relative;
+    transform-origin: left;
+    z-index: 10;
+  }
+
+  &__solution {
+    position: absolute;
+    right: 0;
+    transform-origin: right;
+    z-index: 0;
+  }
+
+  &__problem-heading,
+  &__solution-heading {
+    position: absolute;
+    display: block;
+    border-width: 3.2em;
+    border-color: $blue-mid;
+    border-style: solid;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+
+    h3 {
+      position: absolute;
+      display: inline-block;
+      font-size: 1.5em;
+      color: $white;
+      font-weight: 600;
+      text-shadow: 1px 1px 3px rgba($black, 0.4);
+      margin: 0;
+      text-align: center;
+      line-height: 1;
+      transform: translate(-50%, -50%) rotateZ(-45deg) translate(0,-55%);
+    }
+
+    @include susy-media (460px) {
+      border-width: 4.2em;
+
+      h3 {
+        font-size: 2em;
+      }
+    }
+
+    @include susy-media (540px) {
+      border-width: 5.2em;
+
+      h3 {
+        font-size: 2.6em;
+      }
+    }
+
+    @include susy-media (620px) {
+      border-width: 6em;
+
+      h3 {
+        font-size: 3em;
+      }
+    }
+
+    @include susy-media (700px) {
+      border-width: 6.6em;
+
+      h3 {
+        font-size: 3.4em;
+      }
+    }
+  }
+
+  &__problem-heading-border,
+  &__solution-heading-border {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    border-width: 3.3em;
+    border-color: $blue-dark;
+    border-style: solid;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+
+    @include susy-media (460px) {
+      border-width: 4.3em;
+    }
+
+    @include susy-media (540px) {
+      border-width: 5.3em;
+    }
+
+    @include susy-media (620px) {
+      border-width: 6.1em;
+    }
+
+    @include susy-media (700px) {
+      border-width: 6.7em;
+    }
+  }
+
+  @include susy-media ($desktop) {
+    margin-top: ms(4);
+    margin-bottom: ms(4);
+    padding-bottom: ms(4);
+
+    &__headline-handheld {
+      display: none;
+      margin-bottom: ms(2);
+    }
+
+    h2 {
+      text-align: center;
+      max-width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    &__subheading h3 {
+      border-top: none;
+      text-align: left;
+    }
+
+    ul {
+      display: block;
+    }
+
+    &__headline-desktop {
+      display: block;
+    }
+
+    &__problem,
+    &__solution {
+      width: 65%;
+    }
+  }
+}
+
+.solution-feature,
+.problem-feature {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 1.5em;
+  opacity: 0;
+  visibility: hidden;
+
+  > .text {
+    position: absolute;
+    top: -25%;
+
+    > .stroke,
+    > .fill {
+      display: inline-block;
+      font-size: 1.1em;
+      text-align: center;
+      font-weight: 400;
+      line-height: 1.1;
+    }
+
+    > .stroke {
+      position: absolute;
+      top: 0;
+      text-shadow: 3px 3px 5px rgba($black, 1);
+    }
+
+    > .fill {
+      position: relative;
+      color: $white;
+    }
+  }
+
+  > img {
+    display: block;
+    width: 1.5em;
+  }
+
+  &--icon-left .text {
+    left: 100%;
+    padding-left: 0.25em;
+  }
+
+  &--icon-right .text {
+    right: 100%;
+    padding-right: 0.25em;
+  }
+
+  @include susy-media (460px) {
+    width: 2em;
+
+    > .text {
+      > .stroke,
+      > .fill {
+        font-size: 1.4em;
+      }
+    }
+
+    > img {
+      width: 2em;
+    }
+  }
+
+  @include susy-media (540px) {
+    width: 2.3em;
+
+    > .text {
+      > .stroke,
+      > .fill {
+        font-size: 1.6em;
+      }
+    }
+
+    > img {
+      width: 2.3em;
+    }
+  }
+
+  @include susy-media (620px) {
+    width: 2.6em;
+
+    > .text {
+      > .stroke,
+      > .fill {
+        font-size: 1.8em;
+      }
+    }
+
+    > img {
+      width: 2.6em;
+    }
+  }
+
+  @include susy-media (700px) {
+    width: 2.9em;
+
+    > .text {
+      > .stroke,
+      > .fill {
+        font-size: 2em;
+      }
+    }
+
+    > img {
+      width: 2.9em;
+    }
+  }
+}
+
+.stroke {
+  .solution-feature & {
+    -webkit-text-stroke: 0.3em darken($green, 12%);
+    color: $green;
+  }
+
+  .problem-feature & {
+    -webkit-text-stroke: 0.3em darken($red, 12%);
+    color: $red;
+  }
+}

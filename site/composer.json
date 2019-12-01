@@ -17,11 +17,14 @@
     }
   ],
   "keywords": [
-    "bedrock", "composer", "roots", "wordpress", "wp", "wp-config"
+    "bedrock", "roots", "wordpress", "stack", "composer", "vagrant", "wp"
   ],
   "support": {
     "issues": "https://github.com/roots/bedrock/issues",
     "forum": "https://discourse.roots.io/category/bedrock"
+  },
+  "config": {
+    "preferred-install": "dist"
   },
   "repositories": [
     {
@@ -30,25 +33,26 @@
     }
   ],
   "require": {
-    "php": ">=7.1",
-    "composer/installers": "^1.7",
-    "vlucas/phpdotenv": "^3.4.0",
-    "oscarotero/env": "^1.2.0",
-    "roots/wordpress": "5.2.3",
+    "php": ">=5.6",
+    "composer/installers": "^1.4",
+    "vlucas/phpdotenv": "^2.0.1",
+    "johnpbloch/wordpress": "^5.0",
+    "oscarotero/env": "^1.1.0",
+    "roots/wp-password-bcrypt": "1.0.0",
     "roots/wp-config": "1.0.0",
-    "roots/wp-password-bcrypt": "1.0.0"
+    "roots/soil": "^3.7",
+    "woocommerce/woocommerce": "^3.5",
+    "wpackagist-plugin/storefront-footer-bar": "^1.0",
+    "wpackagist-plugin/contact-form-7": "^5.1",
+    "automattic/jetpack": "^6.9",
+    "wpackagist-plugin/mailchimp-for-woocommerce": "^2.1",
+    "wpackagist-plugin/woocommerce-services": "^1.18",
+    "wpackagist-plugin/redirection": "^4.0"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "^3.4.2",
+    "squizlabs/php_codesniffer": "^3.0.2",
     "roave/security-advisories": "dev-master"
   },
-  "config": {
-    "optimize-autoloader": true,
-    "preferred-install": "dist",
-    "sort-packages": true
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
   "extra": {
     "installer-paths": {
       "web/app/mu-plugins/{$name}/": ["type:wordpress-muplugin"],

@@ -6,12 +6,15 @@ web/app/upgrade
 web/app/uploads/*
 !web/app/uploads/.gitkeep
 
+# Custom Plugin Whitelist
+# This is for custom site plugins and other plugins that are not available through composer.
+!web/app/plugins/advanced-custom-fields-pro
+!web/app/plugins/storefront-footer-bar
+!web/app/plugins/woocommerce-min-max-quantities
+
 # WordPress
 web/wp
 web/.htaccess
-
-# Logs
-*.log
 
 # Dotenv
 .env
@@ -21,5 +24,5 @@ web/.htaccess
 # Composer
 /vendor
 
-# WP-CLI
-wp-cli.local.yml
+# Emacs
+.ac-php-conf.json

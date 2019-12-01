@@ -1,0 +1,239 @@
+/*****************************************************************************/
+/*                               Product Blocks                              */
+/*****************************************************************************/
+
+$block-vertical-spacing: 4;
+
+%button-base {
+  text-shadow: 0 1px 3px rgba($black, 0.4);
+  border: 1px solid darken($green, 2.5%);
+  background-color: $green;
+  color: $white;
+  letter-spacing: 0.2px;
+  margin: 0;
+  padding: ms(-1) ms(0);
+  line-height: 1;
+}
+
+.products-block {
+  margin: ms($block-vertical-spacing) ms(2);
+  padding: 0;
+
+  &__headings {
+    margin-bottom: ms(1);
+
+    * {
+      text-align: center;
+    }
+
+    p {
+      line-height: 1.2;
+      font-size: 1rem;
+      margin: ms(-1) auto 0;
+      max-width: 80%;
+    }
+  }
+
+  &__heading {
+    font-size: 2.4rem;
+    margin-bottom: 0;
+  }
+
+  &__subheading {
+    line-height: 1;
+    border-top: none;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-top: ms(-1);
+  }
+
+  ul.products {
+    &.columns-4 {
+      li.product {
+        img {
+          width: 100%;
+        }
+
+        @include susy-media (max-width $handheld) {
+          @include span(6 of 12);
+
+          &:nth-child(2n) {
+            margin-right: 0;
+          }
+        }
+
+        @include susy-media ($handheld $desktop) {
+          @include span(4 of 12);
+
+          &:nth-child(3n) {
+            margin-right: 0;
+          }
+        }
+
+      }
+
+      .product {
+        .price {
+          letter-spacing: 0.4px;
+        }
+
+        .add_to_cart_button {
+          @extend %button-base;
+
+          width: 100%;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  // Color Schemes
+
+  &.color-scheme-blue-negative {
+    background: $blue-light;
+    margin: 0;
+    padding: ms($block-vertical-spacing) ms(2);
+
+    .products .product {
+      .price {
+        color: $white;
+      }
+    }
+
+    * {
+      color: $white;
+      text-shadow: 0 1px 3px rgba($black, 0.4);
+    }
+
+    .woocommerce-loop-product__link > img,
+    .add_to_cart_button {
+      box-shadow: 0 1px 3px rgba($black, 0.4);
+    }
+  }
+}
+
+.corporate-customers-block {
+  margin: ms($block-vertical-spacing) ms(2);
+
+  &__heading {
+    text-align: center;
+  }
+
+  &__logo-row {
+    @include clearfix;
+
+    position: relative;
+    text-align: center;
+  }
+
+  &__logo {
+    @include span (6 of 12);
+
+    margin: 0 auto ms(-1);
+    max-width: 20rem;
+    float: none !important;
+    display: inline-block;
+  }
+
+  img,
+  span {
+    display: block;
+    height: auto;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  span {
+    position: relative;
+  }
+
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  @include susy-media ($handheld) {
+    &__logo {
+      margin: 0 auto ms(0);
+    }
+  }
+
+  @include susy-media ($desktop) {
+    &__logo {
+      @include span (4 of 12);
+
+      margin: 0 auto ms(1);
+    }
+  }
+}
+
+.header-and-text-block {
+  $self: &;
+
+  margin: ms($block-vertical-spacing) ms(2);
+
+  &__headings-desktop {
+    display: none;
+  }
+
+  &__image {
+    margin-bottom: ms(1);
+  }
+
+  .button {
+    @extend %button-base;
+  }
+
+  @include susy-media ($handheld) {
+    &__content-row {
+      display: flex;
+    }
+
+    &__image {
+      min-width: 50%;
+    }
+
+    &__content {
+      flex-grow: 1;
+      padding: 0 0 0 ms(1);
+    }
+  }
+
+  @include susy-media ($desktop) {
+    &__headings-mobile {
+      display: none;
+    }
+
+    &__headings-desktop {
+      display: block;
+    }
+
+    &__image {
+      min-width: 33%;
+    }
+
+    &__content {
+      padding: 0 0 0 ms(2);
+      font-size: 1.2rem;
+    }
+  }
+
+  &--align-center {
+    #{$self}__headings,
+    #{$self}__content-row {
+      text-align: center;
+    }
+  }
+}
+
+.horizontal-rule-block hr {
+  max-width: 60%;
+  margin: ms($block-vertical-spacing) auto;
+}

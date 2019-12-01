@@ -1,0 +1,59 @@
+---
+# Deploy procedures
+# -----------------
+#
+# We need to process theme assets for both storefront-master and our Tonik
+# based child theme. We run the install and build commands locallaly and then
+# use the Ansible syncronize command to upload the compiled files to the server.
+
+# Storefront
+- name: Install Storefront npm dependencies
+  command: npm install
+  connection: local
+  args:
+    chdir: "{{ project_local_path }}/web/app/themes/storefront-master"
+
+- name: Install Storefront Composer dependencies
+  command: composer install --no-ansi --no-dev --no-interaction --no-progress --optimize-autoloader --no-scripts
+  args:
+    chdir: "{{ deploy_helper.new_release_path }}/web/app/themes/storefront-master"
+
+- name: Compile Storefront assets for production
+  command: npm run build
+  connection: local
+  args:
+    chdir: "{{ project_local_path }}/web/app/themes/storefront-master"
+
+- name: Copy Storefront production assets
+  synchronize:
+    src: "{{ project_local_path }}/web/app/themes/storefront-master/"
+    dest: "{{ deploy_helper.new_release_path }}/web/app/themes/storefront-master/"
+    group: no
+    owner: no
+    rsync_opts: --chmod=Du=rwx,--chmod=Dg=rx,--chmod=Do=rx,--chmod=Fu=rw,--chmod=Fg=r,--chmod=Fo=r
+
+# StayDry/Tonik
+- name: Install StayDry/Tonik npm dependencies
+  command: npm install
+  connection: local
+  args:
+    chdir: "{{ project_local_path }}/web/app/themes/staydry-storefront"
+
+- name: Install StayDry/Tonik Composer dependencies
+  command: composer install --no-ansi --no-dev --no-interaction --no-progress --optimize-autoloader --no-scripts
+  args:
+    chdir: "{{ deploy_helper.new_release_path }}/web/app/themes/staydry-storefront"
+
+- name: Compile StayDry/Tonik assets for production
+  command: npm run prod
+  connection: local
+  args:
+    chdir: "{{ project_local_path }}/web/app/themes/staydry-storefront"
+
+- name: Copy StayDry/Tonik production assets
+  synchronize:
+    src: "{{ project_local_path }}/web/app/themes/staydry-storefront/public"
+    dest: "{{ deploy_helper.new_release_path }}/web/app/themes/staydry-storefront"
+    group: no
+    owner: no
+    rsync_opts: --chmod=Du=rwx,--chmod=Dg=rx,--chmod=Do=rx,--chmod=Fu=rw,--chmod=Fg=r,--chmod=Fo=r
