@@ -1,11 +1,9 @@
----
 # Deploy procedures
 # -----------------
 #
 # We need to process theme assets for both storefront-master and our Tonik
 # based child theme. We run the install and build commands locallaly and then
 # use the Ansible syncronize command to upload the compiled files to the server.
----
 
 # Storefront
 - name: Install Storefront npm dependencies
