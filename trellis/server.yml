@@ -37,5 +37,6 @@
     - { role: wp-cli, tags: [wp-cli] }
     - { role: letsencrypt, tags: [letsencrypt], when: sites_using_letsencrypt | count }
     - { role: wordpress-setup, tags: [wordpress, wordpress-setup, letsencrypt] }
+    - { role: trellis-disable-xml-rpc, tags: [nginx, wordpress, wordpress-setup] }
     - { role: bedrock-site-protect, tags: [htpasswd] }
     - { role: trellis-backup, tags: [backup] }

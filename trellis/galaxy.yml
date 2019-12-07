@@ -31,3 +31,6 @@
 
 - src: https://github.com/ItinerisLtd/trellis-backup-during-deploy
   version: 0.1.2 # Check for latest version!
+
+- src: https://github.com/ItinerisLtd/trellis-disable-xml-rpc
+  version: 0.2.0 # Check for latest version!
