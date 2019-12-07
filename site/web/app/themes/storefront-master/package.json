@@ -30,14 +30,12 @@
     "grunt-stylelint": "~0.9.0",
     "grunt-wp-i18n": "^1.0.0",
     "node-bourbon": "~4.2.8",
+    "node-sass": "~4.5.2",
     "stylelint": "~8.2.0",
     "susy": "~2.2.12"
   },
   "engines": {
     "node": ">=0.8.0",
     "npm": ">=1.1.0"
-  },
-  "dependencies": {
-    "node-sass": "^4.13.0"
   }
 }
