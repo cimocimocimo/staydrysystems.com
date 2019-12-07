@@ -20,3 +20,9 @@ wordpress_sites:
       provider: letsencrypt
     cache:
       enabled: false
+    backup:
+      enabled: true
+      auto: true
+      target: s3://s3.us-west-2.amazonaws.com/backup.staydrysystems.com # any location supported by duplicity
+      schedule: '0 4 * * *' # cron time of backups (change this value)
+      purge: true # switch to true to enable automatic purging of old backups
