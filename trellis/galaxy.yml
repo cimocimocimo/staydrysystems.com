@@ -28,3 +28,6 @@
 
 - name: lafranceinsoumise.backup
   version: 3.6.3
+
+- src: https://github.com/ItinerisLtd/trellis-backup-during-deploy
+  version: 0.1.2 # Check for latest version!

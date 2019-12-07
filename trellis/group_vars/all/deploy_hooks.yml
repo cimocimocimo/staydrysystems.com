@@ -1,0 +1,4 @@
+# group_vars/all/deploy-hooks.yml
+# Learn more on https://roots.io/trellis/docs/deploys/#hooks
+deploy_initialize_after:
+  - "{{ playbook_dir }}/vendor/roles/trellis-backup-during-deploy/tasks/main.yml"
