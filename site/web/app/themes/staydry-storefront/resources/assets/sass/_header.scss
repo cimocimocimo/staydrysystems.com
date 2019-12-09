@@ -43,6 +43,22 @@
   }
 }
 
+.topbar-worldwide-shipping {
+  float: right;
+
+  a {
+    color: $white;
+    font-size: ms(0);
+    line-height: 1;
+  }
+
+  @include susy-media ($desktop) {
+    a {
+      font-size: ms(1);
+    }
+  }
+}
+
 @include susy-media ($handheld) {
   .before-header {
     padding-top: ms(0);

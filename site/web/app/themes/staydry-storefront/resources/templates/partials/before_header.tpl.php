@@ -15,5 +15,10 @@
                 <span class="bottom-line">1-866-944-0449</span>
             </a>
         </div>
+        <div class="topbar-worldwide-shipping">
+            <a href="/shipping-policies/">
+                Worldwide Shipping
+            </a>
+        </div>
     </div>
 </div>
