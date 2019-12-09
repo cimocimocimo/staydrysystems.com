@@ -237,3 +237,15 @@ $block-vertical-spacing: 4;
   max-width: 60%;
   margin: ms($block-vertical-spacing) auto;
 }
+
+.product-page-shipping-notice {
+  h4 {
+    margin-top: 0;
+  }
+}
+
+.cart-checkout-shipping-notice {
+  ul {
+    margin-left: 0;
+  }
+}

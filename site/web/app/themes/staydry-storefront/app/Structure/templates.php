@@ -175,3 +175,13 @@ function staydry_woocommerce_breadcrumb($args = []) {
     wc_get_template( 'global/breadcrumb.php', $args );
 }
 add_action('storefront_before_content', 'Tonik\Theme\App\Structure\staydry_woocommerce_breadcrumb', 10);
+
+add_action('woocommerce_after_add_to_cart_form', function() {
+    template('partials/product-page-shipping-notice', []);
+});
+
+function show_cart_checkout_shipping_notice() {
+    template('partials/cart-checkout-shipping-notice', []);
+}
+add_action('woocommerce_before_checkout_form', 'Tonik\Theme\App\Structure\show_cart_checkout_shipping_notice');
+add_action('woocommerce_before_cart_table', 'Tonik\Theme\App\Structure\show_cart_checkout_shipping_notice');
