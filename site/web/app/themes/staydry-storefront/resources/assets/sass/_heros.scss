@@ -55,9 +55,22 @@
   &__headline-desktop,
   &__headline-handheld,
   &__subheading {
+    h2 {
+      font-size: ms(4);
+    }
+
+    h3 {
+      font-size: ms(3);
+    }
+
     h2,
     h3 {
       text-align: center;
+      font-weight: 400;
+    }
+
+    strong {
+      font-weight: 900;
     }
   }
 
