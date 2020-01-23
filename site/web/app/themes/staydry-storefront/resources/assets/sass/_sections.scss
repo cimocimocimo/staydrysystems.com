@@ -49,6 +49,20 @@ $block-vertical-spacing: 4;
   }
 
   ul.products {
+    li.product {
+      .price {
+        letter-spacing: 0.4px;
+      }
+
+      .add_to_cart_button {
+        @extend %button-base;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
     &.columns-4 {
       li.product {
         img {
@@ -71,22 +85,6 @@ $block-vertical-spacing: 4;
           }
         }
 
-      }
-
-      .product {
-        .price {
-          letter-spacing: 0.4px;
-        }
-
-        .add_to_cart_button {
-          @extend %button-base;
-
-          width: 100%;
-        }
-
-        &:last-child {
-          margin-bottom: 0;
-        }
       }
     }
   }
