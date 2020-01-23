@@ -6,3 +6,4 @@ vendor/roles
 *.retry
 .trellis/virtualenv
 database_backup/*
+*.log
