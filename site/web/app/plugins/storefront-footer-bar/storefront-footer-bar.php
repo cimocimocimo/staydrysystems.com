@@ -176,8 +176,7 @@ final class Storefront_Footer_Bar {
 	public function sfb_setup() {
 		$theme = wp_get_theme();
 
-		if ( // 'Storefront' == $theme->name || 'storefront' == $theme->template && 
-             apply_filters( 'storefront_footer_bar_supported', true ) ) {
+		if ( 'Storefront' == $theme->name || 'storefront' == $theme->template && apply_filters( 'storefront_footer_bar_supported', true ) ) {
 			add_action( 'wp_enqueue_scripts',       array( $this, 'sfb_styles' ),                       999 );
 			add_action( 'customize_register',       array( $this, 'sfb_customize_register' ) );
 			add_action( 'customize_preview_init',   array( $this, 'sfb_customize_preview_js' ) );

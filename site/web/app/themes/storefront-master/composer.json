@@ -14,7 +14,7 @@
     "woocommerce/woocommerce-git-hooks": "*",
     "woocommerce/woocommerce-sniffs": "*",
     "wimg/php-compatibility": "^8.0",
-    "dealerdirect/phpcodesniffer-composer-installer": "^0.4.3"
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.5"
   },
   "scripts": {
     "test": [

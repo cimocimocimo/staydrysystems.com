@@ -3,6 +3,7 @@
 node_modules
 npm-debug.log
 vendor
+!/resources/assets/js/vendor
 
 .DS_Store
 Thumbs.db
