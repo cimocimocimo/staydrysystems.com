@@ -138,43 +138,12 @@ add_action( 'storefront_loop_post', 'Tonik\Theme\App\Structure\staydry_storefron
 add_action( 'storefront_single_post', 'Tonik\Theme\App\Structure\staydry_storefront_post_meta', 20 );
 
 /**
- * Overrides WC_Breadcrumb class
- *
- * This is used to change the link to the blog page rather than the category link.
- */
+ * Remove the woocommerce breadcrumb nav. We want to hide the category listings pages.
+//  */
 add_action('init', function () {
     remove_action( 'storefront_before_content', 'woocommerce_breadcrumb', 10 );
 });
-function staydry_woocommerce_breadcrumb($args = []) {
-    $args = wp_parse_args($args,
-        apply_filters('woocommerce_breadcrumb_defaults', [
-            'delimiter' => '&nbsp;&#47;&nbsp;',
-            'wrap_before' => '<nav class="woocommerce-breadcrumb">',
-            'wrap_after'  => '</nav>',
-            'before'      => '',
-            'after'       => '',
-            'home'        => _x( 'Home', 'breadcrumb', 'woocommerce' ),
-        ])
-    );
 
-    $breadcrumbs = new SD_Breadcrumb();
-
-    if ( ! empty( $args['home'] ) ) {
-        $breadcrumbs->add_crumb( $args['home'], apply_filters( 'woocommerce_breadcrumb_home_url', home_url() ) );
-    }
-
-    $args['breadcrumb'] = $breadcrumbs->generate();
-
-    /**
-     * WooCommerce Breadcrumb hook
-     *
-     * @hooked WC_Structured_Data::generate_breadcrumblist_data() - 10
-     */
-    do_action( 'woocommerce_breadcrumb', $breadcrumbs, $args );
-
-    wc_get_template( 'global/breadcrumb.php', $args );
-}
-add_action('storefront_before_content', 'Tonik\Theme\App\Structure\staydry_woocommerce_breadcrumb', 10);
 
 add_action('woocommerce_after_add_to_cart_form', function() {
     template('partials/product-page-shipping-notice', []);
@@ -185,3 +154,6 @@ function show_cart_checkout_shipping_notice() {
 }
 add_action('woocommerce_before_checkout_form', 'Tonik\Theme\App\Structure\show_cart_checkout_shipping_notice');
 add_action('woocommerce_before_cart_table', 'Tonik\Theme\App\Structure\show_cart_checkout_shipping_notice');
+
+// remove the product category listings on the product detail pages.
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );

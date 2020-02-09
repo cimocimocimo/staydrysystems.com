@@ -16,7 +16,7 @@
             </a>
         </div>
         <div class="topbar-worldwide-shipping">
-            <a href="/shipping-policies/">
+            <a style="font-weight: 700; text-decoration: underline;" href="/shipping-policies/">
                 Worldwide Shipping
             </a>
         </div>
