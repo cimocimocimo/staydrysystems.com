@@ -3,18 +3,18 @@
  * Plugin Name: WooCommerce Min/Max Quantities
  * Plugin URI: https://woocommerce.com/products/minmax-quantities/
  * Description: Lets you define minimum/maximum allowed quantities for products, variations and orders. Requires 2.0+
- * Version: 2.4.5
+ * Version: 2.4.14
  * Author: WooCommerce
  * Author URI: https://woocommerce.com
  * Requires at least: 4.0
- * Tested up to: 4.7.0
- * WC tested up to: 3.5
+ * Tested up to: 5.3
+ * WC tested up to: 3.9
  * WC requires at least: 2.6
  *
  * Text Domain: woocommerce-min-max-quantities
  * Domain Path: /languages
  *
- * Copyright: © 2018 WooCommerce.
+ * Copyright: © 2020 WooCommerce
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  * Woo: 18616:2b5188d90baecfb781a5aa2d6abb900a
@@ -37,7 +37,7 @@ woothemes_queue_update( plugin_basename( __FILE__ ), '2b5188d90baecfb781a5aa2d6a
  **/
 if ( ! class_exists( 'WC_Min_Max_Quantities' ) ) :
 
-define( 'WC_MIN_MAX_QUANTITIES', '2.4.5' );
+define( 'WC_MIN_MAX_QUANTITIES', '2.4.14' ); // WRCS: DEFINED_VERSION.
 
 class WC_Min_Max_Quantities {
 
@@ -204,6 +204,10 @@ class WC_Min_Max_Quantities {
 			$product     = $values['data'];
 			$checking_id = $this->get_id_to_check( $values );
 
+			if ( apply_filters( 'wc_min_max_cart_quantity_do_not_count', false, $checking_id, $cart_item_key, $values ) ) {
+				$values['quantity'] = 0;
+			}
+
 			if ( ! isset( $product_quantities[ $checking_id ] ) ) {
 				$product_quantities[ $checking_id ] = $values['quantity'];
 			} else {
@@ -231,6 +235,10 @@ class WC_Min_Max_Quantities {
 				foreach ( $terms as $term ) {
 
 					if ( 'yes' === get_post_meta( $checking_id, 'minmax_category_group_of_exclude', true ) ) {
+						continue;
+					}
+
+					if ( 'yes' === get_post_meta( $checking_id, 'variation_minmax_category_group_of_exclude', true ) ) {
 						continue;
 					}
 
@@ -350,26 +358,10 @@ class WC_Min_Max_Quantities {
 			}
 		}
 
-		// Before checking category groups-of we need to exclude product that
-		// excludes category groups-of.
-		foreach ( $category_quantities as $category => $quantity ) {
-			foreach ( WC()->cart->get_cart() as $cart_item_key => $values ) {
-				$exclude_category_groups = (
-					'yes' === get_post_meta( $values['product_id'], 'minmax_category_group_of_exclude', true )
-					||
-					'yes' === get_post_meta( $values['variation_id'], 'variation_minmax_category_group_of_exclude', true )
-				);
-
-				if ( has_term( $category, 'product_cat', $values['product_id'] ) && $exclude_category_groups ) {
-					$category_quantities[ $category ] -= $values['quantity'];
-				}
-			}
-		}
-
 		// Check category rules
 		foreach ( $category_quantities as $category => $quantity ) {
 
-			$group_of_quantity = intval( get_woocommerce_term_meta( $category, 'group_of_quantity', true ) );
+			$group_of_quantity = intval( version_compare( WC_VERSION, '3.6', 'ge' ) ? get_term_meta( $category, 'group_of_quantity', true ) : get_woocommerce_term_meta( $category, 'group_of_quantity', true ) );
 
 			if ( $group_of_quantity > 0 && ( intval( $quantity ) % intval( $group_of_quantity ) > 0 ) ) {
 
@@ -519,6 +511,12 @@ class WC_Min_Max_Quantities {
 		// Count items
 		foreach ( WC()->cart->get_cart() as $cart_item_key => $values ) {
 
+			$checking_id = $values['variation_id'] ? $values['variation_id'] : $values['product_id'];
+
+			if ( apply_filters( 'wc_min_max_cart_quantity_do_not_count', false, $checking_id, $cart_item_key, $values ) ) {
+				continue;
+			}
+
 			if ( $rule_for_variaton ) {
 
 				if ( $values['variation_id'] == $variation_id ) {
@@ -540,7 +538,14 @@ class WC_Min_Max_Quantities {
 
 				$_product = wc_get_product( $product_id );
 
-				$this->add_error( sprintf( __( 'The maximum allowed quantity for %s is %d (you currently have %s in your cart).', 'woocommerce-min-max-quantities' ), $_product->get_title(), $maximum_quantity, $total_quantity - $quantity ) );
+				$message = sprintf( __( 'The maximum allowed quantity for %s is %d (you currently have %s in your cart).', 'woocommerce-min-max-quantities' ), $_product->get_title(), $maximum_quantity, $total_quantity - $quantity );
+
+				// If quantity requirement is met, show cart link.
+				if ( intval( $maximum_quantity ) <= intval( $total_quantity - $quantity ) ) {
+					$message = sprintf( __( 'The maximum allowed quantity for %s is %d (you currently have %s in your cart). <a href="%s" class="woocommerce-min-max-quantities-error-cart-link button wc-forward">View cart</a>', 'woocommerce-min-max-quantities' ), $_product->get_title(), $maximum_quantity, $total_quantity - $quantity, esc_url( wc_get_cart_url() ) );
+				}
+
+				$this->add_error( $message );
 
 				$pass = false;
 			}
@@ -566,7 +571,13 @@ class WC_Min_Max_Quantities {
 					if ( 0 === $total_quantity - $quantity ) {
 						$this->add_error( sprintf( __( 'The maximum allowed items in cart is %d.', 'woocommerce-min-max-quantities' ), $this->maximum_order_quantity ) );
 					} else {
-						$this->add_error( sprintf( __( 'The maximum allowed items in cart is %d (you currently have %d in your cart).', 'woocommerce-min-max-quantities' ), $this->maximum_order_quantity, $total_quantity - $quantity ) );
+						$message = sprintf( __( 'The maximum allowed items in cart is %d (you currently have %d in your cart).', 'woocommerce-min-max-quantities' ), $this->maximum_order_quantity, $total_quantity - $quantity );
+
+						if ( intval( $this->maximum_order_quantity ) <= intval( $total_quantity - $quantity ) ) {
+							$message = sprintf( __( 'The maximum allowed items in cart is %d (you currently have %d in your cart). <a href="%s" class="woocommerce-min-max-quantities-error-cart-link button wc-forward">View cart</a>', 'woocommerce-min-max-quantities' ), $this->maximum_order_quantity, $total_quantity - $quantity, esc_url( wc_get_cart_url() ) );
+						}
+
+						$this->add_error( $message );
 					}
 
 					$pass = false;
