@@ -1,5 +1,33 @@
 *** WooCommerce Min/Max Quantities Changelog ***
 
+2020-02-04 - version 2.4.14
+* Fix - Use proper escape for attributes.
+
+2020-01-13 - version 2.4.13
+* Add - Cart link to the error message when quantity or order value matches or exceeds whats already in cart.
+* Tweak - WC 3.9 compatibility.
+
+2019-11-04 - version 2.4.12
+* Tweak - WC 3.8 compatibility.
+
+2019-10-03 - version 2.4.11
+* Add - Add wc_min_max_cart_quantity_do_not_count filter to skip counting a line item in the cart.
+
+2019-08-12 - version 2.4.10
+* Tweak - Fixed minor issues.
+
+2019-08-12 - version 2.4.9
+* Tweak - Copyright year and fixed minor issues.
+
+2019-08-08 - version 2.4.8
+* Tweak - WC 3.7 compatibility.
+
+2019-07-02 - version 2.4.7
+* Fix   - Erroneous logic for excluded category products.
+
+2019-04-15 - version 2.4.6
+* Tweak - WC 3.6 compatibility.
+
 2018-10-10 - version 2.4.5
 * Update - WC 3.5 compatibility.
 
