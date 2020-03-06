@@ -13,6 +13,7 @@ web/app/uploads/*
 !web/app/plugins/woocommerce-min-max-quantities
 !web/app/plugins/woocommerce-shipping-per-product
 !web/app/plugins/woocommerce-gateway-paypal-advanced
+!web/app/plugins/redirection
 
 # WordPress
 web/wp

@@ -47,7 +47,7 @@
     "automattic/jetpack": "^6.9",
     "wpackagist-plugin/mailchimp-for-woocommerce": "^2.1",
     "wpackagist-plugin/woocommerce-services": "^1.18",
-    "wpackagist-plugin/redirection": "^4.0",
+    "wpackagist-plugin/redirection": "^4.7",
     "viper007bond/regenerate-thumbnails": "^3.1"
   },
   "require-dev": {
