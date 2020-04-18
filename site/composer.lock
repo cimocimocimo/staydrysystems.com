@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d150c07f819234f612037b4cc8abe76",
+    "content-hash": "8dc144bdffd494a19a17990274fa26ef",
     "packages": [
         {
             "name": "automattic/jetpack",
@@ -828,6 +828,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/contact-form-7/"
+        },
+        {
+            "name": "wpackagist-plugin/enhanced-e-commerce-for-woocommerce-store",
+            "version": "2.3.4",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/enhanced-e-commerce-for-woocommerce-store/",
+                "reference": "trunk"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/enhanced-e-commerce-for-woocommerce-store.zip?timestamp=1586760418"
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/enhanced-e-commerce-for-woocommerce-store/"
         },
         {
             "name": "wpackagist-plugin/mailchimp-for-woocommerce",

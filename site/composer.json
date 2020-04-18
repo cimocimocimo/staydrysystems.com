@@ -48,7 +48,8 @@
     "wpackagist-plugin/mailchimp-for-woocommerce": "^2.1",
     "wpackagist-plugin/woocommerce-services": "^1.18",
     "wpackagist-plugin/redirection": "^4.7",
-    "viper007bond/regenerate-thumbnails": "^3.1"
+    "viper007bond/regenerate-thumbnails": "^3.1",
+    "wpackagist-plugin/enhanced-e-commerce-for-woocommerce-store": "^2.3"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.0.2",
