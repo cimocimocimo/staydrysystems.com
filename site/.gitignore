@@ -10,6 +10,7 @@ web/app/uploads/*
 # This is for custom site plugins and other plugins that are not available through composer.
 !web/app/plugins/advanced-custom-fields-pro
 !web/app/plugins/storefront-footer-bar
+!web/app/plugins/woocommerce-customer-order-csv-export
 !web/app/plugins/woocommerce-min-max-quantities
 !web/app/plugins/woocommerce-shipping-per-product
 !web/app/plugins/woocommerce-gateway-paypal-advanced

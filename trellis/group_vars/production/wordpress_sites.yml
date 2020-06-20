@@ -18,7 +18,7 @@ wordpress_sites:
       enabled: true
       provider: letsencrypt
     cache:
-      enabled: false
+      enabled: true
     backup:
       enabled: true
       auto: true
