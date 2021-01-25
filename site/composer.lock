@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8dc144bdffd494a19a17990274fa26ef",
+    "content-hash": "b4cba212530f472da1af81dfda0b8a19",
     "packages": [
         {
             "name": "automattic/jetpack",
@@ -832,6 +832,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/enhanced-e-commerce-for-woocommerce-store/"
+        },
+        {
+            "name": "wpackagist-plugin/google-sitemap-generator",
+            "version": "4.1.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/google-sitemap-generator/",
+                "reference": "tags/4.1.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/google-sitemap-generator.4.1.1.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/google-sitemap-generator/"
         },
         {
             "name": "wpackagist-plugin/mailchimp-for-woocommerce",
